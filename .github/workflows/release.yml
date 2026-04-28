@@ -1,0 +1,91 @@
+name: Create Production Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version tag (e.g. v1.2.3)"
+        required: true
+      dry_run:
+        description: "Dry run (no push/tag/release)"
+        required: false
+        default: "false"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+
+    permissions:
+      contents: write
+      pull-requests: read
+
+    steps:
+      - name: Checkout main-dev
+        uses: actions/checkout@v6
+        with:
+          ref: main-dev
+          fetch-depth: 0
+
+      - name: Configure git user
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Ensure working tree clean
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "Working tree is not clean."
+            exit 1
+          fi
+
+      - name: Merge main-dev into main
+        run: |
+          git fetch origin main
+          git checkout main
+          git merge --no-ff origin/main-dev -m "chore: merge main-dev into main for release"
+
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            echo "Dry run, not pushing merge."
+          else
+            git push origin main
+          fi
+
+      - name: Create tag
+        run: |
+          VERSION="${{ github.event.inputs.version }}"
+
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            echo "Dry run, not creating tag $VERSION."
+            exit 0
+          fi
+
+          if git rev-parse "$VERSION" >/dev/null 2>&1; then
+            echo "Tag $VERSION already exists."
+            exit 1
+          fi
+
+          git tag "$VERSION"
+          git push origin "$VERSION"
+
+      - name: Create GitHub Release
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: ${{ github.event.inputs.version }}
+          generate_release_notes: true
+
+      - name: Sync main-dev with main
+        run: |
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            echo "Dry run, not syncing main-dev."
+            exit 0
+          fi
+
+          git checkout main-dev
+          git merge --ff-only origin/main
+          git push origin main-dev
+
+

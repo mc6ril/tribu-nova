@@ -1,0 +1,132 @@
+name: Bug report
+description: Report a bug in Workbench
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug. Please fill out the sections below so we can reproduce and fix it quickly.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What happened? What did you expect to happen?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      description: How bad is it?
+      options:
+        - Critical (data loss, security, payments broken, app unusable)
+        - High (core flow broken, no workaround)
+        - Medium (workaround exists)
+        - Low (minor issue, cosmetic)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Area / scope
+      description: Where does this happen?
+      options:
+        - Auth (signin/signup/reset/verify)
+        - Board (columns/tickets/filters)
+        - Workspace / project
+        - Billing / Stripe
+        - i18n / locale / routing
+        - Marketing pages
+        - Settings / profile
+        - API route
+        - Other / not sure
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Minimal steps to trigger the bug. Include code snippets, config, or a link to a reproduction repo if possible.
+      placeholder: |
+        1. Go to ...
+        2. Click ...
+        3. Fill ...
+        4. Observe ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What should have happened instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: What actually happened?
+    validations:
+      required: true
+
+  - type: input
+    id: url
+    attributes:
+      label: URL (if applicable)
+      description: Paste the URL where it happened.
+      placeholder: https://...
+    validations:
+      required: false
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Relevant version info (fill what you can).
+      placeholder: |
+        - App version / commit SHA:
+        - Environment: local / preview / production
+        - Node.js version:
+        - Runtime: Node.js / Edge (Next.js)
+        - Hosting: Vercel / other
+        - OS:
+        - Browser (if relevant):
+        - Locale (if relevant):
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: regression
+    attributes:
+      label: Regression?
+      description: Did this work before?
+      options:
+        - label: This is a regression (it worked in a previous version)
+          required: false
+
+  - type: textarea
+    id: related
+    attributes:
+      label: Related context (optional)
+      description: Anything that helps investigation (Sentry link/event id, Supabase request id, Stripe event id, screenshots, screen recording).
+      placeholder: |
+        - Sentry issue/event:
+        - Stripe event id:
+        - Screenshots / recording:
+    validations:
+      required: false
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / error output
+      description: Paste any relevant error messages or stack traces.
+      render: shell
+    validations:
+      required: false
