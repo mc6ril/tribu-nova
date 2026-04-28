@@ -13,7 +13,7 @@ export const APP_COOKIE_KEYS = Object.freeze({
 type CookieKey = keyof typeof APP_COOKIE_KEYS;
 type CookieName = (typeof APP_COOKIE_KEYS)[CookieKey];
 
-type CookieSource = {
+export type CookieSource = {
   get(name: CookieName): { value?: string } | undefined;
 };
 
