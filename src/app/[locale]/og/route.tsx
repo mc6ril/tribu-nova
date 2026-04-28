@@ -8,7 +8,7 @@ import {
   type Locale,
 } from "@/shared/i18n/config";
 
-export const runtime = "edge";
+export const runtime = "nodejs";
 
 const size = {
   width: 1200,
@@ -32,7 +32,7 @@ export const GET = async (
   const title = tMetadata("title") || PRODUCT_BRAND_NAME;
   const subtitle = tMetadata("description") || "";
 
-  return new ImageResponse(
+  const response = new ImageResponse(
     <div
       style={{
         display: "flex",
@@ -74,5 +74,11 @@ export const GET = async (
     </div>,
     { ...size }
   );
-};
 
+  response.headers.set(
+    "Cache-Control",
+    "public, max-age=0, s-maxage=86400, stale-while-revalidate=604800"
+  );
+
+  return response;
+};

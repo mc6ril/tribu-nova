@@ -24,7 +24,9 @@ export default async function ProjectLayout({
         <nav style={{ display: "grid", gap: 8 }}>
           <Link href={`/${locale}/workspace`}>Workspace</Link>
           <Link href={`/${locale}/workspace/${projectId}/board`}>Board</Link>
-          <Link href={`/${locale}/workspace/${projectId}/recipes`}>Recipes</Link>
+          <Link href={`/${locale}/workspace/${projectId}/recipes`}>
+            Recipes
+          </Link>
           <Link href={`/${locale}/workspace/${projectId}/projectSettings`}>
             Project settings
           </Link>
@@ -34,4 +36,3 @@ export default async function ProjectLayout({
     </div>
   );
 }
-

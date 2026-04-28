@@ -20,8 +20,9 @@ export default async function LocaleLayout({
 
   return (
     <RequestIntlProvider>
-      <LocaleParamProvider locale={locale as Locale}>{children}</LocaleParamProvider>
+      <LocaleParamProvider locale={locale as Locale}>
+        {children}
+      </LocaleParamProvider>
     </RequestIntlProvider>
   );
 }
-

@@ -1,0 +1,5 @@
+yarn lint --fix
+yarn lint
+yarn tsc
+yarn format
+

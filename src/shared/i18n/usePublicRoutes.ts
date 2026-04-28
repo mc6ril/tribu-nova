@@ -19,4 +19,3 @@ export const usePublicRoutes = () => {
     legal: buildLegalPath(locale),
   };
 };
-

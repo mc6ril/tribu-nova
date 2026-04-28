@@ -1,18 +1,12 @@
-import Link from "next/link";
+import { Locale } from "@/shared/i18n";
 
-export default async function LegalPage({
+import LegalPage from "@/domains/roots/presentation/legals";
+
+export default async function LegalPageRoute({
   params,
 }: {
-  params: Promise<{ locale: string }>;
+  params: Promise<{ locale: Locale }>;
 }) {
   const { locale } = await params;
-
-  return (
-    <main style={{ padding: 24 }}>
-      <h1>Legal ({locale})</h1>
-      <p>Public localized legal page (placeholder).</p>
-      <Link href={`/${locale}`}>Back home</Link>
-    </main>
-  );
+  return <LegalPage locale={locale} />;
 }
-

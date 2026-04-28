@@ -33,7 +33,9 @@ export const buildHomePath = (locale: Locale): string => {
 };
 
 export const buildPricingPath = (locale: Locale): string => {
-  return locale === defaultLocale ? PAGE_ROUTES.PRICING : `/${locale}${PAGE_ROUTES.PRICING}`;
+  return locale === defaultLocale
+    ? PAGE_ROUTES.PRICING
+    : `/${locale}${PAGE_ROUTES.PRICING}`;
 };
 
 export const buildLegalPath = (locale: Locale): string => {
@@ -44,14 +46,19 @@ export const buildLegalPath = (locale: Locale): string => {
  * Rewrites a public pathname to its locale-specific URL.
  * Non-public paths are returned unchanged.
  */
-export const localizePublicPathname = (pathname: string, locale: Locale): string => {
+export const localizePublicPathname = (
+  pathname: string,
+  locale: Locale
+): string => {
   const normalizedPathname = normalizePathname(pathname);
   const explicitLocale = getLocaleFromPathname(normalizedPathname);
 
   if (explicitLocale) {
     const suffix = normalizedPathname.slice(explicitLocale.length + 1);
 
-    return locale === defaultLocale ? suffix || PAGE_ROUTES.HOME : `/${locale}${suffix}`;
+    return locale === defaultLocale
+      ? suffix || PAGE_ROUTES.HOME
+      : `/${locale}${suffix}`;
   }
 
   if (!isDefaultLocalePublicPathname(normalizedPathname)) {
@@ -78,7 +85,9 @@ export const isDefaultLocalePublicPathname = (pathname: string): boolean => {
   return normalizePathname(pathname) === PAGE_ROUTES.HOME;
 };
 
-export const getResolvedPublicLocaleFromPathname = (pathname: string): Locale | null => {
+export const getResolvedPublicLocaleFromPathname = (
+  pathname: string
+): Locale | null => {
   const explicitLocale = getLocaleFromPathname(pathname);
   if (explicitLocale) {
     return explicitLocale;
@@ -86,4 +95,3 @@ export const getResolvedPublicLocaleFromPathname = (pathname: string): Locale | 
 
   return isDefaultLocalePublicPathname(pathname) ? defaultLocale : null;
 };
-

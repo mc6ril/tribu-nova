@@ -25,4 +25,3 @@ export const persistThemeCookie = (theme: Theme): void => {
       typeof window !== "undefined" && window.location.protocol === "https:",
   });
 };
-

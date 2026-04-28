@@ -67,4 +67,3 @@ export const GET = async (
 
   return NextResponse.redirect(new URL(redirectTo, url));
 };
-

@@ -1,0 +1,250 @@
+@use "@/styles/variables/colors" as *;
+@use "@/styles/variables/gradients" as *;
+@use "@/styles/variables/spacing" as *;
+@use "@/styles/variables/typography" as *;
+@use "@/styles/variables/borders" as *;
+@use "@/styles/variables/animations" as *;
+@use "@/styles/variables/shadows" as *;
+@use "@/styles/variables/breakpoints" as *;
+
+// ============================================================================
+// Page Layout
+// ============================================================================
+
+.legal-page {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 0;
+  background-color: $color-background;
+  background-image: $color-workspace-page-gradient;
+  display: flex;
+  flex-direction: column;
+}
+
+// ============================================================================
+// Header
+// ============================================================================
+
+.legal-header {
+  background: linear-gradient(
+    $gradient-angle-diagonal,
+    rgba($color-secondary, 0.95) 0%,
+    rgba($color-background, 0.9) 100%
+  );
+  backdrop-filter: blur($backdrop-blur-base);
+  padding: $spacing-3xl $spacing-2xl;
+  border-bottom: $border-width solid $color-accent-border-subtle;
+  box-shadow: $shadow-sm;
+}
+
+.legal-header__content {
+  max-width: $spacing-container-max-width;
+  margin: 0 auto;
+}
+
+.legal-welcome__title {
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+  margin-bottom: $spacing-2xs;
+}
+
+.legal-welcome__subtitle {
+  font-size: $font-size-md;
+  color: $color-text-secondary;
+  font-weight: $font-weight-normal;
+}
+
+// ============================================================================
+// Main Container
+// ============================================================================
+
+.legal-container {
+  max-width: $spacing-container-max-width;
+  margin: 0 auto;
+  padding: $spacing-3xl $spacing-2xl;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-3xl;
+}
+
+// ============================================================================
+// Section
+// ============================================================================
+
+.legal-section {
+  background: $color-secondary;
+  border-radius: $border-radius-lg;
+  border: $border-width solid $color-border;
+  box-shadow: $shadow-card;
+  overflow: hidden;
+  animation: fadeInUp $animation-duration-slower $easing-ease-out backwards;
+
+  @for $i from 1 through 6 {
+    &:nth-child(#{$i}) {
+      animation-delay: calc(#{$i} * #{$animation-delay-medium});
+    }
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY($spacing-xl);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ============================================================================
+// Section Header
+// ============================================================================
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-lg;
+  padding: $spacing-2xl $spacing-3xl;
+  background: linear-gradient(
+    $gradient-angle-diagonal,
+    rgba($color-surface-subtle, 0.5) 0%,
+    $color-secondary 100%
+  );
+  border-bottom: $border-width solid $color-border-subtle;
+}
+
+.section-header__icon {
+  font-size: $font-size-2xl;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.section-title {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-sm;
+
+  &::before {
+    content: "";
+    width: $accent-bar-width;
+    height: $accent-bar-height;
+    background: linear-gradient(
+      $gradient-angle-vertical,
+      $color-accent,
+      $color-accent-peach
+    );
+    border-radius: $border-radius-2xs;
+  }
+}
+
+.section-description {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  margin-top: $spacing-2xs;
+}
+
+// ============================================================================
+// Section Content
+// ============================================================================
+
+.section-content {
+  padding: $spacing-2xl $spacing-3xl;
+}
+
+// ============================================================================
+// Legal Text
+// ============================================================================
+
+.legal-text {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.legal-list {
+  list-style: none;
+  padding-left: $spacing-lg;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+
+  li {
+    position: relative;
+    padding-left: $spacing-lg;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: $spacing-sm;
+      width: $spacing-xs;
+      height: $spacing-xs;
+      border-radius: $border-radius-full;
+      background: linear-gradient(
+        $gradient-angle-vertical,
+        $color-accent,
+        $color-accent-peach
+      );
+    }
+  }
+}
+
+// ============================================================================
+// Footer
+// ============================================================================
+
+.legal-footer {
+  text-align: center;
+  padding: $spacing-xl 0;
+  color: $color-text-secondary;
+}
+
+// ============================================================================
+// Responsive
+// ============================================================================
+
+@media (max-width: $breakpoint-md) {
+  .legal-header {
+    padding: $spacing-2xl $spacing-lg;
+  }
+
+  .legal-container {
+    padding: $spacing-2xl $spacing-lg;
+  }
+
+  .section-header {
+    padding: $spacing-lg $spacing-xl;
+  }
+
+  .section-content {
+    padding: $spacing-lg $spacing-xl;
+  }
+
+  .legal-welcome__title {
+    font-size: $font-size-2xl;
+  }
+}
+
+// ============================================================================
+// Accessibility & Reduced Motion
+// ============================================================================
+
+@media (prefers-reduced-motion: reduce) {
+  .legal-page,
+  .legal-page * {
+    animation-duration: 0ms !important;
+    animation: none !important;
+    transition-duration: 0ms !important;
+  }
+
+  .legal-section {
+    animation: none;
+  }
+}

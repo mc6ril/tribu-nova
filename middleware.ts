@@ -20,10 +20,7 @@ import {
   getAuthCodeRedirectTarget,
   sanitizeInternalRedirectPath,
 } from "@/shared/utils/authRedirect";
-import {
-  isProtectedRoute,
-  isPublicEntryRoute,
-} from "@/shared/utils/routes";
+import { isProtectedRoute, isPublicEntryRoute } from "@/shared/utils/routes";
 import { hasSupabaseAuthCookie } from "@/shared/utils/supabaseAuthCookies";
 
 const NEXT_INTL_LOCALE_HEADER_NAME = "X-NEXT-INTL-LOCALE";
@@ -101,10 +98,7 @@ const appendLocaleResponseCookies = (
   currentCookieLocale?: string
 ): NextResponse => {
   const resolvedPublicLocale = getResolvedPublicLocaleFromPathname(pathname);
-  if (
-    resolvedPublicLocale &&
-    resolvedPublicLocale !== currentCookieLocale
-  ) {
+  if (resolvedPublicLocale && resolvedPublicLocale !== currentCookieLocale) {
     return setLocaleCookie(response, resolvedPublicLocale);
   }
 
