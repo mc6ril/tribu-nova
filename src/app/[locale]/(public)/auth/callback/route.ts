@@ -55,14 +55,14 @@ export const GET = async (
   const redirectTo = resolveNextPath({ locale, nextPath });
 
   if (!code) {
-    return NextResponse.redirect(new URL(`/${locale}/login`, url));
+    return NextResponse.redirect(new URL(`/${locale}/auth/signin`, url));
   }
 
   const supabase = await createSupabaseServerClient();
   const { error } = await supabase.auth.exchangeCodeForSession(code);
 
   if (error) {
-    return NextResponse.redirect(new URL(`/${locale}/login`, url));
+    return NextResponse.redirect(new URL(`/${locale}/auth/signin`, url));
   }
 
   return NextResponse.redirect(new URL(redirectTo, url));

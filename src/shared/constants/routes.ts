@@ -29,13 +29,13 @@ export const PROTECTED_ROUTES: readonly string[] = Object.freeze([
 
 /**
  * Project route patterns.
- * Project routes follow the pattern: /{projectId}/{view}
- * where projectId is a UUID and view can be: board, recipes, settings, etc.
+ * Project routes follow the pattern: /workspace/{projectId}/{view}
+ * where projectId can be a UUID or human-friendly slug.
  */
 export const PROJECT_VIEWS = Object.freeze({
   BOARD: "board",
   RECIPES: "recipes",
-  SETTINGS: "settings",
+  SETTINGS: "projectSettings",
 });
 
 export type ProjectView = (typeof PROJECT_VIEWS)[keyof typeof PROJECT_VIEWS];
@@ -47,6 +47,7 @@ export type ProjectView = (typeof PROJECT_VIEWS)[keyof typeof PROJECT_VIEWS];
 export const AUTH_PAGE_ROUTES = Object.freeze({
   SIGNIN: "/auth/signin",
   SIGNUP: "/auth/signup",
+  JOIN: "/auth/join",
   VERIFY_EMAIL: "/auth/verify-email",
   RESET_PASSWORD: "/auth/reset-password",
   CALLBACK: "/auth/callback",
@@ -63,6 +64,7 @@ export const PUBLIC_ROUTES: readonly string[] = Object.freeze([
   PAGE_ROUTES.LEGAL,
   AUTH_PAGE_ROUTES.SIGNIN,
   AUTH_PAGE_ROUTES.SIGNUP,
+  AUTH_PAGE_ROUTES.JOIN,
   AUTH_PAGE_ROUTES.VERIFY_EMAIL,
   AUTH_PAGE_ROUTES.RESET_PASSWORD,
   AUTH_PAGE_ROUTES.UPDATE_PASSWORD,

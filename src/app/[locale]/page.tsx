@@ -16,10 +16,13 @@ export default async function LocaleHomePage({
           <Link href={`/${locale}/pricing`}>Pricing</Link>
         </li>
         <li>
-          <Link href={`/${locale}/login`}>Login</Link>
+          <Link href={`/${locale}/auth/signin`}>Sign in</Link>
         </li>
         <li>
           <Link href={`/${locale}/account`}>Account (auth)</Link>
+        </li>
+        <li>
+          <Link href={`/${locale}/workspace`}>Workspace (auth)</Link>
         </li>
       </ul>
     </main>

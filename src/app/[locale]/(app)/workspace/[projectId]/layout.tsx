@@ -1,13 +1,13 @@
 import Link from "next/link";
 
-export default async function WorkspaceLayout({
+export default async function ProjectLayout({
   children,
   params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ locale: string; workspaceId: string }>;
+  params: Promise<{ locale: string; projectId: string }>;
 }) {
-  const { locale, workspaceId } = await params;
+  const { locale, projectId } = await params;
 
   return (
     <div style={{ display: "flex", minHeight: "100vh" }}>
@@ -19,14 +19,14 @@ export default async function WorkspaceLayout({
         }}
       >
         <div style={{ fontWeight: 600, marginBottom: 12 }}>
-          Workspace {workspaceId}
+          Project {projectId}
         </div>
         <nav style={{ display: "grid", gap: 8 }}>
-          <Link href={`/${locale}/account`}>Account</Link>
-          <Link
-            href={`/${locale}/workspace/${workspaceId}/project/demo-project`}
-          >
-            Project demo
+          <Link href={`/${locale}/workspace`}>Workspace</Link>
+          <Link href={`/${locale}/workspace/${projectId}/board`}>Board</Link>
+          <Link href={`/${locale}/workspace/${projectId}/recipes`}>Recipes</Link>
+          <Link href={`/${locale}/workspace/${projectId}/projectSettings`}>
+            Project settings
           </Link>
         </nav>
       </aside>

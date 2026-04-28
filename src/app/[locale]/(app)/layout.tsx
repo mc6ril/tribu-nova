@@ -15,7 +15,7 @@ export default async function AppLayout({
 
   const userCookie = cookieStore.get(APP_COOKIE_KEYS.USER)?.value;
   if (!userCookie) {
-    redirect(`/${locale}/login`);
+    redirect(`/${locale}/auth/signin`);
   }
 
   return (
