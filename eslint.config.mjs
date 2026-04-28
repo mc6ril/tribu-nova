@@ -192,6 +192,46 @@ const eslintConfig = defineConfig([
       ],
     },
   },
+  /**
+   * Design System enforcement
+   *
+   * Goal: prevent "random HTML UI" and keep typography/form controls consistent.
+   * We allow raw tags inside the design-system itself, but forbid them elsewhere.
+   */
+  {
+    files: ["src/**/*.{tsx}"],
+    ignores: ["src/shared/design-system/**/*.{ts,tsx}"],
+    rules: {
+      "no-restricted-syntax": [
+        "error",
+        {
+          selector: "JSXOpeningElement[name.name=/^h[1-6]$/]",
+          message:
+            "Use the design system heading component instead (ex: @/shared/design-system/title or @/shared/design-system/section_title).",
+        },
+        {
+          selector: "JSXOpeningElement[name.name=/^(p|span)$/]",
+          message:
+            "Use the design system text component instead (ex: @/shared/design-system/text).",
+        },
+        {
+          selector: "JSXOpeningElement[name.name=/^(ul|ol|li)$/]",
+          message:
+            "Avoid raw list tags in UI. Prefer a design-system component (or create one) to keep spacing/typography consistent. If you just need vertical spacing, consider @/shared/design-system/stack.",
+        },
+        {
+          selector: "JSXOpeningElement[name.name='button']",
+          message:
+            "Use the design system button component instead (ex: @/shared/design-system/button).",
+        },
+        {
+          selector: "JSXOpeningElement[name.name='textarea']",
+          message:
+            "Use the design system textarea component instead (ex: @/shared/design-system/textarea).",
+        },
+      ],
+    },
+  },
   {
     files: [
       "src/app/**/page.tsx",
