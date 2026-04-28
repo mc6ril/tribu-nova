@@ -1,0 +1,249 @@
+// Theme definitions (light and dark palettes)
+// This file defines CSS custom properties on :root and [data-theme="dark"].
+// It must be imported from global.scss (not from CSS modules).
+
+// ============================================================================
+// Light theme (default)
+// ============================================================================
+
+:root {
+  // Brand / Primary (warm neutrals)
+  --color-primary: #5c4a42;
+  --color-primary-hover: #4a3c36;
+  --color-primary-text: #ffffff;
+
+  // Secondary (surfaces, cards)
+  --color-secondary: #ffffff;
+  --color-secondary-hover: #faf7f4;
+
+  // Background
+  --color-background: #faf7f4;
+  --color-background-gradient-start: #faf7f4;
+  --color-background-gradient-end: #f0ebe5;
+  --color-surface: #ffffff;
+  --color-surface-hover: #faf7f4;
+  --color-surface-subtle: #faf7f4;
+  --color-background-dark: #5c4a42;
+
+  // Foreground / Text
+  --color-foreground: #5c4a42;
+  --color-foreground-dark: #4a3c36;
+  --color-text: #5c4a42;
+  --color-text-primary: #5c4a42;
+  --color-text-secondary: #8a7a72;
+  --color-text-muted: #b8a89a;
+  --color-text-footer: #c4a898;
+
+  // Border
+  --color-border: #ede8e2;
+  --color-border-subtle: #f0ebe5;
+  --color-border-tooltip: #e8ddd5;
+  --color-border-highlight: #e8d8d0;
+  --color-border-button: #ddd5cd;
+  --color-border-dark: rgba(92, 74, 66, 0.15);
+
+  // Accent (brand highlights, CTAs, labels)
+  --color-accent: #c4788a;
+  --color-accent-hover: #b06a7a;
+  --color-accent-peach: #d4a085;
+  --color-accent-tan: #b8a89a;
+  --color-accent-subtle: rgba(196, 120, 138, 0.06);
+
+  // Ticket action buttons (publish / save / edit / delete)
+  --color-action-publish-bg: #6b3a46;
+  --color-action-publish-hover: #8b4d5c;
+  --color-action-publish-text: #f8f4ef;
+  --color-action-save-gradient-start: #c4788a;
+  --color-action-save-gradient-end: #8b4d5c;
+
+  // Highlight box gradient
+  --color-highlight-gradient-start: #f5e6df;
+  --color-highlight-gradient-end: #ede0d8;
+
+  // Accent borders (for badges, cards)
+  --color-accent-border-subtle: rgba(196, 120, 138, 0.15);
+  --color-accent-border-soft: rgba(196, 120, 138, 0.2);
+  --color-accent-bg-soft: rgba(196, 120, 138, 0.1);
+  --color-accent-peach-bg-soft: rgba(212, 160, 133, 0.1);
+
+  // Tooltip / overlay
+  --color-tooltip-background: rgba(255, 255, 255, 0.95);
+
+  // Sage (soft green for "active" indicators)
+  --color-sage: #7fb89a;
+  --color-sage-text: #5a9376;
+  --color-sage-bg-soft: rgba(127, 184, 154, 0.15);
+  --color-sage-bg-soft-end: rgba(163, 212, 187, 0.12);
+  --color-sage-border: rgba(127, 184, 154, 0.25);
+
+  // Semantic — Success
+  --color-success: #2d8a5e;
+  --color-success-background: #dcfce7;
+  --color-success-text: #15803d;
+  --color-success-ring: rgba(22, 163, 74, 0.3);
+
+  // Semantic — Error
+  --color-error: #c45c5c;
+  --color-error-background: #fee2e2;
+  --color-error-text: #991b1b;
+  --color-error-ring: rgba(220, 38, 38, 0.3);
+
+  // Semantic — Warning
+  --color-warning: #c49a3d;
+  --color-warning-background: #fef3c7;
+  --color-warning-text: #92400e;
+
+  // Semantic — Info
+  --color-info: #5c7cba;
+  --color-info-background: #dbeafe;
+  --color-info-text: #1e40af;
+
+  // Neutral scale (warm grays)
+  --color-neutral-50: #faf7f4;
+  --color-neutral-100: #f0ebe5;
+  --color-neutral-200: #ede8e2;
+  --color-neutral-300: #e8ddd5;
+  --color-neutral-400: #b8a89a;
+  --color-neutral-500: #8a7a72;
+  --color-neutral-600: #6b5e56;
+  --color-neutral-700: #5c4a42;
+  --color-neutral-800: #4a3c36;
+  --color-neutral-900: #3d322c;
+
+  // Focus
+  --color-focus: #c4788a;
+  --color-focus-ring: rgba(196, 120, 138, 0.3);
+
+  // Disabled
+  --color-disabled: #b8a89a;
+  --color-disabled-background: #f0ebe5;
+  --color-disabled-text: #8a7a72;
+
+  // Shadows (base RGB values for rgba() usage)
+  --shadow-color: 92, 74, 66;
+  --shadow-color-accent: 196, 120, 138;
+}
+
+// ============================================================================
+// Dark theme — Candlelit workshop
+// Concept: A warm textile workshop at night, lit by candlelight.
+// Palette inspired by plum velvet, natural linen and golden light.
+// ============================================================================
+
+[data-theme="dark"] {
+  // Brand / Primary — Natural linen under dimmed light
+  --color-primary: #e8d8ce;
+  --color-primary-hover: #f2e4da;
+  --color-primary-text: #2a1f1a;
+
+  // Secondary — Deep plum velvet
+  --color-secondary: #3d2e32;
+  --color-secondary-hover: #4a3640;
+
+  // Background — Workshop in twilight with warm undertones
+  --color-background: #2a1f1a;
+  --color-background-gradient-start: #2a1f1a;
+  --color-background-gradient-end: #3d2e28;
+  --color-surface: #3d2e32;
+  --color-surface-hover: #4a3640;
+  --color-surface-subtle: #342822;
+  --color-background-dark: #1a120e;
+
+  // Foreground / Text — Raw linen and rosy beige
+  --color-foreground: #f5ede5;
+  --color-foreground-dark: #faf7f4;
+  --color-text: #f5ede5;
+  --color-text-primary: #f5ede5;
+  --color-text-secondary: #d4c4b8;
+  --color-text-muted: #b8a89a;
+  --color-text-footer: #9a8a7e;
+
+  // Border — Subtle and warm
+  --color-border: #564640;
+  --color-border-subtle: #4a3a34;
+  --color-border-tooltip: #6b5850;
+  --color-border-highlight: #7a6058;
+  --color-border-button: #6b5850;
+  --color-border-dark: rgba(245, 237, 229, 0.12);
+
+  // Accent — Luminous marsala rose, brighter in dark mode to evoke candlelight
+  --color-accent: #d89aa8;
+  --color-accent-hover: #e5adb9;
+  --color-accent-peach: #e5b69a;
+  --color-accent-tan: #d4c4b8;
+  --color-accent-subtle: rgba(216, 154, 168, 0.12);
+
+  // Ticket action buttons (publish / save / edit / delete)
+  --color-action-publish-bg: #d89aa8;
+  --color-action-publish-hover: #e5adb9;
+  --color-action-publish-text: #2a1f1a;
+  --color-action-save-gradient-start: #e5adb9;
+  --color-action-save-gradient-end: #b5798a;
+
+  // Highlight box gradient — Golden glow on velvet
+  --color-highlight-gradient-start: #4a3640;
+  --color-highlight-gradient-end: #3d2e32;
+
+  // Accent borders — Warm rosy halos
+  --color-accent-border-subtle: rgba(216, 154, 168, 0.25);
+  --color-accent-border-soft: rgba(216, 154, 168, 0.35);
+  --color-accent-bg-soft: rgba(216, 154, 168, 0.15);
+  --color-accent-peach-bg-soft: rgba(229, 182, 154, 0.15);
+
+  // Tooltip / overlay — Translucent linen veil
+  --color-tooltip-background: rgba(61, 46, 50, 0.95);
+
+  // Sage (soft green for "active" indicators)
+  --color-sage: #a3d4bb;
+  --color-sage-text: #a3d4bb;
+  --color-sage-bg-soft: rgba(127, 184, 154, 0.18);
+  --color-sage-bg-soft-end: rgba(163, 212, 187, 0.14);
+  --color-sage-border: rgba(163, 212, 187, 0.3);
+
+  // Semantic — Success — Soft sage green
+  --color-success: #7fb89a;
+  --color-success-background: rgba(127, 184, 154, 0.15);
+  --color-success-text: #a3d4bb;
+  --color-success-ring: rgba(127, 184, 154, 0.3);
+
+  // Semantic — Error — Tender coral rose
+  --color-error: #e88a8a;
+  --color-error-background: rgba(232, 138, 138, 0.15);
+  --color-error-text: #f5b0b0;
+  --color-error-ring: rgba(232, 138, 138, 0.3);
+
+  // Semantic — Warning — Warm gold (candlelight)
+  --color-warning: #e5b67a;
+  --color-warning-background: rgba(229, 182, 122, 0.15);
+  --color-warning-text: #f5d4a0;
+
+  // Semantic — Info — Textile indigo blue (natural dye)
+  --color-info: #8a9ec4;
+  --color-info-background: rgba(138, 158, 196, 0.15);
+  --color-info-text: #afbee0;
+
+  // Neutral scale — Velvet-to-linen gradation
+  --color-neutral-50: #2a1f1a;
+  --color-neutral-100: #342822;
+  --color-neutral-200: #3d2e32;
+  --color-neutral-300: #4a3640;
+  --color-neutral-400: #7a6058;
+  --color-neutral-500: #9a8a7e;
+  --color-neutral-600: #b8a89a;
+  --color-neutral-700: #d4c4b8;
+  --color-neutral-800: #e8d8ce;
+  --color-neutral-900: #f5ede5;
+
+  // Focus — Luminous rosy halo
+  --color-focus: #e5adb9;
+  --color-focus-ring: rgba(229, 173, 185, 0.4);
+
+  // Disabled — Muted taupe
+  --color-disabled: #7a6058;
+  --color-disabled-background: #3d2e32;
+  --color-disabled-text: #9a8a7e;
+
+  // Shadows — Deep velvety shadows
+  --shadow-color: 26, 18, 14;
+  --shadow-color-accent: 216, 154, 168;
+}

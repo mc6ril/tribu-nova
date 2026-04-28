@@ -1,0 +1,364 @@
+@use "@/styles/variables/animations" as *;
+@use "@/styles/variables/borders" as *;
+@use "@/styles/variables/breakpoints" as *;
+@use "@/styles/variables/colors" as *;
+@use "@/styles/variables/gradients" as *;
+@use "@/styles/variables/shadows" as *;
+@use "@/styles/variables/spacing" as *;
+@use "@/styles/variables/typography" as *;
+
+.route-fallback {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: $spacing-4xl $spacing-2xl;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at top left,
+      $color-accent-peach-bg-soft 0%,
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      $color-accent-bg-soft 0%,
+      transparent 36%
+    ),
+    $color-background-gradient;
+}
+
+.route-fallback__glow {
+  position: absolute;
+  inset: auto auto 6% -6%;
+  width: 18rem;
+  height: 18rem;
+  border-radius: 999px;
+  background: $color-highlight-gradient;
+  filter: blur(42px);
+  opacity: 0.14;
+  pointer-events: none;
+}
+
+.route-fallback__panel {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(18rem, 0.95fr);
+  gap: $spacing-4xl;
+  width: min(68rem, 100%);
+  padding: $spacing-4xl;
+  border: $border-width solid $color-accent-border-subtle;
+  border-radius: $border-radius-xl;
+  background: linear-gradient(
+    180deg,
+    $color-secondary 0%,
+    $color-surface-subtle 100%
+  );
+  box-shadow: $shadow-modal;
+}
+
+.route-fallback__panel--error {
+  border-color: $color-error-ring;
+}
+
+.route-fallback__panel--loading {
+  border-color: $color-accent-border-soft;
+}
+
+.route-fallback__copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.route-fallback__eyebrow {
+  @include typography-caption;
+  color: $color-text-secondary;
+}
+
+.route-fallback__status {
+  display: inline-flex;
+  align-items: center;
+  margin-top: $spacing-lg;
+  padding: $spacing-2xs $spacing-md;
+  border: $border-width solid $color-accent-border-soft;
+  border-radius: 999px;
+  background: $color-accent-bg-soft;
+  color: $color-text;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+}
+
+.route-fallback--error .route-fallback__status {
+  border-color: $color-error-ring;
+  background: $color-error-background;
+  color: $color-error-text;
+}
+
+.route-fallback__title {
+  margin-top: $spacing-xl;
+  max-width: 14ch;
+  font-family: $font-family-serif;
+  font-size: clamp(2.4rem, 4vw, 4.8rem);
+  font-weight: $font-weight-normal;
+  line-height: 0.94;
+  color: $color-text;
+}
+
+.route-fallback__message {
+  margin-top: $spacing-xl;
+  max-width: 38rem;
+  font-size: $font-size-lg;
+  line-height: $line-height-relaxed;
+  color: $color-text-secondary;
+}
+
+.route-fallback__detail {
+  margin-top: $spacing-lg;
+  max-width: 32rem;
+  padding: $spacing-lg;
+  border: $border-width solid $color-border-subtle;
+  border-radius: $border-radius-md;
+  background: $color-secondary;
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+}
+
+.route-fallback__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-md;
+  margin-top: $spacing-3xl;
+}
+
+.route-fallback__action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: $spacing-button-height;
+  padding: $spacing-sm $spacing-2xl;
+  border: $border-width solid transparent;
+  border-radius: $border-radius-full;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  text-decoration: none;
+  transition:
+    transform $animation-duration-base $easing-smooth,
+    box-shadow $animation-duration-base $easing-smooth,
+    background-color $animation-duration-base $easing-smooth,
+    border-color $animation-duration-base $easing-smooth;
+}
+
+.route-fallback__action:hover {
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+
+.route-fallback__action:focus-visible {
+  outline: $border-width-thick solid $color-focus;
+  outline-offset: 2px;
+}
+
+.route-fallback__action--primary {
+  background: $color-text;
+  color: $color-secondary;
+  box-shadow: $shadow-accent-sm;
+}
+
+.route-fallback__action--secondary {
+  border-color: $color-border;
+  background: $color-secondary;
+  color: $color-text;
+}
+
+.route-fallback__visual {
+  display: flex;
+}
+
+.route-fallback__visual-frame {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  width: 100%;
+  min-height: 24rem;
+  padding: $spacing-2xl;
+  overflow: hidden;
+  border: $border-width solid $color-border-subtle;
+  border-radius: $border-radius-xl;
+  background:
+    radial-gradient(
+      circle at top right,
+      $color-accent-peach-bg-soft 0%,
+      transparent 34%
+    ),
+    linear-gradient(160deg, $color-secondary 0%, $color-accent-bg-soft 100%);
+  box-shadow: $shadow-card;
+}
+
+.route-fallback__visual-frame::before {
+  content: "";
+  position: absolute;
+  inset: auto -8% -18% auto;
+  width: 11rem;
+  height: 11rem;
+  border-radius: 999px;
+  background: $color-highlight-gradient;
+  opacity: 0.18;
+}
+
+.route-fallback__status-value {
+  position: absolute;
+  top: $spacing-lg;
+  right: $spacing-xl;
+  font-family: $font-family-serif;
+  font-size: min(11rem, 28vw);
+  line-height: 0.82;
+  letter-spacing: -0.08em;
+  color: $color-accent-border-soft;
+}
+
+.route-fallback--error .route-fallback__status-value {
+  color: $color-error-ring;
+}
+
+.route-fallback__status-card {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: $spacing-md;
+  align-self: flex-end;
+  min-width: 13rem;
+  max-width: 15rem;
+  padding: $spacing-xl;
+  border: $border-width solid $color-border-subtle;
+  border-radius: $border-radius-lg;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(10px);
+  box-shadow: $shadow-lg;
+}
+
+.route-fallback__status-card-label {
+  @include typography-caption;
+  color: $color-text-secondary;
+}
+
+.route-fallback__status-card-line {
+  height: 0.72rem;
+  width: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, $color-text 0%, $color-accent 100%);
+}
+
+.route-fallback__status-card-line--short {
+  width: 62%;
+}
+
+.route-fallback__loading-board {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: $spacing-md;
+  width: 100%;
+}
+
+.route-fallback__loading-column {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  padding: $spacing-md;
+  border: $border-width solid $color-border-subtle;
+  border-radius: $border-radius-lg;
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: $shadow-card;
+}
+
+.route-fallback__loading-column-header,
+.route-fallback__loading-card,
+.route-fallback__loading-card--small {
+  position: relative;
+  overflow: hidden;
+  border-radius: $border-radius-sm;
+  background: $color-surface-subtle;
+}
+
+.route-fallback__loading-column-header::after,
+.route-fallback__loading-card::after,
+.route-fallback__loading-card--small::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.85) 50%,
+    transparent 100%
+  );
+  animation: fallbackShimmer 1.6s infinite;
+}
+
+.route-fallback__loading-column-header {
+  width: 68%;
+  height: 0.9rem;
+}
+
+.route-fallback__loading-card {
+  height: 4rem;
+}
+
+.route-fallback__loading-card--small {
+  height: 2.75rem;
+}
+
+@keyframes fallbackShimmer {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .route-fallback {
+    padding: $spacing-3xl $spacing-lg;
+  }
+
+  .route-fallback__panel {
+    grid-template-columns: 1fr;
+    gap: $spacing-2xl;
+    padding: $spacing-3xl;
+  }
+
+  .route-fallback__title {
+    max-width: none;
+  }
+
+  .route-fallback__message {
+    font-size: $font-size-md;
+  }
+
+  .route-fallback__visual-frame {
+    min-height: 19rem;
+  }
+
+  .route-fallback__loading-board {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route-fallback__action,
+  .route-fallback__loading-column-header::after,
+  .route-fallback__loading-card::after,
+  .route-fallback__loading-card--small::after {
+    animation: none;
+    transition: none;
+  }
+}

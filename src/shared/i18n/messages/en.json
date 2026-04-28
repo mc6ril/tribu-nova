@@ -1,0 +1,1785 @@
+{
+  "app": {
+    "metadata": {
+      "title": "Tribu Nova",
+      "description": "A couple-focused app to lighten mental load and organize daily life together, without the overwhelm.",
+      "titleTemplate": "%s | Tribu Nova",
+      "keywords": "couple, mental load, daily life, household balance, family organization, clarity, care",
+      "ogImageAlt": "Tribu Nova — less mental load, more clarity"
+    },
+    "manifest": {
+      "description": "A couple-focused app to lighten mental load and organize daily life together."
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "loadingAriaLabel": "Loading content",
+    "email": "Email",
+    "password": "Password",
+    "signIn": "Sign in",
+    "signUp": "Sign up",
+    "dismiss": "Dismiss",
+    "dismissAriaLabel": "Dismiss error message",
+    "submit": "Submit",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "emptyState": {
+      "defaultTitle": "No items",
+      "defaultMessage": "There are no items to display yet."
+    },
+    "passwordToggle": {
+      "show": "Show password",
+      "hide": "Hide password"
+    }
+  },
+  "navigation": {
+    "skipLink": {
+      "label": "Skip to main content"
+    },
+    "sidebar": {
+      "ariaLabel": "Project navigation",
+      "openMenu": "Open project menu",
+      "closeMenu": "Close project menu",
+      "addTab": "Add module",
+      "addTabAriaLabel": "Add a module to the project",
+      "items": {
+        "home": "Home",
+        "board": "Board",
+        "recipes": "Recipes",
+        "ticketDetail": "Task",
+        "settings": "Settings"
+      },
+      "moduleLibrary": {
+        "title": "Add a module",
+        "intro": "Shape the project around the household’s real week. Only ready modules that are not already enabled appear here.",
+        "preview": {
+          "kicker": "Module preview",
+          "title": "Soft catalogue, visible quick list, clean shopping handoff"
+        },
+        "recipes": {
+          "status": "Available",
+          "lockedStatus": "{plan} plan",
+          "subtitle": "The household meals module, designed to feel desirable as soon as it lands in a project.",
+          "teaser": "A premium space to pick recipes, keep the right meals close, and turn the week into a very simple shopping plan.",
+          "cta": "Add Recipes to the project",
+          "upgradeCta": "See plans"
+        },
+        "empty": {
+          "badge": "Project up to date",
+          "title": "No new module to add right now",
+          "description": "Modules already enabled disappear from this list, and future modules stay hidden until they are ready."
+        }
+      },
+      "locked": {
+        "ariaLabel": "{feature} — requires {plan} plan",
+        "badge": {
+          "pro": "Foyer",
+          "team": "Foyer Plus"
+        }
+      },
+      "profile": {
+        "ariaLabel": "Open profile menu",
+        "backToWorkspace": "Back to workspace",
+        "profileSettings": "Account settings",
+        "logout": "Sign out",
+        "userFallbackName": "User"
+      }
+    },
+    "searchBar": {
+      "ariaLabel": "Search bar",
+      "placeholder": "Search"
+    },
+    "navbar": {
+      "filter": "Filter",
+      "filterAriaLabel": "Open filters",
+      "reviewGuide": "Review guide",
+      "reviewGuideAriaLabel": "Restart the onboarding guide",
+      "addTicket": "Add task",
+      "addTicketAriaLabel": "Create a new task"
+    }
+  },
+  "layout": {
+    "appFooter": {
+      "label": "Tribu Nova",
+      "ariaLabel": "Application footer"
+    }
+  },
+  "pages": {
+    "signup": {
+      "title": "Create an account",
+      "subtitle": "Sign up to start lightening your mental load.",
+      "button": "Sign up",
+      "buttonLoading": "Signing up...",
+      "buttonAriaLabel": "Sign up",
+      "oauth": {
+        "divider": "or",
+        "googleButton": "Continue with Google",
+        "googleButtonAriaLabel": "Sign in with Google"
+      },
+      "footer": "Already have an account?",
+      "footerLink": "Sign in",
+      "fields": {
+        "displayName": {
+          "label": "Display name",
+          "placeholder": "John Doe"
+        },
+        "email": {
+          "required": "Email address is required",
+          "invalid": "Email address is not valid"
+        },
+        "confirmPassword": {
+          "label": "Confirm password",
+          "required": "Please confirm your password",
+          "mismatch": "Passwords do not match"
+        },
+        "password": {
+          "helperText": "Minimum 6 characters",
+          "tooShort": "Password must be at least 6 characters",
+          "tooLong": "Password must not exceed 100 characters",
+          "hint": {
+            "hasMinLength": "Minimum 6 characters",
+            "hasUppercase": "Add an uppercase letter",
+            "hasLowercase": "Add a lowercase letter",
+            "hasNumber": "Add a number",
+            "hasSpecialChar": "Add a special character (!@#...)"
+          }
+        },
+        "acceptedTerms": {
+          "label": "I accept the",
+          "linkLabel": "terms and conditions",
+          "ariaLabel": "Accept the terms and conditions"
+        }
+      },
+      "passwordStrength": {
+        "weak": "Weak",
+        "medium": "Medium",
+        "strong": "Strong"
+      },
+      "verification": {
+        "title": "Email verification required",
+        "message": "A verification email has been sent to your address.",
+        "instructions": "Please check your inbox and click the link to verify your account.",
+        "resendHint": "If you do not receive it, you can request a new verification email.",
+        "resendButton": "Resend verification email",
+        "resendButtonAriaLabel": "Resend verification email",
+        "resendSuccess": "Verification email sent again. Please check your inbox.",
+        "backToSignin": "Back to sign in"
+      },
+      "errors": {
+        "invalidEmail": "Invalid email address",
+        "weakPassword": "Password does not meet requirements",
+        "passwordMismatch": "Passwords do not match",
+        "termsRequired": "You must accept the terms and conditions",
+        "generic": "An error occurred during sign up"
+      }
+    },
+    "verifyEmail": {
+      "title": "Email verification",
+      "success": "Your email has been verified successfully.",
+      "redirecting": "Redirecting...",
+      "backToSignin": "Back to sign in",
+      "errors": {
+        "missingToken": "Invalid verification link. Token or email is missing.",
+        "invalidToken": "The verification link is invalid or has expired. Please request a new link.",
+        "verificationError": "An error occurred during email verification.",
+        "generic": "An error occurred during verification"
+      }
+    },
+    "resetPassword": {
+      "title": "Reset password",
+      "subtitle": "Enter your email address to receive a reset link",
+      "button": "Send link",
+      "buttonAriaLabel": "Send reset link",
+      "backToSignin": "Back to sign in",
+      "success": {
+        "message": "If an account exists with this email address, a reset link has been sent.",
+        "instructions": "Please check your inbox and click the link to reset your password."
+      },
+      "fields": {
+        "email": {
+          "required": "Email address is required",
+          "invalid": "Email address is not valid"
+        }
+      }
+    },
+    "updatePassword": {
+      "title": "Update password",
+      "subtitle": "Enter your new password",
+      "button": "Update password",
+      "buttonAriaLabel": "Update password",
+      "backToSignin": "Back to sign in",
+      "success": "Your password has been updated successfully.",
+      "redirecting": "Redirecting...",
+      "fields": {
+        "password": {
+          "label": "New password",
+          "tooShort": "Password must be at least 6 characters",
+          "tooLong": "Password must be less than 100 characters",
+          "hint": {
+            "hasMinLength": "Minimum 6 characters",
+            "hasUppercase": "Add an uppercase letter",
+            "hasLowercase": "Add a lowercase letter",
+            "hasNumber": "Add a number",
+            "hasSpecialChar": "Add a special character (!@#...)"
+          }
+        },
+        "confirmPassword": {
+          "label": "Confirm password",
+          "required": "Please confirm your password",
+          "mismatch": "Passwords do not match"
+        }
+      }
+    },
+    "signin": {
+      "title": "Sign in",
+      "subtitle": "Sign in to access your Tribu Nova space",
+      "button": "Sign in",
+      "buttonAriaLabel": "Sign in",
+      "oauth": {
+        "divider": "or",
+        "googleButton": "Continue with Google",
+        "googleButtonAriaLabel": "Sign in with Google"
+      },
+      "forgotPassword": "Forgot password?",
+      "footer": "Don't have an account?",
+      "footerLink": "Sign up",
+      "resendVerification": {
+        "button": "Resend verification email",
+        "buttonAriaLabel": "Resend verification email",
+        "success": "Verification email sent. Please check your inbox."
+      },
+      "errors": {
+        "invalidCredentials": "Invalid email or password",
+        "invalidEmail": "Invalid email address",
+        "emailNotVerified": "Your email has not been verified. Please check your inbox and click the verification link.",
+        "generic": "An error occurred during sign in"
+      },
+      "fields": {
+        "email": {
+          "required": "Email address is required",
+          "invalid": "Email address is not valid"
+        },
+        "password": {
+          "required": "Password is required"
+        }
+      }
+    },
+    "home": {
+      "welcome": "Welcome to Tribu Nova",
+      "welcomeSubtitle": "Get started by signing in or creating an account",
+      "welcomeTitle": "Welcome",
+      "signedInAs": "Signed in as:",
+      "accessProjectTitle": "Access a project",
+      "accessProjectDescription": "Enter a project ID to access a project you are not yet a member of",
+      "projectIdLabel": "Project ID",
+      "projectIdPlaceholder": "Enter the project UUID",
+      "accessProjectButton": "Access project",
+      "yourProjectsTitle": "Your projects",
+      "loading": "Loading...",
+      "loadingProjects": "Loading projects...",
+      "noProjects": "You don't have access to any projects yet.",
+      "errorLoadingProjects": "Error loading projects:",
+      "unknownError": "Unknown error",
+      "pleaseEnterProjectId": "Please enter a project ID",
+      "failedToAddToProject": "Unable to add you to the project",
+      "roleAdmin": "Administrator",
+      "roleMember": "Member",
+      "roleViewer": "Viewer",
+      "roleAriaLabel": "Role",
+      "createProjectTitle": "Create a project",
+      "createProjectDescription": "Create your first project to get started",
+      "projectNameLabel": "Project name",
+      "projectNamePlaceholder": "Enter your project name",
+      "createProjectButton": "Create project",
+      "createProjectButtonAriaLabel": "Create project",
+      "logoutButton": "Sign out",
+      "logoutButtonAriaLabel": "Sign out",
+      "updateUserButton": "Update account",
+      "updateUserButtonAriaLabel": "Update account information",
+      "deleteUserButton": "Delete account",
+      "deleteUserButtonAriaLabel": "Permanently delete account",
+      "deleteUserConfirmation": "Are you sure you want to delete your account? This action cannot be undone.",
+      "newEmailLabel": "New email",
+      "newEmailPlaceholder": "Enter your new email",
+      "newPasswordLabel": "New password",
+      "newPasswordPlaceholder": "Enter your new password (optional)",
+      "saveButton": "Save",
+      "saveButtonAriaLabel": "Save changes",
+      "cancelButton": "Cancel",
+      "cancelButtonAriaLabel": "Cancel changes",
+      "errors": {
+        "projectNameRequired": "Project name is required",
+        "projectNameTooShort": "Project name must be at least 1 character",
+        "generic": "An error occurred while creating the project"
+      },
+      "quickAddTicket": {
+        "title": "Task title",
+        "placeholder": "Enter the task title",
+        "submitButton": "Add",
+        "submitButtonAriaLabel": "Add task"
+      },
+      "myWorkWidget": {
+        "title": "My work",
+        "emptyMessage": "No active tasks",
+        "ticketAriaLabel": "Task",
+        "statusLabel": "Status"
+      },
+      "recentActivityWidget": {
+        "title": "Recent activity",
+        "emptyMessage": "No recent activity",
+        "activityAriaLabel": "Activity",
+        "types": {
+          "ticket_created": "Task created",
+          "ticket_updated": "Task updated",
+          "ticket_completed": "Task completed"
+        }
+      },
+      "shortcutsWidget": {
+        "title": "Shortcuts",
+        "shortcuts": {
+          "board": "Board",
+          "settings": "Settings"
+        }
+      }
+    },
+    "projectHome": {
+      "title": "Home",
+      "lastActivityNow": "Last activity: just now",
+      "lastActivityHours": "Last activity: {hours, plural, one {# hour} other {# hours}}",
+      "lastActivityDays": "Last activity: {days, plural, one {# day} other {# days}}",
+      "lastActivityDate": "Last activity: {date}",
+      "myTasksTitle": "My tasks",
+      "myTasksDescription": "Your assigned tasks to tackle first.",
+      "myTasksEmpty": "No personal tasks for now.",
+      "recentTitle": "Recent",
+      "recentDescription": "The latest items updated in this project.",
+      "recentEmpty": "No recent activity yet.",
+      "openBacklog": "View all tasks",
+      "openBacklogAriaLabel": "Open the full task list",
+      "shortcutsWidget": {
+        "title": "Shortcuts",
+        "shortcuts": {
+          "board": "Board",
+          "settings": "Settings"
+        }
+      }
+    },
+    "fallback": {
+      "workspaceLoading": {
+        "eyebrow": "Opening workspace",
+        "status": "Loading",
+        "title": "We are preparing your spaces",
+        "message": "Projects, members, and access rights are on their way. The screen is being assembled before we hand control back to you.",
+        "ariaLabel": "Loading workspace"
+      },
+      "projectLoading": {
+        "eyebrow": "Loading project",
+        "status": "Syncing",
+        "title": "The project is taking shape",
+        "message": "We are loading the board and permissions so the project opens in a ready-to-use state.",
+        "ariaLabel": "Loading project"
+      }
+    },
+    "workspace": {
+      "title": "Family spaces",
+      "subtitle": "Create a workspace or join those you have access to.",
+      "welcomeBanner": "Welcome {name}",
+      "sectionDescription": "Find all your shared spaces",
+      "membersCount": "{count, plural, one {# member} other {# members}}",
+      "tasksCount": "{count, plural, one {# task} other {# tasks}}",
+      "statInProgress": "In progress",
+      "statCompleted": "Completed",
+      "emptyStateCardTitle": "Your workspace awaits",
+      "emptyStateCardDescription": "Create your first space to organize everyday life as a team and move forward together.",
+      "userFallbackName": "User",
+      "addWorkspaceButton": "Create a space",
+      "addWorkspaceButtonAriaLabel": "Open form to create a new workspace",
+      "joinWorkspaceButton": "Use an invitation link",
+      "joinWorkspaceButtonAriaLabel": "Open form to join a space with an invitation link",
+      "yourWorkspacesTitle": "Your spaces",
+      "noWorkspaces": "No space",
+      "noWorkspacesMessage": "Create your first space or join one with an invitation link.",
+      "emptyStateTitle": "Welcome home",
+      "emptyStateMessage": "Create a space to share daily tasks, reduce mental load, and stay aligned together.",
+      "addFirstProjectButton": "Create my first workspace",
+      "addFirstProjectButtonAriaLabel": "Create my first workspace",
+      "createWorkspaceTitle": "Create a workspace",
+      "createWorkspaceDescription": "Give your new workspace a name to get started.",
+      "projectNameLabel": "Workspace name",
+      "projectNamePlaceholder": "e.g. My project",
+      "emojiPickerLabel": "Choose a mood",
+      "emojiPickerAriaLabel": "Workspace emoji picker",
+      "emojiPickerOptionAriaLabel": "Choose emoji {emoji}",
+      "createButton": "Create space",
+      "createButtonAriaLabel": "Create space",
+      "joinWorkspaceTitle": "Join a space with a link",
+      "joinWorkspaceDescription": "Paste the invitation link from your partner to join the space.",
+      "invitationLinkLabel": "Invitation link",
+      "invitationLinkPlaceholder": "https://.../join/ABC123 or token",
+      "joinButton": "Join workspace",
+      "joinButtonAriaLabel": "Join workspace",
+      "roleAdmin": "Administrator",
+      "roleMember": "Member",
+      "roleViewer": "Viewer",
+      "roleAriaLabel": "Role",
+      "openWorkspaceAriaLabel": "Open workspace {name}, role: {role}",
+      "pleaseEnterInvitationLink": "Please enter an invitation link or token",
+      "pendingInvitationsTitle": "Pending invitations",
+      "pendingInvitationsDescription": "Accept incoming invitations quickly to start collaborating.",
+      "pendingInvitationsInvitedBy": "Invited by {name}",
+      "pendingInvitationsAccept": "Accept",
+      "pendingInvitationsAcceptAriaLabel": "Accept invitation for {project}",
+      "pendingInvitationsDecline": "Decline",
+      "pendingInvitationsDeclineAriaLabel": "Decline invitation for {project}",
+      "welcomeGuideTitle": "Getting started guide",
+      "welcomeGuideDescription": "Start by creating your first space. You will then be able to invite someone and discover the board.",
+      "welcomeGuidePrimaryCta": "Create my first space",
+      "welcomeGuidePrimaryCtaAriaLabel": "Open the form to create my first space",
+      "welcomeGuideSkipCta": "Skip for now",
+      "welcomeGuideSkipCtaAriaLabel": "Stop opening the getting started guide automatically",
+      "actions": {
+        "inviteRoleViewerDescription": "Can browse the project without changing its content.",
+        "inviteRoleMemberDescription": "Can collaborate on tickets and everyday project work.",
+        "inviteRoleAdminDescription": "Can manage members, settings, and project structure."
+      },
+      "reclaimable": {
+        "sectionTitle": "Projects to recover",
+        "sectionDescription": "These projects were associated with your email and can be recovered before they are permanently deleted.",
+        "orphanedSince": "Orphaned since {date}",
+        "expiresIn": "Expires in {days} days",
+        "reclaimButton": "Recover",
+        "reclaimButtonAriaLabel": "Recover project {name}",
+        "reclaimSuccess": "Project recovered successfully! You are now admin.",
+        "reclaimError": "An error occurred while recovering the project."
+      },
+      "footer": {
+        "ariaLabel": "Useful links and information",
+        "account": "My account",
+        "legal": "Legal information",
+        "subscriptions": "Plans and options"
+      }
+    },
+    "join": {
+      "processing": "Processing invitation...",
+      "processingEyebrow": "Invitation in progress",
+      "processingStatus": "Connecting to project",
+      "processingTitle": "We are preparing your access",
+      "processingMessage": "Your invitation is being validated. You will join the project in a few moments.",
+      "processingDetail": "We are checking the link validity and your permissions before redirecting you.",
+      "processingAriaLabel": "Invitation processing in progress",
+      "errorEyebrow": "Invitation unavailable",
+      "errorStatus": "Access failed",
+      "errorStatusValue": "!",
+      "errorTitle": "This invitation cannot be used",
+      "errorMessage": "The link may have expired, already been used, or is no longer valid.",
+      "retry": "Retry",
+      "retryAriaLabel": "Retry accepting invitation",
+      "backToWorkspace": "Back to workspace",
+      "backToWorkspaceAriaLabel": "Return to the workspace"
+    },
+    "board": {
+      "columns": {
+        "todo": "To do",
+        "in_progress": "In progress",
+        "done": "Done",
+        "in-progress": "In progress",
+        "completed": "Done"
+      },
+      "search": {
+        "archivedBadge": "Archived"
+      },
+      "view": {
+        "title": "Board",
+        "ariaLabel": "Board view",
+        "loading": "Loading board...",
+        "emptyMessage": "No tasks on the board yet. Add one to get started."
+      },
+      "quickAdd": {
+        "label": "Quick add",
+        "placeholder": "Add a task without opening a modal",
+        "button": "Add",
+        "buttonAriaLabel": "Quickly add a task",
+        "success": "Task \"{title}\" added.",
+        "error": "Unable to add task. Please try again."
+      },
+      "column": {
+        "ariaLabel": "Column {title}",
+        "dropZoneAriaLabel": "Drop zone for column {title}",
+        "emptyDropZoneAriaLabel": "Empty drop zone for column {title}",
+        "emptyColumnPlaceholder": "No tasks"
+      },
+      "filters": {
+        "searchLabel": "Search",
+        "searchPlaceholder": "Search by title or notes",
+        "statusLabel": "Status",
+        "resetLabel": "Reset filters",
+        "assigneeLabel": "Assignee",
+        "assigneeUnassignedLabel": "Unassigned",
+        "allAssigneesLabel": "All"
+      },
+      "ticketCard": {
+        "ticketAriaLabel": "Task",
+        "statusLabel": "Status",
+        "assigneeLabel": "Assignee",
+        "priority": {
+          "urgent": "Urgent",
+          "normal": "Normal",
+          "low": "Low"
+        },
+        "priorityLabel": "Priority",
+        "storyPointsLabel": "{count, plural, one {# point} other {# points}}",
+        "editTicketLabel": "Edit task"
+      },
+      "columnsConfiguration": {
+        "title": "Column configuration",
+        "ariaLabel": "Board column configuration",
+        "closeLabel": "Close",
+        "moveUpLabel": "Move up",
+        "moveDownLabel": "Move down",
+        "moveUpAriaLabel": "Move column {title} up",
+        "moveDownAriaLabel": "Move column {title} down"
+      },
+      "createTicketForm": {
+        "title": "Create task",
+        "fields": {
+          "title": "Title",
+          "status": "Status",
+          "notes": "Notes"
+        },
+        "submitButton": "Create task",
+        "cancelButton": "Cancel",
+        "errorGeneric": "An error occurred while creating the task",
+        "readOnlyHint": "Viewers cannot create tasks.",
+        "noStatusHint": "Manage and organize your tasks"
+      },
+      "onboarding": {
+        "eyebrow": "Onboarding",
+        "title": "Get oriented on the board",
+        "description": "Follow the three key actions to understand the board and build your first day-to-day workflow.",
+        "reviewTitle": "Review the guide",
+        "reviewDescription": "Restart the full onboarding whenever you want to revisit ticket creation, assignment, and comments.",
+        "reviewCta": "Review the guide",
+        "reviewCtaAriaLabel": "Review the board onboarding guide",
+        "hideCta": "Hide guide",
+        "hideCtaAriaLabel": "Hide the board onboarding guide",
+        "skipCta": "Skip onboarding",
+        "skipCtaAriaLabel": "Stop opening onboarding automatically",
+        "genericError": "Unable to update your onboarding preferences.",
+        "status": {
+          "complete": "Done",
+          "current": "In progress",
+          "pending": "Coming up"
+        },
+        "steps": {
+          "createTicket": {
+            "title": "Create a ticket",
+            "description": "Create your first task to see how the board structures the work.",
+            "action": "Create a ticket",
+            "actionAriaLabel": "Open ticket creation"
+          },
+          "assignTicket": {
+            "title": "Open and assign a ticket",
+            "description": "Open a ticket and assign it so ownership is clear from the start.",
+            "blockedDescription": "Create a first ticket first. Then you will be able to open it and assign it.",
+            "action": "Open the ticket",
+            "actionAriaLabel": "Open a ticket to assign it"
+          },
+          "commentTicket": {
+            "title": "Comment on a ticket",
+            "description": "Add a comment inside the ticket to keep context and decisions in one place.",
+            "blockedDescription": "Create a first ticket first. Then you will be able to open it and add a comment.",
+            "action": "Open comments",
+            "actionAriaLabel": "Open a ticket to add a comment"
+          }
+        }
+      }
+    },
+    "settings": {
+      "page": {
+        "loading": "Loading project settings...",
+        "loadErrorTitle": "Unable to load the project",
+        "retry": "Retry",
+        "tabs": {
+          "project": "Project",
+          "statusesColumns": "Statuses and columns"
+        },
+        "fallback": "Settings section unavailable"
+      },
+      "layout": {
+        "title": "Settings",
+        "tabsNavAriaLabel": "Settings navigation"
+      },
+      "project": {
+        "title": "Project information",
+        "subtitle": "Pick a board icon and project name. The project code stays two letters, without emoji.",
+        "fields": {
+          "boardEmoji": {
+            "label": "Board icon",
+            "choiceAriaLabel": "Choose board emoji"
+          },
+          "projectName": {
+            "label": "Project name",
+            "placeholder": "Enter the project name"
+          },
+          "shortCode": {
+            "label": "Project code"
+          },
+          "createdAt": {
+            "label": "Created on"
+          },
+          "projectDescription": {
+            "label": "Project description",
+            "placeholder": "Add a description (optional)"
+          }
+        },
+        "actions": {
+          "save": "Save",
+          "saving": "Saving...",
+          "reset": "Reset"
+        },
+        "status": {
+          "saved": "Changes saved"
+        },
+        "validation": {
+          "projectNameRequired": "Project name is required.",
+          "projectNameContainsEmoji": "The project name must not contain emoji."
+        }
+      },
+      "access": {
+        "title": "Your permissions",
+        "subtitle": "The actions available here depend on your current role in this project.",
+        "currentRoleLabel": "Current role",
+        "roles": {
+          "admin": "Administrator",
+          "member": "Member",
+          "viewer": "Viewer"
+        },
+        "fallbackRole": "Unknown access",
+        "statuses": {
+          "allowed": "Allowed",
+          "blocked": "Not allowed"
+        },
+        "capabilities": {
+          "projectEdit": "Project editing",
+          "invitation": "Invitations",
+          "roleManagement": "Role changes",
+          "renameAllowed": "You can rename the project.",
+          "renameBlocked": "You can view the project, but not rename it.",
+          "deleteAllowed": "You can delete the project.",
+          "deleteBlocked": "Only an administrator can delete the project."
+        }
+      },
+      "dangerZone": {
+        "title": "Danger zone",
+        "subtitle": "Deleting permanently removes the project and all associated content.",
+        "description": "This action cannot be undone. Make sure you no longer need the project data before continuing.",
+        "adminOnly": "Project deletion is reserved for administrators.",
+        "readOnly": "Your current role is read-only."
+      },
+      "delete": {
+        "open": "Delete project",
+        "openAriaLabel": "Open the project deletion confirmation",
+        "modalTitle": "Delete project",
+        "modalDescription": "Type the project name to confirm permanent deletion.",
+        "confirmationLabel": "Confirm the project name",
+        "confirmationPlaceholder": "Type {name} again",
+        "confirmationHelper": "Enter exactly \"{name}\" to enable deletion.",
+        "confirm": "Delete permanently",
+        "deleting": "Deleting...",
+        "cancel": "Cancel"
+      },
+      "people": {
+        "title": "Members and invitations",
+        "subtitle": "Manage project access, active roles, and invitation links that are still valid.",
+        "adminOnly": "Only an administrator can invite people, change roles, or remove a member from the project.",
+        "advancedRolesLocked": "The Viewer role requires the {plan} plan. Existing viewers remain visible until their next role change.",
+        "currentPlan": "Current plan: {plan}",
+        "memberLimit": {
+          "limited": "{count}/{limit} seats used",
+          "unlimited": "{count} seats used, no limit",
+          "reached": "The {plan} plan limit of {limit} seats has been reached. Active members and pending invitations both count toward this total."
+        }
+      },
+      "members": {
+        "title": "Project members",
+        "subtitle": "This list reflects the roles currently active in the project.",
+        "loading": "Loading members...",
+        "loadErrorTitle": "Unable to load members",
+        "emptyTitle": "No members to display",
+        "emptyDescription": "People who join the project will appear here.",
+        "adminsCount": "{count, plural, one {# administrator} other {# administrators}}",
+        "syncing": "Syncing...",
+        "live": "Synced",
+        "roleFieldLabel": "Role"
+      },
+      "invitations": {
+        "title": "Pending invitations",
+        "subtitle": "Create access links and keep track of invitations that are still valid.",
+        "createTitle": "Create an invitation link",
+        "createDescription": "Choose the role assigned when someone joins the project.",
+        "roleLabel": "Assigned role",
+        "create": "Create link",
+        "creating": "Creating...",
+        "copyLink": "Copy link",
+        "copyLinkSuccess": "Invitation link copied",
+        "linkLabel": "Invitation link",
+        "linkHelper": "Share this link before it expires.",
+        "listTitle": "Active links",
+        "listDescription": "Each link counts toward project capacity until it is used or revoked.",
+        "loading": "Loading invitations...",
+        "loadErrorTitle": "Unable to load invitations",
+        "emptyTitle": "No pending invitations",
+        "emptyDescription": "Active links will appear here as soon as you create one.",
+        "activeCount": "{count, plural, one {# pending invitation} other {# pending invitations}}",
+        "pendingLinkTitle": "Invitation link",
+        "createdAt": "Created on {date}",
+        "expiresAt": "Expires on {date}",
+        "revoke": "Revoke",
+        "revokeAriaLabel": "Revoke the invitation expiring on {date}",
+        "revokeConfirm": "Revoke this invitation link?",
+        "revokeModal": {
+          "title": "Revoke this link",
+          "description": "Are you sure you want to revoke this invitation? The link will no longer be usable.",
+          "confirm": "Confirm revocation",
+          "pending": "Revoking...",
+          "cancel": "Cancel"
+        },
+        "revokeSuccess": "Invitation revoked",
+        "listAriaLabel": "Pending invitations list",
+        "syncing": "Syncing..."
+      },
+      "statusesColumns": {
+        "title": "Statuses and columns",
+        "subtitle": "Configure column order, name, and activation",
+        "listAriaLabel": "Column list",
+        "fields": {
+          "enabled": {
+            "label": "Enabled",
+            "ariaLabel": "Enable column {name}"
+          },
+          "name": {
+            "label": "Name",
+            "placeholder": "Column name",
+            "ariaLabel": "Rename column {name}"
+          }
+        },
+        "actions": {
+          "add": "Add",
+          "moveUp": "Move up",
+          "moveDown": "Move down",
+          "moveUpAriaLabel": "Move column {name} up",
+          "moveDownAriaLabel": "Move column {name} down"
+        },
+        "empty": {
+          "title": "No columns",
+          "message": "Add a column to get started"
+        }
+      }
+    },
+    "ticketDetail": {
+      "page": {
+        "title": "Task detail",
+        "modalTitle": "Task",
+        "ticketCode": "Ref. {code}",
+        "actions": {
+          "back": "Back",
+          "close": "Close",
+          "save": "Save",
+          "delete": "Delete task",
+          "deleteModal": {
+            "title": "Delete task",
+            "message": "Do you really want to delete this task? This action cannot be undone.",
+            "confirm": "Delete permanently",
+            "deleting": "Deleting..."
+          },
+          "openFullPage": "Open full page"
+        },
+        "states": {
+          "errorTitle": "Task not found",
+          "errorMessage": "This task does not exist or you do not have access to it."
+        },
+        "fields": {
+          "title": "Title",
+          "notes": "Notes",
+          "notesPlaceholder": "Add a few helpful notes for the household...",
+          "status": "Status",
+          "priority": "Priority",
+          "assignee": "Assignee",
+          "dueDate": "Due date",
+          "createdAt": "Created",
+          "position": "Position",
+          "none": "None"
+        },
+        "sections": {
+          "details": "Details"
+        },
+        "priority": {
+          "urgent": "Urgent",
+          "normal": "Normal",
+          "low": "Low"
+        },
+        "comments": {
+          "title": "Comments",
+          "newLabel": "Add comment",
+          "newPlaceholder": "Add a comment...",
+          "readOnlyHint": "Viewers cannot post comments.",
+          "addButton": "Post",
+          "author": "Author: {author}",
+          "unknownAuthor": "User",
+          "editLabel": "Edit comment",
+          "saveEdit": "Save",
+          "editButton": "Edit",
+          "deleteButton": "Delete"
+        },
+        "archived": {
+          "bannerTitle": "Archived task",
+          "bannerDescription": "This task no longer appears on the active board. You can unarchive it to bring it back into the flow.",
+          "unarchiveAction": "Unarchive"
+        }
+      }
+    },
+    "recipes": {
+      "catalog": {
+        "header": {
+          "kicker": "Catalog",
+          "title": "All recipes",
+          "filteredTitle": "Filtered results"
+        },
+        "summary": {
+          "availableResults": "{count} recipe available",
+          "availableResults_other": "{count} recipes available",
+          "filteredResults": "{count} recipe after filters",
+          "filteredResults_other": "{count} recipes after filters",
+          "refreshing": "Refreshing..."
+        },
+        "filterBar": {
+          "open": "Filter",
+          "openAriaLabel": "Open the catalog filters",
+          "helper": "{count} filter category available",
+          "helper_other": "{count} filter categories available",
+          "reset": "Reset"
+        },
+        "activeFilters": {
+          "search": "Search: {search}"
+        },
+        "empty": {
+          "kicker": "No results",
+          "title": "No recipe matches the current filters.",
+          "description": "Try a shorter search or remove a filter to reopen the catalog.",
+          "reset": "Reset filters"
+        },
+        "pagination": {
+          "loadMore": "Load more",
+          "loading": "Loading...",
+          "loadingMessage": "Loading more recipes...",
+          "loadingAriaLabel": "Loading more recipes"
+        },
+        "card": {
+          "openRecipeAriaLabel": "Open recipe {title}",
+          "editRecipeAriaLabel": "Edit recipe {title}",
+          "addToQuickListAriaLabel": "Add {title} to the quick list",
+          "removeFromQuickListAriaLabel": "Remove {title} from the quick list",
+          "quickListUpdateFailed": "The quick list could not be updated."
+        },
+        "sheet": {
+          "ariaLabel": "Recipe catalog filters",
+          "kicker": "Filters",
+          "title": "Refine the catalog",
+          "close": "Close",
+          "closeAriaLabel": "Close the filters panel",
+          "reset": "Reset",
+          "apply": "Apply",
+          "applyPending": "Apply filters",
+          "groups": {
+            "popular": {
+              "title": "Popular"
+            },
+            "type": {
+              "title": "Type"
+            },
+            "nutrition": {
+              "title": "Nutrition"
+            },
+            "nutriScore": {
+              "title": "Nutri-score"
+            },
+            "dietary": {
+              "title": "Dietary habits"
+            },
+            "equipment": {
+              "title": "Equipment"
+            },
+            "customTags": {
+              "title": "Added tags"
+            }
+          },
+          "options": {
+            "popular-express": "Express",
+            "popular-low-calories": "Low calorie",
+            "popular-boost-nutri": "Nutri boost",
+            "popular-organic-vegetables": "Organic vegetables",
+            "popular-vegetarian": "Vegetarian",
+            "popular-gourmand": "Gourmet",
+            "type-crustaceans": "Shellfish",
+            "type-express": "Express",
+            "type-family": "Family",
+            "type-healthy": "Healthy",
+            "type-world": "World",
+            "type-fish": "Fish",
+            "type-veggie": "Veggie",
+            "type-meat": "Meat",
+            "nutrition-low-calories": "Low calorie",
+            "nutrition-fibers-plus": "Fiber+",
+            "nutrition-omega-3": "Omega 3",
+            "nutrition-protein": "Protein-rich",
+            "nutrition-vegetables-rich": "Rich in vegetables",
+            "nutri-score-a": "A",
+            "nutri-score-b": "B",
+            "nutri-score-c": "C",
+            "nutri-score-d": "D",
+            "nutri-score-e": "E",
+            "dietary-naturally-gluten-free": "Naturally gluten-free",
+            "equipment-two-hobs-max": "2 hobs max",
+            "equipment-food-processor": "Food processor compatible",
+            "equipment-no-oven": "No oven",
+            "equipment-no-blender": "No blender"
+          }
+        },
+        "toolbar": {
+          "filter": "Filter",
+          "filterAriaLabel": "Open the catalog filters",
+          "quickList": "Quick list",
+          "quickListShowAriaLabel": "Show the quick list",
+          "quickListHideAriaLabel": "Hide the quick list",
+          "addRecipe": "Add recipe",
+          "addRecipeAriaLabel": "Create a new recipe"
+        }
+      },
+      "detail": {
+        "editAction": "Edit",
+        "editRecipeAriaLabel": "Edit recipe {title}",
+        "additions": {
+          "title": "To try",
+          "validate": "Validate this addition",
+          "validating": "Validating..."
+        },
+        "ingredients": {
+          "title": "Ingredients",
+          "empty": "No validated ingredient yet."
+        },
+        "steps": {
+          "label": "Step {position}",
+          "empty": "No steps yet."
+        },
+        "errors": {
+          "validateAddition": "Addition validation failed. Please try again."
+        }
+      },
+      "editor": {
+        "page": {
+          "create": {
+            "eyebrow": "Recipes / create",
+            "title": "Create a recipe",
+            "description": "A more direct screen to capture the idea, structure the base, and save the recipe cleanly."
+          },
+          "edit": {
+            "eyebrow": "Recipes / edit",
+            "title": "Edit recipe",
+            "description": "A readable editing sheet to adjust the base, additions, and steps without losing the thread."
+          },
+          "aside": {
+            "kicker": "Active rules",
+            "title": "V1 frame",
+            "ruleQuantities": "Accepted structured quantities: {formats}.",
+            "ruleUnits": "V1 units: {units}.",
+            "ruleFallback": "Fallback keeps `amountText` when the quantity stays free-form.",
+            "ruleReorder": "Reordering stays simple with up / down buttons."
+          }
+        },
+        "header": {
+          "kicker": "Recipe sheet",
+          "createMode": "Create",
+          "editMode": "Edit",
+          "localDraftBadge": "Local draft",
+          "localDraftHelper": "Press the \"Create recipe\" button at the very bottom to save it.",
+          "descriptionCreate": "Start with the title, then fill the useful blocks just like on the task update screen.",
+          "descriptionEdit": "Adjust the recipe block by block with the same compact reading as on the task update screen."
+        },
+        "meta": {
+          "servings": "Servings",
+          "time": "Time",
+          "image": "Image",
+          "tags": "Tags",
+          "validatedIngredients": "Base",
+          "additionIngredients": "Additions",
+          "steps": "Steps",
+          "servingsFallback": "To define",
+          "servingsWithCount": "{count} servings",
+          "timeFallback": "To estimate",
+          "timeWithCount": "{count} min",
+          "imageReady": "Set",
+          "imageEmpty": "Optional"
+        },
+        "sections": {
+          "identity": {
+            "kicker": "Identity",
+            "title": "The cues that make the recipe recognizable",
+            "description": "The title stays visible at the top, then we complete the image, time, servings, and summary."
+          },
+          "tags": {
+            "kicker": "Tags",
+            "title": "Project tags, without duplicates",
+            "description": "Suggestions reuse already-used tags and the slug prevents duplicates.",
+            "empty": "No tag selected yet."
+          },
+          "validatedIngredients": {
+            "kicker": "Ingredients",
+            "title": "The stable base of the recipe",
+            "description": "Accepted structured quantities: {formats}. V1 units: {units}.",
+            "empty": "No ingredient yet.",
+            "rowLabel": "Ingredient {position}",
+            "nameLabel": "Ingredient"
+          },
+          "additionIngredients": {
+            "kicker": "Additions",
+            "title": "Variations to test without blurring the base",
+            "description": "Additions stay persistent, but clearly identified as hypotheses or variants.",
+            "empty": "No ingredient yet.",
+            "rowLabel": "Ingredient {position}",
+            "nameLabel": "Ingredient"
+          },
+          "steps": {
+            "kicker": "Steps",
+            "title": "A sequence of short, easy-to-reuse blocks",
+            "description": "Each step keeps a clear instruction and an optional marker for easier rereading.",
+            "empty": "No step yet.",
+            "rowLabel": "Step {position}",
+            "instructionPlaceholder": "Describe the action to take…",
+            "metaPlaceholder": "Sauce, oven, 10 min…"
+          },
+          "note": {
+            "kicker": "Note",
+            "title": "Testing feedback or personal reminder",
+            "description": "Optional, but useful to keep a decision after testing."
+          },
+          "summary": {
+            "kicker": "Summary",
+            "title": "Check before saving",
+            "description": "A quick preview of the sheet as it will be reread later."
+          }
+        },
+        "fields": {
+          "title": {
+            "label": "Title",
+            "placeholder": "Lemon chicken & pilaf rice"
+          },
+          "coverImageUrl": {
+            "label": "Image",
+            "placeholder": "https://...",
+            "helper": "Paste the address of an online image or upload one."
+          },
+          "servingsCount": {
+            "label": "Servings",
+            "placeholder": "2"
+          },
+          "totalTimeMinutes": {
+            "label": "Estimated time",
+            "placeholder": "35",
+            "helper": "In minutes."
+          },
+          "summary": {
+            "label": "Summary",
+            "helper": "One or two lines to recognize the recipe quickly."
+          },
+          "note": {
+            "label": "Recipe note",
+            "helper": "Optional. Useful to keep a tradeoff after testing."
+          },
+          "tagDraft": {
+            "label": "New tag",
+            "placeholder": "Quick"
+          },
+          "ingredientAmount": {
+            "label": "Amount"
+          },
+          "ingredientUnit": {
+            "label": "Unit",
+            "options": {
+              "none": "No unit",
+              "g": "g",
+              "kg": "kg",
+              "ml": "ml",
+              "cl": "cl",
+              "l": "l",
+              "piece": "piece",
+              "botte": "bunch",
+              "cs": "tbsp",
+              "cc": "tsp"
+            }
+          },
+          "ingredientNotes": {
+            "label": "Note"
+          },
+          "stepInstruction": {
+            "label": "Instruction"
+          },
+          "stepMeta": {
+            "label": "Marker"
+          }
+        },
+        "actions": {
+          "close": "Close",
+          "backToCatalog": "Back to catalog",
+          "backToRecipe": "Back to recipe",
+          "addTag": "Add",
+          "addValidatedIngredient": "Add",
+          "addAdditionIngredient": "Add",
+          "addStep": "Add",
+          "uploadCover": "Upload image",
+          "replaceCover": "Replace image",
+          "uploadingCover": "Uploading...",
+          "moveUp": "Up",
+          "moveDown": "Down",
+          "remove": "Remove",
+          "removeTagAriaLabel": "Remove {label}",
+          "moveUpItemAriaLabel": "Move up {label} {position}",
+          "moveDownItemAriaLabel": "Move down {label} {position}",
+          "removeItemAriaLabel": "Remove {label} {position}",
+          "saveCreate": "Create recipe",
+          "saveEdit": "Save changes",
+          "saving": "Saving..."
+        },
+        "labels": {
+          "validatedIngredient": "ingredient",
+          "additionIngredient": "addition",
+          "step": "step"
+        },
+        "summary": {
+          "untitled": "Untitled recipe",
+          "noTags": "No tag selected.",
+          "validatedIngredients": "{count} validated ingredient",
+          "validatedIngredients_other": "{count} validated ingredients",
+          "additionIngredients": "{count} addition",
+          "additionIngredients_other": "{count} additions",
+          "steps": "{count} step",
+          "steps_other": "{count} steps"
+        },
+        "errors": {
+          "missingId": "The recipe was saved without a usable identifier.",
+          "saveFailed": "Unable to save the recipe right now.",
+          "coverUploadFailed": "Unable to upload the image right now.",
+          "coverUploadTooLarge": "The image file is too large.",
+          "coverUploadInvalidType": "Unsupported image format."
+        }
+      },
+      "quickListSummary": {
+        "kicker": "Quick list",
+        "titleEmpty": "Visible even when empty",
+        "titleFilled": "Meals kept for the week",
+        "copyEmpty": "The quick list keeps its place in the flow, even before the first selection.",
+        "copyFilled": "The summary keeps active recipes readable from the other module screens.",
+        "emptyNote": "No active recipe yet.",
+        "open": "Open quick list",
+        "activeBadge": "Active",
+        "defaultNote": "Recipe kept for an upcoming meal."
+      }
+    },
+    "account": {
+      "header": {
+        "label": "Settings 🔧",
+        "title": "My account",
+        "subtitle": "Manage your personal information and preferences"
+      },
+      "personalInfo": {
+        "title": "Personal information",
+        "description": "Update your name and email address",
+        "icon": "👤",
+        "fields": {
+          "name": {
+            "label": "Full name",
+            "placeholder": "Your name"
+          },
+          "email": {
+            "label": "Email address",
+            "placeholder": "your.email@example.com"
+          }
+        },
+        "saveButton": "Save changes",
+        "saveButtonAriaLabel": "Save profile changes",
+        "savingButton": "Saving..."
+      },
+      "security": {
+        "title": "Security",
+        "description": "Change your password",
+        "icon": "🔒",
+        "fields": {
+          "currentPassword": {
+            "label": "Current password",
+            "placeholder": "••••••••"
+          },
+          "newPassword": {
+            "label": "New password",
+            "placeholder": "••••••••"
+          },
+          "confirmPassword": {
+            "label": "Confirm password",
+            "placeholder": "••••••••"
+          }
+        },
+        "changeButton": "Change password",
+        "changeButtonAriaLabel": "Change password",
+        "changingButton": "Changing...",
+        "oauthNotice": "This account uses OAuth sign-in. Password updates are not available from Tribu Nova."
+      },
+      "preferences": {
+        "title": "Preferences",
+        "description": "Customize your experience",
+        "icon": "🎨",
+        "emailNotifications": {
+          "label": "Email notifications",
+          "description": "Receive emails about your workspace activity"
+        },
+        "theme": {
+          "label": "Theme",
+          "description": "Choose the appearance of the interface",
+          "options": {
+            "light": "Light",
+            "dark": "Dark",
+            "system": "System"
+          }
+        },
+        "language": {
+          "label": "Language",
+          "description": "Choose your preferred language"
+        },
+        "languageOptions": {
+          "fr": "Français",
+          "en": "English",
+          "es": "Español"
+        }
+      },
+      "subscription": {
+        "title": "My subscription",
+        "description": "Manage your plan and billing",
+        "icon": "💳",
+        "currentPlan": "Current plan",
+        "planLabels": {
+          "free": "Free",
+          "pro": "Foyer",
+          "team": "Foyer Plus"
+        },
+        "statusLabels": {
+          "active": "Active",
+          "canceled": "Canceled",
+          "past_due": "Payment overdue",
+          "trialing": "Trial period"
+        },
+        "periodEnd": "Renews on {date}",
+        "cancelAtPeriodEnd": "Your subscription will be canceled at the end of the current period",
+        "manageButton": "Manage my subscription",
+        "manageButtonAriaLabel": "Open Stripe subscription management portal",
+        "changePlanButton": "Change plan",
+        "changePlanButtonAriaLabel": "View other available plans",
+        "superuser": {
+          "badge": "Super User",
+          "description": "Full access to all features"
+        }
+      },
+      "dangerZone": {
+        "title": "Danger zone",
+        "description": "Irreversible actions",
+        "icon": "⚠️",
+        "deleteAccount": {
+          "label": "Delete my account",
+          "description": "This action is permanent and will delete all your data"
+        },
+        "deleteButton": "Delete account",
+        "deleteButtonAriaLabel": "Permanently delete account",
+        "deletingButton": "Deleting...",
+        "confirmTitle": "Confirm deletion",
+        "confirmMessage": "Are you sure you want to delete your account? This action cannot be undone and will permanently delete all your data.",
+        "confirmButton": "Yes, delete my account",
+        "confirmButtonAriaLabel": "Confirm account deletion",
+        "cancelButton": "Cancel"
+      },
+      "signOut": {
+        "title": "Session",
+        "description": "Manage your active session",
+        "icon": "🚪",
+        "label": "Sign out",
+        "descriptionText": "You will be redirected to the home page",
+        "button": "Sign out",
+        "buttonAriaLabel": "Sign out of your account",
+        "pendingButton": "Signing out..."
+      },
+      "success": {
+        "profileUpdated": "Profile updated successfully",
+        "passwordChanged": "Password changed successfully",
+        "preferencesUpdated": "Preferences saved"
+      },
+      "validation": {
+        "passwordMinLength": "Password must be at least 6 characters",
+        "passwordMaxLength": "Password must be less than 100 characters",
+        "confirmPasswordRequired": "Please confirm your password",
+        "passwordsDoNotMatch": "Passwords do not match",
+        "currentPasswordRequired": "Current password is required"
+      }
+    },
+    "landing": {
+      "hero": {
+        "brandPill": "✨ Organize what actually matters",
+        "logoAriaLabel": "Tribu Nova logo",
+        "title": "Less mental load. More time for you.",
+        "subtitle": "Tribu Nova helps you organize your daily life, alone or as a couple — without overthinking it.",
+        "proofNoCard": "Free to start",
+        "proofFreeStart": "Ready in 2 minutes",
+        "proofCancelAnytime": "Works on mobile, anywhere",
+        "ctaSignUp": "Create my space",
+        "ctaSignIn": "Sign in",
+        "ctaPreview": "See preview"
+      },
+      "values": {
+        "title": "Organization, finally simple",
+        "simplicity": {
+          "icon": "🎯",
+          "title": "Everything in one place",
+          "description": "Your tasks, projects, and ideas. One space so nothing gets lost."
+        },
+        "clarity": {
+          "icon": "⚖️",
+          "title": "A better-balanced load",
+          "description": "Assign what belongs to each person. No more repeating yourself."
+        },
+        "control": {
+          "icon": "🌿",
+          "title": "Less stress",
+          "description": "When everything is organized, daily life becomes lighter."
+        }
+      },
+      "features": {
+        "title": "Concrete, fast, effective",
+        "board": {
+          "icon": "📋",
+          "title": "Your daily tasks",
+          "description": "Add, assign, track. As simple as a list, as powerful as a tool."
+        }
+      },
+      "impact": {
+        "title": "Mental load is real",
+        "description": "It affects almost everyone. Tribu Nova helps reduce it.",
+        "time": {
+          "value": "2h",
+          "title": "Saved every week",
+          "description": "Less coordination, fewer reminders. Your time comes back to you."
+        },
+        "alignment": {
+          "value": "73%",
+          "title": "Of couples affected",
+          "description": "Mental load touches almost every household — and strains relationships."
+        },
+        "serenity": {
+          "value": "-40%",
+          "title": "Less friction",
+          "description": "When everyone knows what to do, unnecessary reminders disappear."
+        }
+      },
+      "rhythm": {
+        "title": "Three steps. That's it.",
+        "capture": {
+          "icon": "📝",
+          "title": "Note it",
+          "description": "Add a task or idea as soon as it comes up, from your phone."
+        },
+        "plan": {
+          "icon": "🗓️",
+          "title": "Organize",
+          "description": "Decide who does what. Assign in two taps, plan without effort."
+        },
+        "act": {
+          "icon": "✅",
+          "title": "Move forward",
+          "description": "Track what is done. See progress, without the stress."
+        }
+      },
+      "trust": {
+        "title": "Simple. Clear. For you.",
+        "description": "Tribu Nova turns your ideas into concrete actions, with a shared view of your daily life.",
+        "freeForeverIcon": "🆓",
+        "freeForever": "Free to get started",
+        "noCreditCardIcon": "📱",
+        "noCreditCard": "Built for mobile",
+        "noComplexityIcon": "🌿",
+        "noComplexity": "No unnecessary complexity"
+      },
+      "examples": {
+        "title": "A concrete snapshot",
+        "columns": {
+          "todo": "To do",
+          "in_progress": "In progress",
+          "inProgress": "In progress",
+          "done": "Done"
+        },
+        "board": {
+          "title": "Your daily tasks",
+          "description": "Add, assign, track — from your phone.",
+          "todo1": "Book doctor appointment",
+          "todo2": "Groceries for tonight",
+          "in_progress1": "Administrative paperwork",
+          "inProgress1": "Administrative paperwork",
+          "done1": "Rent transfer done"
+        }
+      },
+      "cta": {
+        "title": "Ready to take back control?",
+        "description": "Start for free, no credit card needed. Your space is ready in 2 minutes.",
+        "button": "Start for free"
+      },
+      "footer": {
+        "ariaLabel": "Footer links",
+        "legal": "Legal notice",
+        "pricing": "Pricing"
+      }
+    },
+    "legal": {
+      "metadata": {
+        "title": "Legal notice",
+        "description": "Legal information, privacy, and terms of use for the Tribu Nova service."
+      },
+      "header": {
+        "label": "Back",
+        "title": "Legal notice",
+        "subtitle": "Information required by applicable law"
+      },
+      "sections": {
+        "editor": {
+          "icon": "🏢",
+          "title": "Website publisher",
+          "description": "Information about the platform publisher",
+          "appName": "Tribu Nova",
+          "appDescription": "Tribu Nova is a personal family management application.",
+          "contact": "Contact: contact@tribunova.app",
+          "hosting": "Hosting: Vercel Inc. — 340 S Lemon Ave #4133, Walnut, CA 91789, United States"
+        },
+        "intellectualProperty": {
+          "icon": "©️",
+          "title": "Intellectual property",
+          "description": "Copyright and content ownership",
+          "content": "All content on Tribu Nova (text, interfaces, source code, logos, graphics) is protected by copyright law. Any reproduction, representation, or distribution, in whole or in part, without prior authorization is prohibited."
+        },
+        "dataProtection": {
+          "icon": "🔒",
+          "title": "Personal data protection",
+          "description": "GDPR compliance and data management",
+          "intro": "In accordance with the General Data Protection Regulation (GDPR), you have the following rights:",
+          "rights": {
+            "access": "Right to access your personal data",
+            "rectification": "Right to rectify inaccurate data",
+            "deletion": "Right to erasure of your data",
+            "portability": "Right to data portability"
+          },
+          "collectedData": "Data collected: email address, display name, user preferences.",
+          "purpose": "Purpose: authentication, experience personalization, and service operation.",
+          "retention": "Retention period: your data is kept as long as your account is active. It is deleted upon request.",
+          "exerciseRights": "To exercise your rights, contact us at: contact@tribunova.app"
+        },
+        "cookies": {
+          "icon": "🍪",
+          "title": "Cookies",
+          "description": "Cookie usage on the platform",
+          "content": "Tribu Nova uses only strictly necessary cookies for service operation (authentication, user session). No advertising or tracking cookies are used. These cookies are essential and do not require prior consent."
+        },
+        "liability": {
+          "icon": "⚖️",
+          "title": "Liability",
+          "description": "Publisher liability limitations",
+          "content": "The publisher strives to provide a reliable and available service. However, they cannot be held liable for service interruptions, data loss, or indirect damages related to the use of the platform. The service is provided \"as is\", without warranty of any kind."
+        },
+        "applicableLaw": {
+          "icon": "📜",
+          "title": "Applicable law",
+          "description": "Jurisdiction and applicable law",
+          "content": "These legal notices are governed by French law. In the event of a dispute, French courts shall have exclusive jurisdiction."
+        }
+      },
+      "lastUpdated": "Last updated: February 2026"
+    },
+    "pricing": {
+      "metadata": {
+        "title": "Pricing",
+        "description": "Explore Tribu Nova plans: Free, Foyer, and Foyer Plus — built for couples and families easing mental load."
+      },
+      "header": {
+        "label": "Back",
+        "title": "Our pricing",
+        "subtitle": "Simple plans for couples and families organizing daily life together"
+      },
+      "billing": {
+        "monthly": "Monthly billing",
+        "yearly": "Annual billing",
+        "yearlyDiscount": "Save 20%",
+        "perMonth": "/month",
+        "free": "Free"
+      },
+      "plans": {
+        "free": {
+          "name": "Free",
+          "description": "Discover Tribu Nova and organize your home life together",
+          "price": "€0",
+          "cta": "Get started for free",
+          "ctaAriaLabel": "Create a free account"
+        },
+        "pro": {
+          "name": "Foyer",
+          "description": "For couples who want a clearer split of mental load and routines",
+          "price": "€3.99",
+          "cta": "Upgrade to Foyer",
+          "ctaAriaLabel": "Subscribe to the Foyer plan",
+          "badge": "Popular"
+        },
+        "team": {
+          "name": "Foyer Plus",
+          "description": "For larger households and co-parents who need more coordination",
+          "price": "€8.99",
+          "cta": "Choose Foyer Plus",
+          "ctaAriaLabel": "Subscribe to the Foyer Plus plan"
+        },
+        "currentBadge": "Active"
+      },
+      "comparison": {
+        "title": "Detailed plan comparison",
+        "featuresColumn": "Included in plan"
+      },
+      "features": {
+        "projectsPerAccount": "Projects per account",
+        "workspaces": "Projects per account",
+        "membersPerWorkspace": "Members per workspace",
+        "tickets": "Tickets",
+        "boardView": "Board view",
+        "customColumns": "Custom columns",
+        "advancedRoles": "Advanced roles (viewer)",
+        "prioritySupport": "Priority support"
+      },
+      "values": {
+        "one": "1",
+        "two": "2",
+        "four": "4",
+        "three": "3",
+        "five": "5",
+        "twenty": "20",
+        "hundred": "100",
+        "ten": "10",
+        "twentyFive": "25",
+        "fifty": "50",
+        "threeColumns": "3 fixed columns (not customizable)",
+        "unlimited": "Unlimited",
+        "included": "Included",
+        "notIncluded": "Not included"
+      },
+      "faq": {
+        "title": "Frequently asked questions",
+        "items": {
+          "cancel": {
+            "question": "Can I cancel at any time?",
+            "answer": "Yes, you can cancel your subscription at any time. You will keep access until the end of the current billing period."
+          },
+          "upgrade": {
+            "question": "Can I change my plan?",
+            "answer": "You can upgrade to a higher plan at any time. The change takes effect immediately and the difference is prorated."
+          },
+          "data": {
+            "question": "What happens to my data if I switch back to free?",
+            "answer": "Your data is preserved. If you exceed the free plan limits, you can view your existing projects but cannot create new ones."
+          },
+          "payment": {
+            "question": "What payment methods do you accept?",
+            "answer": "We accept credit cards (Visa, Mastercard) and SEPA direct debits."
+          }
+        }
+      },
+      "guarantee": {
+        "title": "Money-back guarantee",
+        "description": "Try Tribu Nova Foyer or Foyer Plus for 14 days. If you're not satisfied, we'll give you a full refund."
+      },
+      "trust": {
+        "title": "Premium, with clear expectations",
+        "item1": "A solid free version to get started without friction.",
+        "item2": "Premium features only when you truly need them.",
+        "item3": "Transparent pricing with no hidden costs."
+      },
+      "cta": {
+        "currentPlan": "Current plan",
+        "upgrade": "Upgrade to {plan}",
+        "downgrade": "Switch to {plan}",
+        "downgradeFree": "Switch to Free",
+        "signUpFirst": "Create an account",
+        "superuserFullAccess": "Full access",
+        "manageBilling": "Manage billing"
+      }
+    },
+    "members": {
+      "title": "Project members",
+      "listAriaLabel": "Project members list",
+      "you": "you",
+      "remove": "Remove",
+      "removeAriaLabel": "Remove {name} from project",
+      "changeRoleAriaLabel": "Change {name}'s role",
+      "role": {
+        "admin": "Administrator",
+        "member": "Member",
+        "viewer": "Viewer"
+      },
+      "removeConfirm": "Remove {name} from this project?",
+      "removeModal": {
+        "title": "Remove this member",
+        "description": "Are you sure you want to remove {name} from the project?",
+        "confirm": "Confirm removal",
+        "pending": "Removing...",
+        "cancel": "Cancel"
+      },
+      "removeSuccess": "Member removed from project",
+      "roleUpdateSuccess": "Role updated",
+      "lastAdminError": "Cannot remove the last administrator",
+      "emptyState": "No members in this project"
+    },
+    "upgrade": {
+      "title": "Feature requires {plan} plan",
+      "description": "This feature is not available on your current plan. Upgrade to {plan} to unlock it.",
+      "ctaLabel": "View plans",
+      "ctaAriaLabel": "View plans and upgrade your subscription",
+      "featureNames": {
+        "advancedRoles": "Advanced roles",
+        "workspaces": "Projects per account",
+        "membersPerWorkspace": "Members per workspace",
+        "tickets": "Tickets",
+        "customColumns": "Custom columns"
+      },
+      "planBadges": {
+        "free": "Free",
+        "pro": "Foyer",
+        "team": "Foyer Plus"
+      }
+    }
+  },
+  "forms": {
+    "invitation": {
+      "title": "Invite a member",
+      "ariaLabel": "Invitation form",
+      "emailLabel": "Email address",
+      "emailPlaceholder": "name@example.com",
+      "emailAriaLabel": "Email address of the member to invite",
+      "roleLabel": "Role",
+      "roleAriaLabel": "Role to assign to the invited member",
+      "role": {
+        "admin": "Administrator",
+        "member": "Member",
+        "viewer": "Viewer"
+      },
+      "send": "Send invitation",
+      "sending": "Sending...",
+      "sendAriaLabel": "Send invitation",
+      "cancel": "Cancel",
+      "inviteSuccess": "Invitation sent",
+      "inviteError": "Unable to send invitation",
+      "limitReached": "Member limit reached for your plan",
+      "pending": {
+        "title": "Pending invitations",
+        "ariaLabel": "Pending invitations list",
+        "invitedBy": "Invited by {name}",
+        "accept": "Accept",
+        "acceptAriaLabel": "Accept invitation for {project}",
+        "decline": "Decline",
+        "declineAriaLabel": "Decline invitation for {project}",
+        "acceptSuccess": "Invitation accepted",
+        "declineSuccess": "Invitation declined",
+        "role": {
+          "admin": "Administrator",
+          "member": "Member",
+          "viewer": "Viewer"
+        }
+      }
+    }
+  },
+  "errors": {
+    "generic": "An error occurred",
+    "retry": "Retry",
+    "retryAriaLabel": "Retry operation",
+    "auth": {
+      "INVALID_CREDENTIALS": "Invalid email or password",
+      "EMAIL_ALREADY_EXISTS": "This email address is already in use",
+      "WEAK_PASSWORD": "Password does not meet security requirements",
+      "INVALID_EMAIL": "Invalid email address",
+      "AUTHENTICATION_ERROR": "An authentication error occurred",
+      "EMAIL_VERIFICATION_ERROR": "An error occurred during email verification",
+      "PASSWORD_RESET_ERROR": "An error occurred during password reset",
+      "INVALID_TOKEN": "The link is invalid or has expired. Please request a new one",
+      "SAME_PASSWORD": "New password must be different from the current one",
+      "PASSWORD_UPDATE_NOT_ALLOWED": "This account uses an external sign-in provider. Password updates are not available."
+    },
+    "repository": {
+      "NOT_FOUND": "Resource not found",
+      "NOT_FOUND_WITH_ENTITY": "{entityType} with ID {entityId} not found",
+      "CONSTRAINT_VIOLATION": "A database constraint was violated",
+      "DATABASE_ERROR": "A database error occurred"
+    },
+    "domain": {
+      "TICKET_PROJECT_MISMATCH": "The ticket does not belong to the same project",
+      "LAST_ADMIN_REQUIRED": "The project must keep at least one administrator",
+      "MEMBER_ROLE_CHANGE_ADMIN_REQUIRED": "Only an administrator can change a project member's role",
+      "INVITATION_ALREADY_USED": "This invitation link is no longer available",
+      "INVITATION_EXPIRED": "This invitation link has expired",
+      "INVITATION_ALREADY_MEMBER": "You are already a member of this project",
+      "INVITATION_LIMIT_REACHED": "Your current plan does not allow more active members or invitation links in this workspace",
+      "INVALID_COLUMN_ORDER": "Invalid column order",
+      "DUPLICATE_COLUMN_KEY": "Duplicate column key",
+      "INVALID_BOARD_COLUMN_RELATIONSHIP": "The column does not belong to the specified board",
+      "MIXED_BOARD_COLUMNS": "Columns from multiple boards mixed together",
+      "MISSING_DONE_COLUMN": "The board must have at least one visible terminal column",
+      "COLUMN_IN_USE": "This column cannot be deleted while it still contains tickets",
+      "UPDATE_CREDENTIALS_NO_FIELDS": "Provide at least a new email or a new password"
+    },
+    "infra": {
+      "avatarFileTooLarge": "File is too large to process",
+      "avatarInvalidMimeType": "Unsupported format. Use JPEG, PNG, or WebP",
+      "avatarProcessingFailed": "The image could not be prepared. Try another file.",
+      "stripeWebhookNotConfigured": "Online payments are not configured correctly. Contact support.",
+      "billingNoCustomer": "No billing account is linked to your profile.",
+      "boardInvalidColumnWorkflowState": "Inconsistent column data. Refresh the page.",
+      "googleOauthNotAvailable": "Google sign-in is not available right now.",
+      "deleteAccountFailed": "Could not delete the account. Try again later."
+    },
+    "stripe": {
+      "checkoutFailed": "Unable to start the payment process. Please try again.",
+      "portalFailed": "Unable to access subscription management. Please try again.",
+      "checkoutSuccess": "Payment successful! Your subscription is now active.",
+      "notAuthenticated": "You must be logged in to perform this action."
+    }
+  },
+  "ui": {
+    "assigneePicker": {
+      "ariaLabel": "Assignee selection",
+      "noAssignee": "Unassigned",
+      "assign": "Assign",
+      "assignAriaLabel": "Open assignee picker",
+      "memberListAriaLabel": "Available members list"
+    },
+    "draggableItem": {
+      "ariaLabel": "Draggable item {id}"
+    },
+    "avatarUpload": {
+      "ariaLabel": "Avatar management",
+      "upload": "Add avatar",
+      "uploadAriaLabel": "Add a profile picture",
+      "change": "Change",
+      "changeAriaLabel": "Change profile picture",
+      "remove": "Remove",
+      "removeAriaLabel": "Remove profile picture",
+      "selectFile": "Select an image file",
+      "hint": "JPEG, PNG, or WebP.",
+      "uploadSuccess": "Profile picture updated",
+      "removeSuccess": "Profile picture removed",
+      "errorTooLarge": "File is too large to process",
+      "errorInvalidType": "Unsupported format. Use JPEG, PNG, or WebP",
+      "errorProcessing": "The image could not be prepared. Try another file."
+    }
+  }
+}

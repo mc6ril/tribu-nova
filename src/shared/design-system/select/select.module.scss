@@ -1,0 +1,97 @@
+@use "@/styles/variables/colors" as *;
+@use "@/styles/variables/spacing" as *;
+@use "@/styles/variables/typography" as *;
+@use "@/styles/variables/borders" as *;
+@use "@/styles/variables/animations" as *;
+@use "@/styles/variables/shadows" as *;
+
+.select-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.select-label {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  line-height: $line-height-normal;
+  color: $color-text;
+}
+
+.select-label--required::after {
+  content: " *";
+  color: $color-error;
+}
+
+.select {
+  width: 100%;
+  padding: $spacing-input-padding-y $spacing-input-padding-x;
+  border: $border-width solid $color-border;
+  border-radius: $border-radius-input;
+  font-size: $font-size-base;
+  line-height: $line-height-normal;
+  color: $color-text;
+  background-color: $color-secondary;
+  font-family: inherit;
+  transition: $transition-border, $transition-shadow;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23374151' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right $spacing-input-padding-x center;
+  background-size: 12px 12px;
+  padding-right: $spacing-unit * 12; // Extra padding for arrow
+
+  &:focus {
+    outline: none;
+    border-color: $color-focus;
+    box-shadow: $shadow-focus;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: $color-disabled-background;
+    color: $color-disabled-text;
+    border-color: $color-border;
+    opacity: 0.6;
+  }
+
+  &[aria-invalid="true"] {
+    border-color: $color-error;
+  }
+
+  &[aria-invalid="true"]:focus {
+    border-color: $color-error;
+    box-shadow: $shadow-focus-error;
+  }
+
+  option {
+    padding: $spacing-sm;
+    background-color: $color-secondary;
+    color: $color-text;
+  }
+
+  option:disabled {
+    color: $color-disabled-text;
+  }
+}
+
+.select--multiple {
+  appearance: auto;
+  background-image: none;
+  padding-right: $spacing-input-padding-x;
+}
+
+.select-error {
+  font-size: $font-size-sm;
+  line-height: $line-height-normal;
+  color: $color-error;
+  margin-top: $spacing-xs;
+}
+
+.select-helper {
+  font-size: $font-size-sm;
+  line-height: $line-height-normal;
+  color: $color-text-secondary;
+  margin-top: $spacing-xs;
+}

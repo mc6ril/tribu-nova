@@ -1,0 +1,1785 @@
+{
+  "app": {
+    "metadata": {
+      "title": "Tribu Nova",
+      "description": "Une aide au couple pour alléger la charge mentale et organiser le quotidien sans s'épuiser.",
+      "titleTemplate": "%s | Tribu Nova",
+      "keywords": "couple, charge mentale, organisation quotidienne, foyer, familles, équilibre, bienveillance",
+      "ogImageAlt": "Tribu Nova — moins de charge mentale, plus de clarté"
+    },
+    "manifest": {
+      "description": "Outil d'aide au couple pour réduire la charge mentale et clarifier le quotidien."
+    }
+  },
+  "common": {
+    "loading": "Chargement en cours...",
+    "loadingAriaLabel": "Chargement du contenu",
+    "email": "Email",
+    "password": "Mot de passe",
+    "signIn": "Se connecter",
+    "signUp": "S'inscrire",
+    "dismiss": "Fermer",
+    "dismissAriaLabel": "Fermer le message d'erreur",
+    "submit": "Soumettre",
+    "delete": "Supprimer",
+    "cancel": "Annuler",
+    "emptyState": {
+      "defaultTitle": "Aucun élément",
+      "defaultMessage": "Il n'y a pas encore d'éléments à afficher."
+    },
+    "passwordToggle": {
+      "show": "Afficher le mot de passe",
+      "hide": "Masquer le mot de passe"
+    }
+  },
+  "navigation": {
+    "skipLink": {
+      "label": "Aller au contenu principal"
+    },
+    "sidebar": {
+      "ariaLabel": "Navigation du projet",
+      "openMenu": "Ouvrir le menu du projet",
+      "closeMenu": "Fermer le menu du projet",
+      "addTab": "Ajouter un module",
+      "addTabAriaLabel": "Ajouter un module au projet",
+      "items": {
+        "home": "Accueil",
+        "board": "Tableau",
+        "recipes": "Recipes",
+        "ticketDetail": "Tâche",
+        "settings": "Paramètres"
+      },
+      "moduleLibrary": {
+        "title": "Ajouter un module",
+        "intro": "Composez un projet qui colle vraiment au quotidien du foyer. Seuls les modules déjà prêts et pas encore activés apparaissent ici.",
+        "preview": {
+          "kicker": "Aperçu du module",
+          "title": "Catalogue doux, quick list visible, sortie courses nette"
+        },
+        "recipes": {
+          "status": "Disponible",
+          "lockedStatus": "Plan {plan}",
+          "subtitle": "Le module repas du foyer, pensé pour devenir immédiatement désirable dans un projet.",
+          "teaser": "Un espace premium pour choisir ses recettes, garder les bons plats sous la main et transformer la semaine en plan d’achats très simple.",
+          "cta": "Ajouter Recipes au projet",
+          "upgradeCta": "Voir l'offre"
+        },
+        "empty": {
+          "badge": "Projet déjà à jour",
+          "title": "Aucun nouveau module à ajouter pour le moment",
+          "description": "Les modules déjà intégrés n’apparaissent plus ici, et les futurs modules restent masqués tant qu’ils ne sont pas prêts."
+        }
+      },
+      "locked": {
+        "ariaLabel": "{feature} — nécessite le plan {plan}",
+        "badge": {
+          "pro": "Foyer",
+          "team": "Foyer Plus"
+        }
+      },
+      "profile": {
+        "ariaLabel": "Ouvrir le menu profil",
+        "backToWorkspace": "Revenir à l'espace de travail",
+        "profileSettings": "Paramètres du compte",
+        "logout": "Se déconnecter",
+        "userFallbackName": "Utilisateur"
+      }
+    },
+    "searchBar": {
+      "ariaLabel": "Barre de recherche",
+      "placeholder": "Rechercher"
+    },
+    "navbar": {
+      "filter": "Filtrer",
+      "filterAriaLabel": "Ouvrir les filtres",
+      "reviewGuide": "Revoir le guide",
+      "reviewGuideAriaLabel": "Relancer le guide d'onboarding",
+      "addTicket": "Ajouter une tâche",
+      "addTicketAriaLabel": "Créer une nouvelle tâche"
+    }
+  },
+  "layout": {
+    "appFooter": {
+      "label": "Tribu Nova",
+      "ariaLabel": "Pied de page de l'application"
+    }
+  },
+  "pages": {
+    "signup": {
+      "title": "Créer un compte",
+      "subtitle": "Inscrivez-vous pour commencer a alleger votre charge mentale.",
+      "button": "S'inscrire",
+      "buttonLoading": "Inscription en cours...",
+      "buttonAriaLabel": "S'inscrire",
+      "oauth": {
+        "divider": "ou",
+        "googleButton": "Continuer avec Google",
+        "googleButtonAriaLabel": "Se connecter avec Google"
+      },
+      "footer": "Vous avez déjà un compte ?",
+      "footerLink": "Se connecter",
+      "fields": {
+        "displayName": {
+          "label": "Nom d'affichage",
+          "placeholder": "Jean Dupont"
+        },
+        "email": {
+          "required": "L'adresse email est requise",
+          "invalid": "L'adresse email n'est pas valide"
+        },
+        "confirmPassword": {
+          "label": "Confirmer le mot de passe",
+          "required": "Veuillez confirmer votre mot de passe",
+          "mismatch": "Les mots de passe ne correspondent pas"
+        },
+        "password": {
+          "helperText": "Minimum 8 caractères",
+          "tooShort": "Le mot de passe doit contenir au moins 8 caractères",
+          "tooLong": "Le mot de passe ne doit pas dépasser 100 caractères",
+          "hint": {
+            "hasMinLength": "Minimum 8 caractères",
+            "hasUppercase": "Ajoutez une majuscule",
+            "hasLowercase": "Ajoutez une minuscule",
+            "hasNumber": "Ajoutez un chiffre",
+            "hasSpecialChar": "Ajoutez un caractère spécial (!@#...)"
+          }
+        },
+        "acceptedTerms": {
+          "label": "J'accepte les",
+          "linkLabel": "mentions légales",
+          "ariaLabel": "Accepter les mentions légales"
+        }
+      },
+      "passwordStrength": {
+        "weak": "Faible",
+        "medium": "Moyen",
+        "strong": "Fort"
+      },
+      "verification": {
+        "title": "Vérification de l'email requise",
+        "message": "Un email de vérification a été envoyé à votre adresse.",
+        "instructions": "Veuillez vérifier votre boîte de réception et cliquer sur le lien pour vérifier votre compte.",
+        "resendHint": "Si vous ne le recevez pas, vous pouvez demander un nouvel email de vérification.",
+        "resendButton": "Renvoyer l'email de vérification",
+        "resendButtonAriaLabel": "Renvoyer l'email de vérification",
+        "resendSuccess": "Email de vérification renvoyé. Veuillez vérifier votre boîte de réception.",
+        "backToSignin": "Retour à la connexion"
+      },
+      "errors": {
+        "invalidEmail": "Adresse email invalide",
+        "weakPassword": "Le mot de passe ne respecte pas les exigences",
+        "passwordMismatch": "Les mots de passe ne correspondent pas",
+        "termsRequired": "Vous devez accepter les mentions légales",
+        "generic": "Une erreur s'est produite lors de l'inscription"
+      }
+    },
+    "verifyEmail": {
+      "title": "Vérification de l'email",
+      "success": "Votre email a été vérifié avec succès.",
+      "redirecting": "Redirection en cours...",
+      "backToSignin": "Retour à la connexion",
+      "errors": {
+        "missingToken": "Lien de vérification invalide. Le token ou l'email est manquant.",
+        "invalidToken": "Le lien de vérification est invalide ou a expiré. Veuillez demander un nouveau lien.",
+        "verificationError": "Une erreur s'est produite lors de la vérification de l'email.",
+        "generic": "Une erreur s'est produite lors de la vérification"
+      }
+    },
+    "resetPassword": {
+      "title": "Réinitialiser le mot de passe",
+      "subtitle": "Entrez votre adresse email pour recevoir un lien de réinitialisation",
+      "button": "Envoyer le lien",
+      "buttonAriaLabel": "Envoyer le lien de réinitialisation",
+      "backToSignin": "Retour à la connexion",
+      "success": {
+        "message": "Si un compte existe avec cette adresse email, un lien de réinitialisation a été envoyé.",
+        "instructions": "Veuillez vérifier votre boîte de réception et cliquer sur le lien pour réinitialiser votre mot de passe."
+      },
+      "fields": {
+        "email": {
+          "required": "L'adresse email est requise",
+          "invalid": "L'adresse email n'est pas valide"
+        }
+      }
+    },
+    "updatePassword": {
+      "title": "Mettre à jour le mot de passe",
+      "subtitle": "Entrez votre nouveau mot de passe",
+      "button": "Mettre à jour le mot de passe",
+      "buttonAriaLabel": "Mettre à jour le mot de passe",
+      "backToSignin": "Retour à la connexion",
+      "success": "Votre mot de passe a été mis à jour avec succès.",
+      "redirecting": "Redirection en cours...",
+      "fields": {
+        "password": {
+          "label": "Nouveau mot de passe",
+          "tooShort": "Le mot de passe doit contenir au moins 8 caractères",
+          "tooLong": "Le mot de passe doit contenir moins de 100 caractères",
+          "hint": {
+            "hasMinLength": "Minimum 8 caractères",
+            "hasUppercase": "Ajoutez une majuscule",
+            "hasLowercase": "Ajoutez une minuscule",
+            "hasNumber": "Ajoutez un chiffre",
+            "hasSpecialChar": "Ajoutez un caractère spécial (!@#...)"
+          }
+        },
+        "confirmPassword": {
+          "label": "Confirmer le mot de passe",
+          "required": "Veuillez confirmer votre mot de passe",
+          "mismatch": "Les mots de passe ne correspondent pas"
+        }
+      }
+    },
+    "signin": {
+      "title": "Se connecter",
+      "subtitle": "Connectez-vous pour accéder à votre espace Tribu Nova",
+      "button": "Se connecter",
+      "buttonAriaLabel": "Se connecter",
+      "oauth": {
+        "divider": "ou",
+        "googleButton": "Continuer avec Google",
+        "googleButtonAriaLabel": "Se connecter avec Google"
+      },
+      "forgotPassword": "Mot de passe oublié ?",
+      "footer": "Vous n'avez pas de compte ?",
+      "footerLink": "S'inscrire",
+      "resendVerification": {
+        "button": "Renvoyer l'email de vérification",
+        "buttonAriaLabel": "Renvoyer l'email de vérification",
+        "success": "Email de vérification envoyé. Veuillez vérifier votre boîte de réception."
+      },
+      "errors": {
+        "invalidCredentials": "Email ou mot de passe invalide",
+        "invalidEmail": "Adresse email invalide",
+        "emailNotVerified": "Votre email n'a pas été vérifié. Veuillez vérifier votre boîte de réception et cliquer sur le lien de vérification.",
+        "generic": "Une erreur s'est produite lors de la connexion"
+      },
+      "fields": {
+        "email": {
+          "required": "L'adresse email est requise",
+          "invalid": "L'adresse email n'est pas valide"
+        },
+        "password": {
+          "required": "Le mot de passe est requis"
+        }
+      }
+    },
+    "home": {
+      "welcome": "Bienvenue sur Tribu Nova",
+      "welcomeSubtitle": "Commencez par vous connecter ou créer un compte",
+      "welcomeTitle": "Bienvenue",
+      "signedInAs": "Connecté en tant que :",
+      "accessProjectTitle": "Accéder à un projet",
+      "accessProjectDescription": "Entrez un ID de projet pour accéder à un projet dont vous n'êtes pas encore membre",
+      "projectIdLabel": "ID du projet",
+      "projectIdPlaceholder": "Entrez l'UUID du projet",
+      "accessProjectButton": "Accéder au projet",
+      "yourProjectsTitle": "Vos projets",
+      "loading": "Chargement...",
+      "loadingProjects": "Chargement des projets...",
+      "noProjects": "Vous n'avez pas encore accès à des projets.",
+      "errorLoadingProjects": "Erreur lors du chargement des projets :",
+      "unknownError": "Erreur inconnue",
+      "pleaseEnterProjectId": "Veuillez entrer un ID de projet",
+      "failedToAddToProject": "Impossible de vous ajouter au projet",
+      "roleAdmin": "Administrateur",
+      "roleMember": "Membre",
+      "roleViewer": "Observateur",
+      "roleAriaLabel": "Rôle",
+      "createProjectTitle": "Créer un projet",
+      "createProjectDescription": "Créez votre premier projet pour commencer à travailler",
+      "projectNameLabel": "Nom du projet",
+      "projectNamePlaceholder": "Entrez le nom de votre projet",
+      "createProjectButton": "Créer le projet",
+      "createProjectButtonAriaLabel": "Créer le projet",
+      "logoutButton": "Se déconnecter",
+      "logoutButtonAriaLabel": "Se déconnecter",
+      "updateUserButton": "Mettre à jour le compte",
+      "updateUserButtonAriaLabel": "Mettre à jour les informations du compte",
+      "deleteUserButton": "Supprimer le compte",
+      "deleteUserButtonAriaLabel": "Supprimer définitivement le compte",
+      "deleteUserConfirmation": "Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.",
+      "newEmailLabel": "Nouvel email",
+      "newEmailPlaceholder": "Entrez votre nouvel email",
+      "newPasswordLabel": "Nouveau mot de passe",
+      "newPasswordPlaceholder": "Entrez votre nouveau mot de passe (optionnel)",
+      "saveButton": "Enregistrer",
+      "saveButtonAriaLabel": "Enregistrer les modifications",
+      "cancelButton": "Annuler",
+      "cancelButtonAriaLabel": "Annuler les modifications",
+      "errors": {
+        "projectNameRequired": "Le nom du projet est requis",
+        "projectNameTooShort": "Le nom du projet doit contenir au moins 1 caractère",
+        "generic": "Une erreur s'est produite lors de la création du projet"
+      },
+      "quickAddTicket": {
+        "title": "Titre de la tâche",
+        "placeholder": "Entrez le titre de la tâche",
+        "submitButton": "Ajouter",
+        "submitButtonAriaLabel": "Ajouter la tâche"
+      },
+      "myWorkWidget": {
+        "title": "Mon travail",
+        "emptyMessage": "Aucune tâche active",
+        "ticketAriaLabel": "Tâche",
+        "statusLabel": "Statut"
+      },
+      "recentActivityWidget": {
+        "title": "Activité récente",
+        "emptyMessage": "Aucune activité récente",
+        "activityAriaLabel": "Activité",
+        "types": {
+          "ticket_created": "Tâche créée",
+          "ticket_updated": "Tâche modifiée",
+          "ticket_completed": "Tâche terminée"
+        }
+      },
+      "shortcutsWidget": {
+        "title": "Raccourcis",
+        "shortcuts": {
+          "board": "Tableau",
+          "settings": "Paramètres"
+        }
+      }
+    },
+    "projectHome": {
+      "title": "Accueil",
+      "lastActivityNow": "Dernière activité: à l'instant",
+      "lastActivityHours": "Dernière activité: {hours, plural, one {# heure} other {# heures}}",
+      "lastActivityDays": "Dernière activité: {days, plural, one {# jour} other {# jours}}",
+      "lastActivityDate": "Dernière activité: {date}",
+      "myTasksTitle": "Mes tâches",
+      "myTasksDescription": "Vos tâches assignées en priorité.",
+      "myTasksEmpty": "Aucune tâche personnelle pour le moment.",
+      "recentTitle": "Récent",
+      "recentDescription": "Les derniers éléments mis à jour dans ce projet.",
+      "recentEmpty": "Aucune activité récente pour l'instant.",
+      "openBacklog": "Voir toutes les tâches",
+      "openBacklogAriaLabel": "Ouvrir la liste complète des tâches",
+      "shortcutsWidget": {
+        "title": "Raccourcis",
+        "shortcuts": {
+          "board": "Tableau",
+          "settings": "Paramètres"
+        }
+      }
+    },
+    "fallback": {
+      "workspaceLoading": {
+        "eyebrow": "Ouverture de l'espace de travail",
+        "status": "Chargement",
+        "title": "On prépare vos espaces",
+        "message": "Les projets, membres et accès arrivent. L'écran se met en place juste avant de vous laisser la main.",
+        "ariaLabel": "Chargement de l'espace de travail"
+      },
+      "projectLoading": {
+        "eyebrow": "Chargement du projet",
+        "status": "Synchronisation",
+        "title": "Le projet prend forme",
+        "message": "Nous chargeons le board et les permissions pour ouvrir le projet dans un etat pret a l'emploi.",
+        "ariaLabel": "Chargement du projet"
+      }
+    },
+    "workspace": {
+      "title": "Espaces famille",
+      "subtitle": "Créez un espace ou rejoignez ceux auxquels vous avez accès.",
+      "welcomeBanner": "Bienvenue {name}",
+      "sectionDescription": "Retrouvez tous vos espaces partagés",
+      "membersCount": "{count, plural, one {# membre} other {# membres}}",
+      "tasksCount": "{count, plural, one {# tâche} other {# tâches}}",
+      "statInProgress": "En cours",
+      "statCompleted": "Terminées",
+      "emptyStateCardTitle": "Votre espace vous attend",
+      "emptyStateCardDescription": "Créez votre premier espace pour organiser le quotidien en duo et avancer ensemble.",
+      "userFallbackName": "Utilisateur",
+      "addWorkspaceButton": "Créer un espace",
+      "addWorkspaceButtonAriaLabel": "Ouvrir le formulaire pour créer un nouvel espace de travail",
+      "joinWorkspaceButton": "Entrer un lien d'invitation",
+      "joinWorkspaceButtonAriaLabel": "Ouvrir le formulaire pour rejoindre un espace avec un lien d'invitation",
+      "yourWorkspacesTitle": "Vos espaces",
+      "noWorkspaces": "Aucun espace",
+      "noWorkspacesMessage": "Créez votre premier espace ou rejoignez un espace avec un lien d'invitation.",
+      "emptyStateTitle": "Bienvenue chez vous",
+      "emptyStateMessage": "Creez un espace pour partager les taches du quotidien, repartir la charge mentale et mieux vous coordonner.",
+      "addFirstProjectButton": "Créer mon premier espace",
+      "addFirstProjectButtonAriaLabel": "Créer mon premier espace de travail",
+      "createWorkspaceTitle": "Créer un espace",
+      "createWorkspaceDescription": "Donnez un nom à votre nouvel espace pour commencer.",
+      "projectNameLabel": "Nom de l'espace de travail",
+      "projectNamePlaceholder": "Ex. Mon projet",
+      "emojiPickerLabel": "Choisissez une ambiance",
+      "emojiPickerAriaLabel": "Sélecteur d'emoji d'espace",
+      "emojiPickerOptionAriaLabel": "Choisir l'emoji {emoji}",
+      "createButton": "Créer l'espace",
+      "createButtonAriaLabel": "Créer l'espace",
+      "joinWorkspaceTitle": "Rejoindre un espace avec un lien",
+      "joinWorkspaceDescription": "Collez le lien d'invitation reçu de votre partenaire pour rejoindre l'espace.",
+      "invitationLinkLabel": "Lien d'invitation",
+      "invitationLinkPlaceholder": "https://.../join/ABC123 ou token",
+      "joinButton": "Rejoindre l'espace",
+      "joinButtonAriaLabel": "Rejoindre l'espace",
+      "roleAdmin": "Administrateur",
+      "roleMember": "Membre",
+      "roleViewer": "Observateur",
+      "roleAriaLabel": "Rôle",
+      "openWorkspaceAriaLabel": "Ouvrir l'espace {name}, rôle : {role}",
+      "pleaseEnterInvitationLink": "Veuillez entrer un lien d'invitation ou un token",
+      "pendingInvitationsTitle": "Invitations en attente",
+      "pendingInvitationsDescription": "Acceptez rapidement les invitations reçues pour commencer en duo.",
+      "pendingInvitationsInvitedBy": "Invité par {name}",
+      "pendingInvitationsAccept": "Accepter",
+      "pendingInvitationsAcceptAriaLabel": "Accepter l'invitation pour {project}",
+      "pendingInvitationsDecline": "Refuser",
+      "pendingInvitationsDeclineAriaLabel": "Refuser l'invitation pour {project}",
+      "welcomeGuideTitle": "Guide de demarrage",
+      "welcomeGuideDescription": "Commencez par creer votre premier espace. Vous pourrez ensuite inviter une personne et decouvrir le board.",
+      "welcomeGuidePrimaryCta": "Creer mon premier espace",
+      "welcomeGuidePrimaryCtaAriaLabel": "Ouvrir le formulaire pour creer mon premier espace",
+      "welcomeGuideSkipCta": "Passer pour l'instant",
+      "welcomeGuideSkipCtaAriaLabel": "Ne plus ouvrir automatiquement le guide de demarrage",
+      "actions": {
+        "inviteRoleViewerDescription": "Peut consulter le projet sans modifier son contenu.",
+        "inviteRoleMemberDescription": "Peut collaborer sur les tickets et le travail courant.",
+        "inviteRoleAdminDescription": "Peut gérer les membres, les réglages et la structure du projet."
+      },
+      "reclaimable": {
+        "sectionTitle": "Projets à récupérer",
+        "sectionDescription": "Ces projets étaient associés à votre adresse e-mail et peuvent être récupérés avant leur suppression définitive.",
+        "orphanedSince": "Orphelin depuis le {date}",
+        "expiresIn": "Expire dans {days} jours",
+        "reclaimButton": "Récupérer",
+        "reclaimButtonAriaLabel": "Récupérer le projet {name}",
+        "reclaimSuccess": "Projet récupéré avec succès ! Vous êtes désormais administrateur.",
+        "reclaimError": "Une erreur est survenue lors de la récupération du projet."
+      },
+      "footer": {
+        "ariaLabel": "Liens utiles et informations",
+        "account": "Mon compte",
+        "legal": "Informations légales",
+        "subscriptions": "Plans et options"
+      }
+    },
+    "join": {
+      "processing": "Traitement de l'invitation en cours...",
+      "processingEyebrow": "Invitation en cours",
+      "processingStatus": "Connexion au projet",
+      "processingTitle": "Nous préparons votre accès",
+      "processingMessage": "L'invitation est en cours de validation. Vous allez rejoindre le projet dans quelques instants.",
+      "processingDetail": "Nous vérifions la validité du lien et vos droits avant de vous rediriger.",
+      "processingAriaLabel": "Traitement de l'invitation en cours",
+      "errorEyebrow": "Invitation indisponible",
+      "errorStatus": "Accès impossible",
+      "errorStatusValue": "!",
+      "errorTitle": "Cette invitation ne peut pas être utilisée",
+      "errorMessage": "Le lien a peut-être expiré, déjà été consommé ou n'est plus valide.",
+      "retry": "Réessayer",
+      "retryAriaLabel": "Réessayer d'accepter l'invitation",
+      "backToWorkspace": "Retourner au workspace",
+      "backToWorkspaceAriaLabel": "Retourner à l'espace de travail"
+    },
+    "board": {
+      "columns": {
+        "todo": "À faire",
+        "in_progress": "En cours",
+        "done": "Fait",
+        "in-progress": "En cours",
+        "completed": "Fait"
+      },
+      "search": {
+        "archivedBadge": "Archivée"
+      },
+      "view": {
+        "title": "Tableau de bord",
+        "ariaLabel": "Vue tableau de bord",
+        "loading": "Chargement du tableau...",
+        "emptyMessage": "Aucune tâche dans le tableau pour le moment. Ajoutez-en une pour lancer la dynamique."
+      },
+      "quickAdd": {
+        "label": "Ajout rapide",
+        "placeholder": "Ajouter une tâche sans ouvrir de fenêtre",
+        "button": "Ajouter",
+        "buttonAriaLabel": "Ajouter rapidement une tâche",
+        "success": "Tâche \"{title}\" ajoutée.",
+        "error": "Impossible d'ajouter la tâche. Réessayez."
+      },
+      "column": {
+        "ariaLabel": "Colonne {title}",
+        "dropZoneAriaLabel": "Zone de dépôt pour la colonne {title}",
+        "emptyDropZoneAriaLabel": "Zone de dépôt vide pour la colonne {title}",
+        "emptyColumnPlaceholder": "Aucune tâche"
+      },
+      "filters": {
+        "searchLabel": "Rechercher",
+        "searchPlaceholder": "Rechercher par titre ou notes",
+        "statusLabel": "Statut",
+        "resetLabel": "Réinitialiser les filtres",
+        "assigneeLabel": "Assigné à",
+        "assigneeUnassignedLabel": "Sans assignation",
+        "allAssigneesLabel": "Tous"
+      },
+      "ticketCard": {
+        "ticketAriaLabel": "Tâche",
+        "statusLabel": "Statut",
+        "assigneeLabel": "Assigné à",
+        "priority": {
+          "urgent": "Urgente",
+          "normal": "Normale",
+          "low": "Basse"
+        },
+        "priorityLabel": "Priorité",
+        "storyPointsLabel": "{count, plural, one {# point} other {# points}}",
+        "editTicketLabel": "Modifier la tâche"
+      },
+      "columnsConfiguration": {
+        "title": "Configuration des colonnes",
+        "ariaLabel": "Configuration des colonnes du tableau",
+        "closeLabel": "Fermer",
+        "moveUpLabel": "Monter",
+        "moveDownLabel": "Descendre",
+        "moveUpAriaLabel": "Déplacer la colonne {title} vers le haut",
+        "moveDownAriaLabel": "Déplacer la colonne {title} vers le bas"
+      },
+      "createTicketForm": {
+        "title": "Créer une tâche",
+        "fields": {
+          "title": "Titre",
+          "status": "Statut",
+          "notes": "Notes"
+        },
+        "submitButton": "Créer la tâche",
+        "cancelButton": "Annuler",
+        "errorGeneric": "Une erreur s'est produite lors de la création de la tâche",
+        "readOnlyHint": "Les lecteurs ne peuvent pas créer de tâches.",
+        "noStatusHint": "Gérez et organisez vos tâches"
+      },
+      "onboarding": {
+        "eyebrow": "Onboarding",
+        "title": "Prenez vos reperes sur le board",
+        "description": "Retrouvez les trois actions cle pour apprendre le fonctionnement du board et prendre vos premiers reflexes.",
+        "reviewTitle": "Revoir le guide",
+        "reviewDescription": "Relancez a tout moment le parcours complet pour revoir la creation d'un ticket, l'assignation et les commentaires.",
+        "reviewCta": "Revoir le guide",
+        "reviewCtaAriaLabel": "Revoir le guide d'onboarding du board",
+        "hideCta": "Masquer le guide",
+        "hideCtaAriaLabel": "Masquer le guide d'onboarding du board",
+        "skipCta": "Passer l'onboarding",
+        "skipCtaAriaLabel": "Ne plus ouvrir automatiquement l'onboarding",
+        "genericError": "Impossible de mettre a jour vos preferences d'onboarding.",
+        "status": {
+          "complete": "Fait",
+          "current": "En cours",
+          "pending": "A venir"
+        },
+        "steps": {
+          "createTicket": {
+            "title": "Creer un ticket",
+            "description": "Creez votre premiere tache pour voir comment le board organise le travail.",
+            "action": "Creer un ticket",
+            "actionAriaLabel": "Ouvrir la creation d'un ticket"
+          },
+          "assignTicket": {
+            "title": "Ouvrir et assigner un ticket",
+            "description": "Ouvrez un ticket puis assignez-le a une personne pour clarifier qui prend le sujet en charge.",
+            "blockedDescription": "Créez d'abord un premier ticket. Vous pourrez ensuite l'ouvrir et l'assigner a une personne.",
+            "action": "Ouvrir le ticket",
+            "actionAriaLabel": "Ouvrir un ticket pour l'assigner"
+          },
+          "commentTicket": {
+            "title": "Commenter un ticket",
+            "description": "Ajoutez un commentaire dans le ticket pour centraliser le contexte et les decisions.",
+            "blockedDescription": "Créez d'abord un premier ticket. Vous pourrez ensuite l'ouvrir et y ajouter un commentaire.",
+            "action": "Ouvrir les commentaires",
+            "actionAriaLabel": "Ouvrir un ticket pour ajouter un commentaire"
+          }
+        }
+      }
+    },
+    "settings": {
+      "page": {
+        "loading": "Chargement des paramètres du projet...",
+        "loadErrorTitle": "Impossible de charger le projet",
+        "retry": "Réessayer",
+        "tabs": {
+          "project": "Projet",
+          "statusesColumns": "Statuts et colonnes"
+        },
+        "fallback": "Section de paramètres indisponible"
+      },
+      "layout": {
+        "title": "Paramètres",
+        "tabsNavAriaLabel": "Navigation des paramètres"
+      },
+      "project": {
+        "title": "Informations du projet",
+        "subtitle": "Choisissez l’icône du board et le nom du projet. Le code projet reste deux lettres, sans emoji.",
+        "fields": {
+          "boardEmoji": {
+            "label": "Icône du board",
+            "choiceAriaLabel": "Choisir l’emoji du board"
+          },
+          "projectName": {
+            "label": "Nom du projet",
+            "placeholder": "Entrez le nom du projet"
+          },
+          "shortCode": {
+            "label": "Code projet"
+          },
+          "createdAt": {
+            "label": "Créé le"
+          },
+          "projectDescription": {
+            "label": "Description du projet",
+            "placeholder": "Ajoutez une description (optionnel)"
+          }
+        },
+        "actions": {
+          "save": "Enregistrer",
+          "saving": "Enregistrement...",
+          "reset": "Réinitialiser"
+        },
+        "status": {
+          "saved": "Modifications enregistrées"
+        },
+        "validation": {
+          "projectNameRequired": "Le nom du projet est requis.",
+          "projectNameContainsEmoji": "Le nom du projet ne doit pas contenir d’emoji."
+        }
+      },
+      "access": {
+        "title": "Vos permissions",
+        "subtitle": "Les actions disponibles dépendent de votre rôle actuel dans ce projet.",
+        "currentRoleLabel": "Rôle actuel",
+        "roles": {
+          "admin": "Administrateur",
+          "member": "Membre",
+          "viewer": "Lecteur"
+        },
+        "fallbackRole": "Accès inconnu",
+        "statuses": {
+          "allowed": "Autorisé",
+          "blocked": "Non autorisé"
+        },
+        "capabilities": {
+          "projectEdit": "Modification du projet",
+          "invitation": "Invitation",
+          "roleManagement": "Modification du rôle",
+          "renameAllowed": "Vous pouvez renommer le projet.",
+          "renameBlocked": "Vous pouvez consulter le projet, mais pas le renommer.",
+          "deleteAllowed": "Vous pouvez supprimer le projet.",
+          "deleteBlocked": "Seul un administrateur peut supprimer le projet."
+        }
+      },
+      "dangerZone": {
+        "title": "Zone dangereuse",
+        "subtitle": "La suppression retire définitivement le projet et son contenu associé.",
+        "description": "Cette action est irréversible. Vérifiez que vous n'avez plus besoin des données du projet avant de continuer.",
+        "adminOnly": "La suppression du projet est réservée aux administrateurs.",
+        "readOnly": "Votre rôle actuel est en lecture seule."
+      },
+      "delete": {
+        "open": "Supprimer le projet",
+        "openAriaLabel": "Ouvrir la confirmation de suppression du projet",
+        "modalTitle": "Supprimer le projet",
+        "modalDescription": "Tapez le nom du projet pour confirmer sa suppression définitive.",
+        "confirmationLabel": "Confirmer le nom du projet",
+        "confirmationPlaceholder": "Retapez {name}",
+        "confirmationHelper": "Saisissez exactement \"{name}\" pour activer la suppression.",
+        "confirm": "Supprimer définitivement",
+        "deleting": "Suppression...",
+        "cancel": "Annuler"
+      },
+      "people": {
+        "title": "Membres et invitations",
+        "subtitle": "Gérez les accès au projet, les rôles en cours et les liens d'invitation encore actifs.",
+        "adminOnly": "Seul un administrateur peut inviter, changer les rôles ou retirer un membre du projet.",
+        "advancedRolesLocked": "Le rôle Observateur est réservé au plan {plan}. Les membres déjà observateurs restent visibles jusqu'à leur prochaine modification.",
+        "currentPlan": "Plan actuel : {plan}",
+        "memberLimit": {
+          "limited": "{count}/{limit} accès utilisés",
+          "unlimited": "{count} accès utilisés, sans limite",
+          "reached": "La limite de {limit} accès est atteinte pour votre plan {plan}. Les membres actifs et les invitations en attente comptent tous dans ce total."
+        }
+      },
+      "members": {
+        "title": "Membres du projet",
+        "subtitle": "La liste reflète les rôles réellement actifs dans le projet.",
+        "loading": "Chargement des membres...",
+        "loadErrorTitle": "Impossible de charger les membres",
+        "emptyTitle": "Aucun membre à afficher",
+        "emptyDescription": "Les personnes qui rejoignent le projet apparaîtront ici.",
+        "adminsCount": "{count, plural, one {# administrateur} other {# administrateurs}}",
+        "syncing": "Synchronisation...",
+        "live": "Synchronisé",
+        "roleFieldLabel": "Rôle"
+      },
+      "invitations": {
+        "title": "Invitations en attente",
+        "subtitle": "Créez des liens d'accès et suivez les invitations encore valides.",
+        "createTitle": "Créer un lien d'invitation",
+        "createDescription": "Choisissez le rôle attribué à la personne lorsqu'elle rejoint le projet.",
+        "roleLabel": "Rôle attribué",
+        "create": "Créer un lien",
+        "creating": "Création...",
+        "copyLink": "Copier le lien",
+        "copyLinkSuccess": "Lien d'invitation copié",
+        "linkLabel": "Lien d'invitation",
+        "linkHelper": "Partagez ce lien avant son expiration.",
+        "listTitle": "Liens actifs",
+        "listDescription": "Chaque lien compte dans la capacité du projet tant qu'il n'est pas utilisé ou révoqué.",
+        "loading": "Chargement des invitations...",
+        "loadErrorTitle": "Impossible de charger les invitations",
+        "emptyTitle": "Aucune invitation en attente",
+        "emptyDescription": "Les liens actifs apparaîtront ici dès qu'une invitation est créée.",
+        "activeCount": "{count, plural, one {# invitation en attente} other {# invitations en attente}}",
+        "pendingLinkTitle": "Lien d'invitation",
+        "createdAt": "Créé le {date}",
+        "expiresAt": "Expire le {date}",
+        "revoke": "Révoquer",
+        "revokeAriaLabel": "Révoquer l'invitation qui expire le {date}",
+        "revokeConfirm": "Révoquer ce lien d'invitation ?",
+        "revokeModal": {
+          "title": "Révoquer ce lien",
+          "description": "Voulez-vous vraiment révoquer cette invitation ? Le lien ne pourra plus être utilisé.",
+          "confirm": "Confirmer la révocation",
+          "pending": "Révocation...",
+          "cancel": "Annuler"
+        },
+        "revokeSuccess": "Invitation révoquée",
+        "listAriaLabel": "Liste des invitations en attente",
+        "syncing": "Synchronisation..."
+      },
+      "statusesColumns": {
+        "title": "Statuts et colonnes",
+        "subtitle": "Configurez l'ordre, le nom et l'activation des colonnes",
+        "listAriaLabel": "Liste des colonnes",
+        "fields": {
+          "enabled": {
+            "label": "Activé",
+            "ariaLabel": "Activer la colonne {name}"
+          },
+          "name": {
+            "label": "Nom",
+            "placeholder": "Nom de la colonne",
+            "ariaLabel": "Renommer la colonne {name}"
+          }
+        },
+        "actions": {
+          "add": "Ajouter",
+          "moveUp": "Monter",
+          "moveDown": "Descendre",
+          "moveUpAriaLabel": "Monter la colonne {name}",
+          "moveDownAriaLabel": "Descendre la colonne {name}"
+        },
+        "empty": {
+          "title": "Aucune colonne",
+          "message": "Ajoutez une colonne pour commencer"
+        }
+      }
+    },
+    "ticketDetail": {
+      "page": {
+        "title": "Détail de la tâche",
+        "modalTitle": "Tâche",
+        "ticketCode": "Ref. {code}",
+        "actions": {
+          "back": "Retour",
+          "close": "Fermer",
+          "save": "Enregistrer",
+          "delete": "Supprimer la tâche",
+          "deleteModal": {
+            "title": "Supprimer la tâche",
+            "message": "Voulez-vous vraiment supprimer cette tâche ? Cette action est irreversible.",
+            "confirm": "Supprimer definitivement",
+            "deleting": "Suppression..."
+          },
+          "openFullPage": "Ouvrir en pleine page"
+        },
+        "states": {
+          "errorTitle": "Tâche introuvable",
+          "errorMessage": "Cette tâche n'existe pas ou vous n'avez pas accès à son contenu."
+        },
+        "fields": {
+          "title": "Titre",
+          "notes": "Notes",
+          "notesPlaceholder": "Ajoutez quelques notes utiles pour la famille...",
+          "status": "Statut",
+          "priority": "Priorité",
+          "assignee": "Assigné à",
+          "dueDate": "Échéance",
+          "createdAt": "Date de création",
+          "position": "Position",
+          "none": "Aucun"
+        },
+        "sections": {
+          "details": "Détails"
+        },
+        "priority": {
+          "urgent": "Urgente",
+          "normal": "Normale",
+          "low": "Basse"
+        },
+        "comments": {
+          "title": "Commentaires",
+          "newLabel": "Ajouter un commentaire",
+          "newPlaceholder": "Ajouter un commentaire...",
+          "readOnlyHint": "Les lecteurs ne peuvent pas publier de commentaires.",
+          "addButton": "Publier",
+          "author": "Auteur : {author}",
+          "unknownAuthor": "Utilisateur",
+          "editLabel": "Modifier le commentaire",
+          "saveEdit": "Enregistrer",
+          "editButton": "Modifier",
+          "deleteButton": "Supprimer"
+        },
+        "archived": {
+          "bannerTitle": "Tâche archivée",
+          "bannerDescription": "Cette tâche n'apparaît plus dans le tableau actif. Vous pouvez la désarchiver pour la remettre dans le flux.",
+          "unarchiveAction": "Désarchiver"
+        }
+      }
+    },
+    "recipes": {
+      "catalog": {
+        "header": {
+          "kicker": "Catalogue",
+          "title": "Toutes les recettes",
+          "filteredTitle": "Résultats filtrés"
+        },
+        "summary": {
+          "availableResults": "{count} recette disponible",
+          "availableResults_other": "{count} recettes disponibles",
+          "filteredResults": "{count} recette après filtres",
+          "filteredResults_other": "{count} recettes après filtres",
+          "refreshing": "Mise à jour..."
+        },
+        "filterBar": {
+          "open": "Filtrer",
+          "openAriaLabel": "Ouvrir les filtres du catalogue",
+          "helper": "{count} catégorie de filtre disponible",
+          "helper_other": "{count} catégories de filtre disponibles",
+          "reset": "Réinitialiser"
+        },
+        "activeFilters": {
+          "search": "Recherche : {search}"
+        },
+        "empty": {
+          "kicker": "Aucun résultat",
+          "title": "Aucune recette ne correspond aux filtres actuels.",
+          "description": "Essayez une recherche plus courte ou retirez un filtre pour rouvrir le catalogue.",
+          "reset": "Réinitialiser les filtres"
+        },
+        "pagination": {
+          "loadMore": "Charger plus",
+          "loading": "Chargement...",
+          "loadingMessage": "Chargement des recettes suivantes...",
+          "loadingAriaLabel": "Chargement des recettes suivantes"
+        },
+        "card": {
+          "openRecipeAriaLabel": "Ouvrir la recette {title}",
+          "editRecipeAriaLabel": "Modifier la recette {title}",
+          "addToQuickListAriaLabel": "Ajouter {title} à la quick list",
+          "removeFromQuickListAriaLabel": "Retirer {title} de la quick list",
+          "quickListUpdateFailed": "La quick list n'a pas pu être mise à jour."
+        },
+        "sheet": {
+          "ariaLabel": "Filtres du catalogue de recettes",
+          "kicker": "Filtres",
+          "title": "Affiner le catalogue",
+          "close": "Fermer",
+          "closeAriaLabel": "Fermer le panneau des filtres",
+          "reset": "Réinitialiser",
+          "apply": "Valider",
+          "applyPending": "Valider les filtres",
+          "groups": {
+            "popular": {
+              "title": "Populaires"
+            },
+            "type": {
+              "title": "Type"
+            },
+            "nutrition": {
+              "title": "Nutrition"
+            },
+            "nutriScore": {
+              "title": "Nutri-score"
+            },
+            "dietary": {
+              "title": "Habitudes alimentaires"
+            },
+            "equipment": {
+              "title": "Équipement"
+            },
+            "customTags": {
+              "title": "Tags ajoutés"
+            }
+          },
+          "options": {
+            "popular-express": "Express",
+            "popular-low-calories": "Faibles en calories",
+            "popular-boost-nutri": "Boost Nutri",
+            "popular-organic-vegetables": "Légumes BIO",
+            "popular-vegetarian": "Végétarien",
+            "popular-gourmand": "Gourmand",
+            "type-crustaceans": "Crustacés",
+            "type-express": "Express",
+            "type-family": "Famille",
+            "type-healthy": "Healthy",
+            "type-world": "Monde",
+            "type-fish": "Poisson",
+            "type-veggie": "Veggie",
+            "type-meat": "Viande",
+            "nutrition-low-calories": "Faible en calories",
+            "nutrition-fibers-plus": "Fibres+",
+            "nutrition-omega-3": "Oméga 3",
+            "nutrition-protein": "Protéiné",
+            "nutrition-vegetables-rich": "Riche en légumes",
+            "nutri-score-a": "A",
+            "nutri-score-b": "B",
+            "nutri-score-c": "C",
+            "nutri-score-d": "D",
+            "nutri-score-e": "E",
+            "dietary-naturally-gluten-free": "Naturellement sans gluten",
+            "equipment-two-hobs-max": "2 plaques maximum",
+            "equipment-food-processor": "Compatible robot de cuisine",
+            "equipment-no-oven": "Sans four",
+            "equipment-no-blender": "Sans mixeur"
+          }
+        },
+        "toolbar": {
+          "filter": "Filtrer",
+          "filterAriaLabel": "Ouvrir les filtres du catalogue",
+          "quickList": "Quick list",
+          "quickListShowAriaLabel": "Afficher la quick list",
+          "quickListHideAriaLabel": "Masquer la quick list",
+          "addRecipe": "Ajouter une recette",
+          "addRecipeAriaLabel": "Créer une nouvelle recette"
+        }
+      },
+      "detail": {
+        "editAction": "Modifier",
+        "editRecipeAriaLabel": "Modifier la recette {title}",
+        "additions": {
+          "title": "A tester",
+          "validate": "Valider cet ajout",
+          "validating": "Validation..."
+        },
+        "ingredients": {
+          "title": "Ingrédients",
+          "empty": "Aucun ingrédient validé pour l'instant."
+        },
+        "steps": {
+          "label": "Étape {position}",
+          "empty": "Aucune étape pour l'instant."
+        },
+        "errors": {
+          "validateAddition": "La validation de l'ajout a échoué. Réessayez."
+        }
+      },
+      "editor": {
+        "page": {
+          "create": {
+            "eyebrow": "Recipes / création",
+            "title": "Créer une recette",
+            "description": "Un écran plus direct pour poser l’idée, structurer la base et enregistrer proprement la fiche."
+          },
+          "edit": {
+            "eyebrow": "Recipes / édition",
+            "title": "Modifier la recette",
+            "description": "Une fiche d’édition lisible pour ajuster la base, les ajouts et les étapes sans perdre le fil."
+          },
+          "aside": {
+            "kicker": "Règles actives",
+            "title": "Cadre du v1",
+            "ruleQuantities": "Quantités structurées acceptées : {formats}.",
+            "ruleUnits": "Unités v1 : {units}.",
+            "ruleFallback": "Le fallback conserve `amountText` si la quantité reste libre.",
+            "ruleReorder": "Le réordonnancement reste simple avec les boutons haut / bas."
+          }
+        },
+        "header": {
+          "kicker": "Fiche recette",
+          "createMode": "Création",
+          "editMode": "Édition",
+          "localDraftBadge": "Brouillon local",
+          "localDraftHelper": "Appuyez sur le bouton \"Créer la recette\" tout en bas pour l’enregistrer.",
+          "descriptionCreate": "Commence par le titre puis complète les blocs utiles, comme sur l’écran de mise à jour d’une tâche.",
+          "descriptionEdit": "Retouche la recette bloc par bloc avec la même lecture compacte que sur l’écran de mise à jour d’une tâche."
+        },
+        "meta": {
+          "servings": "Portions",
+          "time": "Temps",
+          "image": "Image",
+          "tags": "Tags",
+          "validatedIngredients": "Base",
+          "additionIngredients": "Ajouts",
+          "steps": "Étapes",
+          "servingsFallback": "À définir",
+          "servingsWithCount": "{count} portions",
+          "timeFallback": "À estimer",
+          "timeWithCount": "{count} min",
+          "imageReady": "Renseignée",
+          "imageEmpty": "Optionnelle"
+        },
+        "sections": {
+          "identity": {
+            "kicker": "Identité",
+            "title": "Les repères qui font reconnaître la recette",
+            "description": "Le titre reste visible en haut, puis on complète l’image, le temps, les portions et le résumé."
+          },
+          "tags": {
+            "kicker": "Tags",
+            "title": "Des tags projet, sans doublon",
+            "description": "Les suggestions reprennent les tags déjà utilisés et le slug évite les répétitions.",
+            "empty": "Aucun tag sélectionné pour l’instant."
+          },
+          "validatedIngredients": {
+            "kicker": "Ingrédients",
+            "title": "La base stable de la recette",
+            "description": "Quantités structurées acceptées : {formats}. Unités v1 : {units}.",
+            "empty": "Aucun ingrédient pour l’instant.",
+            "rowLabel": "Ingrédient {position}",
+            "nameLabel": "Ingrédient"
+          },
+          "additionIngredients": {
+            "kicker": "Ajouts",
+            "title": "Les variantes à tester sans brouiller la base",
+            "description": "Les ajouts restent persistants, mais clairement identifiés comme hypothèses ou variations.",
+            "empty": "Aucun ingrédient pour l’instant.",
+            "rowLabel": "Ingrédient {position}",
+            "nameLabel": "Ingrédient"
+          },
+          "steps": {
+            "kicker": "Étapes",
+            "title": "Une suite de blocs courts et faciles à reprendre",
+            "description": "Chaque étape garde une instruction claire et un repère optionnel pour mieux relire.",
+            "empty": "Aucune étape pour l’instant.",
+            "rowLabel": "Étape {position}",
+            "instructionPlaceholder": "Décris l’action à faire…",
+            "metaPlaceholder": "Sauce, four, 10 min…"
+          },
+          "note": {
+            "kicker": "Note",
+            "title": "Le retour de test ou le rappel personnel",
+            "description": "Optionnel, mais pratique pour garder un arbitrage après test."
+          },
+          "summary": {
+            "kicker": "Récap",
+            "title": "Vérifier avant l’enregistrement",
+            "description": "Un aperçu rapide de la fiche telle qu’elle sera relue ensuite."
+          }
+        },
+        "fields": {
+          "title": {
+            "label": "Titre",
+            "placeholder": "Poulet citron & riz pilaf"
+          },
+          "coverImageUrl": {
+            "label": "Image",
+            "placeholder": "https://...",
+            "helper": "Colle l’adresse d’une image en ligne ou télécharge-en une."
+          },
+          "servingsCount": {
+            "label": "Portions",
+            "placeholder": "2"
+          },
+          "totalTimeMinutes": {
+            "label": "Temps estimé",
+            "placeholder": "35",
+            "helper": "En minutes."
+          },
+          "summary": {
+            "label": "Résumé",
+            "helper": "Une phrase ou deux pour reconnaître la recette vite."
+          },
+          "note": {
+            "label": "Note de recette",
+            "helper": "Optionnel. Pratique pour garder un arbitrage après test."
+          },
+          "tagDraft": {
+            "label": "Nouveau tag",
+            "placeholder": "Rapide"
+          },
+          "ingredientAmount": {
+            "label": "Quantité"
+          },
+          "ingredientUnit": {
+            "label": "Unité",
+            "options": {
+              "none": "Sans unité",
+              "g": "g",
+              "kg": "kg",
+              "ml": "ml",
+              "cl": "cl",
+              "l": "l",
+              "piece": "pièce",
+              "botte": "botte",
+              "cs": "c. à s.",
+              "cc": "c. à c."
+            }
+          },
+          "ingredientNotes": {
+            "label": "Note"
+          },
+          "stepInstruction": {
+            "label": "Instruction"
+          },
+          "stepMeta": {
+            "label": "Repère"
+          }
+        },
+        "actions": {
+          "close": "Fermer",
+          "backToCatalog": "Retour au catalogue",
+          "backToRecipe": "Retour à la recette",
+          "addTag": "Ajouter",
+          "addValidatedIngredient": "Ajouter",
+          "addAdditionIngredient": "Ajouter",
+          "addStep": "Ajouter",
+          "uploadCover": "Télécharger une image",
+          "replaceCover": "Remplacer l’image",
+          "uploadingCover": "Téléchargement...",
+          "moveUp": "Haut",
+          "moveDown": "Bas",
+          "remove": "Suppr.",
+          "removeTagAriaLabel": "Retirer {label}",
+          "moveUpItemAriaLabel": "Monter {label} {position}",
+          "moveDownItemAriaLabel": "Descendre {label} {position}",
+          "removeItemAriaLabel": "Supprimer {label} {position}",
+          "saveCreate": "Créer la recette",
+          "saveEdit": "Enregistrer les changements",
+          "saving": "Enregistrement..."
+        },
+        "labels": {
+          "validatedIngredient": "l’ingrédient",
+          "additionIngredient": "l’ajout",
+          "step": "l’étape"
+        },
+        "summary": {
+          "untitled": "Recette sans titre",
+          "noTags": "Aucun tag sélectionné.",
+          "validatedIngredients": "{count} ingrédient validé",
+          "validatedIngredients_other": "{count} ingrédients validés",
+          "additionIngredients": "{count} ajout",
+          "additionIngredients_other": "{count} ajouts",
+          "steps": "{count} étape",
+          "steps_other": "{count} étapes"
+        },
+        "errors": {
+          "missingId": "La recette a été enregistrée sans identifiant exploitable.",
+          "saveFailed": "Impossible d’enregistrer la recette pour l’instant.",
+          "coverUploadFailed": "Impossible de télécharger l’image pour l’instant.",
+          "coverUploadTooLarge": "L’image est trop lourde.",
+          "coverUploadInvalidType": "Format d’image non pris en charge."
+        }
+      },
+      "quickListSummary": {
+        "kicker": "Quick list",
+        "titleEmpty": "Visible même à vide",
+        "titleFilled": "Repas retenus pour la semaine",
+        "copyEmpty": "La quick list garde sa place dans le parcours, même avant la première sélection.",
+        "copyFilled": "Le résumé garde les recettes actives lisibles depuis les autres écrans du module.",
+        "emptyNote": "Aucune recette active pour l’instant.",
+        "open": "Ouvrir la quick list",
+        "activeBadge": "Active",
+        "defaultNote": "Recette retenue pour un prochain repas."
+      }
+    },
+    "account": {
+      "header": {
+        "label": "Paramètres 🔧",
+        "title": "Mon compte",
+        "subtitle": "Gérez vos informations personnelles et préférences"
+      },
+      "personalInfo": {
+        "title": "Informations personnelles",
+        "description": "Mettez à jour votre nom et adresse email",
+        "icon": "👤",
+        "fields": {
+          "name": {
+            "label": "Nom complet",
+            "placeholder": "Votre nom"
+          },
+          "email": {
+            "label": "Adresse email",
+            "placeholder": "votre.email@exemple.com"
+          }
+        },
+        "saveButton": "Enregistrer les modifications",
+        "saveButtonAriaLabel": "Enregistrer les modifications du profil",
+        "savingButton": "Enregistrement..."
+      },
+      "security": {
+        "title": "Sécurité",
+        "description": "Changez votre mot de passe",
+        "icon": "🔒",
+        "fields": {
+          "currentPassword": {
+            "label": "Mot de passe actuel",
+            "placeholder": "••••••••"
+          },
+          "newPassword": {
+            "label": "Nouveau mot de passe",
+            "placeholder": "••••••••"
+          },
+          "confirmPassword": {
+            "label": "Confirmer le mot de passe",
+            "placeholder": "••••••••"
+          }
+        },
+        "changeButton": "Changer le mot de passe",
+        "changeButtonAriaLabel": "Changer le mot de passe",
+        "changingButton": "Modification...",
+        "oauthNotice": "Ce compte utilise une connexion OAuth. La mise à jour du mot de passe n'est pas disponible depuis Tribu Nova."
+      },
+      "preferences": {
+        "title": "Préférences",
+        "description": "Personnalisez votre expérience",
+        "icon": "🎨",
+        "emailNotifications": {
+          "label": "Notifications par email",
+          "description": "Recevoir des emails sur l'activité de vos espaces"
+        },
+        "theme": {
+          "label": "Thème",
+          "description": "Choisissez l'apparence de l'interface",
+          "options": {
+            "light": "Clair",
+            "dark": "Sombre",
+            "system": "Système"
+          }
+        },
+        "language": {
+          "label": "Langue",
+          "description": "Choisissez votre langue préférée"
+        },
+        "languageOptions": {
+          "fr": "Français",
+          "en": "English",
+          "es": "Español"
+        }
+      },
+      "subscription": {
+        "title": "Mon abonnement",
+        "description": "Gérez votre plan et votre facturation",
+        "icon": "💳",
+        "currentPlan": "Plan actuel",
+        "planLabels": {
+          "free": "Gratuit",
+          "pro": "Foyer",
+          "team": "Foyer Plus"
+        },
+        "statusLabels": {
+          "active": "Actif",
+          "canceled": "Annulé",
+          "past_due": "Paiement en retard",
+          "trialing": "Période d'essai"
+        },
+        "periodEnd": "Renouvellement le {date}",
+        "cancelAtPeriodEnd": "Votre abonnement sera annulé à la fin de la période en cours",
+        "manageButton": "Gérer mon abonnement",
+        "manageButtonAriaLabel": "Ouvrir le portail de gestion d'abonnement Stripe",
+        "changePlanButton": "Changer de plan",
+        "changePlanButtonAriaLabel": "Voir les autres plans disponibles",
+        "superuser": {
+          "badge": "Super Utilisateur",
+          "description": "Accès complet à toutes les fonctionnalités"
+        }
+      },
+      "dangerZone": {
+        "title": "Zone de danger",
+        "description": "Actions irréversibles",
+        "icon": "⚠️",
+        "deleteAccount": {
+          "label": "Supprimer mon compte",
+          "description": "Cette action est définitive et supprimera toutes vos données"
+        },
+        "deleteButton": "Supprimer le compte",
+        "deleteButtonAriaLabel": "Supprimer définitivement le compte",
+        "deletingButton": "Suppression...",
+        "confirmTitle": "Confirmer la suppression",
+        "confirmMessage": "Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible et supprimera définitivement toutes vos données.",
+        "confirmButton": "Oui, supprimer mon compte",
+        "confirmButtonAriaLabel": "Confirmer la suppression du compte",
+        "cancelButton": "Annuler"
+      },
+      "signOut": {
+        "title": "Session",
+        "description": "Gérez votre session active",
+        "icon": "🚪",
+        "label": "Déconnexion",
+        "descriptionText": "Vous serez redirigé vers la page d'accueil",
+        "button": "Se déconnecter",
+        "buttonAriaLabel": "Se déconnecter de votre compte",
+        "pendingButton": "Déconnexion..."
+      },
+      "success": {
+        "profileUpdated": "Profil mis à jour avec succès",
+        "passwordChanged": "Mot de passe modifié avec succès",
+        "preferencesUpdated": "Préférences enregistrées"
+      },
+      "validation": {
+        "passwordMinLength": "Le mot de passe doit contenir au moins 8 caractères",
+        "passwordMaxLength": "Le mot de passe doit contenir moins de 100 caractères",
+        "confirmPasswordRequired": "Veuillez confirmer votre mot de passe",
+        "passwordsDoNotMatch": "Les mots de passe ne correspondent pas",
+        "currentPasswordRequired": "Le mot de passe actuel est requis"
+      }
+    },
+    "landing": {
+      "hero": {
+        "brandPill": "✨ Organisez ce qui compte vraiment",
+        "logoAriaLabel": "Logo Tribu Nova",
+        "title": "Moins de charge mentale. Plus de temps pour vous.",
+        "subtitle": "Tribu Nova vous aide à organiser votre quotidien, seul ou en couple — sans vous prendre la tête.",
+        "proofNoCard": "Gratuit pour démarrer",
+        "proofFreeStart": "Prêt en 2 minutes",
+        "proofCancelAnytime": "Sur mobile, partout",
+        "ctaSignUp": "Créer mon espace",
+        "ctaSignIn": "Se connecter",
+        "ctaPreview": "Voir un aperçu"
+      },
+      "values": {
+        "title": "L'organisation, enfin simple",
+        "simplicity": {
+          "icon": "🎯",
+          "title": "Tout au même endroit",
+          "description": "Vos tâches, vos projets, vos idées. Un seul espace pour ne rien perdre."
+        },
+        "clarity": {
+          "icon": "⚖️",
+          "title": "Une charge mieux répartie",
+          "description": "Assignez clairement ce qui revient à chacun. Plus besoin de répéter."
+        },
+        "control": {
+          "icon": "🌿",
+          "title": "Moins de stress",
+          "description": "Quand tout est organisé, le quotidien devient plus léger."
+        }
+      },
+      "features": {
+        "title": "Concret, rapide, efficace",
+        "board": {
+          "icon": "📋",
+          "title": "Vos tâches du quotidien",
+          "description": "Ajoutez, assignez, suivez. Simple comme une liste, puissant comme un outil."
+        }
+      },
+      "impact": {
+        "title": "La charge mentale, c'est réel",
+        "description": "Elle touche presque tout le monde. Tribu Nova aide à la réduire.",
+        "time": {
+          "value": "2h",
+          "title": "Gagnées par semaine",
+          "description": "Moins de coordination, moins de rappels. Votre temps vous revient."
+        },
+        "alignment": {
+          "value": "73%",
+          "title": "Des couples concernés",
+          "description": "La charge mentale touche presque tous les foyers — et déséquilibre les relations."
+        },
+        "serenity": {
+          "value": "-40%",
+          "title": "De frictions en moins",
+          "description": "Quand chacun sait quoi faire, les rappels et les reproches disparaissent."
+        }
+      },
+      "rhythm": {
+        "title": "Trois étapes, c'est tout",
+        "capture": {
+          "icon": "📝",
+          "title": "Notez",
+          "description": "Ajoutez une tâche ou une idée dès qu'elle arrive, depuis votre téléphone."
+        },
+        "plan": {
+          "icon": "🗓️",
+          "title": "Organisez",
+          "description": "Décidez qui fait quoi. Assignez en deux clics, planifiez sans effort."
+        },
+        "act": {
+          "icon": "✅",
+          "title": "Avancez",
+          "description": "Suivez ce qui est fait. Voyez le progrès, sans le stress."
+        }
+      },
+      "trust": {
+        "title": "Simple. Clair. Pour vous.",
+        "description": "Tribu Nova transforme vos idées en actions concrètes, avec une vision partagée de votre quotidien.",
+        "freeForeverIcon": "🆓",
+        "freeForever": "Gratuit pour commencer",
+        "noCreditCardIcon": "📱",
+        "noCreditCard": "Pensé pour le mobile",
+        "noComplexityIcon": "🌿",
+        "noComplexity": "Sans complexité inutile"
+      },
+      "examples": {
+        "title": "Aperçu concret",
+        "columns": {
+          "todo": "À faire",
+          "in_progress": "En cours",
+          "inProgress": "En cours",
+          "done": "Fait"
+        },
+        "board": {
+          "title": "Vos tâches du quotidien",
+          "description": "Ajoutez, assignez, suivez — depuis votre téléphone.",
+          "todo1": "Rappel médecin à prendre",
+          "todo2": "Faire les courses du soir",
+          "in_progress1": "Démarches administratives",
+          "inProgress1": "Démarches administratives",
+          "done1": "Virement loyer effectué"
+        }
+      },
+      "cta": {
+        "title": "Prêt à reprendre le contrôle ?",
+        "description": "Commencez gratuitement, sans carte bancaire. En 2 minutes, votre espace est prêt.",
+        "button": "Démarrer gratuitement"
+      },
+      "footer": {
+        "ariaLabel": "Liens de pied de page",
+        "legal": "Mentions légales",
+        "pricing": "Tarifs"
+      }
+    },
+    "legal": {
+      "metadata": {
+        "title": "Mentions légales",
+        "description": "Mentions légales, protection des données et conditions d'utilisation du service Tribu Nova."
+      },
+      "header": {
+        "label": "Retour",
+        "title": "Mentions légales",
+        "subtitle": "Informations légales relatives à l'utilisation de Tribu Nova"
+      },
+      "sections": {
+        "editor": {
+          "icon": "🏢",
+          "title": "Éditeur du site",
+          "description": "Informations sur l'éditeur de la plateforme",
+          "appName": "Tribu Nova",
+          "appDescription": "Tribu Nova est une application de gestion familiale éditée à titre personnel.",
+          "contact": "Contact : contact@tribunova.app",
+          "hosting": "Hébergement : Vercel Inc. — 340 S Lemon Ave #4133, Walnut, CA 91789, États-Unis"
+        },
+        "intellectualProperty": {
+          "icon": "©️",
+          "title": "Propriété intellectuelle",
+          "description": "Droits d'auteur et propriété du contenu",
+          "content": "L'ensemble des contenus présents sur Tribu Nova (textes, interfaces, code source, logos, éléments graphiques) sont protégés par le droit d'auteur. Toute reproduction, représentation ou diffusion, en tout ou partie, sans autorisation préalable est interdite."
+        },
+        "dataProtection": {
+          "icon": "🔒",
+          "title": "Protection des données personnelles",
+          "description": "Conformité RGPD et gestion de vos données",
+          "intro": "Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez des droits suivants :",
+          "rights": {
+            "access": "Droit d'accès à vos données personnelles",
+            "rectification": "Droit de rectification des données inexactes",
+            "deletion": "Droit à l'effacement de vos données",
+            "portability": "Droit à la portabilité de vos données"
+          },
+          "collectedData": "Données collectées : adresse email, nom d'affichage, préférences utilisateur.",
+          "purpose": "Finalité : authentification, personnalisation de l'expérience et fonctionnement du service.",
+          "retention": "Durée de conservation : vos données sont conservées tant que votre compte est actif. Elles sont supprimées sur demande.",
+          "exerciseRights": "Pour exercer vos droits, contactez-nous à : contact@tribunova.app"
+        },
+        "cookies": {
+          "icon": "🍪",
+          "title": "Cookies",
+          "description": "Utilisation des cookies sur la plateforme",
+          "content": "Tribu Nova utilise uniquement des cookies strictement nécessaires au fonctionnement du service (authentification, session utilisateur). Aucun cookie publicitaire ou de suivi n'est utilisé. Ces cookies sont indispensables et ne requièrent pas de consentement préalable."
+        },
+        "liability": {
+          "icon": "⚖️",
+          "title": "Responsabilité",
+          "description": "Limites de responsabilité de l'éditeur",
+          "content": "L'éditeur s'efforce de fournir un service fiable et disponible. Toutefois, il ne saurait être tenu responsable des interruptions de service, pertes de données ou dommages indirects liés à l'utilisation de la plateforme. Le service est fourni « en l'état », sans garantie d'aucune sorte."
+        },
+        "applicableLaw": {
+          "icon": "📜",
+          "title": "Droit applicable",
+          "description": "Juridiction et loi applicable",
+          "content": "Les présentes mentions légales sont régies par le droit français. En cas de litige, les tribunaux français seront seuls compétents."
+        }
+      },
+      "lastUpdated": "Dernière mise à jour : février 2026"
+    },
+    "pricing": {
+      "metadata": {
+        "title": "Tarifs",
+        "description": "Découvrez les offres Tribu Nova : gratuit, Foyer et Foyer Plus pour organiser votre quotidien."
+      },
+      "header": {
+        "label": "Retour",
+        "title": "Nos tarifs",
+        "subtitle": "Des offres pensées pour les familles et leur organisation du quotidien"
+      },
+      "billing": {
+        "monthly": "Facturation mensuelle",
+        "yearly": "Facturation annuelle",
+        "yearlyDiscount": "Économisez 20%",
+        "perMonth": "/mois",
+        "free": "Gratuit"
+      },
+      "plans": {
+        "free": {
+          "name": "Gratuit",
+          "description": "Pour démarrer simplement et organiser le quotidien familial",
+          "price": "0€",
+          "cta": "Commencer gratuitement",
+          "ctaAriaLabel": "Créer un compte gratuit"
+        },
+        "pro": {
+          "name": "Foyer",
+          "description": "Pour les familles qui veulent mieux répartir les responsabilités et les routines",
+          "price": "3,99€",
+          "cta": "Passer à Foyer",
+          "ctaAriaLabel": "Souscrire à l'offre Foyer",
+          "badge": "Populaire"
+        },
+        "team": {
+          "name": "Foyer Plus",
+          "description": "Pour les foyers élargis et la coordination avec aidants, proches ou co-parents",
+          "price": "8,99€",
+          "cta": "Choisir Foyer Plus",
+          "ctaAriaLabel": "Souscrire à l'offre Foyer Plus"
+        },
+        "currentBadge": "Actif"
+      },
+      "comparison": {
+        "title": "Comparaison détaillée des offres",
+        "featuresColumn": "Inclus dans le plan"
+      },
+      "features": {
+        "projectsPerAccount": "Projets par compte",
+        "workspaces": "Projets par compte",
+        "membersPerWorkspace": "Membres du foyer",
+        "tickets": "Tâches",
+        "boardView": "Vue tableau",
+        "customColumns": "Personnalisation des colonnes",
+        "advancedRoles": "Rôles avancés (observateur)",
+        "prioritySupport": "Support prioritaire"
+      },
+      "values": {
+        "one": "1",
+        "two": "2",
+        "four": "4",
+        "three": "3",
+        "five": "5",
+        "twenty": "20",
+        "hundred": "100",
+        "ten": "10",
+        "twentyFive": "25",
+        "fifty": "50",
+        "threeColumns": "3 colonnes fixes",
+        "unlimited": "Illimité",
+        "included": "Inclus",
+        "notIncluded": "Non inclus"
+      },
+      "faq": {
+        "title": "Questions fréquentes",
+        "items": {
+          "cancel": {
+            "question": "Puis-je annuler à tout moment ?",
+            "answer": "Oui, vous pouvez annuler votre abonnement à tout moment. Vous conserverez l'accès jusqu'à la fin de la période en cours."
+          },
+          "upgrade": {
+            "question": "Puis-je changer de forfait ?",
+            "answer": "Vous pouvez passer à un forfait supérieur à tout moment. Le changement est effectif immédiatement et la différence est calculée au prorata."
+          },
+          "data": {
+            "question": "Que deviennent mes données si je repasse au gratuit ?",
+            "answer": "Vos données sont conservées. Si vous dépassez les limites du plan gratuit, vous pourrez consulter vos projets existants mais ne pourrez pas en créer de nouveaux."
+          },
+          "payment": {
+            "question": "Quels moyens de paiement acceptez-vous ?",
+            "answer": "Nous acceptons les cartes bancaires (Visa, Mastercard) et les prélèvements SEPA."
+          }
+        }
+      },
+      "guarantee": {
+        "title": "Satisfait ou remboursé",
+        "description": "Essayez Tribu Nova Pro ou Équipe pendant 14 jours. Si vous n'êtes pas satisfait, nous vous remboursons intégralement."
+      },
+      "trust": {
+        "title": "Une offre premium, sans surprise",
+        "item1": "Version gratuite solide pour démarrer sans friction.",
+        "item2": "Fonctionnalités premium activables uniquement quand vous en avez besoin.",
+        "item3": "Tarification claire, sans coût caché."
+      },
+      "cta": {
+        "currentPlan": "Plan actuel",
+        "upgrade": "Passer au {plan}",
+        "downgrade": "Passer au {plan}",
+        "downgradeFree": "Passer au Gratuit",
+        "signUpFirst": "Créer un compte",
+        "superuserFullAccess": "Accès complet",
+        "manageBilling": "Gérer la facturation"
+      }
+    },
+    "upgrade": {
+      "title": "Fonctionnalité réservée au plan {plan}",
+      "description": "Cette fonctionnalité n'est pas disponible avec votre plan actuel. Passez au plan {plan} pour y accéder.",
+      "ctaLabel": "Voir les tarifs",
+      "ctaAriaLabel": "Voir les tarifs et passer à un plan supérieur",
+      "featureNames": {
+        "advancedRoles": "Rôles avancés",
+        "workspaces": "Projets par compte",
+        "membersPerWorkspace": "Membres du foyer",
+        "tickets": "Tâches",
+        "customColumns": "Colonnes personnalisées"
+      },
+      "planBadges": {
+        "free": "Gratuit",
+        "pro": "Foyer",
+        "team": "Foyer Plus"
+      }
+    },
+    "members": {
+      "title": "Membres du projet",
+      "listAriaLabel": "Liste des membres du projet",
+      "you": "vous",
+      "remove": "Retirer",
+      "removeAriaLabel": "Retirer {name} du projet",
+      "changeRoleAriaLabel": "Changer le rôle de {name}",
+      "role": {
+        "admin": "Administrateur",
+        "member": "Membre",
+        "viewer": "Lecteur"
+      },
+      "removeConfirm": "Retirer {name} du projet ?",
+      "removeModal": {
+        "title": "Retirer ce membre",
+        "description": "Voulez-vous vraiment retirer {name} du projet ?",
+        "confirm": "Confirmer le retrait",
+        "pending": "Retrait...",
+        "cancel": "Annuler"
+      },
+      "removeSuccess": "Membre retiré du projet",
+      "roleUpdateSuccess": "Rôle mis à jour",
+      "lastAdminError": "Impossible de retirer le dernier administrateur",
+      "emptyState": "Aucun membre dans ce projet"
+    }
+  },
+  "forms": {
+    "invitation": {
+      "title": "Inviter un membre",
+      "ariaLabel": "Formulaire d'invitation",
+      "emailLabel": "Adresse email",
+      "emailPlaceholder": "nom@exemple.com",
+      "emailAriaLabel": "Adresse email du membre à inviter",
+      "roleLabel": "Rôle",
+      "roleAriaLabel": "Rôle à attribuer au membre invité",
+      "role": {
+        "admin": "Administrateur",
+        "member": "Membre",
+        "viewer": "Lecteur"
+      },
+      "send": "Envoyer l'invitation",
+      "sending": "Envoi en cours...",
+      "sendAriaLabel": "Envoyer l'invitation",
+      "cancel": "Annuler",
+      "inviteSuccess": "Invitation envoyée",
+      "inviteError": "Impossible d'envoyer l'invitation",
+      "limitReached": "Limite de membres atteinte pour votre plan",
+      "pending": {
+        "title": "Invitations en attente",
+        "ariaLabel": "Liste des invitations en attente",
+        "invitedBy": "Invité par {name}",
+        "accept": "Accepter",
+        "acceptAriaLabel": "Accepter l'invitation pour {project}",
+        "decline": "Refuser",
+        "declineAriaLabel": "Refuser l'invitation pour {project}",
+        "acceptSuccess": "Invitation acceptée",
+        "declineSuccess": "Invitation refusée",
+        "role": {
+          "admin": "Administrateur",
+          "member": "Membre",
+          "viewer": "Lecteur"
+        }
+      }
+    }
+  },
+  "errors": {
+    "generic": "Une erreur s'est produite",
+    "retry": "Réessayer",
+    "retryAriaLabel": "Réessayer l'opération",
+    "auth": {
+      "INVALID_CREDENTIALS": "Email ou mot de passe invalide",
+      "EMAIL_ALREADY_EXISTS": "Cette adresse email est déjà utilisée",
+      "WEAK_PASSWORD": "Le mot de passe ne respecte pas les exigences de sécurité",
+      "INVALID_EMAIL": "Adresse email invalide",
+      "AUTHENTICATION_ERROR": "Une erreur d'authentification s'est produite",
+      "EMAIL_VERIFICATION_ERROR": "Une erreur s'est produite lors de la vérification de l'email",
+      "PASSWORD_RESET_ERROR": "Une erreur s'est produite lors de la réinitialisation du mot de passe",
+      "INVALID_TOKEN": "Le lien est invalide ou a expiré. Veuillez en demander un nouveau",
+      "SAME_PASSWORD": "Le nouveau mot de passe doit être différent de l'ancien",
+      "PASSWORD_UPDATE_NOT_ALLOWED": "Ce compte utilise une connexion externe. La mise à jour du mot de passe n'est pas disponible."
+    },
+    "repository": {
+      "NOT_FOUND": "Ressource introuvable",
+      "NOT_FOUND_WITH_ENTITY": "{entityType} avec l'ID {entityId} introuvable",
+      "CONSTRAINT_VIOLATION": "Une contrainte de base de données a été violée",
+      "DATABASE_ERROR": "Une erreur de base de données s'est produite"
+    },
+    "domain": {
+      "TICKET_PROJECT_MISMATCH": "La tâche n'appartient pas au même projet",
+      "LAST_ADMIN_REQUIRED": "Le projet doit conserver au moins un administrateur",
+      "MEMBER_ROLE_CHANGE_ADMIN_REQUIRED": "Seul un administrateur peut modifier le rôle d'un membre du projet",
+      "INVITATION_ALREADY_USED": "Ce lien d'invitation n'est plus disponible",
+      "INVITATION_EXPIRED": "Ce lien d'invitation a expiré",
+      "INVITATION_ALREADY_MEMBER": "Vous faites déjà partie de ce projet",
+      "INVITATION_LIMIT_REACHED": "Votre formule actuelle ne permet pas plus de membres actifs ou de liens d'invitation dans cet espace",
+      "INVALID_COLUMN_ORDER": "Ordre de colonnes invalide",
+      "DUPLICATE_COLUMN_KEY": "Clé de colonne en double",
+      "INVALID_BOARD_COLUMN_RELATIONSHIP": "La colonne n'appartient pas au tableau spécifié",
+      "MIXED_BOARD_COLUMNS": "Colonnes de plusieurs tableaux mélangées",
+      "MISSING_DONE_COLUMN": "Le tableau doit avoir au moins une colonne terminale visible",
+      "COLUMN_IN_USE": "Impossible de supprimer cette colonne tant qu'elle contient des tâches",
+      "UPDATE_CREDENTIALS_NO_FIELDS": "Indiquez au moins un nouvel email ou un nouveau mot de passe"
+    },
+    "infra": {
+      "avatarFileTooLarge": "Le fichier est trop volumineux pour être traité",
+      "avatarInvalidMimeType": "Format non supporté. Utilisez JPEG, PNG ou WebP",
+      "avatarProcessingFailed": "Impossible de préparer l'image. Essayez un autre fichier.",
+      "stripeWebhookNotConfigured": "Le paiement en ligne n'est pas configuré correctement. Contactez le support.",
+      "billingNoCustomer": "Aucun compte de facturation n'est associé à votre profil.",
+      "boardInvalidColumnWorkflowState": "Données de colonne incohérentes. Actualisez la page.",
+      "googleOauthNotAvailable": "La connexion Google n'est pas disponible pour le moment.",
+      "deleteAccountFailed": "Impossible de supprimer le compte. Réessayez plus tard."
+    },
+    "stripe": {
+      "checkoutFailed": "Impossible de lancer le paiement. Veuillez réessayer.",
+      "portalFailed": "Impossible d'accéder à la gestion de l'abonnement. Veuillez réessayer.",
+      "checkoutSuccess": "Paiement effectué avec succès ! Votre abonnement est actif.",
+      "notAuthenticated": "Vous devez être connecté pour effectuer cette action."
+    }
+  },
+  "ui": {
+    "assigneePicker": {
+      "ariaLabel": "Sélection des assignés",
+      "noAssignee": "Non assigné",
+      "assign": "Assigner",
+      "assignAriaLabel": "Ouvrir le sélecteur d'assignés",
+      "memberListAriaLabel": "Liste des membres disponibles"
+    },
+    "draggableItem": {
+      "ariaLabel": "Élément déplaçable {id}"
+    },
+    "avatarUpload": {
+      "ariaLabel": "Gestion de l'avatar",
+      "upload": "Ajouter un avatar",
+      "uploadAriaLabel": "Ajouter une photo de profil",
+      "change": "Changer",
+      "changeAriaLabel": "Changer la photo de profil",
+      "remove": "Supprimer",
+      "removeAriaLabel": "Supprimer la photo de profil",
+      "selectFile": "Sélectionner un fichier image",
+      "hint": "JPEG, PNG ou WebP.",
+      "uploadSuccess": "Photo de profil mise à jour",
+      "removeSuccess": "Photo de profil supprimée",
+      "errorTooLarge": "Le fichier est trop volumineux pour être traité",
+      "errorInvalidType": "Format non supporté. Utilisez JPEG, PNG ou WebP",
+      "errorProcessing": "Impossible de préparer l'image. Essayez un autre fichier."
+    }
+  }
+}

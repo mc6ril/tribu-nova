@@ -1,0 +1,32 @@
+@use "@/styles/variables/colors" as *;
+@use "@/styles/variables/spacing" as *;
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: $spacing-md $spacing-md;
+
+  @media (min-width: 768px) {
+    padding: $spacing-md $spacing-lg;
+  }
+
+  @media (min-width: 1024px) {
+    padding: $spacing-lg $spacing-xl;
+  }
+}
+
+.container--small {
+  max-width: $spacing-container-max-width * 0.6; // ~480px
+}
+
+.container--medium {
+  max-width: $spacing-container-max-width; // 800px
+}
+
+.container--large {
+  max-width: $spacing-container-max-width * 1.5; // 1200px
+}
+
+.container--full {
+  max-width: 100%;
+}

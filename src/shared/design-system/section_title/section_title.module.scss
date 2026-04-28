@@ -1,0 +1,9 @@
+@use "@/styles/variables/colors" as *;
+@use "@/styles/variables/typography" as *;
+
+.section-title {
+  @include typography-label-uppercase;
+  color: $color-text-muted;
+  margin: 0;
+  text-transform: none;
+}

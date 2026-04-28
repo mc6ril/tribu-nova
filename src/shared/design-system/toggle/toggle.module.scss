@@ -1,0 +1,84 @@
+@use "@/styles/variables/colors" as *;
+@use "@/styles/variables/spacing" as *;
+@use "@/styles/variables/typography" as *;
+@use "@/styles/variables/borders" as *;
+@use "@/styles/variables/animations" as *;
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-sm;
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle--disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.toggle__label {
+  font-size: $font-size-base;
+  line-height: $line-height-normal;
+  color: $color-text;
+}
+
+.toggle__track {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 44px;
+  height: 24px;
+  padding: 0;
+  border: $border-width solid $color-border;
+  border-radius: $border-radius-full;
+  background-color: $color-surface;
+  cursor: pointer;
+  transition:
+    background-color $animation-duration-base $easing-ease-out,
+    border-color $animation-duration-base $easing-ease-out;
+  flex-shrink: 0;
+
+  &:focus-visible {
+    outline: 2px solid $color-focus;
+    outline-offset: 2px;
+  }
+
+  &:hover:not(:disabled) {
+    border-color: $color-primary;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.toggle__track--active {
+  background-color: $color-primary;
+  border-color: $color-primary;
+
+  .toggle__thumb {
+    transform: translateX(20px);
+    background-color: $color-primary-text;
+  }
+}
+
+.toggle__thumb {
+  position: absolute;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: $border-radius-full;
+  background-color: $color-text-secondary;
+  transition:
+    transform $animation-duration-base $easing-ease-out,
+    background-color $animation-duration-base $easing-ease-out;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toggle__track,
+  .toggle__thumb {
+    transition: none;
+  }
+}

@@ -1,0 +1,56 @@
+@use "@/styles/variables/colors" as *;
+@use "@/styles/variables/spacing" as *;
+@use "@/styles/variables/typography" as *;
+@use "@/styles/variables/borders" as *;
+@use "@/styles/variables/animations" as *;
+@use "@/styles/variables/shadows" as *;
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: $font-weight-medium;
+  line-height: $line-height-normal;
+  border-radius: $border-radius-full;
+  white-space: nowrap;
+}
+
+.badge--small {
+  padding: $spacing-xs $spacing-sm;
+  font-size: $font-size-xs;
+}
+
+.badge--medium {
+  padding: $spacing-xs $spacing-md;
+  font-size: $font-size-sm;
+}
+
+.badge--large {
+  padding: $spacing-sm $spacing-lg;
+  font-size: $font-size-base;
+}
+
+.badge--default {
+  background-color: $color-neutral-200;
+  color: $color-neutral-800;
+}
+
+.badge--success {
+  background-color: $color-success-background;
+  color: $color-success-text;
+}
+
+.badge--warning {
+  background-color: $color-warning-background;
+  color: $color-warning-text;
+}
+
+.badge--error {
+  background-color: $color-error-background;
+  color: $color-error-text;
+}
+
+.badge--info {
+  background-color: $color-info-background;
+  color: $color-info-text;
+}

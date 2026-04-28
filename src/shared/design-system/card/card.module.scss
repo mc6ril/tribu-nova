@@ -1,0 +1,94 @@
+@use "@/styles/variables/colors" as *;
+@use "@/styles/variables/spacing" as *;
+@use "@/styles/variables/typography" as *;
+@use "@/styles/variables/borders" as *;
+@use "@/styles/variables/animations" as *;
+@use "@/styles/variables/shadows" as *;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: $color-secondary;
+  border-radius: $border-radius-md;
+  overflow: hidden;
+  transition: $transition-shadow, $transition-border, $transition-transform;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+.card--default {
+  border: $border-width solid $color-border;
+}
+
+.card--elevated {
+  border: none;
+  box-shadow: $shadow-card;
+}
+
+.card--outlined {
+  border: $border-width solid $color-border;
+  box-shadow: none;
+}
+
+.card--interactive {
+  border: $border-width solid $color-border;
+  cursor: pointer;
+
+  &:hover {
+    border-color: $color-primary;
+    box-shadow: $shadow-md;
+    transform: translateY(-2px);
+
+    @media (prefers-reduced-motion: reduce) {
+      transform: none;
+    }
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $color-focus;
+    box-shadow: $shadow-focus;
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: $shadow-sm;
+
+    @media (prefers-reduced-motion: reduce) {
+      transform: none;
+    }
+  }
+}
+
+.card--clickable {
+  cursor: pointer;
+}
+
+.card__header {
+  padding: $spacing-md $spacing-lg;
+  border-bottom: $border-width solid $color-border;
+}
+
+.card__title {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-tight;
+  color: $color-text;
+  margin: 0;
+}
+
+.card__body {
+  padding: $spacing-lg;
+  flex: 1;
+}
+
+.card__footer {
+  padding: $spacing-md $spacing-lg;
+  border-top: $border-width solid $color-border;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: $spacing-sm;
+}

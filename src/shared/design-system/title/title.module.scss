@@ -1,0 +1,35 @@
+@use "@/styles/variables/colors" as *;
+@use "@/styles/variables/typography" as *;
+@use "@/styles/variables/spacing" as *;
+
+.title {
+  margin: 0;
+  font-family: $font-family-sans;
+  color: $color-text;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+}
+
+.title--h1 {
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+}
+
+.title--h2 {
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-tight;
+}
+
+.title--h3 {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-normal;
+}
+
+.title--h4 {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-normal;
+}

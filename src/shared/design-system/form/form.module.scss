@@ -1,0 +1,40 @@
+@use "@/styles/variables/colors" as *;
+@use "@/styles/variables/spacing" as *;
+@use "@/styles/variables/typography" as *;
+@use "@/styles/variables/borders" as *;
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.form-fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.form-legend {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-tight;
+  color: $color-text;
+  margin-bottom: $spacing-sm;
+  padding: 0;
+}
+
+.form-error {
+  font-size: $font-size-sm;
+  line-height: $line-height-normal;
+  color: $color-error;
+  padding: $spacing-sm;
+  border: $border-width solid $color-error;
+  border-radius: $border-radius-md;
+  background-color: $color-error-background;
+  margin-top: $spacing-xs;
+}

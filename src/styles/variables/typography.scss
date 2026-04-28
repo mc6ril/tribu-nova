@@ -1,0 +1,113 @@
+// Typography Scale Variables (FlavieBoard design system)
+// All typography values must reference these variables
+
+// ============================================================================
+// Font Families
+// ============================================================================
+
+$font-family-serif: "Cormorant Garamond", Georgia, serif;
+$font-family-sans:
+  system-ui,
+  -apple-system,
+  BlinkMacSystemFont,
+  "Segoe UI",
+  Roboto,
+  "Helvetica Neue",
+  Arial,
+  sans-serif;
+$font-family-mono:
+  ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono",
+  monospace;
+
+// ============================================================================
+// Font Sizes (FlavieBoard scale)
+// ============================================================================
+
+$font-size-root: 16px; // Root font-size for rem calculations
+$font-size-2xs: 0.6875rem; // 11px
+$font-size-xs: 0.75rem; // 12px
+$font-size-sm: 0.8125rem; // 13px
+$font-size-base: 0.875rem; // 14px
+$font-size-md: 0.9375rem; // 15px
+$font-size-lg: 1rem; // 16px
+$font-size-xl: 1.25rem; // 20px
+$font-size-2xl: 1.375rem; // 22px
+$font-size-3xl: 1.75rem; // 28px
+$font-size-4xl: 2.25rem; // 36px
+
+// ============================================================================
+// Font Weights
+// ============================================================================
+
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// ============================================================================
+// Line Heights
+// ============================================================================
+
+$line-height-tight: 1.25;
+$line-height-normal: 1.5;
+$line-height-relaxed: 1.6;
+$line-height-loose: 2;
+
+// ============================================================================
+// Letter Spacing (FlavieBoard)
+// ============================================================================
+
+$letter-spacing-tight: 0.5px;
+$letter-spacing-normal: 1px;
+$letter-spacing-wide: 1.5px;
+$letter-spacing-wider: 3px;
+
+// ============================================================================
+// Typography Mixins
+// ============================================================================
+
+@mixin typography-body {
+  font-family: $font-family-sans;
+  font-size: $font-size-base;
+  line-height: $line-height-relaxed;
+  font-weight: $font-weight-normal;
+}
+
+@mixin typography-body-strong {
+  @include typography-body;
+  font-weight: $font-weight-semibold;
+}
+
+@mixin typography-body-md {
+  font-family: $font-family-sans;
+  font-size: $font-size-base;
+  line-height: $line-height-normal;
+  font-weight: $font-weight-medium;
+}
+
+@mixin typography-body-sm {
+  font-family: $font-family-sans;
+  font-size: $font-size-sm;
+  line-height: $line-height-normal;
+  font-weight: $font-weight-normal;
+}
+
+@mixin typography-caption {
+  font-family: $font-family-sans;
+  font-size: $font-size-2xs;
+  line-height: $line-height-normal;
+  font-weight: $font-weight-medium;
+  letter-spacing: $letter-spacing-wide;
+}
+
+@mixin typography-heading-serif {
+  font-family: $font-family-serif;
+  font-weight: $font-weight-normal;
+}
+
+@mixin typography-label-uppercase {
+  font-family: $font-family-sans;
+  font-size: $font-size-2xs;
+  text-transform: uppercase;
+  letter-spacing: $letter-spacing-wide;
+}

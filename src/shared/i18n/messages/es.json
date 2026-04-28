@@ -1,0 +1,1785 @@
+{
+  "app": {
+    "metadata": {
+      "title": "Tribu Nova",
+      "description": "Una ayuda para la pareja para aligerar la carga mental y organizar el día a día sin agotarse.",
+      "titleTemplate": "%s | Tribu Nova",
+      "keywords": "pareja, carga mental, organización del hogar, familia, equilibrio, claridad",
+      "ogImageAlt": "Tribu Nova — menos carga mental, más claridad"
+    },
+    "manifest": {
+      "description": "Una ayuda para la pareja para aligerar la carga mental y organizar el día a día."
+    }
+  },
+  "common": {
+    "loading": "Cargando...",
+    "loadingAriaLabel": "Cargando contenido",
+    "email": "Email",
+    "password": "Contraseña",
+    "signIn": "Iniciar sesión",
+    "signUp": "Registrarse",
+    "dismiss": "Cerrar",
+    "dismissAriaLabel": "Cerrar mensaje de error",
+    "submit": "Enviar",
+    "delete": "Eliminar",
+    "cancel": "Cancelar",
+    "emptyState": {
+      "defaultTitle": "Ningún elemento",
+      "defaultMessage": "Aún no hay elementos que mostrar."
+    },
+    "passwordToggle": {
+      "show": "Mostrar contraseña",
+      "hide": "Ocultar contraseña"
+    }
+  },
+  "navigation": {
+    "skipLink": {
+      "label": "Ir al contenido principal"
+    },
+    "sidebar": {
+      "ariaLabel": "Navegación del proyecto",
+      "openMenu": "Abrir el menu del proyecto",
+      "closeMenu": "Cerrar el menu del proyecto",
+      "addTab": "Añadir módulo",
+      "addTabAriaLabel": "Añadir un módulo al proyecto",
+      "items": {
+        "home": "Inicio",
+        "board": "Tablero",
+        "recipes": "Recipes",
+        "ticketDetail": "Tarea",
+        "settings": "Configuración"
+      },
+      "moduleLibrary": {
+        "title": "Añadir módulo",
+        "intro": "Compón un proyecto que se adapte de verdad al día a día del hogar. Aquí solo aparecen los módulos listos y aún no activados.",
+        "preview": {
+          "kicker": "Vista previa del módulo",
+          "title": "Catálogo suave, quick list visible y paso limpio a compras"
+        },
+        "recipes": {
+          "status": "Disponible",
+          "lockedStatus": "Plan {plan}",
+          "subtitle": "El módulo de comidas del hogar, pensado para resultar deseable en cuanto entra en un proyecto.",
+          "teaser": "Un espacio premium para elegir recetas, tener a mano los platos adecuados y convertir la semana en un plan de compras muy simple.",
+          "cta": "Añadir Recipes al proyecto",
+          "upgradeCta": "Ver planes"
+        },
+        "empty": {
+          "badge": "Proyecto al día",
+          "title": "No hay nuevos módulos para añadir por ahora",
+          "description": "Los módulos ya integrados desaparecen de aquí, y los futuros siguen ocultos hasta que estén listos."
+        }
+      },
+      "locked": {
+        "ariaLabel": "{feature} — requiere el plan {plan}",
+        "badge": {
+          "pro": "Foyer",
+          "team": "Foyer Plus"
+        }
+      },
+      "profile": {
+        "ariaLabel": "Abrir menú de perfil",
+        "backToWorkspace": "Volver al espacio de trabajo",
+        "profileSettings": "Configuración de la cuenta",
+        "logout": "Cerrar sesión",
+        "userFallbackName": "Usuario"
+      }
+    },
+    "searchBar": {
+      "ariaLabel": "Barra de búsqueda",
+      "placeholder": "Buscar"
+    },
+    "navbar": {
+      "filter": "Filtrar",
+      "filterAriaLabel": "Abrir filtros",
+      "reviewGuide": "Volver a ver la guia",
+      "reviewGuideAriaLabel": "Relanzar la guia de onboarding",
+      "addTicket": "Añadir tarea",
+      "addTicketAriaLabel": "Crear una nueva tarea"
+    }
+  },
+  "layout": {
+    "appFooter": {
+      "label": "Tribu Nova",
+      "ariaLabel": "Pie de página de la aplicación"
+    }
+  },
+  "pages": {
+    "signup": {
+      "title": "Crear cuenta",
+      "subtitle": "Regístrate para empezar a reducir tu carga mental.",
+      "button": "Registrarse",
+      "buttonLoading": "Registrando...",
+      "buttonAriaLabel": "Registrarse",
+      "oauth": {
+        "divider": "o",
+        "googleButton": "Continuar con Google",
+        "googleButtonAriaLabel": "Iniciar sesión con Google"
+      },
+      "footer": "¿Ya tienes una cuenta?",
+      "footerLink": "Iniciar sesión",
+      "fields": {
+        "displayName": {
+          "label": "Nombre para mostrar",
+          "placeholder": "Juan García"
+        },
+        "email": {
+          "required": "La dirección de email es obligatoria",
+          "invalid": "La dirección de email no es válida"
+        },
+        "confirmPassword": {
+          "label": "Confirmar contraseña",
+          "required": "Confirma tu contraseña",
+          "mismatch": "Las contraseñas no coinciden"
+        },
+        "password": {
+          "helperText": "Mínimo 6 caracteres",
+          "tooShort": "La contraseña debe tener al menos 6 caracteres",
+          "tooLong": "La contraseña no debe superar los 100 caracteres",
+          "hint": {
+            "hasMinLength": "Mínimo 6 caracteres",
+            "hasUppercase": "Añade una mayúscula",
+            "hasLowercase": "Añade una minúscula",
+            "hasNumber": "Añade un número",
+            "hasSpecialChar": "Añade un carácter especial (!@#...)"
+          }
+        },
+        "acceptedTerms": {
+          "label": "Acepto las",
+          "linkLabel": "condiciones legales",
+          "ariaLabel": "Aceptar las condiciones legales"
+        }
+      },
+      "passwordStrength": {
+        "weak": "Débil",
+        "medium": "Media",
+        "strong": "Fuerte"
+      },
+      "verification": {
+        "title": "Verificación de email requerida",
+        "message": "Se ha enviado un email de verificación a tu dirección.",
+        "instructions": "Revisa tu bandeja de entrada y haz clic en el enlace para verificar tu cuenta.",
+        "resendHint": "Si no lo recibes, puedes solicitar un nuevo email de verificación.",
+        "resendButton": "Reenviar email de verificación",
+        "resendButtonAriaLabel": "Reenviar email de verificación",
+        "resendSuccess": "El email de verificación se ha enviado de nuevo. Revisa tu bandeja de entrada.",
+        "backToSignin": "Volver a iniciar sesión"
+      },
+      "errors": {
+        "invalidEmail": "Dirección de email no válida",
+        "weakPassword": "La contraseña no cumple los requisitos",
+        "passwordMismatch": "Las contraseñas no coinciden",
+        "termsRequired": "Debes aceptar las condiciones legales",
+        "generic": "Se ha producido un error al registrarse"
+      }
+    },
+    "verifyEmail": {
+      "title": "Verificación de email",
+      "success": "Tu email se ha verificado correctamente.",
+      "redirecting": "Redirigiendo...",
+      "backToSignin": "Volver a iniciar sesión",
+      "errors": {
+        "missingToken": "Enlace de verificación no válido. Falta el token o el email.",
+        "invalidToken": "El enlace de verificación no es válido o ha caducado. Solicita un nuevo enlace.",
+        "verificationError": "Se ha producido un error al verificar el email.",
+        "generic": "Se ha producido un error durante la verificación"
+      }
+    },
+    "resetPassword": {
+      "title": "Restablecer contraseña",
+      "subtitle": "Introduce tu email para recibir un enlace de restablecimiento",
+      "button": "Enviar enlace",
+      "buttonAriaLabel": "Enviar enlace de restablecimiento",
+      "backToSignin": "Volver a iniciar sesión",
+      "success": {
+        "message": "Si existe una cuenta con este email, se ha enviado un enlace de restablecimiento.",
+        "instructions": "Revisa tu bandeja de entrada y haz clic en el enlace para restablecer tu contraseña."
+      },
+      "fields": {
+        "email": {
+          "required": "La dirección de email es obligatoria",
+          "invalid": "La dirección de email no es válida"
+        }
+      }
+    },
+    "updatePassword": {
+      "title": "Actualizar contraseña",
+      "subtitle": "Introduce tu nueva contraseña",
+      "button": "Actualizar contraseña",
+      "buttonAriaLabel": "Actualizar contraseña",
+      "backToSignin": "Volver a iniciar sesión",
+      "success": "Tu contraseña se ha actualizado correctamente.",
+      "redirecting": "Redirigiendo...",
+      "fields": {
+        "password": {
+          "label": "Nueva contraseña",
+          "tooShort": "La contraseña debe tener al menos 6 caracteres",
+          "tooLong": "La contraseña debe tener menos de 100 caracteres",
+          "hint": {
+            "hasMinLength": "Mínimo 6 caracteres",
+            "hasUppercase": "Añade una mayúscula",
+            "hasLowercase": "Añade una minúscula",
+            "hasNumber": "Añade un número",
+            "hasSpecialChar": "Añade un carácter especial (!@#...)"
+          }
+        },
+        "confirmPassword": {
+          "label": "Confirmar contraseña",
+          "required": "Confirma tu contraseña",
+          "mismatch": "Las contraseñas no coinciden"
+        }
+      }
+    },
+    "signin": {
+      "title": "Iniciar sesión",
+      "subtitle": "Inicia sesión para acceder a tu espacio Tribu Nova",
+      "button": "Iniciar sesión",
+      "buttonAriaLabel": "Iniciar sesión",
+      "oauth": {
+        "divider": "o",
+        "googleButton": "Continuar con Google",
+        "googleButtonAriaLabel": "Iniciar sesión con Google"
+      },
+      "forgotPassword": "¿Olvidaste tu contraseña?",
+      "footer": "¿No tienes cuenta?",
+      "footerLink": "Registrarse",
+      "resendVerification": {
+        "button": "Reenviar email de verificación",
+        "buttonAriaLabel": "Reenviar email de verificación",
+        "success": "Email de verificación enviado. Revisa tu bandeja de entrada."
+      },
+      "errors": {
+        "invalidCredentials": "Email o contraseña no válidos",
+        "invalidEmail": "Dirección de email no válida",
+        "emailNotVerified": "Tu email no ha sido verificado. Revisa tu bandeja de entrada y haz clic en el enlace de verificación.",
+        "generic": "Se ha producido un error al iniciar sesión"
+      },
+      "fields": {
+        "email": {
+          "required": "La dirección de correo electrónico es obligatoria",
+          "invalid": "La dirección de correo electrónico no es válida"
+        },
+        "password": {
+          "required": "La contraseña es obligatoria"
+        }
+      }
+    },
+    "home": {
+      "welcome": "Bienvenido a Tribu Nova",
+      "welcomeSubtitle": "Empieza iniciando sesión o creando una cuenta",
+      "welcomeTitle": "Bienvenido",
+      "signedInAs": "Conectado como:",
+      "accessProjectTitle": "Acceder a un proyecto",
+      "accessProjectDescription": "Introduce el ID del proyecto para acceder a un proyecto del que aún no eres miembro",
+      "projectIdLabel": "ID del proyecto",
+      "projectIdPlaceholder": "Introduce el UUID del proyecto",
+      "accessProjectButton": "Acceder al proyecto",
+      "yourProjectsTitle": "Tus proyectos",
+      "loading": "Cargando...",
+      "loadingProjects": "Cargando proyectos...",
+      "noProjects": "Aún no tienes acceso a ningún proyecto.",
+      "errorLoadingProjects": "Error al cargar los proyectos:",
+      "unknownError": "Error desconocido",
+      "pleaseEnterProjectId": "Introduce un ID de proyecto",
+      "failedToAddToProject": "No se ha podido añadirte al proyecto",
+      "roleAdmin": "Administrador",
+      "roleMember": "Miembro",
+      "roleViewer": "Observador",
+      "roleAriaLabel": "Rol",
+      "createProjectTitle": "Crear proyecto",
+      "createProjectDescription": "Crea tu primer proyecto para empezar a trabajar",
+      "projectNameLabel": "Nombre del proyecto",
+      "projectNamePlaceholder": "Introduce el nombre de tu proyecto",
+      "createProjectButton": "Crear proyecto",
+      "createProjectButtonAriaLabel": "Crear proyecto",
+      "logoutButton": "Cerrar sesión",
+      "logoutButtonAriaLabel": "Cerrar sesión",
+      "updateUserButton": "Actualizar cuenta",
+      "updateUserButtonAriaLabel": "Actualizar información de la cuenta",
+      "deleteUserButton": "Eliminar cuenta",
+      "deleteUserButtonAriaLabel": "Eliminar la cuenta de forma definitiva",
+      "deleteUserConfirmation": "¿Seguro que quieres eliminar tu cuenta? Esta acción es irreversible.",
+      "newEmailLabel": "Nuevo email",
+      "newEmailPlaceholder": "Introduce tu nuevo email",
+      "newPasswordLabel": "Nueva contraseña",
+      "newPasswordPlaceholder": "Introduce tu nueva contraseña (opcional)",
+      "saveButton": "Guardar",
+      "saveButtonAriaLabel": "Guardar cambios",
+      "cancelButton": "Cancelar",
+      "cancelButtonAriaLabel": "Cancelar cambios",
+      "errors": {
+        "projectNameRequired": "El nombre del proyecto es obligatorio",
+        "projectNameTooShort": "El nombre del proyecto debe tener al menos 1 carácter",
+        "generic": "Se ha producido un error al crear el proyecto"
+      },
+      "quickAddTicket": {
+        "title": "Título de la tarea",
+        "placeholder": "Introduce el título de la tarea",
+        "submitButton": "Añadir",
+        "submitButtonAriaLabel": "Añadir tarea"
+      },
+      "myWorkWidget": {
+        "title": "Mi trabajo",
+        "emptyMessage": "Ninguna tarea activa",
+        "ticketAriaLabel": "Tarea",
+        "statusLabel": "Estado"
+      },
+      "recentActivityWidget": {
+        "title": "Actividad reciente",
+        "emptyMessage": "Ninguna actividad reciente",
+        "activityAriaLabel": "Actividad",
+        "types": {
+          "ticket_created": "Tarea creada",
+          "ticket_updated": "Tarea modificada",
+          "ticket_completed": "Tarea completada"
+        }
+      },
+      "shortcutsWidget": {
+        "title": "Accesos directos",
+        "shortcuts": {
+          "board": "Tablero",
+          "settings": "Configuración"
+        }
+      }
+    },
+    "projectHome": {
+      "title": "Inicio",
+      "lastActivityNow": "Última actividad: justo ahora",
+      "lastActivityHours": "Última actividad: {hours, plural, one {# hora} other {# horas}}",
+      "lastActivityDays": "Última actividad: {days, plural, one {# día} other {# días}}",
+      "lastActivityDate": "Última actividad: {date}",
+      "myTasksTitle": "Mis tareas",
+      "myTasksDescription": "Tus tareas asignadas para priorizar.",
+      "myTasksEmpty": "No hay tareas personales por ahora.",
+      "recentTitle": "Reciente",
+      "recentDescription": "Los ultimos elementos actualizados en este proyecto.",
+      "recentEmpty": "Aun no hay actividad reciente.",
+      "openBacklog": "Ver todas las tareas",
+      "openBacklogAriaLabel": "Abrir la lista completa de tareas",
+      "shortcutsWidget": {
+        "title": "Accesos directos",
+        "shortcuts": {
+          "board": "Tablero",
+          "settings": "Configuración"
+        }
+      }
+    },
+    "fallback": {
+      "workspaceLoading": {
+        "eyebrow": "Abriendo el espacio",
+        "status": "Cargando",
+        "title": "Estamos preparando tus espacios",
+        "message": "Proyectos, miembros y accesos están llegando. La pantalla se organiza antes de devolverte la mano.",
+        "ariaLabel": "Cargando espacio de trabajo"
+      },
+      "projectLoading": {
+        "eyebrow": "Cargando proyecto",
+        "status": "Sincronizando",
+        "title": "El proyecto va tomando forma",
+        "message": "Estamos cargando el board y los permisos para abrir el proyecto listo para usar.",
+        "ariaLabel": "Cargando proyecto"
+      }
+    },
+    "workspace": {
+      "title": "Espacios familiares",
+      "subtitle": "Crea un espacio o únete a los que tienes acceso.",
+      "welcomeBanner": "Bienvenido {name}",
+      "sectionDescription": "Todos tus espacios compartidos",
+      "membersCount": "{count, plural, one {# miembro} other {# miembros}}",
+      "tasksCount": "{count, plural, one {# tarea} other {# tareas}}",
+      "statInProgress": "En curso",
+      "statCompleted": "Completadas",
+      "emptyStateCardTitle": "Tu espacio te espera",
+      "emptyStateCardDescription": "Crea tu primer espacio para organizar el dia a dia en equipo y avanzar juntos.",
+      "userFallbackName": "Usuario",
+      "addWorkspaceButton": "Crear un espacio",
+      "addWorkspaceButtonAriaLabel": "Abrir formulario para crear un nuevo espacio de trabajo",
+      "joinWorkspaceButton": "Usar enlace de invitacion",
+      "joinWorkspaceButtonAriaLabel": "Abrir formulario para unirse con un enlace de invitacion",
+      "yourWorkspacesTitle": "Tus espacios",
+      "noWorkspaces": "Ningún espacio",
+      "noWorkspacesMessage": "Crea tu primer espacio o unete con un enlace de invitacion.",
+      "emptyStateTitle": "Bienvenido a casa",
+      "emptyStateMessage": "Crea un espacio para compartir tareas diarias, reducir la carga mental y coordinaros mejor.",
+      "addFirstProjectButton": "Crear mi primer espacio",
+      "addFirstProjectButtonAriaLabel": "Crear mi primer espacio de trabajo",
+      "createWorkspaceTitle": "Crear un espacio",
+      "createWorkspaceDescription": "Dale un nombre a tu nuevo espacio para empezar.",
+      "projectNameLabel": "Nombre del espacio de trabajo",
+      "projectNamePlaceholder": "Ej. Mi proyecto",
+      "emojiPickerLabel": "Elige un estilo",
+      "emojiPickerAriaLabel": "Selector de emoji del espacio",
+      "emojiPickerOptionAriaLabel": "Elegir emoji {emoji}",
+      "createButton": "Crear espacio",
+      "createButtonAriaLabel": "Crear espacio",
+      "joinWorkspaceTitle": "Unirse con enlace",
+      "joinWorkspaceDescription": "Pega el enlace de invitacion de tu pareja para unirte al espacio.",
+      "invitationLinkLabel": "Enlace de invitacion",
+      "invitationLinkPlaceholder": "https://.../join/ABC123 o token",
+      "joinButton": "Unirse al espacio",
+      "joinButtonAriaLabel": "Unirse al espacio",
+      "roleAdmin": "Administrador",
+      "roleMember": "Miembro",
+      "roleViewer": "Observador",
+      "roleAriaLabel": "Rol",
+      "openWorkspaceAriaLabel": "Abrir espacio {name}, rol: {role}",
+      "pleaseEnterInvitationLink": "Introduce un enlace de invitacion o token",
+      "pendingInvitationsTitle": "Invitaciones pendientes",
+      "pendingInvitationsDescription": "Acepta rapido las invitaciones recibidas para empezar a colaborar.",
+      "pendingInvitationsInvitedBy": "Invitado por {name}",
+      "pendingInvitationsAccept": "Aceptar",
+      "pendingInvitationsAcceptAriaLabel": "Aceptar invitacion para {project}",
+      "pendingInvitationsDecline": "Rechazar",
+      "pendingInvitationsDeclineAriaLabel": "Rechazar invitacion para {project}",
+      "welcomeGuideTitle": "Guia de inicio",
+      "welcomeGuideDescription": "Empieza creando tu primer espacio. Despues podras invitar a alguien y descubrir el board.",
+      "welcomeGuidePrimaryCta": "Crear mi primer espacio",
+      "welcomeGuidePrimaryCtaAriaLabel": "Abrir el formulario para crear mi primer espacio",
+      "welcomeGuideSkipCta": "Omitir por ahora",
+      "welcomeGuideSkipCtaAriaLabel": "Dejar de abrir automaticamente la guia de inicio",
+      "actions": {
+        "inviteRoleViewerDescription": "Puede consultar el proyecto sin modificar su contenido.",
+        "inviteRoleMemberDescription": "Puede colaborar en tickets y en el trabajo diario del proyecto.",
+        "inviteRoleAdminDescription": "Puede gestionar miembros, ajustes y la estructura del proyecto."
+      },
+      "reclaimable": {
+        "sectionTitle": "Proyectos para recuperar",
+        "sectionDescription": "Estos proyectos estaban asociados a tu dirección de correo electrónico y pueden ser recuperados antes de su eliminación definitiva.",
+        "orphanedSince": "Huérfano desde el {date}",
+        "expiresIn": "Expira en {days} días",
+        "reclaimButton": "Recuperar",
+        "reclaimButtonAriaLabel": "Recuperar el proyecto {name}",
+        "reclaimSuccess": "¡Proyecto recuperado con éxito! Ahora eres administrador.",
+        "reclaimError": "Ha ocurrido un error al recuperar el proyecto."
+      },
+      "footer": {
+        "ariaLabel": "Enlaces útiles e información",
+        "account": "Mi cuenta",
+        "legal": "Informacion legal",
+        "subscriptions": "Planes y opciones"
+      }
+    },
+    "join": {
+      "processing": "Procesando invitacion...",
+      "processingEyebrow": "Invitacion en curso",
+      "processingStatus": "Conexion al proyecto",
+      "processingTitle": "Estamos preparando tu acceso",
+      "processingMessage": "La invitacion se esta validando. Te unirás al proyecto en unos instantes.",
+      "processingDetail": "Estamos comprobando la validez del enlace y tus permisos antes de redirigirte.",
+      "processingAriaLabel": "Tratamiento de la invitacion en curso",
+      "errorEyebrow": "Invitacion no disponible",
+      "errorStatus": "Acceso imposible",
+      "errorStatusValue": "!",
+      "errorTitle": "Esta invitacion no se puede usar",
+      "errorMessage": "Es posible que el enlace haya caducado, ya se haya usado o ya no sea valido.",
+      "retry": "Reintentar",
+      "retryAriaLabel": "Reintentar aceptar invitacion",
+      "backToWorkspace": "Volver al workspace",
+      "backToWorkspaceAriaLabel": "Volver al espacio de trabajo"
+    },
+    "board": {
+      "columns": {
+        "todo": "Por hacer",
+        "in_progress": "En curso",
+        "done": "Hecho",
+        "in-progress": "En curso",
+        "completed": "Hecho"
+      },
+      "search": {
+        "archivedBadge": "Archivada"
+      },
+      "view": {
+        "title": "Tablero",
+        "ariaLabel": "Vista de tablero",
+        "loading": "Cargando tablero...",
+        "emptyMessage": "Aun no hay tareas en el tablero. Añade una para empezar."
+      },
+      "quickAdd": {
+        "label": "Alta rapida",
+        "placeholder": "Añade una tarea sin abrir una ventana",
+        "button": "Añadir",
+        "buttonAriaLabel": "Añadir rapidamente una tarea",
+        "success": "Tarea \"{title}\" añadida.",
+        "error": "No se pudo añadir la tarea. Intentalo de nuevo."
+      },
+      "column": {
+        "ariaLabel": "Columna {title}",
+        "dropZoneAriaLabel": "Zona de soltar para la columna {title}",
+        "emptyDropZoneAriaLabel": "Zona de soltar vacía para la columna {title}",
+        "emptyColumnPlaceholder": "Ninguna tarea"
+      },
+      "filters": {
+        "searchLabel": "Buscar",
+        "searchPlaceholder": "Buscar por titulo o notas",
+        "statusLabel": "Estado",
+        "resetLabel": "Restablecer filtros",
+        "assigneeLabel": "Asignado a",
+        "assigneeUnassignedLabel": "Sin asignar",
+        "allAssigneesLabel": "Todos"
+      },
+      "ticketCard": {
+        "ticketAriaLabel": "Tarea",
+        "statusLabel": "Estado",
+        "assigneeLabel": "Asignado a",
+        "priority": {
+          "urgent": "Urgente",
+          "normal": "Normal",
+          "low": "Baja"
+        },
+        "priorityLabel": "Prioridad",
+        "storyPointsLabel": "{count, plural, one {# punto} other {# puntos}}",
+        "editTicketLabel": "Editar tarea"
+      },
+      "columnsConfiguration": {
+        "title": "Configuración de columnas",
+        "ariaLabel": "Configuración de columnas del tablero",
+        "closeLabel": "Cerrar",
+        "moveUpLabel": "Subir",
+        "moveDownLabel": "Bajar",
+        "moveUpAriaLabel": "Mover columna {title} hacia arriba",
+        "moveDownAriaLabel": "Mover columna {title} hacia abajo"
+      },
+      "createTicketForm": {
+        "title": "Crear tarea",
+        "fields": {
+          "title": "Título",
+          "status": "Estado",
+          "notes": "Notas"
+        },
+        "submitButton": "Crear tarea",
+        "cancelButton": "Cancelar",
+        "errorGeneric": "Se ha producido un error al crear la tarea",
+        "readOnlyHint": "Los lectores no pueden crear tareas.",
+        "noStatusHint": "Gestiona y organiza tus tareas"
+      },
+      "onboarding": {
+        "eyebrow": "Onboarding",
+        "title": "Ubicate rapido en el board",
+        "description": "Sigue las tres acciones clave para entender el board y adoptar el flujo de trabajo basico.",
+        "reviewTitle": "Volver a ver la guia",
+        "reviewDescription": "Reinicia el recorrido completo cuando quieras para repasar la creacion de tickets, la asignacion y los comentarios.",
+        "reviewCta": "Volver a ver la guia",
+        "reviewCtaAriaLabel": "Volver a ver la guia de onboarding del board",
+        "hideCta": "Ocultar la guia",
+        "hideCtaAriaLabel": "Ocultar la guia de onboarding del board",
+        "skipCta": "Omitir onboarding",
+        "skipCtaAriaLabel": "Dejar de abrir automaticamente el onboarding",
+        "genericError": "No se pudieron actualizar tus preferencias de onboarding.",
+        "status": {
+          "complete": "Hecho",
+          "current": "En curso",
+          "pending": "Pendiente"
+        },
+        "steps": {
+          "createTicket": {
+            "title": "Crear un ticket",
+            "description": "Crea tu primera tarea para ver como el board organiza el trabajo.",
+            "action": "Crear un ticket",
+            "actionAriaLabel": "Abrir la creacion de un ticket"
+          },
+          "assignTicket": {
+            "title": "Abrir y asignar un ticket",
+            "description": "Abre un ticket y asignalo para dejar claro quien se encarga.",
+            "blockedDescription": "Primero crea un ticket. Despues podras abrirlo y asignarlo a una persona.",
+            "action": "Abrir el ticket",
+            "actionAriaLabel": "Abrir un ticket para asignarlo"
+          },
+          "commentTicket": {
+            "title": "Comentar un ticket",
+            "description": "Agrega un comentario en el ticket para centralizar el contexto y las decisiones.",
+            "blockedDescription": "Primero crea un ticket. Despues podras abrirlo y agregar un comentario.",
+            "action": "Abrir comentarios",
+            "actionAriaLabel": "Abrir un ticket para agregar un comentario"
+          }
+        }
+      }
+    },
+    "settings": {
+      "page": {
+        "loading": "Cargando la configuración del proyecto...",
+        "loadErrorTitle": "No se puede cargar el proyecto",
+        "retry": "Reintentar",
+        "tabs": {
+          "project": "Proyecto",
+          "statusesColumns": "Estados y columnas"
+        },
+        "fallback": "Sección de configuración no disponible"
+      },
+      "layout": {
+        "title": "Configuración",
+        "tabsNavAriaLabel": "Navegación de configuración"
+      },
+      "project": {
+        "title": "Información del proyecto",
+        "subtitle": "Elige el icono del tablero y el nombre del proyecto. El código sigue siendo dos letras, sin emoji.",
+        "fields": {
+          "boardEmoji": {
+            "label": "Icono del tablero",
+            "choiceAriaLabel": "Elegir emoji del tablero"
+          },
+          "projectName": {
+            "label": "Nombre del proyecto",
+            "placeholder": "Introduce el nombre del proyecto"
+          },
+          "shortCode": {
+            "label": "Código del proyecto"
+          },
+          "createdAt": {
+            "label": "Creado el"
+          },
+          "projectDescription": {
+            "label": "Descripción del proyecto",
+            "placeholder": "Añade una descripción (opcional)"
+          }
+        },
+        "actions": {
+          "save": "Guardar",
+          "saving": "Guardando...",
+          "reset": "Restablecer"
+        },
+        "status": {
+          "saved": "Cambios guardados"
+        },
+        "validation": {
+          "projectNameRequired": "El nombre del proyecto es obligatorio.",
+          "projectNameContainsEmoji": "El nombre del proyecto no debe contener emoji."
+        }
+      },
+      "access": {
+        "title": "Tus permisos",
+        "subtitle": "Las acciones disponibles aquí dependen de tu rol actual en este proyecto.",
+        "currentRoleLabel": "Rol actual",
+        "roles": {
+          "admin": "Administrador",
+          "member": "Miembro",
+          "viewer": "Lector"
+        },
+        "fallbackRole": "Acceso desconocido",
+        "statuses": {
+          "allowed": "Permitido",
+          "blocked": "No permitido"
+        },
+        "capabilities": {
+          "projectEdit": "Modificación del proyecto",
+          "invitation": "Invitación",
+          "roleManagement": "Cambio de rol",
+          "renameAllowed": "Puedes renombrar el proyecto.",
+          "renameBlocked": "Puedes consultar el proyecto, pero no renombrarlo.",
+          "deleteAllowed": "Puedes eliminar el proyecto.",
+          "deleteBlocked": "Solo un administrador puede eliminar el proyecto."
+        }
+      },
+      "dangerZone": {
+        "title": "Zona peligrosa",
+        "subtitle": "Eliminar borra definitivamente el proyecto y todo su contenido asociado.",
+        "description": "Esta acción no se puede deshacer. Asegúrate de que ya no necesitas los datos del proyecto antes de continuar.",
+        "adminOnly": "La eliminación del proyecto está reservada a los administradores.",
+        "readOnly": "Tu rol actual es de solo lectura."
+      },
+      "delete": {
+        "open": "Eliminar proyecto",
+        "openAriaLabel": "Abrir la confirmación de eliminación del proyecto",
+        "modalTitle": "Eliminar proyecto",
+        "modalDescription": "Escribe el nombre del proyecto para confirmar la eliminación definitiva.",
+        "confirmationLabel": "Confirmar el nombre del proyecto",
+        "confirmationPlaceholder": "Vuelve a escribir {name}",
+        "confirmationHelper": "Introduce exactamente \"{name}\" para activar la eliminación.",
+        "confirm": "Eliminar definitivamente",
+        "deleting": "Eliminando...",
+        "cancel": "Cancelar"
+      },
+      "people": {
+        "title": "Miembros e invitaciones",
+        "subtitle": "Gestiona el acceso al proyecto, los roles activos y los enlaces de invitación que siguen siendo válidos.",
+        "adminOnly": "Solo un administrador puede invitar personas, cambiar roles o eliminar a un miembro del proyecto.",
+        "advancedRolesLocked": "El rol Observador requiere el plan {plan}. Los observadores actuales siguen visibles hasta su próximo cambio de rol.",
+        "currentPlan": "Plan actual: {plan}",
+        "memberLimit": {
+          "limited": "{count}/{limit} accesos usados",
+          "unlimited": "{count} accesos usados, sin límite",
+          "reached": "Se ha alcanzado el límite de {limit} accesos para tu plan {plan}. Los miembros activos y las invitaciones pendientes cuentan en este total."
+        }
+      },
+      "members": {
+        "title": "Miembros del proyecto",
+        "subtitle": "Esta lista refleja los roles realmente activos en el proyecto.",
+        "loading": "Cargando miembros...",
+        "loadErrorTitle": "No se pueden cargar los miembros",
+        "emptyTitle": "No hay miembros para mostrar",
+        "emptyDescription": "Las personas que se unan al proyecto aparecerán aquí.",
+        "adminsCount": "{count, plural, one {# administrador} other {# administradores}}",
+        "syncing": "Sincronizando...",
+        "live": "Sincronizado",
+        "roleFieldLabel": "Rol"
+      },
+      "invitations": {
+        "title": "Invitaciones pendientes",
+        "subtitle": "Crea enlaces de acceso y sigue las invitaciones que siguen siendo válidas.",
+        "createTitle": "Crear un enlace de invitación",
+        "createDescription": "Elige el rol que tendrá la persona cuando se una al proyecto.",
+        "roleLabel": "Rol asignado",
+        "create": "Crear enlace",
+        "creating": "Creando...",
+        "copyLink": "Copiar enlace",
+        "copyLinkSuccess": "Enlace de invitación copiado",
+        "linkLabel": "Enlace de invitación",
+        "linkHelper": "Comparte este enlace antes de que caduque.",
+        "listTitle": "Enlaces activos",
+        "listDescription": "Cada enlace cuenta en la capacidad del proyecto hasta que se usa o se revoca.",
+        "loading": "Cargando invitaciones...",
+        "loadErrorTitle": "No se pueden cargar las invitaciones",
+        "emptyTitle": "No hay invitaciones pendientes",
+        "emptyDescription": "Los enlaces activos aparecerán aquí en cuanto crees uno.",
+        "activeCount": "{count, plural, one {# invitación pendiente} other {# invitaciones pendientes}}",
+        "pendingLinkTitle": "Enlace de invitación",
+        "createdAt": "Creado el {date}",
+        "expiresAt": "Caduca el {date}",
+        "revoke": "Revocar",
+        "revokeAriaLabel": "Revocar la invitación que caduca el {date}",
+        "revokeConfirm": "¿Revocar este enlace de invitación?",
+        "revokeModal": {
+          "title": "Revocar este enlace",
+          "description": "¿Seguro que quieres revocar esta invitación? El enlace ya no se podrá usar.",
+          "confirm": "Confirmar revocación",
+          "pending": "Revocando...",
+          "cancel": "Cancelar"
+        },
+        "revokeSuccess": "Invitación revocada",
+        "listAriaLabel": "Lista de invitaciones pendientes",
+        "syncing": "Sincronizando..."
+      },
+      "statusesColumns": {
+        "title": "Estados y columnas",
+        "subtitle": "Configura el orden, nombre y activación de las columnas",
+        "listAriaLabel": "Lista de columnas",
+        "fields": {
+          "enabled": {
+            "label": "Activo",
+            "ariaLabel": "Activar columna {name}"
+          },
+          "name": {
+            "label": "Nombre",
+            "placeholder": "Nombre de la columna",
+            "ariaLabel": "Renombrar columna {name}"
+          }
+        },
+        "actions": {
+          "add": "Añadir",
+          "moveUp": "Subir",
+          "moveDown": "Bajar",
+          "moveUpAriaLabel": "Subir columna {name}",
+          "moveDownAriaLabel": "Bajar columna {name}"
+        },
+        "empty": {
+          "title": "Ninguna columna",
+          "message": "Añade una columna para empezar"
+        }
+      }
+    },
+    "ticketDetail": {
+      "page": {
+        "title": "Detalle de la tarea",
+        "modalTitle": "Tarea",
+        "ticketCode": "Ref. {code}",
+        "actions": {
+          "back": "Volver",
+          "close": "Cerrar",
+          "save": "Guardar",
+          "delete": "Eliminar tarea",
+          "deleteModal": {
+            "title": "Eliminar tarea",
+            "message": "Deseas eliminar esta tarea? Esta accion no se puede deshacer.",
+            "confirm": "Eliminar definitivamente",
+            "deleting": "Eliminando..."
+          },
+          "openFullPage": "Abrir a pantalla completa"
+        },
+        "states": {
+          "errorTitle": "Tarea no encontrada",
+          "errorMessage": "Esta tarea no existe o no tienes acceso a su contenido."
+        },
+        "fields": {
+          "title": "Título",
+          "notes": "Notas",
+          "notesPlaceholder": "Añade algunas notas útiles para la familia...",
+          "status": "Estado",
+          "priority": "Prioridad",
+          "assignee": "Asignado a",
+          "dueDate": "Vencimiento",
+          "createdAt": "Creada",
+          "position": "Posición",
+          "none": "Ninguno"
+        },
+        "sections": {
+          "details": "Detalles"
+        },
+        "priority": {
+          "urgent": "Urgente",
+          "normal": "Normal",
+          "low": "Baja"
+        },
+        "comments": {
+          "title": "Comentarios",
+          "newLabel": "Añadir comentario",
+          "newPlaceholder": "Añadir un comentario...",
+          "readOnlyHint": "Los lectores no pueden publicar comentarios.",
+          "addButton": "Publicar",
+          "author": "Autor: {author}",
+          "unknownAuthor": "Usuario",
+          "editLabel": "Editar comentario",
+          "saveEdit": "Guardar",
+          "editButton": "Editar",
+          "deleteButton": "Eliminar"
+        },
+        "archived": {
+          "bannerTitle": "Tarea archivada",
+          "bannerDescription": "Esta tarea ya no aparece en el tablero activo. Puedes desarchivarla para volver a incluirla en el flujo.",
+          "unarchiveAction": "Desarchivar"
+        }
+      }
+    },
+    "recipes": {
+      "catalog": {
+        "header": {
+          "kicker": "Catálogo",
+          "title": "Todas las recetas",
+          "filteredTitle": "Resultados filtrados"
+        },
+        "summary": {
+          "availableResults": "{count} receta disponible",
+          "availableResults_other": "{count} recetas disponibles",
+          "filteredResults": "{count} receta tras los filtros",
+          "filteredResults_other": "{count} recetas tras los filtros",
+          "refreshing": "Actualizando..."
+        },
+        "filterBar": {
+          "open": "Filtrar",
+          "openAriaLabel": "Abrir los filtros del catálogo",
+          "helper": "{count} categoría de filtro disponible",
+          "helper_other": "{count} categorías de filtro disponibles",
+          "reset": "Restablecer"
+        },
+        "activeFilters": {
+          "search": "Búsqueda: {search}"
+        },
+        "empty": {
+          "kicker": "Sin resultados",
+          "title": "Ninguna receta coincide con los filtros actuales.",
+          "description": "Prueba una búsqueda más corta o quita un filtro para reabrir el catálogo.",
+          "reset": "Restablecer filtros"
+        },
+        "pagination": {
+          "loadMore": "Cargar más",
+          "loading": "Cargando...",
+          "loadingMessage": "Cargando las siguientes recetas...",
+          "loadingAriaLabel": "Cargando las siguientes recetas"
+        },
+        "card": {
+          "openRecipeAriaLabel": "Abrir la receta {title}",
+          "editRecipeAriaLabel": "Editar la receta {title}",
+          "addToQuickListAriaLabel": "Añadir {title} a la quick list",
+          "removeFromQuickListAriaLabel": "Quitar {title} de la quick list",
+          "quickListUpdateFailed": "No se pudo actualizar la quick list."
+        },
+        "sheet": {
+          "ariaLabel": "Filtros del catálogo de recetas",
+          "kicker": "Filtros",
+          "title": "Afinar el catálogo",
+          "close": "Cerrar",
+          "closeAriaLabel": "Cerrar el panel de filtros",
+          "reset": "Restablecer",
+          "apply": "Validar",
+          "applyPending": "Validar filtros",
+          "groups": {
+            "popular": {
+              "title": "Populares"
+            },
+            "type": {
+              "title": "Tipo"
+            },
+            "nutrition": {
+              "title": "Nutrición"
+            },
+            "nutriScore": {
+              "title": "Nutri-score"
+            },
+            "dietary": {
+              "title": "Hábitos alimentarios"
+            },
+            "equipment": {
+              "title": "Equipamiento"
+            },
+            "customTags": {
+              "title": "Tags añadidos"
+            }
+          },
+          "options": {
+            "popular-express": "Exprés",
+            "popular-low-calories": "Bajas en calorías",
+            "popular-boost-nutri": "Boost Nutri",
+            "popular-organic-vegetables": "Verduras BIO",
+            "popular-vegetarian": "Vegetariano",
+            "popular-gourmand": "Gourmet",
+            "type-crustaceans": "Crustáceos",
+            "type-express": "Exprés",
+            "type-family": "Familia",
+            "type-healthy": "Healthy",
+            "type-world": "Mundo",
+            "type-fish": "Pescado",
+            "type-veggie": "Veggie",
+            "type-meat": "Carne",
+            "nutrition-low-calories": "Bajo en calorías",
+            "nutrition-fibers-plus": "Fibras+",
+            "nutrition-omega-3": "Omega 3",
+            "nutrition-protein": "Proteico",
+            "nutrition-vegetables-rich": "Rico en verduras",
+            "nutri-score-a": "A",
+            "nutri-score-b": "B",
+            "nutri-score-c": "C",
+            "nutri-score-d": "D",
+            "nutri-score-e": "E",
+            "dietary-naturally-gluten-free": "Naturalmente sin gluten",
+            "equipment-two-hobs-max": "Máximo 2 fuegos",
+            "equipment-food-processor": "Compatible con robot de cocina",
+            "equipment-no-oven": "Sin horno",
+            "equipment-no-blender": "Sin batidora"
+          }
+        },
+        "toolbar": {
+          "filter": "Filtrar",
+          "filterAriaLabel": "Abrir los filtros del catálogo",
+          "quickList": "Quick list",
+          "quickListShowAriaLabel": "Mostrar la quick list",
+          "quickListHideAriaLabel": "Ocultar la quick list",
+          "addRecipe": "Añadir una receta",
+          "addRecipeAriaLabel": "Crear una nueva receta"
+        }
+      },
+      "detail": {
+        "editAction": "Editar",
+        "editRecipeAriaLabel": "Editar la receta {title}",
+        "additions": {
+          "title": "Por probar",
+          "validate": "Validar este añadido",
+          "validating": "Validando..."
+        },
+        "ingredients": {
+          "title": "Ingredientes",
+          "empty": "Todavía no hay ingredientes validados."
+        },
+        "steps": {
+          "label": "Paso {position}",
+          "empty": "Todavía no hay pasos."
+        },
+        "errors": {
+          "validateAddition": "La validación del añadido ha fallado. Inténtalo de nuevo."
+        }
+      },
+      "editor": {
+        "page": {
+          "create": {
+            "eyebrow": "Recipes / crear",
+            "title": "Crear una receta",
+            "description": "Una pantalla más directa para capturar la idea, estructurar la base y guardar la ficha correctamente."
+          },
+          "edit": {
+            "eyebrow": "Recipes / editar",
+            "title": "Editar receta",
+            "description": "Una ficha de edición legible para ajustar la base, los añadidos y los pasos sin perder el hilo."
+          },
+          "aside": {
+            "kicker": "Reglas activas",
+            "title": "Marco v1",
+            "ruleQuantities": "Cantidades estructuradas aceptadas: {formats}.",
+            "ruleUnits": "Unidades v1: {units}.",
+            "ruleFallback": "El fallback conserva `amountText` si la cantidad sigue siendo libre.",
+            "ruleReorder": "La reorganización sigue siendo simple con los botones subir / bajar."
+          }
+        },
+        "header": {
+          "kicker": "Ficha de receta",
+          "createMode": "Creación",
+          "editMode": "Edición",
+          "localDraftBadge": "Borrador local",
+          "localDraftHelper": "Pulsa el botón \"Crear receta\" al final de la página para guardarla.",
+          "descriptionCreate": "Empieza por el título y después completa los bloques útiles, como en la pantalla de actualización de una tarea.",
+          "descriptionEdit": "Ajusta la receta bloque por bloque con la misma lectura compacta que en la pantalla de actualización de una tarea."
+        },
+        "meta": {
+          "servings": "Raciones",
+          "time": "Tiempo",
+          "image": "Imagen",
+          "tags": "Tags",
+          "validatedIngredients": "Base",
+          "additionIngredients": "Añadidos",
+          "steps": "Pasos",
+          "servingsFallback": "Por definir",
+          "servingsWithCount": "{count} raciones",
+          "timeFallback": "Por estimar",
+          "timeWithCount": "{count} min",
+          "imageReady": "Indicada",
+          "imageEmpty": "Opcional"
+        },
+        "sections": {
+          "identity": {
+            "kicker": "Identidad",
+            "title": "Las pistas que hacen reconocible la receta",
+            "description": "El título se mantiene visible arriba y después completamos la imagen, el tiempo, las raciones y el resumen."
+          },
+          "tags": {
+            "kicker": "Tags",
+            "title": "Tags del proyecto, sin duplicados",
+            "description": "Las sugerencias reutilizan los tags ya usados y el slug evita repeticiones.",
+            "empty": "Todavía no hay ningún tag seleccionado."
+          },
+          "validatedIngredients": {
+            "kicker": "Ingredientes",
+            "title": "La base estable de la receta",
+            "description": "Cantidades estructuradas aceptadas: {formats}. Unidades v1: {units}.",
+            "empty": "Todavía no hay ningún ingrediente.",
+            "rowLabel": "Ingrediente {position}",
+            "nameLabel": "Ingrediente"
+          },
+          "additionIngredients": {
+            "kicker": "Añadidos",
+            "title": "Variaciones por probar sin ensuciar la base",
+            "description": "Los añadidos siguen siendo persistentes, pero claramente identificados como hipótesis o variaciones.",
+            "empty": "Todavía no hay ningún ingrediente.",
+            "rowLabel": "Ingrediente {position}",
+            "nameLabel": "Ingrediente"
+          },
+          "steps": {
+            "kicker": "Pasos",
+            "title": "Una secuencia de bloques cortos y fáciles de retomar",
+            "description": "Cada paso mantiene una instrucción clara y una referencia opcional para releer mejor.",
+            "empty": "Todavía no hay ningún paso.",
+            "rowLabel": "Paso {position}",
+            "instructionPlaceholder": "Describe la acción que hay que hacer…",
+            "metaPlaceholder": "Salsa, horno, 10 min…"
+          },
+          "note": {
+            "kicker": "Nota",
+            "title": "El retorno de prueba o el recordatorio personal",
+            "description": "Opcional, pero útil para conservar una decisión después de probar."
+          },
+          "summary": {
+            "kicker": "Resumen",
+            "title": "Revisar antes de guardar",
+            "description": "Una vista rápida de la ficha tal y como se releerá después."
+          }
+        },
+        "fields": {
+          "title": {
+            "label": "Título",
+            "placeholder": "Pollo al limón y arroz pilaf"
+          },
+          "coverImageUrl": {
+            "label": "Imagen",
+            "placeholder": "https://...",
+            "helper": "Pega la dirección de una imagen en línea o sube una."
+          },
+          "servingsCount": {
+            "label": "Raciones",
+            "placeholder": "2"
+          },
+          "totalTimeMinutes": {
+            "label": "Tiempo estimado",
+            "placeholder": "35",
+            "helper": "En minutos."
+          },
+          "summary": {
+            "label": "Resumen",
+            "helper": "Una o dos líneas para reconocer la receta rápido."
+          },
+          "note": {
+            "label": "Nota de receta",
+            "helper": "Opcional. Útil para conservar un arbitraje después de probar."
+          },
+          "tagDraft": {
+            "label": "Nuevo tag",
+            "placeholder": "Rápida"
+          },
+          "ingredientAmount": {
+            "label": "Cantidad"
+          },
+          "ingredientUnit": {
+            "label": "Unidad",
+            "options": {
+              "none": "Sin unidad",
+              "g": "g",
+              "kg": "kg",
+              "ml": "ml",
+              "cl": "cl",
+              "l": "l",
+              "piece": "pieza",
+              "botte": "manojo",
+              "cs": "cda",
+              "cc": "cdta"
+            }
+          },
+          "ingredientNotes": {
+            "label": "Nota"
+          },
+          "stepInstruction": {
+            "label": "Instrucción"
+          },
+          "stepMeta": {
+            "label": "Referencia"
+          }
+        },
+        "actions": {
+          "close": "Cerrar",
+          "backToCatalog": "Volver al catálogo",
+          "backToRecipe": "Volver a la receta",
+          "addTag": "Añadir",
+          "addValidatedIngredient": "Añadir",
+          "addAdditionIngredient": "Añadir",
+          "addStep": "Añadir",
+          "uploadCover": "Subir imagen",
+          "replaceCover": "Reemplazar imagen",
+          "uploadingCover": "Subiendo...",
+          "moveUp": "Subir",
+          "moveDown": "Bajar",
+          "remove": "Eliminar",
+          "removeTagAriaLabel": "Quitar {label}",
+          "moveUpItemAriaLabel": "Subir {label} {position}",
+          "moveDownItemAriaLabel": "Bajar {label} {position}",
+          "removeItemAriaLabel": "Eliminar {label} {position}",
+          "saveCreate": "Crear receta",
+          "saveEdit": "Guardar cambios",
+          "saving": "Guardando..."
+        },
+        "labels": {
+          "validatedIngredient": "el ingrediente",
+          "additionIngredient": "el añadido",
+          "step": "el paso"
+        },
+        "summary": {
+          "untitled": "Receta sin título",
+          "noTags": "Ningún tag seleccionado.",
+          "validatedIngredients": "{count} ingrediente validado",
+          "validatedIngredients_other": "{count} ingredientes validados",
+          "additionIngredients": "{count} añadido",
+          "additionIngredients_other": "{count} añadidos",
+          "steps": "{count} paso",
+          "steps_other": "{count} pasos"
+        },
+        "errors": {
+          "missingId": "La receta se ha guardado sin un identificador usable.",
+          "saveFailed": "No se puede guardar la receta ahora mismo.",
+          "coverUploadFailed": "No se puede subir la imagen ahora mismo.",
+          "coverUploadTooLarge": "La imagen es demasiado pesada.",
+          "coverUploadInvalidType": "Formato de imagen no compatible."
+        }
+      },
+      "quickListSummary": {
+        "kicker": "Quick list",
+        "titleEmpty": "Visible incluso vacía",
+        "titleFilled": "Comidas previstas para la semana",
+        "copyEmpty": "La quick list mantiene su lugar en el recorrido, incluso antes de la primera selección.",
+        "copyFilled": "El resumen mantiene las recetas activas legibles desde las otras pantallas del módulo.",
+        "emptyNote": "Todavía no hay ninguna receta activa.",
+        "open": "Abrir la quick list",
+        "activeBadge": "Activa",
+        "defaultNote": "Receta guardada para una próxima comida."
+      }
+    },
+    "account": {
+      "header": {
+        "label": "Configuración 🔧",
+        "title": "Mi cuenta",
+        "subtitle": "Gestiona tu información personal y preferencias"
+      },
+      "personalInfo": {
+        "title": "Información personal",
+        "description": "Actualiza tu nombre y email",
+        "icon": "👤",
+        "fields": {
+          "name": {
+            "label": "Nombre completo",
+            "placeholder": "Tu nombre"
+          },
+          "email": {
+            "label": "Dirección de email",
+            "placeholder": "tu.email@ejemplo.com"
+          }
+        },
+        "saveButton": "Guardar cambios",
+        "saveButtonAriaLabel": "Guardar cambios del perfil",
+        "savingButton": "Guardando..."
+      },
+      "security": {
+        "title": "Seguridad",
+        "description": "Cambia tu contraseña",
+        "icon": "🔒",
+        "fields": {
+          "currentPassword": {
+            "label": "Contraseña actual",
+            "placeholder": "••••••••"
+          },
+          "newPassword": {
+            "label": "Nueva contraseña",
+            "placeholder": "••••••••"
+          },
+          "confirmPassword": {
+            "label": "Confirmar contraseña",
+            "placeholder": "••••••••"
+          }
+        },
+        "changeButton": "Cambiar contraseña",
+        "changeButtonAriaLabel": "Cambiar contraseña",
+        "changingButton": "Cambiando...",
+        "oauthNotice": "Esta cuenta usa inicio de sesión OAuth. La actualización de contraseña no está disponible desde Tribu Nova."
+      },
+      "preferences": {
+        "title": "Preferencias",
+        "description": "Personaliza tu experiencia",
+        "icon": "🎨",
+        "emailNotifications": {
+          "label": "Notificaciones por email",
+          "description": "Recibir emails sobre la actividad de tus workspaces"
+        },
+        "theme": {
+          "label": "Tema",
+          "description": "Elige la apariencia de la interfaz",
+          "options": {
+            "light": "Claro",
+            "dark": "Oscuro",
+            "system": "Sistema"
+          }
+        },
+        "language": {
+          "label": "Idioma",
+          "description": "Elige tu idioma preferido"
+        },
+        "languageOptions": {
+          "fr": "Français",
+          "en": "English",
+          "es": "Español"
+        }
+      },
+      "subscription": {
+        "title": "Mi suscripción",
+        "description": "Gestiona tu plan y facturación",
+        "icon": "💳",
+        "currentPlan": "Plan actual",
+        "planLabels": {
+          "free": "Gratuito",
+          "pro": "Foyer",
+          "team": "Foyer Plus"
+        },
+        "statusLabels": {
+          "active": "Activo",
+          "canceled": "Cancelado",
+          "past_due": "Pago pendiente",
+          "trialing": "Periodo de prueba"
+        },
+        "periodEnd": "Renovación el {date}",
+        "cancelAtPeriodEnd": "Tu suscripción se cancelará al final del periodo actual",
+        "manageButton": "Gestionar mi suscripción",
+        "manageButtonAriaLabel": "Abrir el portal de gestión de suscripción de Stripe",
+        "changePlanButton": "Cambiar de plan",
+        "changePlanButtonAriaLabel": "Ver otros planes disponibles",
+        "superuser": {
+          "badge": "Super Usuario",
+          "description": "Acceso completo a todas las funcionalidades"
+        }
+      },
+      "dangerZone": {
+        "title": "Zona de peligro",
+        "description": "Acciones irreversibles",
+        "icon": "⚠️",
+        "deleteAccount": {
+          "label": "Eliminar mi cuenta",
+          "description": "Esta acción es definitiva y eliminará todos tus datos"
+        },
+        "deleteButton": "Eliminar cuenta",
+        "deleteButtonAriaLabel": "Eliminar la cuenta de forma definitiva",
+        "deletingButton": "Eliminando...",
+        "confirmTitle": "Confirmar eliminación",
+        "confirmMessage": "¿Seguro que quieres eliminar tu cuenta? Esta acción es irreversible y eliminará definitivamente todos tus datos.",
+        "confirmButton": "Sí, eliminar mi cuenta",
+        "confirmButtonAriaLabel": "Confirmar eliminación de la cuenta",
+        "cancelButton": "Cancelar"
+      },
+      "signOut": {
+        "title": "Sesión",
+        "description": "Gestiona tu sesión activa",
+        "icon": "🚪",
+        "label": "Cerrar sesión",
+        "descriptionText": "Serás redirigido a la página de inicio",
+        "button": "Cerrar sesión",
+        "buttonAriaLabel": "Cerrar sesión de tu cuenta",
+        "pendingButton": "Cerrando sesión..."
+      },
+      "success": {
+        "profileUpdated": "Perfil actualizado correctamente",
+        "passwordChanged": "Contraseña cambiada correctamente",
+        "preferencesUpdated": "Preferencias guardadas"
+      },
+      "validation": {
+        "passwordMinLength": "La contraseña debe tener al menos 6 caracteres",
+        "passwordMaxLength": "La contraseña debe tener menos de 100 caracteres",
+        "confirmPasswordRequired": "Confirma tu contraseña",
+        "passwordsDoNotMatch": "Las contraseñas no coinciden",
+        "currentPasswordRequired": "La contraseña actual es obligatoria"
+      }
+    },
+    "landing": {
+      "hero": {
+        "brandPill": "✨ Tribu Nova • Organizacion familiar premium",
+        "logoAriaLabel": "Logo de Tribu Nova",
+        "title": "La vida familiar funciona mejor cuando todo esta claro.",
+        "subtitle": "Un espacio compartido para coordinar tareas, citas y proyectos del hogar sin sobrecarga mental constante.",
+        "proofNoCard": "Sin tarjeta bancaria",
+        "proofFreeStart": "Configuracion en 2 minutos",
+        "proofCancelAnytime": "Pensado para padres e hijos",
+        "ctaSignUp": "Crear mi espacio familiar",
+        "ctaSignIn": "Iniciar sesión",
+        "ctaPreview": "Ver vista previa"
+      },
+      "values": {
+        "title": "Organizacion que sigue siendo humana",
+        "simplicity": {
+          "icon": "🧭",
+          "title": "Una direccion comun",
+          "description": "Todo el hogar ve las prioridades de la semana en un solo lugar."
+        },
+        "clarity": {
+          "icon": "🗓️",
+          "title": "Rutinas visibles",
+          "description": "Compra, escuela, casa, administracion: todos saben que esta en marcha."
+        },
+        "control": {
+          "icon": "🫶",
+          "title": "Carga mejor repartida",
+          "description": "Asignad responsabilidades con claridad para evitar recordatorios constantes."
+        }
+      },
+      "features": {
+        "title": "Casos de uso practicos para el dia a dia familiar",
+        "board": {
+          "icon": "🧺",
+          "title": "Rutinas del hogar",
+          "description": "Repartid tareas recurrentes para que la casa funcione sin sobrecarga."
+        }
+      },
+      "impact": {
+        "title": "Beneficios visibles desde los primeros dias",
+        "description": "Una estructura simple para ahorrar tiempo y reducir la carga mental familiar.",
+        "time": {
+          "value": "Tiempo recuperado",
+          "title": "Menos coordinacion de ultima hora",
+          "description": "Todo queda centralizado y se evitan cadenas interminables de mensajes."
+        },
+        "alignment": {
+          "value": "Responsabilidades claras",
+          "title": "Cada persona sabe que hacer",
+          "description": "Las tareas se reparten de forma visible y equilibrada."
+        },
+        "serenity": {
+          "value": "Serenidad estable",
+          "title": "Menos olvidos y menos tension",
+          "description": "La semana fluye mejor, incluso cuando hay mucho por hacer."
+        }
+      },
+      "rhythm": {
+        "title": "Un ritmo familiar simple en 3 pasos",
+        "capture": {
+          "icon": "🧩",
+          "title": "Capturar",
+          "description": "Anadid una tarea o idea en cuanto aparezca."
+        },
+        "plan": {
+          "icon": "🗓️",
+          "title": "Planificar",
+          "description": "Decidid juntos quien se encarga de cada cosa esta semana."
+        },
+        "act": {
+          "icon": "✨",
+          "title": "Avanzar",
+          "description": "Seguid lo completado y ajustad sin estres."
+        }
+      },
+      "trust": {
+        "title": "Disenado para la vida familiar real",
+        "description": "Tribu Nova transforma conversaciones familiares en acciones claras con una vision compartida del dia a dia.",
+        "freeForeverIcon": "👀",
+        "freeForever": "Visibilidad clara para todo el hogar",
+        "noCreditCardIcon": "🤝",
+        "noCreditCard": "Responsabilidades explicitas y justas",
+        "noComplexityIcon": "🌿",
+        "noComplexity": "Menos friccion y mas calma"
+      },
+      "examples": {
+        "title": "Vista previa de una semana real",
+        "columns": {
+          "todo": "Por hacer",
+          "in_progress": "En curso",
+          "inProgress": "En curso",
+          "done": "Hecho"
+        },
+        "board": {
+          "title": "Rutinas del hogar",
+          "description": "Reparte rutinas para evitar sobrecarga silenciosa.",
+          "todo1": "Poner lavadora de la tarde",
+          "todo2": "Preparar mochilas del cole",
+          "in_progress1": "Recoger cocina",
+          "inProgress1": "Recoger cocina",
+          "done1": "Sacar la basura"
+        }
+      },
+      "cta": {
+        "title": "Pasa de la carga constante a un flujo familiar claro",
+        "description": "Unete a Tribu Nova y organiza el dia a dia familiar con mas claridad y calma.",
+        "button": "Empezar gratis"
+      },
+      "footer": {
+        "ariaLabel": "Enlaces del pie de página",
+        "legal": "Aviso legal",
+        "pricing": "Precios"
+      }
+    },
+    "legal": {
+      "metadata": {
+        "title": "Aviso legal",
+        "description": "Información legal, privacidad y condiciones de uso del servicio Tribu Nova."
+      },
+      "header": {
+        "label": "Volver",
+        "title": "Aviso legal",
+        "subtitle": "Información requerida por la legislación vigente"
+      },
+      "sections": {
+        "editor": {
+          "icon": "🏢",
+          "title": "Editor del sitio",
+          "description": "Información sobre el editor de la plataforma",
+          "appName": "Tribu Nova",
+          "appDescription": "Tribu Nova es una aplicación de gestión familiar editada a título personal.",
+          "contact": "Contacto: contact@tribunova.app",
+          "hosting": "Alojamiento: Vercel Inc. — 340 S Lemon Ave #4133, Walnut, CA 91789, Estados Unidos"
+        },
+        "intellectualProperty": {
+          "icon": "©️",
+          "title": "Propiedad intelectual",
+          "description": "Derechos de autor y propiedad del contenido",
+          "content": "Todo el contenido de Tribu Nova (textos, interfaces, código fuente, logotipos, elementos gráficos) está protegido por derechos de autor. Queda prohibida cualquier reproducción, representación o difusión, total o parcial, sin autorización previa."
+        },
+        "dataProtection": {
+          "icon": "🔒",
+          "title": "Protección de datos personales",
+          "description": "Cumplimiento del RGPD y gestión de tus datos",
+          "intro": "De conformidad con el Reglamento General de Protección de Datos (RGPD), dispones de los siguientes derechos:",
+          "rights": {
+            "access": "Derecho de acceso a tus datos personales",
+            "rectification": "Derecho de rectificación de datos inexactos",
+            "deletion": "Derecho de supresión de tus datos",
+            "portability": "Derecho a la portabilidad de tus datos"
+          },
+          "collectedData": "Datos recogidos: dirección de email, nombre para mostrar, preferencias de usuario.",
+          "purpose": "Finalidad: autenticación, personalización de la experiencia y funcionamiento del servicio.",
+          "retention": "Plazo de conservación: tus datos se conservan mientras tu cuenta esté activa. Se eliminan a petición.",
+          "exerciseRights": "Para ejercer tus derechos, contáctanos en: contact@tribunova.app"
+        },
+        "cookies": {
+          "icon": "🍪",
+          "title": "Cookies",
+          "description": "Uso de cookies en la plataforma",
+          "content": "Tribu Nova utiliza únicamente cookies estrictamente necesarias para el funcionamiento del servicio (autenticación, sesión de usuario). No se utilizan cookies publicitarias ni de seguimiento. Estas cookies son esenciales y no requieren consentimiento previo."
+        },
+        "liability": {
+          "icon": "⚖️",
+          "title": "Responsabilidad",
+          "description": "Limitaciones de responsabilidad del editor",
+          "content": "El editor se esfuerza por ofrecer un servicio fiable y disponible. Sin embargo, no puede ser considerado responsable de interrupciones del servicio, pérdidas de datos o daños indirectos derivados del uso de la plataforma. El servicio se ofrece «tal cual», sin garantía de ningún tipo."
+        },
+        "applicableLaw": {
+          "icon": "📜",
+          "title": "Legislación aplicable",
+          "description": "Jurisdicción y ley aplicable",
+          "content": "El presente aviso legal se rige por la legislación francesa. En caso de litigio, los tribunales franceses serán los únicos competentes."
+        }
+      },
+      "lastUpdated": "Última actualización: febrero de 2026"
+    },
+    "pricing": {
+      "metadata": {
+        "title": "Precios",
+        "description": "Descubre los planes de Tribu Nova: Gratuito, Foyer y Foyer Plus — pensados para parejas y familias que quieren aligerar la carga mental."
+      },
+      "header": {
+        "label": "Volver",
+        "title": "Nuestros precios",
+        "subtitle": "Planes sencillos para parejas y familias que organizan el día a día juntas"
+      },
+      "billing": {
+        "monthly": "Facturación mensual",
+        "yearly": "Facturación anual",
+        "yearlyDiscount": "Ahorra un 20%",
+        "perMonth": "/mes",
+        "free": "Gratuito"
+      },
+      "plans": {
+        "free": {
+          "name": "Gratuito",
+          "description": "Para descubrir Tribu Nova y organizar la vida en casa juntos",
+          "price": "0€",
+          "cta": "Empezar gratis",
+          "ctaAriaLabel": "Crear una cuenta gratuita"
+        },
+        "pro": {
+          "name": "Foyer",
+          "description": "Para parejas que quieren repartir mejor la carga mental y las rutinas",
+          "price": "3,99€",
+          "cta": "Pasar a Foyer",
+          "ctaAriaLabel": "Suscribirse al plan Foyer",
+          "badge": "Popular"
+        },
+        "team": {
+          "name": "Foyer Plus",
+          "description": "Para hogares amplios y coparentalidad con más coordinación",
+          "price": "8,99€",
+          "cta": "Elegir Foyer Plus",
+          "ctaAriaLabel": "Suscribirse al plan Foyer Plus"
+        },
+        "currentBadge": "Activo"
+      },
+      "comparison": {
+        "title": "Comparación detallada de los planes",
+        "featuresColumn": "Incluido en el plan"
+      },
+      "features": {
+        "projectsPerAccount": "Proyectos por cuenta",
+        "workspaces": "Proyectos por cuenta",
+        "membersPerWorkspace": "Miembros por espacio",
+        "tickets": "Tickets",
+        "boardView": "Vista Tablero",
+        "customColumns": "Columnas personalizadas",
+        "advancedRoles": "Roles avanzados (observador)",
+        "prioritySupport": "Soporte prioritario"
+      },
+      "values": {
+        "one": "1",
+        "two": "2",
+        "four": "4",
+        "three": "3",
+        "five": "5",
+        "twenty": "20",
+        "hundred": "100",
+        "ten": "10",
+        "twentyFive": "25",
+        "fifty": "50",
+        "threeColumns": "3 columnas fijas (sin personalizacion)",
+        "unlimited": "Ilimitado",
+        "included": "Incluido",
+        "notIncluded": "No incluido"
+      },
+      "faq": {
+        "title": "Preguntas frecuentes",
+        "items": {
+          "cancel": {
+            "question": "¿Puedo cancelar en cualquier momento?",
+            "answer": "Sí, puedes cancelar tu suscripción en cualquier momento. Mantendrás el acceso hasta el final del periodo actual."
+          },
+          "upgrade": {
+            "question": "¿Puedo cambiar de plan?",
+            "answer": "Puedes pasar a un plan superior en cualquier momento. El cambio se aplica de inmediato y la diferencia se calcula de forma proporcional."
+          },
+          "data": {
+            "question": "¿Qué pasa con mis datos si vuelvo al plan gratuito?",
+            "answer": "Tus datos se conservan. Si superas los límites del plan gratuito, podrás consultar tus proyectos existentes pero no podrás crear nuevos."
+          },
+          "payment": {
+            "question": "¿Qué métodos de pago aceptan?",
+            "answer": "Aceptamos tarjetas bancarias (Visa, Mastercard) y adeudos directos SEPA."
+          }
+        }
+      },
+      "guarantee": {
+        "title": "Garantía de satisfacción",
+        "description": "Prueba Tribu Nova Foyer o Foyer Plus durante 14 días. Si no estás satisfecho, te devolvemos el importe íntegro."
+      },
+      "trust": {
+        "title": "Premium, con expectativas claras",
+        "item1": "Versión gratuita sólida para empezar sin fricción.",
+        "item2": "Funciones premium solo cuando realmente las necesites.",
+        "item3": "Precios transparentes, sin costes ocultos."
+      },
+      "cta": {
+        "currentPlan": "Plan actual",
+        "upgrade": "Pasar a {plan}",
+        "downgrade": "Cambiar a {plan}",
+        "downgradeFree": "Cambiar a Gratuito",
+        "signUpFirst": "Crear una cuenta",
+        "superuserFullAccess": "Acceso completo",
+        "manageBilling": "Gestionar facturación"
+      }
+    },
+    "members": {
+      "title": "Miembros del proyecto",
+      "listAriaLabel": "Lista de miembros del proyecto",
+      "you": "tú",
+      "remove": "Eliminar",
+      "removeAriaLabel": "Eliminar a {name} del proyecto",
+      "changeRoleAriaLabel": "Cambiar el rol de {name}",
+      "role": {
+        "admin": "Administrador",
+        "member": "Miembro",
+        "viewer": "Lector"
+      },
+      "removeConfirm": "¿Eliminar a {name} de este proyecto?",
+      "removeModal": {
+        "title": "Eliminar a este miembro",
+        "description": "¿Seguro que quieres eliminar a {name} del proyecto?",
+        "confirm": "Confirmar eliminación",
+        "pending": "Eliminando...",
+        "cancel": "Cancelar"
+      },
+      "removeSuccess": "Miembro eliminado del proyecto",
+      "roleUpdateSuccess": "Rol actualizado",
+      "lastAdminError": "No se puede eliminar al último administrador",
+      "emptyState": "No hay miembros en este proyecto"
+    },
+    "upgrade": {
+      "title": "Función reservada al plan {plan}",
+      "description": "Esta función no está disponible en tu plan actual. Cambia al plan {plan} para desbloquearla.",
+      "ctaLabel": "Ver planes",
+      "ctaAriaLabel": "Ver planes y mejorar tu suscripción",
+      "featureNames": {
+        "advancedRoles": "Roles avanzados",
+        "workspaces": "Proyectos por cuenta",
+        "membersPerWorkspace": "Miembros por espacio",
+        "tickets": "Tickets",
+        "customColumns": "Columnas personalizadas"
+      },
+      "planBadges": {
+        "free": "Gratis",
+        "pro": "Foyer",
+        "team": "Foyer Plus"
+      }
+    }
+  },
+  "forms": {
+    "invitation": {
+      "title": "Invitar a un miembro",
+      "ariaLabel": "Formulario de invitación",
+      "emailLabel": "Dirección de email",
+      "emailPlaceholder": "nombre@ejemplo.com",
+      "emailAriaLabel": "Dirección de email del miembro a invitar",
+      "roleLabel": "Rol",
+      "roleAriaLabel": "Rol a asignar al miembro invitado",
+      "role": {
+        "admin": "Administrador",
+        "member": "Miembro",
+        "viewer": "Lector"
+      },
+      "send": "Enviar invitación",
+      "sending": "Enviando...",
+      "sendAriaLabel": "Enviar invitación",
+      "cancel": "Cancelar",
+      "inviteSuccess": "Invitación enviada",
+      "inviteError": "No se pudo enviar la invitación",
+      "limitReached": "Límite de miembros alcanzado para tu plan",
+      "pending": {
+        "title": "Invitaciones pendientes",
+        "ariaLabel": "Lista de invitaciones pendientes",
+        "invitedBy": "Invitado por {name}",
+        "accept": "Aceptar",
+        "acceptAriaLabel": "Aceptar la invitación para {project}",
+        "decline": "Rechazar",
+        "declineAriaLabel": "Rechazar la invitación para {project}",
+        "acceptSuccess": "Invitación aceptada",
+        "declineSuccess": "Invitación rechazada",
+        "role": {
+          "admin": "Administrador",
+          "member": "Miembro",
+          "viewer": "Lector"
+        }
+      }
+    }
+  },
+  "errors": {
+    "generic": "Se ha producido un error",
+    "retry": "Reintentar",
+    "retryAriaLabel": "Reintentar la operación",
+    "auth": {
+      "INVALID_CREDENTIALS": "Email o contraseña no válidos",
+      "EMAIL_ALREADY_EXISTS": "Esta dirección de email ya está en uso",
+      "WEAK_PASSWORD": "La contraseña no cumple los requisitos de seguridad",
+      "INVALID_EMAIL": "Dirección de email no válida",
+      "AUTHENTICATION_ERROR": "Se ha producido un error de autenticación",
+      "EMAIL_VERIFICATION_ERROR": "Se ha producido un error al verificar el email",
+      "PASSWORD_RESET_ERROR": "Se ha producido un error al restablecer la contraseña",
+      "INVALID_TOKEN": "El enlace no es válido o ha caducado. Solicita uno nuevo",
+      "SAME_PASSWORD": "La nueva contraseña debe ser diferente de la actual",
+      "PASSWORD_UPDATE_NOT_ALLOWED": "Esta cuenta usa un proveedor de acceso externo. La actualización de contraseña no está disponible."
+    },
+    "repository": {
+      "NOT_FOUND": "Recurso no encontrado",
+      "NOT_FOUND_WITH_ENTITY": "{entityType} con ID {entityId} no encontrado",
+      "CONSTRAINT_VIOLATION": "Se ha violado una restricción de la base de datos",
+      "DATABASE_ERROR": "Se ha producido un error de base de datos"
+    },
+    "domain": {
+      "TICKET_PROJECT_MISMATCH": "El ticket no pertenece al mismo proyecto",
+      "LAST_ADMIN_REQUIRED": "El proyecto debe conservar al menos un administrador",
+      "MEMBER_ROLE_CHANGE_ADMIN_REQUIRED": "Solo un administrador puede cambiar el rol de un miembro del proyecto",
+      "INVITATION_ALREADY_USED": "Este enlace de invitacion ya no esta disponible",
+      "INVITATION_EXPIRED": "Este enlace de invitacion ha caducado",
+      "INVITATION_ALREADY_MEMBER": "Ya formas parte de este proyecto",
+      "INVITATION_LIMIT_REACHED": "Tu plan actual no permite mas miembros activos o enlaces de invitacion en este espacio",
+      "INVALID_COLUMN_ORDER": "Orden de columnas no válido",
+      "DUPLICATE_COLUMN_KEY": "Clave de columna duplicada",
+      "INVALID_BOARD_COLUMN_RELATIONSHIP": "La columna no pertenece al tablero especificado",
+      "MIXED_BOARD_COLUMNS": "Columnas de varios tableros mezcladas",
+      "MISSING_DONE_COLUMN": "El tablero debe tener al menos una columna terminal visible",
+      "COLUMN_IN_USE": "No se puede eliminar esta columna mientras tenga tareas",
+      "UPDATE_CREDENTIALS_NO_FIELDS": "Indica al menos un correo nuevo o una contraseña nueva"
+    },
+    "infra": {
+      "avatarFileTooLarge": "El archivo es demasiado grande para procesarlo",
+      "avatarInvalidMimeType": "Formato no admitido. Usa JPEG, PNG o WebP",
+      "avatarProcessingFailed": "No se pudo preparar la imagen. Prueba con otro archivo.",
+      "stripeWebhookNotConfigured": "Los pagos en línea no están configurados correctamente. Contacta con soporte.",
+      "billingNoCustomer": "No hay cuenta de facturación vinculada a tu perfil.",
+      "boardInvalidColumnWorkflowState": "Datos de columna incoherentes. Actualiza la página.",
+      "googleOauthNotAvailable": "El inicio de sesión con Google no está disponible ahora.",
+      "deleteAccountFailed": "No se pudo eliminar la cuenta. Inténtalo más tarde."
+    },
+    "stripe": {
+      "checkoutFailed": "No se pudo iniciar el proceso de pago. Inténtalo de nuevo.",
+      "portalFailed": "No se pudo acceder a la gestión de la suscripción. Inténtalo de nuevo.",
+      "checkoutSuccess": "¡Pago exitoso! Tu suscripción está activa.",
+      "notAuthenticated": "Debes iniciar sesión para realizar esta acción."
+    }
+  },
+  "ui": {
+    "assigneePicker": {
+      "ariaLabel": "Selección de asignados",
+      "noAssignee": "Sin asignar",
+      "assign": "Asignar",
+      "assignAriaLabel": "Abrir el selector de asignados",
+      "memberListAriaLabel": "Lista de miembros disponibles"
+    },
+    "draggableItem": {
+      "ariaLabel": "Elemento arrastrable {id}"
+    },
+    "avatarUpload": {
+      "ariaLabel": "Gestión del avatar",
+      "upload": "Añadir avatar",
+      "uploadAriaLabel": "Añadir foto de perfil",
+      "change": "Cambiar",
+      "changeAriaLabel": "Cambiar la foto de perfil",
+      "remove": "Eliminar",
+      "removeAriaLabel": "Eliminar la foto de perfil",
+      "selectFile": "Seleccionar un archivo de imagen",
+      "hint": "JPEG, PNG o WebP.",
+      "uploadSuccess": "Foto de perfil actualizada",
+      "removeSuccess": "Foto de perfil eliminada",
+      "errorTooLarge": "El archivo es demasiado grande para procesarlo",
+      "errorInvalidType": "Formato no soportado. Usa JPEG, PNG o WebP",
+      "errorProcessing": "No se pudo preparar la imagen. Prueba con otro archivo."
+    }
+  }
+}

@@ -1,0 +1,34 @@
+@use "@/styles/variables/a11y" as *;
+@use "@/styles/variables/animations" as *;
+@use "@/styles/variables/borders" as *;
+@use "@/styles/variables/colors" as *;
+@use "@/styles/variables/spacing" as *;
+@use "@/styles/variables/typography" as *;
+
+.skip-link {
+  position: absolute;
+  left: $a11y-offscreen-left;
+  top: $spacing-sm;
+  z-index: $a11y-skip-link-z-index;
+  padding: $spacing-sm $spacing-md;
+
+  background-color: $color-primary;
+  color: $color-primary-text;
+
+  border: $border-width solid $color-border;
+  border-radius: $border-radius-md;
+
+  font-family: $font-family-sans;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  text-decoration: none;
+
+  transition: left $transition-base;
+
+  &:focus,
+  &:focus-visible {
+    left: $spacing-sm;
+    outline: $border-width-thick solid $color-focus;
+    outline-offset: $spacing-xs;
+  }
+}

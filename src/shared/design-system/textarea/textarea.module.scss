@@ -1,0 +1,102 @@
+@use "@/styles/variables/colors" as *;
+@use "@/styles/variables/spacing" as *;
+@use "@/styles/variables/typography" as *;
+@use "@/styles/variables/borders" as *;
+@use "@/styles/variables/animations" as *;
+@use "@/styles/variables/shadows" as *;
+
+.textarea-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.textarea-label {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  line-height: $line-height-normal;
+  color: $color-text;
+}
+
+.textarea-label--required::after {
+  content: " *";
+  color: $color-error;
+}
+
+.textarea {
+  width: 100%;
+  padding: $spacing-input-padding-y $spacing-input-padding-x;
+  border: $border-width solid $color-border;
+  border-radius: $border-radius-input;
+  font-size: $font-size-base;
+  line-height: $line-height-normal;
+  color: $color-text;
+  background-color: $color-secondary;
+  font-family: inherit;
+  transition: $transition-border, $transition-shadow;
+  resize: vertical;
+
+  &:focus {
+    outline: none;
+    border-color: $color-focus;
+    box-shadow: $shadow-focus;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: $color-disabled-background;
+    color: $color-disabled-text;
+    border-color: $color-border;
+  }
+
+  &::placeholder {
+    color: $color-disabled-text;
+  }
+
+  &[aria-invalid="true"] {
+    border-color: $color-error;
+  }
+
+  &[aria-invalid="true"]:focus {
+    border-color: $color-error;
+    box-shadow: $shadow-focus-error;
+  }
+}
+
+.textarea--resize-none {
+  resize: none;
+}
+
+.textarea--resize-both {
+  resize: both;
+}
+
+.textarea--resize-vertical {
+  resize: vertical;
+}
+
+.textarea--resize-horizontal {
+  resize: horizontal;
+}
+
+.textarea-char-count {
+  font-size: $font-size-xs;
+  line-height: $line-height-normal;
+  color: $color-text-secondary;
+  text-align: right;
+  margin-top: -$spacing-xs;
+}
+
+.textarea-error {
+  font-size: $font-size-sm;
+  line-height: $line-height-normal;
+  color: $color-error;
+  margin-top: $spacing-xs;
+}
+
+.textarea-helper {
+  font-size: $font-size-sm;
+  line-height: $line-height-normal;
+  color: $color-text-secondary;
+  margin-top: $spacing-xs;
+}

@@ -1,0 +1,37 @@
+@use "@/styles/variables/colors" as *;
+@use "@/styles/variables/spacing" as *;
+@use "@/styles/variables/typography" as *;
+
+.empty-state {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-2xl;
+  text-align: center;
+  gap: $spacing-md;
+}
+
+.empty-state__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-text-secondary;
+  margin-bottom: $spacing-sm;
+}
+
+.empty-state__title {
+  color: $color-text;
+  margin: 0;
+}
+
+.empty-state__message {
+  color: $color-text-secondary;
+  margin: 0;
+  max-width: $spacing-empty-state-max-width;
+}
+
+.empty-state__action {
+  margin-top: $spacing-sm;
+}

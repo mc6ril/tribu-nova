@@ -1,0 +1,26 @@
+# Dependencies
+node_modules
+yarn.lock
+package-lock.json
+
+# Build outputs
+.next
+out
+build
+dist
+
+# Generated files
+.next-env.d.ts
+*.generated.*
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Configuration files
+.cursor/
+.prettierignore
+.eslintignore

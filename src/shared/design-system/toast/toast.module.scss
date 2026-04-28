@@ -1,0 +1,115 @@
+@use "@/styles/variables/colors" as *;
+@use "@/styles/variables/spacing" as *;
+@use "@/styles/variables/typography" as *;
+@use "@/styles/variables/shadows" as *;
+@use "@/styles/variables/borders" as *;
+@use "@/styles/variables/animations" as *;
+
+.toast-container {
+  position: fixed;
+  bottom: $spacing-2xl;
+  right: $spacing-2xl;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  max-width: 24rem;
+  width: 100%;
+  pointer-events: none;
+}
+
+.toast {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-sm;
+  padding: $spacing-md $spacing-lg;
+  border-radius: $border-radius-sm;
+  border: $border-width solid transparent;
+  box-shadow: $shadow-lg;
+  pointer-events: auto;
+  animation: toast-slide-in $animation-duration-slow $easing-smooth;
+  outline: none;
+
+  &:focus-visible {
+    box-shadow: $shadow-focus;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+.toast--success {
+  background-color: $color-success-background;
+  border-color: $color-success;
+  color: $color-success-text;
+}
+
+.toast--error {
+  background-color: $color-error-background;
+  border-color: $color-error;
+  color: $color-error-text;
+}
+
+.toast--warning {
+  background-color: $color-warning-background;
+  border-color: $color-warning;
+  color: $color-warning-text;
+}
+
+.toast--info {
+  background-color: $color-info-background;
+  border-color: $color-info;
+  color: $color-info-text;
+}
+
+.toast__icon {
+  flex-shrink: 0;
+  font-size: $font-size-lg;
+  line-height: $line-height-tight;
+  width: $spacing-2xl;
+  text-align: center;
+}
+
+.toast__message {
+  flex: 1;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  line-height: $line-height-normal;
+  margin: $spacing-none;
+}
+
+.toast__dismiss {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: $font-size-lg;
+  line-height: $line-height-tight;
+  padding: $spacing-none;
+  opacity: 0.6;
+  color: inherit;
+  transition: opacity $transition-base;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &:focus-visible {
+    outline: $border-width-thick solid currentColor;
+    outline-offset: $spacing-2xs;
+    border-radius: $border-radius-2xs;
+  }
+}
+
+@keyframes toast-slide-in {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

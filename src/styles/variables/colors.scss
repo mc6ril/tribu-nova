@@ -1,0 +1,167 @@
+// Color Palette Variables (FlavieBoard design system)
+// SCSS aliases that reference CSS custom properties defined in themes.scss.
+// This allows existing $color-xxx usage in all .module.scss files to keep
+// working unchanged while supporting runtime light/dark theme switching.
+
+// ============================================================================
+// Brand / Primary
+// ============================================================================
+
+$color-primary: var(--color-primary);
+$color-primary-hover: var(--color-primary-hover);
+$color-primary-text: var(--color-primary-text);
+
+// ============================================================================
+// Secondary
+// ============================================================================
+
+$color-secondary: var(--color-secondary);
+$color-secondary-hover: var(--color-secondary-hover);
+
+// ============================================================================
+// Background
+// ============================================================================
+
+$color-background: var(--color-background);
+$color-background-gradient-start: var(--color-background-gradient-start);
+$color-background-gradient-end: var(--color-background-gradient-end);
+$color-surface: var(--color-surface);
+$color-surface-hover: var(--color-surface-hover);
+$color-surface-subtle: var(--color-surface-subtle);
+$color-background-dark: var(--color-background-dark);
+
+// ============================================================================
+// Foreground / Text
+// ============================================================================
+
+$color-foreground: var(--color-foreground);
+$color-foreground-dark: var(--color-foreground-dark);
+$color-text: var(--color-text);
+$color-text-primary: var(--color-text-primary);
+$color-text-secondary: var(--color-text-secondary);
+$color-text-muted: var(--color-text-muted);
+$color-text-footer: var(--color-text-footer);
+
+// ============================================================================
+// Border
+// ============================================================================
+
+$color-border: var(--color-border);
+$color-border-subtle: var(--color-border-subtle);
+$color-border-tooltip: var(--color-border-tooltip);
+$color-border-highlight: var(--color-border-highlight);
+$color-border-button: var(--color-border-button);
+$color-border-dark: var(--color-border-dark);
+
+// ============================================================================
+// Accent
+// ============================================================================
+
+$color-accent: var(--color-accent);
+$color-accent-hover: var(--color-accent-hover);
+$color-accent-peach: var(--color-accent-peach);
+$color-accent-tan: var(--color-accent-tan);
+$color-accent-subtle: var(--color-accent-subtle);
+
+// Ticket action buttons
+$color-action-publish-bg: var(--color-action-publish-bg);
+$color-action-publish-hover: var(--color-action-publish-hover);
+$color-action-publish-text: var(--color-action-publish-text);
+$color-action-save-gradient-start: var(--color-action-save-gradient-start);
+$color-action-save-gradient-end: var(--color-action-save-gradient-end);
+
+// ============================================================================
+// Highlight gradient
+// ============================================================================
+
+$color-highlight-gradient-start: var(--color-highlight-gradient-start);
+$color-highlight-gradient-end: var(--color-highlight-gradient-end);
+
+// ============================================================================
+// Accent borders (for badges, cards)
+// ============================================================================
+
+$color-accent-border-subtle: var(--color-accent-border-subtle);
+$color-accent-border-soft: var(--color-accent-border-soft);
+$color-accent-bg-soft: var(--color-accent-bg-soft);
+$color-accent-peach-bg-soft: var(--color-accent-peach-bg-soft);
+
+// ============================================================================
+// Tooltip / overlay
+// ============================================================================
+
+$color-tooltip-background: var(--color-tooltip-background);
+
+// ============================================================================
+// Sage (soft green for "active" indicators)
+// ============================================================================
+
+$color-sage: var(--color-sage);
+$color-sage-text: var(--color-sage-text);
+$color-sage-bg-soft: var(--color-sage-bg-soft);
+$color-sage-bg-soft-end: var(--color-sage-bg-soft-end);
+$color-sage-border: var(--color-sage-border);
+
+// ============================================================================
+// Semantic — Success
+// ============================================================================
+
+$color-success: var(--color-success);
+$color-success-background: var(--color-success-background);
+$color-success-text: var(--color-success-text);
+$color-success-ring: var(--color-success-ring);
+
+// ============================================================================
+// Semantic — Error
+// ============================================================================
+
+$color-error: var(--color-error);
+$color-error-background: var(--color-error-background);
+$color-error-text: var(--color-error-text);
+$color-error-ring: var(--color-error-ring);
+
+// ============================================================================
+// Semantic — Warning
+// ============================================================================
+
+$color-warning: var(--color-warning);
+$color-warning-background: var(--color-warning-background);
+$color-warning-text: var(--color-warning-text);
+
+// ============================================================================
+// Semantic — Info
+// ============================================================================
+
+$color-info: var(--color-info);
+$color-info-background: var(--color-info-background);
+$color-info-text: var(--color-info-text);
+
+// ============================================================================
+// Neutral scale
+// ============================================================================
+
+$color-neutral-50: var(--color-neutral-50);
+$color-neutral-100: var(--color-neutral-100);
+$color-neutral-200: var(--color-neutral-200);
+$color-neutral-300: var(--color-neutral-300);
+$color-neutral-400: var(--color-neutral-400);
+$color-neutral-500: var(--color-neutral-500);
+$color-neutral-600: var(--color-neutral-600);
+$color-neutral-700: var(--color-neutral-700);
+$color-neutral-800: var(--color-neutral-800);
+$color-neutral-900: var(--color-neutral-900);
+
+// ============================================================================
+// Focus
+// ============================================================================
+
+$color-focus: var(--color-focus);
+$color-focus-ring: var(--color-focus-ring);
+
+// ============================================================================
+// Disabled
+// ============================================================================
+
+$color-disabled: var(--color-disabled);
+$color-disabled-background: var(--color-disabled-background);
+$color-disabled-text: var(--color-disabled-text);

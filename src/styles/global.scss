@@ -1,0 +1,251 @@
+// Global Styles
+// This file contains CSS reset, base styles, and typography defaults
+// All values use SCSS variables from the design system
+
+// Import theme definitions (CSS custom properties for light/dark)
+@use "@/styles/themes";
+
+// Import Variables
+@use "@/styles/variables/colors" as *;
+@use "@/styles/variables/gradients" as *;
+@use "@/styles/variables/typography" as *;
+@use "@/styles/variables/spacing" as *;
+@use "@/styles/variables/borders" as *;
+@use "@/styles/variables/animations" as *;
+
+// ============================================================================
+// CSS Reset
+// ============================================================================
+
+:root {
+  background-color: var(--color-background);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  overscroll-behavior: none;
+}
+
+// Reset list styles
+ul,
+ol {
+  list-style: none;
+}
+
+// Reset button styles
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+// Reset form element styles
+input,
+textarea,
+select {
+  font: inherit;
+  margin: 0;
+}
+
+// Reset link styles
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+// Reset image styles
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+// ============================================================================
+// Base Styles
+// ============================================================================
+
+html {
+  font-family: $font-family-sans;
+  font-size: $font-size-root;
+  line-height: $line-height-normal;
+  color: $color-text-primary;
+  background-color: var(--color-background);
+  background-image: $color-background-gradient;
+  background-repeat: no-repeat;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: $font-family-sans;
+  font-size: $font-size-base;
+  line-height: $line-height-normal;
+  color: $color-text-primary;
+  background-color: var(--color-background);
+  background-image: $color-background-gradient;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-repeat: no-repeat;
+}
+
+// ============================================================================
+// Typography Base Styles
+// ============================================================================
+
+// Headings (FlavieBoard design: serif, warm text color)
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-serif, "Cormorant Garamond"), Georgia, serif;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+  color: $color-text-primary;
+  margin: 0;
+}
+
+h1 {
+  font-size: $font-size-4xl;
+  font-weight: $font-weight-normal;
+  line-height: $line-height-tight;
+}
+
+h2 {
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+}
+
+h3 {
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-tight;
+}
+
+h4 {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-normal;
+}
+
+h5 {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-medium;
+  line-height: $line-height-normal;
+}
+
+h6 {
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
+  line-height: $line-height-normal;
+}
+
+// Paragraphs
+p {
+  font-size: $font-size-base;
+  line-height: $line-height-relaxed;
+  font-weight: $font-weight-normal;
+  color: $color-text-primary;
+  margin: 0;
+}
+
+// Links
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: $transition-color;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:active {
+    color: $color-primary;
+  }
+
+  &:visited {
+    color: $color-text-secondary;
+  }
+
+  &:focus-visible {
+    outline: $border-width-thick solid $color-focus;
+    outline-offset: $spacing-xs;
+    border-radius: $border-radius-sm;
+  }
+}
+
+// Lists
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  margin: 0;
+  padding: 0;
+}
+
+// ============================================================================
+// Application Root Layout
+// ============================================================================
+
+.app-root {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+@supports (-webkit-touch-callout: none) {
+  html {
+    height: -webkit-fill-available;
+  }
+
+  body,
+  .app-root {
+    min-height: -webkit-fill-available;
+  }
+}
+
+// ============================================================================
+// Accessibility Utilities
+// ============================================================================
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

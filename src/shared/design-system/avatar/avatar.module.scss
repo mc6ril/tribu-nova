@@ -1,0 +1,66 @@
+@use "@/styles/variables/colors" as *;
+@use "@/styles/variables/spacing" as *;
+@use "@/styles/variables/typography" as *;
+@use "@/styles/variables/borders" as *;
+
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-radius: $radius-full;
+  overflow: hidden;
+  background-color: $color-primary;
+  color: $color-primary-text;
+  flex-shrink: 0;
+}
+
+.avatar--sm {
+  width: $spacing-3xl;
+  height: $spacing-3xl;
+  font-size: $font-size-xs;
+}
+
+.avatar--md {
+  width: $spacing-4xl;
+  height: $spacing-4xl;
+  font-size: $font-size-sm;
+}
+
+.avatar--lg {
+  width: $spacing-5xl;
+  height: $spacing-5xl;
+  font-size: $font-size-lg;
+}
+
+.avatar--xl {
+  width: $spacing-6xl;
+  height: $spacing-6xl;
+  font-size: $font-size-xl;
+}
+
+.avatar__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar__image--hidden {
+  opacity: 0;
+}
+
+.avatar__initials {
+  position: absolute;
+  inset: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: $font-weight-semibold;
+  line-height: 1;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.avatar__initials--hidden {
+  opacity: 0;
+}

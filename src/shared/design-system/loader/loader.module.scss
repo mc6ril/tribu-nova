@@ -1,0 +1,98 @@
+@use "@/styles/variables/colors" as *;
+@use "@/styles/variables/spacing" as *;
+@use "@/styles/variables/typography" as *;
+@use "@/styles/variables/animations" as *;
+@use "@/styles/variables/borders" as *;
+
+.loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-md;
+}
+
+.loader--full-page {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: $color-background;
+  padding: calc(#{$spacing-3xl} + env(safe-area-inset-top))
+    calc(#{$spacing-lg} + env(safe-area-inset-right))
+    calc(#{$spacing-3xl} + env(safe-area-inset-bottom))
+    calc(#{$spacing-lg} + env(safe-area-inset-left));
+  z-index: 9999;
+}
+
+.loader--inline {
+  padding: $spacing-lg;
+  min-height: auto;
+}
+
+.loader--small {
+  gap: $spacing-sm;
+
+  .loader__spinner {
+    width: $spacing-lg;
+    height: $spacing-lg;
+    border-width: $spacing-xs;
+  }
+
+  .loader__message {
+    font-size: $font-size-sm;
+  }
+}
+
+.loader--medium {
+  gap: $spacing-md;
+
+  .loader__spinner {
+    width: $spacing-2xl;
+    height: $spacing-2xl;
+    border-width: $spacing-xs;
+  }
+
+  .loader__message {
+    font-size: $font-size-base;
+  }
+}
+
+.loader--large {
+  gap: $spacing-lg;
+
+  .loader__spinner {
+    width: $spacing-3xl;
+    height: $spacing-3xl;
+    border-width: $spacing-sm;
+  }
+
+  .loader__message {
+    font-size: $font-size-lg;
+  }
+}
+
+.loader__spinner {
+  border-style: solid;
+  border-color: $color-border;
+  border-top-color: $color-primary;
+  border-radius: $border-radius-full;
+  animation: spin $animation-duration-slow $easing-linear infinite;
+  will-change: transform;
+}
+
+.loader__message {
+  margin: 0;
+  color: $color-text;
+  text-align: center;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

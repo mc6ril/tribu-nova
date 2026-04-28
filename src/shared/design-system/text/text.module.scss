@@ -1,0 +1,39 @@
+@use "@/styles/variables/colors" as *;
+@use "@/styles/variables/typography" as *;
+@use "@/styles/variables/spacing" as *;
+
+.text {
+  margin: 0;
+  font-family: $font-family-sans;
+  color: $color-text;
+  line-height: $line-height-normal;
+}
+
+.text--body {
+  font-size: $font-size-base;
+  font-weight: $font-weight-normal;
+  line-height: $line-height-normal;
+  color: $color-text;
+}
+
+.text--small {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-normal;
+  line-height: $line-height-normal;
+  color: $color-text-secondary;
+}
+
+.text--caption {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-normal;
+  line-height: $line-height-normal;
+  color: $color-text-secondary;
+}
+
+.text--metric {
+  font-family: $font-family-serif;
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-tight;
+  color: $color-accent;
+}

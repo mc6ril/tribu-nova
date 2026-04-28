@@ -1,0 +1,64 @@
+@use "@/styles/variables/colors" as *;
+@use "@/styles/variables/spacing" as *;
+@use "@/styles/variables/typography" as *;
+@use "@/styles/variables/borders" as *;
+@use "@/styles/variables/animations" as *;
+@use "@/styles/variables/shadows" as *;
+
+.link {
+  display: inline;
+  color: $color-text;
+  text-decoration: none;
+  transition: $transition-color, $transition-text-decoration;
+  cursor: pointer;
+
+  &:focus {
+    outline: 2px solid $color-focus;
+    outline-offset: 2px;
+    border-radius: $border-radius-sm;
+  }
+
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
+}
+
+.link--default {
+  color: $color-text;
+
+  &:hover {
+    color: $color-primary;
+    text-decoration: underline;
+  }
+
+  &:active {
+    color: $color-primary-hover;
+  }
+}
+
+.link--primary {
+  color: $color-primary;
+  font-weight: $font-weight-medium;
+
+  &:hover {
+    color: $color-primary-hover;
+    text-decoration: underline;
+  }
+
+  &:active {
+    color: $color-primary;
+  }
+}
+
+.link--secondary {
+  color: $color-text-secondary;
+
+  &:hover {
+    color: $color-text;
+    text-decoration: underline;
+  }
+
+  &:active {
+    color: $color-text-secondary;
+  }
+}

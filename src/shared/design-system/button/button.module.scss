@@ -1,0 +1,305 @@
+@use "@/styles/variables/colors" as *;
+@use "@/styles/variables/spacing" as *;
+@use "@/styles/variables/typography" as *;
+@use "@/styles/variables/borders" as *;
+@use "@/styles/variables/animations" as *;
+@use "@/styles/variables/shadows" as *;
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: $spacing-button-height;
+  padding: $spacing-button-padding-y $spacing-button-padding-x;
+  border: $border-width solid transparent;
+  border-radius: $border-radius-button;
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
+  line-height: $line-height-normal;
+  cursor: pointer;
+  transition:
+    $transition-background, $transition-color, $transition-border,
+    $transition-transform, $transition-shadow;
+  text-align: center;
+  text-decoration: none;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: $shadow-focus;
+  }
+
+  &:focus:not(:focus-visible) {
+    box-shadow: none;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+.button--primary {
+  background-color: $color-action-publish-bg;
+  color: $color-action-publish-text;
+  border-color: transparent;
+  border-radius: $border-radius-full;
+  font-size: $font-size-sm;
+  letter-spacing: $letter-spacing-wide;
+  text-transform: uppercase;
+  font-weight: $font-weight-normal;
+
+  &:hover:not(:disabled) {
+    background-color: $color-action-publish-hover;
+    border-color: transparent;
+    box-shadow: $shadow-button-hover;
+    transform: translateY(-1px);
+
+    @media (prefers-reduced-motion: reduce) {
+      transform: none;
+    }
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: $shadow-sm;
+  }
+
+  &:disabled {
+    background-color: $color-disabled-background;
+    color: $color-disabled-text;
+    border-color: $color-disabled-background;
+  }
+}
+
+.button--secondary {
+  background-color: transparent;
+  color: $color-text-muted;
+  border-color: $color-border;
+  border-radius: $border-radius-full;
+  font-size: $font-size-xs;
+  letter-spacing: $letter-spacing-tight;
+  font-weight: $font-weight-normal;
+
+  &:hover:not(:disabled) {
+    border-color: $color-accent;
+    color: $color-accent;
+    background-color: transparent;
+    transform: none;
+  }
+
+  &:active:not(:disabled) {
+    transform: none;
+  }
+
+  &:disabled {
+    background-color: $color-disabled-background;
+    color: $color-disabled-text;
+    border-color: $color-border;
+  }
+}
+
+.button--outline {
+  background-color: transparent;
+  color: $color-primary;
+  border-color: $color-primary;
+
+  &:hover:not(:disabled) {
+    background-color: $color-primary;
+    color: $color-primary-text;
+    box-shadow: $shadow-button-hover;
+    transform: translateY(-1px);
+
+    @media (prefers-reduced-motion: reduce) {
+      transform: none;
+    }
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: $shadow-sm;
+  }
+
+  &:disabled {
+    background-color: transparent;
+    color: $color-disabled-text;
+    border-color: $color-disabled;
+  }
+}
+
+.button--danger {
+  background-color: $color-error;
+  color: $color-primary-text;
+  border-color: $color-error;
+
+  &:hover:not(:disabled) {
+    background-color: $color-error-text;
+    border-color: $color-error-text;
+    box-shadow: $shadow-button-hover;
+    transform: translateY(-1px);
+
+    @media (prefers-reduced-motion: reduce) {
+      transform: none;
+    }
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: $shadow-sm;
+  }
+
+  &:disabled {
+    background-color: $color-disabled-background;
+    color: $color-disabled-text;
+    border-color: $color-disabled-background;
+  }
+}
+
+.button--ghost {
+  background-color: transparent;
+  color: $color-text;
+  border-color: transparent;
+
+  &:hover:not(:disabled) {
+    background-color: $color-surface-subtle;
+    color: $color-text;
+    transform: translateY(-1px);
+
+    @media (prefers-reduced-motion: reduce) {
+      transform: none;
+    }
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+    background-color: $color-surface;
+  }
+
+  &:disabled {
+    background-color: transparent;
+    color: $color-disabled-text;
+    border-color: transparent;
+  }
+}
+
+.button--full-width {
+  width: 100%;
+}
+
+.button--publish {
+  width: 100%;
+  background-color: $color-action-publish-bg;
+  color: $color-action-publish-text;
+  border-color: transparent;
+  border-radius: $border-radius-xs;
+  font-size: $font-size-sm;
+  letter-spacing: $letter-spacing-wide;
+  text-transform: uppercase;
+  font-weight: $font-weight-normal;
+
+  &:hover:not(:disabled) {
+    background-color: $color-action-publish-hover;
+    border-color: transparent;
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+}
+
+.button--save {
+  background-image: linear-gradient(
+    135deg,
+    $color-action-save-gradient-start 0%,
+    $color-action-save-gradient-end 100%
+  );
+  color: $color-primary-text;
+  border-color: transparent;
+  border-radius: $border-radius-xs;
+  font-size: $font-size-sm;
+  letter-spacing: $letter-spacing-wide;
+  text-transform: uppercase;
+  font-weight: $font-weight-normal;
+
+  &:hover:not(:disabled) {
+    opacity: 0.9;
+    border-color: transparent;
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+}
+
+.button--saveDanger {
+  background-image: linear-gradient(
+    135deg,
+    $color-action-save-gradient-end 0%,
+    $color-error 100%
+  );
+  color: $color-primary-text;
+  border-color: transparent;
+  border-radius: $border-radius-xs;
+  font-size: $font-size-sm;
+  letter-spacing: $letter-spacing-wide;
+  text-transform: uppercase;
+  font-weight: $font-weight-normal;
+
+  &:hover:not(:disabled) {
+    opacity: 0.95;
+    border-color: transparent;
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+}
+
+.button--edit {
+  background-color: transparent;
+  color: $color-text-muted;
+  border-color: $color-border;
+  border-radius: $border-radius-full;
+  height: auto;
+  padding: $spacing-xs $spacing-lg;
+  font-size: $font-size-xs;
+  letter-spacing: $letter-spacing-tight;
+  font-weight: $font-weight-normal;
+
+  &:hover:not(:disabled) {
+    background-color: transparent;
+    color: $color-accent;
+    border-color: $color-accent;
+    transform: none;
+  }
+
+  &:active:not(:disabled) {
+    transform: none;
+  }
+}
+
+.button--delete {
+  background-color: transparent;
+  color: $color-accent;
+  border-color: $color-accent-border-soft;
+  border-radius: $border-radius-full;
+  height: auto;
+  padding: $spacing-xs $spacing-lg;
+  font-size: $font-size-xs;
+  letter-spacing: $letter-spacing-tight;
+  font-weight: $font-weight-normal;
+
+  &:hover:not(:disabled) {
+    background-color: $color-accent;
+    color: $color-primary-text;
+    border-color: $color-accent;
+    transform: none;
+  }
+
+  &:active:not(:disabled) {
+    transform: none;
+  }
+}

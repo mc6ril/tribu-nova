@@ -1,0 +1,49 @@
+// Animation Variables
+// All animation values must reference these variables
+// Respects prefers-reduced-motion for accessibility
+
+// Animation Durations
+$animation-duration-instant: 0ms;
+$animation-duration-fast: 150ms;
+$animation-duration-base: 200ms;
+$animation-duration-slow: 300ms;
+$animation-duration-slower: 500ms;
+
+// Transition Durations (for compatibility with transitions.scss)
+$transition-duration-fast: $animation-duration-fast;
+$transition-duration-base: $animation-duration-base;
+$transition-duration-slow: $animation-duration-slow;
+
+// Easing Functions
+$easing-linear: linear;
+$easing-ease-in: ease-in;
+$easing-ease-out: ease-out;
+$easing-ease-in-out: ease-in-out;
+$easing-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+$easing-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+// Common Transitions (for compatibility with transitions.scss)
+$transition-ease-in-out: $easing-ease-in-out;
+$transition-ease-out: $easing-ease-out;
+$transition-base: $transition-duration-base $transition-ease-in-out;
+$transition-color: color $transition-base;
+$transition-background: background-color $transition-base;
+$transition-border: border-color $transition-base;
+$transition-text-decoration: text-decoration $transition-base;
+$transition-transform: transform $transition-base;
+$transition-opacity: opacity $transition-base;
+$transition-shadow: box-shadow $transition-base;
+
+// Animation Delays
+$animation-delay-none: 0ms;
+$animation-delay-short: 50ms;
+$animation-delay-medium: 100ms;
+$animation-delay-long: 200ms;
+
+// Backdrop Blur
+$backdrop-blur-base: 10px;
+
+// Reduced Motion Support
+// When prefers-reduced-motion is enabled, animations should be instant or minimal
+$animation-duration-reduced: $animation-duration-instant;
+$transition-duration-reduced: $animation-duration-instant;

@@ -1,0 +1,89 @@
+// Spacing Scale Variables (FlavieBoard design system)
+// All spacing (margins, paddings, gaps) must reference these variables
+
+// Base spacing unit (4px)
+$spacing-unit: 0.25rem;
+
+// Zero spacing
+$spacing-none: 0;
+
+// Spacing scale (aligned with FlavieBoard: 4, 6, 8, 12, 16, 18, 20, 28, 32)
+$spacing-2xs: $spacing-unit; // 4px
+$spacing-xs: $spacing-unit * 1.5; // 6px
+$spacing-sm: $spacing-unit * 2; // 8px
+$spacing-md: $spacing-unit * 3; // 12px
+$spacing-lg: $spacing-unit * 4; // 16px
+$spacing-xl: $spacing-unit * 4.5; // 18px
+$spacing-2xl: $spacing-unit * 5; // 20px
+$spacing-3xl: $spacing-unit * 7; // 28px
+$spacing-4xl: $spacing-unit * 8; // 32px
+$spacing-5xl: $spacing-unit * 12; // 48px
+$spacing-6xl: $spacing-unit * 16; // 64px
+
+// Legacy aliases (for existing components)
+$spacing-xxs: $spacing-2xs;
+
+// Component-specific spacing (FlavieBoard)
+$spacing-page-padding-y: $spacing-4xl; // 32px
+$spacing-page-padding-x: $spacing-2xl; // 20px
+$spacing-section-gap: $spacing-3xl; // 28px
+$spacing-block-gap: $spacing-md; // 12px
+$spacing-card-padding: $spacing-lg $spacing-md; // 16px 12px
+$spacing-card-padding-lg: $spacing-xl $spacing-2xl; // 18px 22px
+$spacing-inset-padding: $spacing-md $spacing-lg; // 12px 16px
+
+// Input / Button (unchanged for form compatibility)
+$spacing-input-padding-x: $spacing-unit * 5; // 1.25rem (20px)
+$spacing-input-padding-y: $spacing-unit * 3; // 0.75rem (12px)
+$spacing-button-padding-x: $spacing-unit * 3.5; // 14px
+$spacing-button-padding-y: $spacing-unit * 2; // 8px
+$spacing-button-height: $spacing-unit * 12; // 3rem (48px)
+
+// Container widths (FlavieBoard: 720px content max)
+$container-max-width: 45rem; // 720px
+$spacing-container-max-width: $container-max-width;
+$spacing-empty-state-max-width: 30rem; // 480px
+$spacing-container-max-width-wide: 90rem; // full-width layouts
+
+// Viewport-relative spacing (workspace / full-width layouts)
+$spacing-vh-xs: 1vh;
+$spacing-vh-sm: 2vh;
+$spacing-vh-md: 3vh;
+$spacing-vh-lg: 4vh;
+$spacing-vh-xl: 5vh;
+$spacing-vh-2xl: 6vh;
+$spacing-vh-card-min: 14vh;
+$spacing-vh-main-min: 40vh;
+$spacing-vw-sm: 2vw;
+$spacing-vw-md: 4vw;
+$spacing-vw-lg: 5vw;
+
+// Layout sizing (Dashboard shell)
+$layout-dashboard-sidebar-width: $spacing-unit * 72; // 18rem (288px)
+$layout-dashboard-sidebar-height: $spacing-unit * 16; // 4rem (64px)
+$layout-dashboard-header-height: $spacing-unit * 16; // 4rem (64px)
+$layout-dashboard-footer-height: $spacing-unit * 10; // 2.5rem (40px)
+$layout-dashboard-content-min-height: 100vh;
+$layout-dashboard-main-min-height: 0;
+$layout-dashboard-main-padding: $spacing-lg;
+// Stacking: header must paint above main so toolbar search suggestions overlay the board.
+$layout-dashboard-header-z-index: 10;
+$layout-dashboard-main-z-index: 0;
+
+// Board: on narrow viewports, column width is slightly less than the main area so the next column peeks (horizontal scroll affordance).
+$board-column-mobile-adjacent-peek: $spacing-4xl;
+
+// Accent bar (decorative bar used in section titles)
+$accent-bar-width: 4px;
+$accent-bar-height: 1.5rem;
+
+// Border radius (FlavieBoard: 3, 10, 12, 14, 16, 20)
+$radius-2xs: $spacing-unit * 0.75; // 3px
+$radius-xs: $spacing-unit * 2.5; // 10px
+$radius-sm: $spacing-unit * 3; // 12px
+$radius-md: $spacing-unit * 3.5; // 14px
+$radius-lg: $spacing-unit * 4; // 16px
+$radius-xl: $spacing-unit * 5; // 20px
+$radius-2xl: $spacing-unit * 6; // 24px
+$radius-3xl: $spacing-unit * 8; // 32px
+$radius-full: 9999px;

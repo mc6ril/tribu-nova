@@ -1,0 +1,98 @@
+@use "@/styles/variables/colors" as *;
+@use "@/styles/variables/spacing" as *;
+@use "@/styles/variables/typography" as *;
+@use "@/styles/variables/borders" as *;
+@use "@/styles/variables/animations" as *;
+@use "@/styles/variables/shadows" as *;
+
+.navigation-item {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navigation-item__link {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  width: 100%;
+  min-height: $spacing-button-height;
+  padding: $spacing-sm $spacing-md;
+  border-radius: $border-radius-md;
+  position: relative;
+  color: $color-text-muted;
+  transition: $transition-background, $transition-color, $transition-border;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+
+  &:hover {
+    background-color: $color-neutral-100;
+    color: $color-text;
+  }
+
+  &:hover::before {
+    opacity: 0.45;
+  }
+
+  &:focus {
+    outline-offset: -$border-width-thick;
+  }
+
+  &:focus::before {
+    opacity: 0.45;
+  }
+}
+
+.navigation-item--active .navigation-item__link {
+  background-color: $color-neutral-100;
+  color: $color-foreground;
+  font-weight: $font-weight-normal;
+
+  &::before {
+    opacity: 1;
+  }
+}
+
+.navigation-item__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: $spacing-md * 1.25; // 20px
+  height: $spacing-md * 1.25; // 20px
+  flex-shrink: 0;
+}
+
+.navigation-item__label {
+  font-size: $font-size-base;
+  line-height: $line-height-normal;
+}
+
+.navigation-item--locked .navigation-item__link {
+  opacity: 0.65;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-neutral-100;
+    color: $color-text;
+  }
+
+  &:focus {
+    outline: $border-width-thick solid $color-focus;
+    outline-offset: -$border-width-thick;
+  }
+}
+
+.navigation-item__plan-badge {
+  margin-left: auto;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  color: $color-accent;
+  background: $color-accent-bg-soft;
+  padding: $spacing-2xs $spacing-sm;
+  border-radius: $border-radius-full;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1;
+}

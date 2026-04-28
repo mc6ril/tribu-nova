@@ -1,0 +1,11 @@
+// Accessibility Variables
+// Shared values for reusable a11y patterns (skip links, offscreen content, z-indexes).
+
+// Offscreen positioning for visually hidden elements that should appear on focus.
+$a11y-offscreen-left: -10000px;
+
+// Stacking context for overlay-like accessibility helpers (e.g., SkipLink).
+$a11y-skip-link-z-index: 1000;
+
+// Stacking context for dropdowns and popovers (above page content, below modals).
+$a11y-dropdown-z-index: 100;

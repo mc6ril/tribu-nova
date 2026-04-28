@@ -1,0 +1,308 @@
+#!/usr/bin/env bash
+
+# Run script for fbc-dashboard project
+# Provides a unified interface for common development tasks
+# Usage: sh run <command>
+
+set -euo pipefail
+
+# Function to check if yarn is available
+check_yarn() {
+    if ! command -v yarn &> /dev/null; then
+        echo "Error: yarn is not installed or not in PATH" >&2
+        echo "" >&2
+        echo "To fix this issue:" >&2
+        echo "  1. Install yarn: https://yarnpkg.com/getting-started/install" >&2
+        echo "  2. Ensure yarn is in your PATH environment variable" >&2
+        echo "  3. Verify installation by running: yarn --version" >&2
+        exit 1
+    fi
+}
+
+# Function to handle command execution errors
+handle_command_error() {
+    local command_name="$1"
+    local exit_code="${2:-1}"
+    
+    echo "" >&2
+    echo "Error: Command '${command_name}' failed with exit code ${exit_code}" >&2
+    echo "" >&2
+    echo "Troubleshooting:" >&2
+    case "$command_name" in
+        dev)
+            echo "  - Check that all dependencies are installed: yarn install" >&2
+            echo "  - Verify Next.js is properly configured" >&2
+            echo "  - Check for port conflicts (default: 3000)" >&2
+            echo "  - Ensure Stripe CLI is installed and logged in: stripe login" >&2
+            ;;
+        build)
+            echo "  - Check for TypeScript/compilation errors" >&2
+            echo "  - Verify all dependencies are installed: yarn install" >&2
+            echo "  - Check disk space availability" >&2
+            ;;
+        start)
+            echo "  - Ensure the application has been built: sh run build" >&2
+            echo "  - Check that .next/ directory exists" >&2
+            echo "  - Verify production build completed successfully" >&2
+            ;;
+    esac
+    exit "$exit_code"
+}
+
+# Function to display usage instructions
+show_usage() {
+    echo "Usage: sh run <command> [options]"
+    echo ""
+    echo "Available commands:"
+    echo "  dev              Start development server (Next.js webpack mode)"
+    echo "  dev:all          Start development server (Next.js webpack mode + Stripe webhooks)"
+    echo "  dev:turbo        Start development server (Next.js Turbopack mode)"
+    echo "  dev:turbo:all    Start development server (Next.js Turbopack mode + Stripe webhooks)"
+    echo "  build            Build the application for production"
+    echo "  build:analyze    Build with bundle analyzer report"
+    echo "  start            Start production server"
+    echo "  clean            Remove build artifacts (.next/ directory)"
+    echo "  clean --all      Remove build artifacts and node_modules/ (with confirmation)"
+    echo "  help, --help, -h Show this help message"
+    echo ""
+    echo "Examples:"
+    echo "  sh run dev"
+    echo "  sh run build"
+    echo "  sh run build:analyze"
+    echo "  sh run start"
+    echo "  sh run clean"
+    echo "  sh run clean --all"
+    echo "  sh run help"
+    echo ""
+    echo "For more information, see README.md"
+}
+
+# Function to get the project root directory (where this script is located)
+get_project_root() {
+    # Get the directory where this script is located
+    local script_dir
+    script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+    echo "$script_dir"
+}
+
+# Function to safely remove a directory if it exists
+# Arguments:
+#   $1: Directory path to remove (relative to project root)
+#   $2: Description of what is being removed
+safe_remove_directory() {
+    local dir_path="$1"
+    local description="$2"
+    local project_root
+    project_root="$(get_project_root)"
+
+    # Safety check: prevent directory traversal attacks
+    # Ensure dir_path doesn't contain ".." or start with "/"
+    if [[ "$dir_path" == *".."* ]] || [[ "$dir_path" == /* ]]; then
+        echo "Error: Safety check failed. Invalid directory path: ${dir_path}" >&2
+        echo "This error prevents accidental deletion of files outside the project." >&2
+        return 1
+    fi
+
+    local full_path="${project_root}/${dir_path}"
+
+    # Additional safety check: resolve to absolute path and verify it's within project root
+    local resolved_full_path
+    resolved_full_path="$(cd "$project_root" && pwd)/${dir_path}"
+    local resolved_project_root
+    resolved_project_root="$(cd "$project_root" && pwd)"
+
+    # Normalize paths by removing trailing slashes for comparison
+    resolved_full_path="${resolved_full_path%/}"
+    resolved_project_root="${resolved_project_root%/}"
+
+    # Verify the full path is within project root
+    if [[ ! "$resolved_full_path" == "$resolved_project_root"/* ]]; then
+        echo "Error: Safety check failed. Cannot remove directory outside project root." >&2
+        echo "Attempted path: ${resolved_full_path}" >&2
+        echo "Project root: ${resolved_project_root}" >&2
+        return 1
+    fi
+
+    # Check if directory exists
+    if [ -d "$full_path" ]; then
+        # Check write permissions
+        if [ ! -w "$(dirname "$full_path")" ]; then
+            echo "Error: Permission denied. Cannot remove ${description}." >&2
+            echo "Please check directory permissions: ${dir_path}/" >&2
+            return 1
+        fi
+        
+        echo "Removing ${description}..."
+        if rm -rf "$full_path" 2>/dev/null; then
+            echo "  ✓ Removed: ${dir_path}/"
+        else
+            echo "Error: Failed to remove ${description}." >&2
+            echo "Please check permissions and try again." >&2
+            return 1
+        fi
+    else
+        echo "  ℹ ${description} not found (${dir_path}/), skipping..."
+    fi
+}
+
+# Function to prompt for confirmation
+confirm_action() {
+    local message="$1"
+    local response
+    echo ""
+    echo "$message"
+    echo -n "Are you sure? (yes/no): "
+    read -r response
+    case "$response" in
+        [yY][eE][sS]|[yY])
+            return 0
+            ;;
+        *)
+            return 1
+            ;;
+    esac
+}
+
+# Function to handle clean command
+handle_clean() {
+    local clean_all=false
+    local exit_code=0
+
+    # Check for --all flag
+    if [ "${2:-}" = "--all" ]; then
+        clean_all=true
+    elif [ -n "${2:-}" ]; then
+        echo "Error: Unknown option '${2}'" >&2
+        echo "" >&2
+        echo "Valid options for 'clean' command:" >&2
+        echo "  clean         Remove build artifacts (.next/ directory)" >&2
+        echo "  clean --all   Remove build artifacts and node_modules/ (with confirmation)" >&2
+        exit 1
+    fi
+
+    local project_root
+    project_root="$(get_project_root)"
+
+    # Verify project root is accessible
+    if [ ! -d "$project_root" ] || [ ! -r "$project_root" ]; then
+        echo "Error: Cannot access project root directory: ${project_root}" >&2
+        echo "Please check directory permissions." >&2
+        exit 1
+    fi
+
+    echo "Cleaning build artifacts..."
+    echo "Project root: ${project_root}"
+    echo ""
+
+    # Always remove .next/ directory
+    if ! safe_remove_directory ".next" "Build artifacts (.next/)"; then
+        exit_code=1
+    fi
+
+    # Remove node_modules/ only if --all flag is used
+    if [ "$clean_all" = true ]; then
+        if confirm_action "This will remove node_modules/ directory. You will need to run 'yarn install' afterwards."; then
+            if ! safe_remove_directory "node_modules" "Dependencies (node_modules/)"; then
+                exit_code=1
+            else
+                echo ""
+                echo "✓ Clean complete. Run 'yarn install' to restore dependencies."
+            fi
+        else
+            echo ""
+            echo "Clean cancelled. node_modules/ was not removed."
+        fi
+    else
+        echo ""
+        if [ $exit_code -eq 0 ]; then
+            echo "✓ Clean complete. Use 'sh run clean --all' to also remove node_modules/."
+        fi
+    fi
+
+    exit $exit_code
+}
+
+# Main script logic
+main() {
+    # Get command from first argument
+    local command="${1:-}"
+
+    # Backward compatibility: allow `sh run dev all` as alias for `sh run dev:all`
+    if [ "$command" = "dev" ] && [ "${2:-}" = "all" ]; then
+        command="dev:all"
+    fi
+
+    # Handle help commands
+    if [ -z "$command" ] || [ "$command" = "help" ] || [ "$command" = "--help" ] || [ "$command" = "-h" ]; then
+        show_usage
+        exit 0
+    fi
+
+    # Route command to yarn or handle special commands
+    case "$command" in
+        dev|dev:all|dev:turbo|dev:turbo:all|build|build:analyze|start)
+            # Check if yarn is available for yarn-based commands
+            check_yarn
+            
+            # Execute the command and capture exit code
+            local exit_code=0
+            case "$command" in
+                dev)
+                    echo "Starting development server (Next.js webpack mode)..."
+                    NODE_OPTIONS="--max-old-space-size=6144" yarn dev --webpack || exit_code=$?
+                    ;;
+                dev:all)
+                    echo "Starting development server (Next.js webpack mode + Stripe webhooks)..."
+                    yarn concurrently --names next,stripe --prefix-colors blue,magenta "NODE_OPTIONS=--max-old-space-size=6144 yarn dev --webpack" "yarn dev:stripe" || exit_code=$?
+                    ;;
+                dev:turbo)
+                    echo "Starting development server (Next.js Turbopack mode)..."
+                    NODE_OPTIONS="--max-old-space-size=6144" yarn dev || exit_code=$?
+                    ;;
+                dev:turbo:all)
+                    echo "Starting development server (Next.js Turbopack mode + Stripe webhooks)..."
+                    yarn concurrently --names next,stripe --prefix-colors blue,magenta "NODE_OPTIONS=--max-old-space-size=6144 yarn dev" "yarn dev:stripe" || exit_code=$?
+                    ;;
+                build)
+                    echo "Building application..."
+                    yarn build || exit_code=$?
+                    ;;
+                build:analyze)
+                    echo "Building application with bundle analyzer..."
+                    ANALYZE=true yarn build || exit_code=$?
+                    ;;
+                start)
+                    echo "Starting production server..."
+                    yarn start || exit_code=$?
+                    ;;
+            esac
+            
+            # Handle command execution errors
+            if [ $exit_code -ne 0 ]; then
+                handle_command_error "$command" "$exit_code"
+            fi
+            ;;
+        clean)
+            # Clean command doesn't require yarn
+            handle_clean "$@"
+            ;;
+        *)
+            echo "Error: Unknown command '$command'" >&2
+            echo "" >&2
+            echo "Run 'sh run help' to see available commands." >&2
+            exit 1
+            ;;
+    esac
+}
+
+convert_to_webp() {
+    echo "Converting PNG files to WebP..."
+    chmod +x convert_to_webp.sh
+
+    #Convert all PNG files in public directory to WebP
+    ./convert-to-webp.sh public/
+}
+
+# Execute main function with all arguments
+main "$@"
+

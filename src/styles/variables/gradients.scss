@@ -1,0 +1,73 @@
+@use "./colors" as *;
+
+// Gradient Variables (FlavieBoard design system)
+// Composite gradient values and angle constants.
+// Color stops reference CSS custom properties from themes.scss.
+
+// ============================================================================
+// Gradient angles
+// ============================================================================
+
+$gradient-angle-diagonal: 135deg;
+$gradient-angle-vertical: 180deg;
+
+// ============================================================================
+// Background gradient
+// ============================================================================
+
+$color-background-gradient: linear-gradient(
+  $gradient-angle-vertical,
+  var(--color-background-gradient-start) 0%,
+  var(--color-background-gradient-end) 100%
+);
+
+// ============================================================================
+// Highlight gradient
+// ============================================================================
+
+$color-highlight-gradient: linear-gradient(
+  $gradient-angle-diagonal,
+  var(--color-highlight-gradient-start),
+  var(--color-highlight-gradient-end)
+);
+
+// ============================================================================
+// Surface gradients
+// ============================================================================
+
+$color-surface-accent-gradient: linear-gradient(
+  $gradient-angle-diagonal,
+  $color-accent-bg-soft 0%,
+  $color-secondary 55%,
+  $color-accent-peach-bg-soft 100%
+);
+
+$color-surface-success-gradient: linear-gradient(
+  $gradient-angle-vertical,
+  $color-secondary 0%,
+  $color-success-background 100%
+);
+
+$color-surface-subtle-accent-gradient: linear-gradient(
+  $gradient-angle-vertical,
+  $color-surface-subtle 0%,
+  $color-accent-bg-soft 100%
+);
+
+$color-surface-onboarding-gradient: linear-gradient(
+  $gradient-angle-diagonal,
+  $color-accent-bg-soft 0%,
+  $color-secondary 62%,
+  $color-accent-peach-bg-soft 100%
+);
+
+// ============================================================================
+// Workspace page gradient
+// ============================================================================
+
+$color-workspace-page-gradient: linear-gradient(
+  $gradient-angle-diagonal,
+  var(--color-background) 0%,
+  var(--color-neutral-100) 50%,
+  var(--color-neutral-200) 100%
+);
