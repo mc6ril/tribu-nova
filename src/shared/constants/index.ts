@@ -11,11 +11,11 @@ export {
 
 // Re-export error code constants (canonical definitions in shared/errors)
 export type {
-  AuthErrorCode,
+  AppErrorCode,
   RepositoryErrorCode,
 } from "@/shared/errors/appErrorCodes";
 export {
-  AUTH_ERROR_CODES,
+  APP_ERROR_CODES,
   REPOSITORY_ERROR_CODES,
 } from "@/shared/errors/appErrorCodes";
 

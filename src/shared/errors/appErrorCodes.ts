@@ -3,7 +3,7 @@
  * User-facing copy lives in i18n only; codes are the contract.
  */
 
-export const AUTH_ERROR_CODE = Object.freeze({
+export const AUTH_ERROR_CODES = Object.freeze({
   INVALID_CREDENTIALS: "INVALID_CREDENTIALS",
   EMAIL_ALREADY_EXISTS: "EMAIL_ALREADY_EXISTS",
   WEAK_PASSWORD: "WEAK_PASSWORD",
@@ -15,7 +15,7 @@ export const AUTH_ERROR_CODE = Object.freeze({
   INVALID_TOKEN: "INVALID_TOKEN",
   SAME_PASSWORD: "SAME_PASSWORD",
   PASSWORD_UPDATE_NOT_ALLOWED: "PASSWORD_UPDATE_NOT_ALLOWED",
-} as const);
+});
 
 export const DOMAIN_RULE_ERROR_CODE = Object.freeze({
   TICKET_PROJECT_MISMATCH: "TICKET_PROJECT_MISMATCH",
@@ -32,13 +32,13 @@ export const DOMAIN_RULE_ERROR_CODE = Object.freeze({
   MISSING_DONE_COLUMN: "MISSING_DONE_COLUMN",
   COLUMN_IN_USE: "COLUMN_IN_USE",
   UPDATE_CREDENTIALS_NO_FIELDS: "UPDATE_CREDENTIALS_NO_FIELDS",
-} as const);
+});
 
 export const REPOSITORY_ERROR_CODE = Object.freeze({
   NOT_FOUND: "NOT_FOUND",
   CONSTRAINT_VIOLATION: "CONSTRAINT_VIOLATION",
   DATABASE_ERROR: "DATABASE_ERROR",
-} as const);
+});
 
 export type DomainRuleErrorCode =
   (typeof DOMAIN_RULE_ERROR_CODE)[keyof typeof DOMAIN_RULE_ERROR_CODE];
@@ -61,14 +61,14 @@ export const INFRA_ERROR_CODE = Object.freeze({
   BOARD_INVALID_COLUMN_WORKFLOW_STATE: "BOARD_INVALID_COLUMN_WORKFLOW_STATE",
   GOOGLE_OAUTH_NOT_AVAILABLE: "GOOGLE_OAUTH_NOT_AVAILABLE",
   DELETE_ACCOUNT_FAILED: "DELETE_ACCOUNT_FAILED",
-} as const);
+});
 
 export const APP_ERROR_CODE = Object.freeze({
-  ...AUTH_ERROR_CODE,
   ...DOMAIN_RULE_ERROR_CODE,
   ...REPOSITORY_ERROR_CODE,
   ...INFRA_ERROR_CODE,
-} as const);
+  ...AUTH_ERROR_CODES,
+});
 
 export type AppErrorCode = (typeof APP_ERROR_CODE)[keyof typeof APP_ERROR_CODE];
 
@@ -76,16 +76,16 @@ export const APP_ERROR_CODES = Object.freeze(
   Object.values(APP_ERROR_CODE) as AppErrorCode[]
 );
 
-export type AuthErrorCode =
-  (typeof AUTH_ERROR_CODE)[keyof typeof AUTH_ERROR_CODE];
-
-export const AUTH_ERROR_CODES = Object.freeze(
-  Object.values(AUTH_ERROR_CODE) as AuthErrorCode[]
-);
-
 export type RepositoryErrorCode =
   (typeof REPOSITORY_ERROR_CODE)[keyof typeof REPOSITORY_ERROR_CODE];
 
 export const REPOSITORY_ERROR_CODES = Object.freeze(
   Object.values(REPOSITORY_ERROR_CODE) as RepositoryErrorCode[]
+);
+
+export type AuthErrorCode =
+  (typeof AUTH_ERROR_CODES)[keyof typeof AUTH_ERROR_CODES];
+
+export const AUTH_ERROR_CODES_ARRAY = Object.freeze(
+  Object.values(AUTH_ERROR_CODES) as AuthErrorCode[]
 );

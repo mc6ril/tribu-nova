@@ -1,0 +1,135 @@
+@use "@/styles/variables/colors" as *;
+@use "@/styles/variables/spacing" as *;
+@use "@/styles/variables/typography" as *;
+@use "@/styles/variables/borders" as *;
+@use "@/styles/variables/animations" as *;
+@use "@/styles/variables/shadows" as *;
+@use "@/styles/variables/breakpoints" as *;
+
+.verify-email-page {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  overflow-y: auto;
+  padding: calc(#{$spacing-4xl} + env(safe-area-inset-top))
+    calc(#{$spacing-lg} + env(safe-area-inset-right))
+    calc(#{$spacing-3xl} + env(safe-area-inset-bottom))
+    calc(#{$spacing-lg} + env(safe-area-inset-left));
+  background-color: $color-background;
+  animation: fadeIn $animation-duration-base $easing-ease-out;
+
+  @media (min-width: $breakpoint-md) {
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-4xl $spacing-2xl;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY($spacing-sm);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.verify-email-container {
+  width: 100%;
+  max-width: $container-max-width;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+  animation: slideUp $animation-duration-slow $easing-smooth;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY($spacing-md);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.verify-email-title {
+  text-align: center;
+}
+
+.verify-email-success {
+  padding: $spacing-md;
+  border-radius: $border-radius-md;
+  background-color: $color-background;
+  color: $color-text;
+  font-size: $font-size-base;
+  line-height: $line-height-normal;
+  text-align: center;
+}
+
+.verify-email-error {
+  padding: $spacing-md;
+  border-radius: $border-radius-md;
+  background-color: $color-error-background;
+  color: $color-error-text;
+  font-size: $font-size-sm;
+  line-height: $line-height-normal;
+  text-align: center;
+}
+
+.verify-email-footer {
+  text-align: center;
+}
+
+.verify-email-link {
+  color: $color-primary;
+  text-decoration: none;
+  font-weight: $font-weight-medium;
+  font-size: $font-size-sm;
+  transition: $transition-color;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: $color-primary;
+    transition: width $transition-base;
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  &:hover {
+    color: $color-primary-hover;
+
+    &::after {
+      width: 100%;
+    }
+  }
+
+  &:focus {
+    outline: $border-width-thick solid $color-focus;
+    outline-offset: $border-width-thick;
+    border-radius: $border-radius-sm;
+  }
+}
