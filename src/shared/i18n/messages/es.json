@@ -104,6 +104,38 @@
       "ariaLabel": "Pie de página de la aplicación"
     }
   },
+  "routeFallback": {
+    "notFound": {
+      "eyebrow": "Página no encontrada",
+      "status": "404",
+      "title": "Esta página se nos escapó",
+      "message": "El enlace puede estar desactualizado, incompleto o ya obsoleto. Podemos llevarte de vuelta a un lugar más seguro.",
+      "primaryAction": "Volver al inicio",
+      "primaryActionAriaLabel": "Volver a la página de inicio",
+      "secondaryAction": "Ir al espacio de trabajo",
+      "secondaryActionAriaLabel": "Ir al espacio de trabajo"
+    },
+    "error": {
+      "eyebrow": "Incidente temporal",
+      "status": "Error",
+      "title": "Algo se desvió",
+      "message": "Esta pantalla no pudo cargarse correctamente. Puedes intentarlo de nuevo sin perder tu sesión.",
+      "primaryAction": "Reintentar",
+      "primaryActionAriaLabel": "Intentar cargar la página de nuevo",
+      "secondaryAction": "Volver al inicio",
+      "secondaryActionAriaLabel": "Volver a la página de inicio"
+    },
+    "globalError": {
+      "eyebrow": "Incidente global",
+      "status": "Error crítico",
+      "title": "Perdimos el hilo",
+      "message": "La aplicación no pudo recuperar esta pantalla. Un reinicio limpio suele bastar para volver a empezar.",
+      "primaryAction": "Reiniciar",
+      "primaryActionAriaLabel": "Reiniciar la aplicación",
+      "secondaryAction": "Volver al inicio",
+      "secondaryActionAriaLabel": "Volver a la página de inicio"
+    }
+  },
   "pages": {
     "signup": {
       "title": "Crear cuenta",

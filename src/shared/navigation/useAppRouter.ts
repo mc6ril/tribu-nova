@@ -1,8 +1,8 @@
 "use client";
 
 import { useCallback, useMemo } from "react";
-import { useRouter } from "next/navigation";
 
+import { useRouter } from "@/shared/i18n/routing";
 export type AppRouterNavigationOptions = {
   feedback?: "auto" | "none";
 };
@@ -26,7 +26,7 @@ const omitFeedback = <
 };
 
 /**
- * App-wide router wrapper.
+ * App-wide locale-aware router wrapper.
  * Prefer this over `useRouter` from `next/navigation` in presentation code (see ESLint).
  * The optional `feedback` flag is kept for API compatibility but no longer drives
  * a separate client-side loading overlay; route `loading.tsx` fallbacks own the UX.

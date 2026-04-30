@@ -17,14 +17,13 @@ export const ProfilePreferencesSchema = z.object({
  */
 export const updateProfilePreferences = async (
   gateway: ProfileGateway,
-  preferences: ProfilePreferences,
+  preferences: ProfilePreferences
 ): Promise<Profile | null> => {
   const validated = ProfilePreferencesSchema.parse(
-    preferences,
+    preferences
   ) as ProfilePreferences;
 
   await gateway.updatePreferences(validated);
 
   return gateway.getProfile();
 };
-

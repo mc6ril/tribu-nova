@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/shared/i18n/routing";
 
 export default async function PricingPage({
   params,
@@ -11,7 +11,7 @@ export default async function PricingPage({
     <main style={{ padding: 24 }}>
       <h1>Pricing ({locale})</h1>
       <p>Public localized pricing page (placeholder).</p>
-      <Link href={`/${locale}`}>Back home</Link>
+      <Link href="/">Back home</Link>
     </main>
   );
 }

@@ -1,13 +1,17 @@
-import type { Locale } from "@/shared/i18n/config";
-import { buildHomePath } from "@/shared/i18n/publicPaths";
-import { getStaticTranslator } from "@/shared/i18n/staticTranslator";
+import { getTranslations } from "next-intl/server";
+
+import type { Locale } from "@/shared/core/i18n";
+import { buildHomePath } from "@/shared/i18n/routing";
 import { getSiteUrl } from "@/shared/seo/siteUrl";
 
 /**
  * Server-only JSON-LD for the public home page (WebSite + Organization).
  */
 const WebsiteJsonLd = async ({ locale }: { locale: Locale }) => {
-  const tMetadata = getStaticTranslator(locale, "app.metadata");
+  const tMetadata = await getTranslations({
+    locale,
+    namespace: "app.metadata",
+  });
   const name = tMetadata("title");
   const description = tMetadata("description");
   const base = getSiteUrl();

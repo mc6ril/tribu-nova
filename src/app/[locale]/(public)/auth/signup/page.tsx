@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/shared/i18n/routing";
 
 export default async function SignupPage({
   params,
@@ -13,14 +13,14 @@ export default async function SignupPage({
       <p>Public localized signup page (placeholder).</p>
       <ul style={{ marginTop: 16, display: "grid", gap: 8 }}>
         <li>
-          <Link href={`/${locale}/auth/verify-email`}>Verify email</Link>
+          <Link href="/auth/verify-email">Verify email</Link>
         </li>
         <li>
-          <Link href={`/${locale}/auth/reset-password`}>Reset password</Link>
+          <Link href="/auth/reset-password">Reset password</Link>
         </li>
       </ul>
       <div style={{ marginTop: 16 }}>
-        <Link href={`/${locale}`}>Back home</Link>
+        <Link href="/">Back home</Link>
       </div>
     </main>
   );

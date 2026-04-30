@@ -1,19 +1,23 @@
 import { NextIntlClientProvider } from "next-intl";
-import { getLocale, getMessages } from "next-intl/server";
 
-import { getIntlLocale, type Locale } from "@/shared/i18n";
+import { getIntlLocale, type Locale } from "@/shared/core/i18n";
+import { loadMessages } from "@/shared/i18n/loadMessages";
 import DocumentLang from "@/shared/providers/DocumentLang";
 
 type RequestIntlProviderProps = {
   children: React.ReactNode;
+  /** Locale from `[locale]` URL segment — source of truth for client `useTranslations`. */
+  locale: Locale;
 };
 
-const RequestIntlProvider = async ({ children }: RequestIntlProviderProps) => {
-  const locale = (await getLocale()) as Locale;
-  const messages = await getMessages();
+const RequestIntlProvider = async ({
+  children,
+  locale,
+}: RequestIntlProviderProps) => {
+  const messages = await loadMessages(locale);
 
   return (
-    <NextIntlClientProvider locale={locale} messages={messages}>
+    <NextIntlClientProvider key={locale} locale={locale} messages={messages}>
       <DocumentLang lang={getIntlLocale(locale)} />
       <div className="app-root" lang={getIntlLocale(locale)}>
         {children}

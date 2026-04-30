@@ -5,8 +5,7 @@ import type { SessionGateway } from "@/domains/session/core/ports/session.gatewa
  * Get the current authentication session snapshot.
  */
 export const getCurrentSession = async (
-  gateway: SessionGateway,
+  gateway: SessionGateway
 ): Promise<AuthSession | null> => {
   return gateway.getSession();
 };
-

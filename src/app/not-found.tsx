@@ -1,37 +1,34 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+
 import { PAGE_ROUTES } from "@/shared/constants/routes";
+import { getIntlLocale } from "@/shared/core/i18n";
 import RouteFallbackPage from "@/shared/design-system/route_fallback_page";
-import { getIntlLocale } from "@/shared/i18n";
-import { getFallbackMessages } from "@/shared/i18n/fallbackMessages";
-import { buildHomePath } from "@/shared/i18n/publicPaths";
-import { useRuntimeLocaleSnapshot } from "@/shared/i18n/useRuntimeLocaleSnapshot";
-import DocumentLang from "@/shared/providers/DocumentLang";
-const NotFoundContent = ({
-  locale,
-}: {
-  locale: ReturnType<typeof useRuntimeLocaleSnapshot>;
-}) => {
-  const copy = getFallbackMessages(locale).notFound;
+import { usePathLocale } from "@/shared/i18n/usePathLocale";
+import StaticIntlProvider from "@/shared/providers/StaticIntlProvider";
+
+const NotFoundContent = () => {
+  const t = useTranslations("routeFallback.notFound");
 
   return (
     <RouteFallbackPage
       tone="notFound"
-      eyebrow={copy.eyebrow}
-      statusLabel={copy.status}
+      eyebrow={t("eyebrow")}
+      statusLabel={t("status")}
       statusValue="404"
-      title={copy.title}
-      message={copy.message}
+      title={t("title")}
+      message={t("message")}
       actions={[
         {
-          label: copy.primaryAction,
-          ariaLabel: copy.primaryActionAriaLabel,
-          href: buildHomePath(locale),
+          label: t("primaryAction"),
+          ariaLabel: t("primaryActionAriaLabel"),
+          href: PAGE_ROUTES.HOME,
           variant: "primary",
         },
         {
-          label: copy.secondaryAction,
-          ariaLabel: copy.secondaryActionAriaLabel,
+          label: t("secondaryAction"),
+          ariaLabel: t("secondaryActionAriaLabel"),
           href: PAGE_ROUTES.WORKSPACE,
           variant: "secondary",
         },
@@ -41,15 +38,14 @@ const NotFoundContent = ({
 };
 
 const NotFoundPage = () => {
-  const locale = useRuntimeLocaleSnapshot();
+  const locale = usePathLocale();
 
   return (
-    <>
-      <DocumentLang lang={getIntlLocale(locale)} />
+    <StaticIntlProvider locale={locale}>
       <div className="app-root" lang={getIntlLocale(locale)}>
-        <NotFoundContent locale={locale} />
+        <NotFoundContent />
       </div>
-    </>
+    </StaticIntlProvider>
   );
 };
 

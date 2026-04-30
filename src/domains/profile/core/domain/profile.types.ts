@@ -1,5 +1,5 @@
 import { Theme } from "@/shared/constants/theme";
-import type { Locale } from "@/shared/i18n/config";
+import type { Locale } from "@/shared/core/i18n";
 
 export type ProfilePreferences = {
   theme: Theme;

@@ -1,15 +1,18 @@
 import type { MetadataRoute } from "next";
+import { getTranslations } from "next-intl/server";
 
-import { defaultLocale } from "@/shared/i18n/config";
-import { getStaticTranslator } from "@/shared/i18n/staticTranslator";
+import { defaultLocale } from "@/shared/core/i18n";
 import { buildManifest } from "@/shared/seo/buildManifest";
 
 /**
  * Default web app manifest (PWA install).
  * Prefer the localized manifest route (`/manifest/{locale}`) for public pages.
  */
-const manifest = (): MetadataRoute.Manifest => {
-  const tManifest = getStaticTranslator(defaultLocale, "app.manifest");
+const manifest = async (): Promise<MetadataRoute.Manifest> => {
+  const tManifest = await getTranslations({
+    locale: defaultLocale,
+    namespace: "app.manifest",
+  });
   return buildManifest(defaultLocale, tManifest("description"));
 };
 

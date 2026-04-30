@@ -2,7 +2,7 @@ import {
   defaultLocale,
   type Locale,
   supportedLocales,
-} from "@/shared/i18n/config";
+} from "@/shared/core/i18n";
 import { getSiteUrl } from "@/shared/seo/siteUrl";
 
 type Hreflang = Locale | "x-default";

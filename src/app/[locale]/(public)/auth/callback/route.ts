@@ -1,10 +1,12 @@
 import { NextResponse } from "next/server";
 
+import { AUTH_PAGE_ROUTES, PAGE_ROUTES } from "@/shared/constants/routes";
 import {
   defaultLocale,
   isSupportedLocale,
   type Locale,
-} from "@/shared/i18n/config";
+} from "@/shared/core/i18n";
+import { buildPathForLocale } from "@/shared/i18n/routing";
 import { createSupabaseServerClient } from "@/shared/infrastructure/supabase/client-server";
 
 /**
@@ -24,12 +26,12 @@ const resolveNextPath = ({
   nextPath: string | null;
 }): string => {
   if (!nextPath) {
-    return `/${locale}/account`;
+    return buildPathForLocale(PAGE_ROUTES.ACCOUNT, locale);
   }
 
   // Only allow relative redirects.
   if (!nextPath.startsWith("/")) {
-    return `/${locale}/account`;
+    return buildPathForLocale(PAGE_ROUTES.ACCOUNT, locale);
   }
 
   // If the caller already provided a locale segment, keep it.
@@ -37,8 +39,7 @@ const resolveNextPath = ({
     return nextPath;
   }
 
-  // For app routes like /auth/update-password, prefix with locale.
-  return `/${locale}${nextPath}`;
+  return buildPathForLocale(nextPath, locale);
 };
 
 export const GET = async (
@@ -55,14 +56,18 @@ export const GET = async (
   const redirectTo = resolveNextPath({ locale, nextPath });
 
   if (!code) {
-    return NextResponse.redirect(new URL(`/${locale}/auth/signin`, url));
+    return NextResponse.redirect(
+      new URL(buildPathForLocale(AUTH_PAGE_ROUTES.SIGNIN, locale), url)
+    );
   }
 
   const supabase = await createSupabaseServerClient();
   const { error } = await supabase.auth.exchangeCodeForSession(code);
 
   if (error) {
-    return NextResponse.redirect(new URL(`/${locale}/auth/signin`, url));
+    return NextResponse.redirect(
+      new URL(buildPathForLocale(AUTH_PAGE_ROUTES.SIGNIN, locale), url)
+    );
   }
 
   return NextResponse.redirect(new URL(redirectTo, url));

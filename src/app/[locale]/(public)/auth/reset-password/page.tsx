@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/shared/i18n/routing";
 
 export default async function ResetPasswordPage({
   params,
@@ -15,7 +15,7 @@ export default async function ResetPasswordPage({
         After the user clicks the email link, Supabase redirects to{" "}
         <code>/{locale}/auth/callback</code>.
       </p>
-      <Link href={`/${locale}`}>Back home</Link>
+      <Link href="/">Back home</Link>
     </main>
   );
 }

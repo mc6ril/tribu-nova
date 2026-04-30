@@ -1,4 +1,4 @@
-import type { Locale } from "@/shared/i18n/config";
+import type { Locale } from "@/shared/core/i18n";
 
 import type { AuthSession } from "@/domains/session/core/domain/session.types";
 

@@ -1,14 +1,19 @@
 "use client";
 
-import { IntlProvider } from "use-intl";
+import { NextIntlClientProvider } from "next-intl";
 
-import { getIntlLocale, matchSupportedLocale } from "@/shared/i18n";
+import {
+  defaultLocale,
+  getIntlLocale,
+  matchSupportedLocale,
+} from "@/shared/core/i18n";
+import { messageCatalog } from "@/shared/i18n/messageCatalog";
 import DocumentLang from "@/shared/providers/DocumentLang";
 
 type StaticIntlProviderProps = {
   children: React.ReactNode;
   locale: string;
-  messages: Record<string, unknown>;
+  messages?: Record<string, unknown>;
 };
 
 const StaticIntlProvider = ({
@@ -16,14 +21,19 @@ const StaticIntlProvider = ({
   locale,
   messages,
 }: StaticIntlProviderProps) => {
-  const matchedLocale = matchSupportedLocale(locale);
-  const htmlLang = matchedLocale ? getIntlLocale(matchedLocale) : locale;
+  const resolvedLocale = matchSupportedLocale(locale) ?? defaultLocale;
+  const resolvedMessages = messages ?? messageCatalog[resolvedLocale];
+  const htmlLang = getIntlLocale(resolvedLocale);
 
   return (
-    <IntlProvider locale={locale} messages={messages} timeZone="UTC">
+    <NextIntlClientProvider
+      locale={resolvedLocale}
+      messages={resolvedMessages}
+      timeZone="UTC"
+    >
       <DocumentLang lang={htmlLang} />
       {children}
-    </IntlProvider>
+    </NextIntlClientProvider>
   );
 };
 

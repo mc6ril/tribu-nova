@@ -6,7 +6,7 @@ import {
   defaultLocale,
   isSupportedLocale,
   type Locale,
-} from "@/shared/i18n/config";
+} from "@/shared/core/i18n";
 
 export const runtime = "nodejs";
 

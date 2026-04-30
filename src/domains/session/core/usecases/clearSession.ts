@@ -6,4 +6,3 @@ import type { SessionGateway } from "@/domains/session/core/ports/session.gatewa
 export const clearSession = async (gateway: SessionGateway): Promise<void> => {
   await gateway.clearSession();
 };
-

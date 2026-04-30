@@ -5,8 +5,7 @@ import type { ProfileGateway } from "@/domains/profile/core/ports/profile.gatewa
  * Load the current user's profile from the backing store.
  */
 export const getCurrentProfile = async (
-  gateway: ProfileGateway,
+  gateway: ProfileGateway
 ): Promise<Profile | null> => {
   return gateway.getProfile();
 };
-

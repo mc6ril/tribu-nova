@@ -1,9 +1,18 @@
 import { notFound } from "next/navigation";
+import { setRequestLocale } from "next-intl/server";
 
-import { isSupportedLocale, type Locale } from "@/shared/i18n";
+import {
+  isSupportedLocale,
+  type Locale,
+  supportedLocales,
+} from "@/shared/core/i18n";
+import { resolveIntlLocale } from "@/shared/i18n/resolveIntlLocale";
+import AppProvider from "@/shared/providers/AppProvider";
 import RequestIntlProvider from "@/shared/providers/RequestIntlProvider";
 
-import { LocaleParamProvider } from "./_providers/locale-param-provider";
+export const generateStaticParams = () => {
+  return supportedLocales.map((locale) => ({ locale }));
+};
 
 export default async function LocaleLayout({
   children,
@@ -18,11 +27,13 @@ export default async function LocaleLayout({
     notFound();
   }
 
+  const intlLocale: Locale = await resolveIntlLocale(locale);
+
+  setRequestLocale(intlLocale);
+
   return (
-    <RequestIntlProvider>
-      <LocaleParamProvider locale={locale as Locale}>
-        {children}
-      </LocaleParamProvider>
+    <RequestIntlProvider locale={intlLocale}>
+      <AppProvider>{children}</AppProvider>
     </RequestIntlProvider>
   );
 }

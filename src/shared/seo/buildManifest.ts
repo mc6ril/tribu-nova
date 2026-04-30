@@ -1,8 +1,8 @@
 import type { MetadataRoute } from "next";
 
 import { PRODUCT_BRAND_NAME } from "@/shared/constants/brand";
-import type { Locale } from "@/shared/i18n/config";
-import { buildHomePath } from "@/shared/i18n/publicPaths";
+import type { Locale } from "@/shared/core/i18n";
+import { buildHomePath } from "@/shared/i18n/routing";
 import { getSiteUrl } from "@/shared/seo/siteUrl";
 
 export const buildManifest = (

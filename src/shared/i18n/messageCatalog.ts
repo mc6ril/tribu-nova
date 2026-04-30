@@ -1,7 +1,7 @@
-import messagesEn from "./messages/en.json";
-import messagesEs from "./messages/es.json";
-import messagesFr from "./messages/fr.json";
-import type { Locale } from "./routing";
+import type { Locale } from "@/shared/core/i18n";
+import messagesEn from "@/shared/i18n/messages/en.json";
+import messagesEs from "@/shared/i18n/messages/es.json";
+import messagesFr from "@/shared/i18n/messages/fr.json";
 
 export type IntlMessages = typeof messagesFr;
 

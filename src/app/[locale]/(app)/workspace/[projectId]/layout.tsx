@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/shared/i18n/routing";
 
 export default async function ProjectLayout({
   children,
@@ -7,7 +7,7 @@ export default async function ProjectLayout({
   children: React.ReactNode;
   params: Promise<{ locale: string; projectId: string }>;
 }) {
-  const { locale, projectId } = await params;
+  const { projectId } = await params;
 
   return (
     <div style={{ display: "flex", minHeight: "100vh" }}>
@@ -22,12 +22,10 @@ export default async function ProjectLayout({
           Project {projectId}
         </div>
         <nav style={{ display: "grid", gap: 8 }}>
-          <Link href={`/${locale}/workspace`}>Workspace</Link>
-          <Link href={`/${locale}/workspace/${projectId}/board`}>Board</Link>
-          <Link href={`/${locale}/workspace/${projectId}/recipes`}>
-            Recipes
-          </Link>
-          <Link href={`/${locale}/workspace/${projectId}/projectSettings`}>
+          <Link href="/workspace">Workspace</Link>
+          <Link href={`/workspace/${projectId}/board`}>Board</Link>
+          <Link href={`/workspace/${projectId}/recipes`}>Recipes</Link>
+          <Link href={`/workspace/${projectId}/projectSettings`}>
             Project settings
           </Link>
         </nav>

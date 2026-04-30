@@ -1,11 +1,11 @@
 import type { MetadataRoute } from "next";
 
-import { supportedLocales } from "@/shared/i18n/config";
+import { supportedLocales } from "@/shared/core/i18n";
 import {
   buildHomePath,
   buildLegalPath,
   buildPricingPath,
-} from "@/shared/i18n/publicPaths";
+} from "@/shared/i18n/routing";
 import { getLanguageAlternates } from "@/shared/seo/languageAlternates";
 import { getSiteUrl } from "@/shared/seo/siteUrl";
 

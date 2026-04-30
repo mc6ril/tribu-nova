@@ -1,8 +1,6 @@
 import { z } from "zod";
 
-import type {
-  Profile,
-} from "@/domains/profile/core/domain/profile.types";
+import type { Profile } from "@/domains/profile/core/domain/profile.types";
 import type { ProfileGateway } from "@/domains/profile/core/ports/profile.gateway";
 
 export const ProfileDisplayNameSchema = z
@@ -15,7 +13,7 @@ export const ProfileDisplayNameSchema = z
  */
 export const updateProfileDisplayName = async (
   gateway: ProfileGateway,
-  displayName: string,
+  displayName: string
 ): Promise<Profile | null> => {
   const validated = ProfileDisplayNameSchema.parse(displayName);
 
@@ -23,4 +21,3 @@ export const updateProfileDisplayName = async (
 
   return gateway.getProfile();
 };
-

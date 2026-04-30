@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/shared/i18n/routing";
 
 export default async function WorkspaceEntryPage({
   params,
@@ -13,12 +13,10 @@ export default async function WorkspaceEntryPage({
       <p>Protected entry point (placeholder).</p>
       <ul style={{ marginTop: 16, display: "grid", gap: 8 }}>
         <li>
-          <Link href={`/${locale}/workspace/demo-project`}>
-            Open demo project
-          </Link>
+          <Link href="/workspace/demo-project">Open demo project</Link>
         </li>
         <li>
-          <Link href={`/${locale}/account`}>Account</Link>
+          <Link href="/account">Account</Link>
         </li>
       </ul>
     </main>

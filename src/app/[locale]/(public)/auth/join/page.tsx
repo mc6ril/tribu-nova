@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/shared/i18n/routing";
 
 export default async function JoinPage({
   params,
@@ -14,7 +14,7 @@ export default async function JoinPage({
         Public invitation entry point (placeholder). A user can paste an invite
         link here.
       </p>
-      <Link href={`/${locale}`}>Back home</Link>
+      <Link href="/">Back home</Link>
     </main>
   );
 }

@@ -1,33 +1,55 @@
 import { type NextRequest, NextResponse } from "next/server";
+import createIntlMiddleware from "next-intl/middleware";
 import { type CookieOptions, createServerClient } from "@supabase/ssr";
 
 import { AUTH_PAGE_ROUTES, PAGE_ROUTES } from "@/shared/constants/routes";
-import { requireNonEmptyEnv } from "@/shared/errors/programmingError";
 import {
   defaultLocale,
+  type Locale,
   localeCookieMaxAgeSeconds,
   localeCookieName,
-} from "@/shared/i18n/config";
+  matchSupportedLocale,
+} from "@/shared/core/i18n";
+import { requireNonEmptyEnv } from "@/shared/errors/programmingError";
 import {
+  buildPathForLocale,
   getLocaleFromPathname,
-  getResolvedPublicLocaleFromPathname,
-  isDefaultLocalePublicPathname,
-  localizePublicPathname,
-} from "@/shared/i18n/publicPaths";
-import { resolveRuntimeLocale } from "@/shared/i18n/runtimeLocale";
+  localizeHref,
+  routing,
+  stripLocalePrefix,
+} from "@/shared/i18n/routing";
 import {
   buildAuthCallbackPath,
   getAuthCodeRedirectTarget,
   sanitizeInternalRedirectPath,
 } from "@/shared/utils/authRedirect";
-import { isProtectedRoute, isPublicEntryRoute } from "@/shared/utils/routes";
+import { isProtectedRoute } from "@/shared/utils/routes";
 import { hasSupabaseAuthCookie } from "@/shared/utils/supabaseAuthCookies";
 
-const NEXT_INTL_LOCALE_HEADER_NAME = "X-NEXT-INTL-LOCALE";
+const handleI18nRouting = createIntlMiddleware(routing);
+
+const isRedirectResponse = (response: NextResponse): boolean => {
+  return response.headers.has("location");
+};
+
+const resolveMiddlewareLocale = (
+  request: NextRequest,
+  pathname: string
+): Locale => {
+  const pathLocale = getLocaleFromPathname(pathname);
+  if (pathLocale) {
+    return pathLocale;
+  }
+
+  return (
+    matchSupportedLocale(request.cookies.get(localeCookieName)?.value) ??
+    defaultLocale
+  );
+};
 
 const setLocaleCookie = (
   response: NextResponse,
-  locale: string
+  locale: Locale
 ): NextResponse => {
   response.cookies.set(localeCookieName, locale, {
     path: "/",
@@ -38,14 +60,25 @@ const setLocaleCookie = (
   return response;
 };
 
+const createRedirectResponse = (
+  request: NextRequest,
+  href: string,
+  locale: Locale
+): NextResponse => {
+  return setLocaleCookie(
+    NextResponse.redirect(new URL(href, request.url)),
+    locale
+  );
+};
+
 /**
  * Create Supabase client for Edge Runtime (middleware).
- * Uses @supabase/ssr to handle sessions via cookies.
- * Forwards `forwardHeaders` on every `NextResponse.next` so locale injection is preserved.
+ * Uses @supabase/ssr to handle sessions via cookies while preserving the
+ * `next-intl` response (rewrite headers and locale cookie).
  */
 const createSupabaseClientForMiddleware = (
   request: NextRequest,
-  forwardHeaders: Headers
+  response: NextResponse
 ) => {
   const supabaseUrl = requireNonEmptyEnv(
     process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -56,11 +89,7 @@ const createSupabaseClientForMiddleware = (
     "Missing NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY for Supabase middleware client"
   );
 
-  let supabaseResponse = NextResponse.next({
-    request: {
-      headers: forwardHeaders,
-    },
-  });
+  const supabaseResponse = response;
 
   const supabase = createServerClient(supabaseUrl, supabasePublishableKey, {
     cookies: {
@@ -77,11 +106,6 @@ const createSupabaseClientForMiddleware = (
         cookiesToSet.forEach(({ name, value }) => {
           request.cookies.set(name, value);
         });
-        supabaseResponse = NextResponse.next({
-          request: {
-            headers: forwardHeaders,
-          },
-        });
         cookiesToSet.forEach(({ name, value, options }) => {
           supabaseResponse.cookies.set(name, value, options);
         });
@@ -92,19 +116,6 @@ const createSupabaseClientForMiddleware = (
   return { supabase, response: supabaseResponse };
 };
 
-const appendLocaleResponseCookies = (
-  response: NextResponse,
-  pathname: string,
-  currentCookieLocale?: string
-): NextResponse => {
-  const resolvedPublicLocale = getResolvedPublicLocaleFromPathname(pathname);
-  if (resolvedPublicLocale && resolvedPublicLocale !== currentCookieLocale) {
-    return setLocaleCookie(response, resolvedPublicLocale);
-  }
-
-  return response;
-};
-
 /**
  * Next.js middleware for route optimization (UX redirects).
  *
@@ -113,8 +124,7 @@ const appendLocaleResponseCookies = (
  * - Authorization is enforced by database RLS (ultimate source of truth) and route-level loaders.
  *
  * This middleware provides:
- * - Default-locale public URLs without redirect on `/`
- * - `X-NEXT-INTL-LOCALE` for `next-intl`
+ * - Locale routing, rewrites, detection, and cookie sync through `next-intl`
  * - UX optimization: early redirects for better user experience
  * - Route filtering: prevents loading unnecessary pages
  * - Email verification checks: redirects unverified users
@@ -125,17 +135,15 @@ export const middleware = async (
   request: NextRequest
 ): Promise<NextResponse> => {
   const { pathname } = request.nextUrl;
-  const cookieLocale = request.cookies.get(localeCookieName)?.value;
+  const i18nResponse = handleI18nRouting(request);
 
-  const acceptLanguage = request.headers.get("accept-language");
-  const normalizedPathname =
-    pathname.length > 1 && pathname.endsWith("/")
-      ? pathname.slice(0, -1)
-      : pathname;
-  const pathLocale = getLocaleFromPathname(pathname);
-  const isPublicHome =
-    normalizedPathname === PAGE_ROUTES.HOME ||
-    (pathLocale !== null && normalizedPathname === `/${pathLocale}`);
+  if (isRedirectResponse(i18nResponse)) {
+    return i18nResponse;
+  }
+
+  const locale = resolveMiddlewareLocale(request, pathname);
+  const normalizedPathname = stripLocalePrefix(pathname);
+  const isPublicHome = normalizedPathname === PAGE_ROUTES.HOME;
 
   if (isPublicHome) {
     const code = request.nextUrl.searchParams.get("code");
@@ -148,72 +156,27 @@ export const middleware = async (
         getAuthCodeRedirectTarget(type)
       );
 
-      return appendLocaleResponseCookies(
-        NextResponse.redirect(
-          new URL(
-            buildAuthCallbackPath({
-              code,
-              nextPath,
-              fallbackPath: getAuthCodeRedirectTarget(type),
-            }),
-            request.url
-          )
-        ),
-        pathname,
-        cookieLocale
+      const callbackPath = buildAuthCallbackPath({
+        code,
+        nextPath,
+        fallbackPath: getAuthCodeRedirectTarget(type),
+      });
+
+      return createRedirectResponse(
+        request,
+        localizeHref(callbackPath, locale),
+        locale
       );
     }
   }
 
-  if (isPublicEntryRoute(pathname)) {
-    if (
-      !cookieLocale &&
-      !pathLocale &&
-      isDefaultLocalePublicPathname(pathname)
-    ) {
-      const initialPublicLocale = resolveRuntimeLocale({ acceptLanguage });
-
-      if (initialPublicLocale !== defaultLocale) {
-        const localizedPathname = localizePublicPathname(
-          pathname,
-          initialPublicLocale
-        );
-        const redirectUrl = new URL(localizedPathname, request.url);
-        redirectUrl.search = request.nextUrl.search;
-
-        return setLocaleCookie(
-          NextResponse.redirect(redirectUrl),
-          initialPublicLocale
-        );
-      }
-    }
-
-    return appendLocaleResponseCookies(
-      NextResponse.next(),
-      pathname,
-      cookieLocale
-    );
-  }
-
-  const resolvedLocale = resolveRuntimeLocale({
-    cookieLocale,
-    acceptLanguage,
-  });
-  const requestHeaders = new Headers(request.headers);
-  requestHeaders.set(NEXT_INTL_LOCALE_HEADER_NAME, resolvedLocale);
-
   const isAuthPage =
-    pathname === AUTH_PAGE_ROUTES.SIGNIN ||
-    pathname === AUTH_PAGE_ROUTES.SIGNUP;
+    normalizedPathname === AUTH_PAGE_ROUTES.SIGNIN ||
+    normalizedPathname === AUTH_PAGE_ROUTES.SIGNUP;
   const isProtected = isProtectedRoute(pathname);
 
   if (!isAuthPage && !isProtected) {
-    const response = NextResponse.next({
-      request: {
-        headers: requestHeaders,
-      },
-    });
-    return appendLocaleResponseCookies(response, pathname, cookieLocale);
+    return i18nResponse;
   }
 
   const hasAuthCookie = hasSupabaseAuthCookie(
@@ -222,23 +185,21 @@ export const middleware = async (
 
   if (!hasAuthCookie) {
     if (isProtected) {
-      const signInUrl = new URL(AUTH_PAGE_ROUTES.SIGNIN, request.url);
-      signInUrl.searchParams.set("redirect", pathname);
-      return NextResponse.redirect(signInUrl);
+      const signInUrl = new URL(
+        buildPathForLocale(AUTH_PAGE_ROUTES.SIGNIN, locale),
+        request.url
+      );
+      signInUrl.searchParams.set("redirect", normalizedPathname);
+      return setLocaleCookie(NextResponse.redirect(signInUrl), locale);
     }
 
-    const response = NextResponse.next({
-      request: {
-        headers: requestHeaders,
-      },
-    });
-    return appendLocaleResponseCookies(response, pathname, cookieLocale);
+    return i18nResponse;
   }
 
   try {
     const { supabase, response } = createSupabaseClientForMiddleware(
       request,
-      requestHeaders
+      i18nResponse
     );
 
     const {
@@ -247,32 +208,37 @@ export const middleware = async (
     } = await supabase.auth.getUser();
 
     if (user && isAuthPage) {
-      return NextResponse.redirect(new URL(PAGE_ROUTES.WORKSPACE, request.url));
+      return createRedirectResponse(
+        request,
+        buildPathForLocale(PAGE_ROUTES.WORKSPACE, locale),
+        locale
+      );
     }
 
     if (isProtected) {
       if (error || !user) {
-        const signInUrl = new URL(AUTH_PAGE_ROUTES.SIGNIN, request.url);
-        signInUrl.searchParams.set("redirect", pathname);
-        return NextResponse.redirect(signInUrl);
+        const signInUrl = new URL(
+          buildPathForLocale(AUTH_PAGE_ROUTES.SIGNIN, locale),
+          request.url
+        );
+        signInUrl.searchParams.set("redirect", normalizedPathname);
+        return setLocaleCookie(NextResponse.redirect(signInUrl), locale);
       }
 
       if (!user.email_confirmed_at) {
-        const signInUrl = new URL(AUTH_PAGE_ROUTES.SIGNIN, request.url);
+        const signInUrl = new URL(
+          buildPathForLocale(AUTH_PAGE_ROUTES.SIGNIN, locale),
+          request.url
+        );
         signInUrl.searchParams.set("unverified", "true");
-        return NextResponse.redirect(signInUrl);
+        return setLocaleCookie(NextResponse.redirect(signInUrl), locale);
       }
     }
 
-    return appendLocaleResponseCookies(response, pathname, cookieLocale);
+    return response;
   } catch (error) {
     console.error("[Middleware] Authentication error:", error);
-    const response = NextResponse.next({
-      request: {
-        headers: requestHeaders,
-      },
-    });
-    return appendLocaleResponseCookies(response, pathname, cookieLocale);
+    return i18nResponse;
   }
 };
 

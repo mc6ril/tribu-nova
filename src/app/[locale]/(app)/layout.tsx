@@ -1,6 +1,8 @@
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 
+import { AUTH_PAGE_ROUTES } from "@/shared/constants/routes";
+import { defaultLocale, matchSupportedLocale } from "@/shared/core/i18n";
+import { redirect } from "@/shared/i18n/routing";
 import { APP_COOKIE_KEYS } from "@/shared/infrastructure/storage/cookies";
 
 export default async function AppLayout({
@@ -10,12 +12,13 @@ export default async function AppLayout({
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 }) {
-  const { locale } = await params;
+  const { locale: localeParam } = await params;
+  const locale = matchSupportedLocale(localeParam) ?? defaultLocale;
   const cookieStore = await cookies();
 
   const userCookie = cookieStore.get(APP_COOKIE_KEYS.USER)?.value;
   if (!userCookie) {
-    redirect(`/${locale}/auth/signin`);
+    redirect({ href: AUTH_PAGE_ROUTES.SIGNIN, locale });
   }
 
   return (

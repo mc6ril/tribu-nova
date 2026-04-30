@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/shared/i18n/routing";
 
 export default async function UpdatePasswordPage({
   params,
@@ -14,7 +14,7 @@ export default async function UpdatePasswordPage({
         Public localized update password page (placeholder). This is typically
         the landing page after <code>/auth/callback</code> during reset flows.
       </p>
-      <Link href={`/${locale}`}>Back home</Link>
+      <Link href="/">Back home</Link>
     </main>
   );
 }

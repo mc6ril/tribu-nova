@@ -1,7 +1,7 @@
 import React from "react";
-import Link from "next/link";
 
 import { getAccessibilityId } from "@/shared/a11y/constants";
+import { Link } from "@/shared/i18n/routing";
 
 import styles from "./skip_link.module.scss";
 
