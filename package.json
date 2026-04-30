@@ -16,7 +16,8 @@
     "test:watch": "jest --watch",
     "clean:next": "rm -rf .next",
     "clean:next:dev": "rm -rf .next/dev",
-    "prepare": "husky"
+    "prepare": "husky",
+    "supabase:types": "supabase gen types typescript --project-id xlfeifsojoiisjipwxne > src/shared/infrastructure/supabase/database.types.ts"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",

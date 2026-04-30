@@ -202,12 +202,15 @@ export const middleware = async (
       i18nResponse
     );
 
+    // Claims-first: read the JWT from the cookie without a network call.
+    // getSession() auto-refreshes via the refresh token only when the access
+    // token is expired — zero network calls on the happy path.
+    // Security: this gate is UX-only; RLS is the actual security boundary.
     const {
-      data: { user },
-      error,
-    } = await supabase.auth.getUser();
+      data: { session },
+    } = await supabase.auth.getSession();
 
-    if (user && isAuthPage) {
+    if (session && isAuthPage) {
       return createRedirectResponse(
         request,
         buildPathForLocale(PAGE_ROUTES.WORKSPACE, locale),
@@ -216,7 +219,7 @@ export const middleware = async (
     }
 
     if (isProtected) {
-      if (error || !user) {
+      if (!session) {
         const signInUrl = new URL(
           buildPathForLocale(AUTH_PAGE_ROUTES.SIGNIN, locale),
           request.url
@@ -225,7 +228,7 @@ export const middleware = async (
         return setLocaleCookie(NextResponse.redirect(signInUrl), locale);
       }
 
-      if (!user.email_confirmed_at) {
+      if (!session.user.email_confirmed_at) {
         const signInUrl = new URL(
           buildPathForLocale(AUTH_PAGE_ROUTES.SIGNIN, locale),
           request.url

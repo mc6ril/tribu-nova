@@ -1,6 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 
 import { requireNonEmptyEnv } from "@/shared/errors/programmingError";
+import type { Database } from "@/shared/infrastructure/supabase/database.types";
 
 import "server-only";
 
@@ -18,7 +19,7 @@ export const createSupabasePublicServerClient = () => {
     "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY is not configured."
   );
 
-  return createClient(supabaseUrl, supabasePublishableKey, {
+  return createClient<Database>(supabaseUrl, supabasePublishableKey, {
     auth: {
       autoRefreshToken: false,
       persistSession: false,

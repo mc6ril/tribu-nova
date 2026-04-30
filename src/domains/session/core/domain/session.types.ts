@@ -1,6 +1,6 @@
-import { Profile } from "@/domains/profile/core/domain/profile.types";
+import type { Profile } from "@/domains/profile/core/domain/profile.types";
 
 export type AuthSession = {
-  user: Profile | null;
+  user: Profile;
   expiresAt?: number;
 };

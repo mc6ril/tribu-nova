@@ -1,55 +1,58 @@
-import { Session } from "@supabase/supabase-js";
+import type { Session } from "@supabase/supabase-js";
 
-import { Theme } from "@/shared/constants/theme";
+import type { Theme } from "@/shared/constants/theme";
 import type { Locale } from "@/shared/core/i18n";
 
-import type { ProfilePreferences } from "@/domains/profile/core/domain/profile.types";
-import { AuthSession } from "@/domains/session/core/domain/session.types";
+import type {
+  Profile,
+  ProfilePreferences,
+} from "@/domains/profile/core/domain/profile.types";
+import type { AuthSession } from "@/domains/session/core/domain/session.types";
+
+const resolveTheme = (raw: unknown): Theme => {
+  if (raw === "light" || raw === "dark" || raw === "system") return raw;
+  return "system";
+};
+
+const resolveLocale = (raw: unknown): Locale => {
+  if (raw === "fr" || raw === "en" || raw === "es") return raw;
+  return "en";
+};
 
 /**
- * Maps Supabase Session to the stable session shape returned by auth flows.
+ * Maps a Supabase JWT session to the stable SessionUser shape.
+ * Reads only from session.user (JWT claims + user_metadata) — zero DB calls.
  */
-export const mapSupabaseSessionToCurrentSession = (
+export const mapSupabaseSessionToAuthSession = (
   session: Session,
   userEmail: string
 ): AuthSession => {
-  const rawPreferences = session.user.user_metadata.preferences as
-    | Partial<ProfilePreferences>
+  const meta = session.user.user_metadata as
+    | Record<string, unknown>
     | undefined;
 
-  const languageCandidate = rawPreferences?.language;
-  const language: Locale =
-    languageCandidate === "fr" ||
-    languageCandidate === "en" ||
-    languageCandidate === "es"
-      ? languageCandidate
-      : "en";
-
-  const themeCandidate = rawPreferences?.theme;
-  const theme: Theme =
-    themeCandidate === "light" ||
-    themeCandidate === "dark" ||
-    themeCandidate === "system"
-      ? themeCandidate
-      : "system";
-
   const preferences: ProfilePreferences = {
-    theme,
-    emailNotifications: rawPreferences?.emailNotifications ?? false,
-    language,
+    theme: resolveTheme(
+      (meta?.preferences as Record<string, unknown>)?.theme ?? meta?.theme
+    ),
+    emailNotifications: Boolean(
+      (meta?.preferences as Record<string, unknown>)?.emailNotifications ??
+      false
+    ),
+    language: resolveLocale(
+      (meta?.preferences as Record<string, unknown>)?.language ?? meta?.locale
+    ),
+    gettingStartedStatus: "pending",
   };
 
-  return {
-    user: {
-      id: session.user.id,
-      email: userEmail,
-      displayName: session.user.user_metadata.display_name,
-      avatarUrl: session.user.user_metadata.avatar_url,
-      preferences,
-      termsAcceptedAt: String(
-        session.user.user_metadata.terms_accepted_at ?? ""
-      ),
-    },
-    expiresAt: session.expires_at,
+  const user: Profile = {
+    id: session.user.id,
+    email: userEmail,
+    displayName: meta?.display_name as string | undefined,
+    avatarUrl: meta?.avatar_url as string | undefined,
+    preferences,
+    termsAcceptedAt: String(meta?.terms_accepted_at ?? ""),
   };
+
+  return { user, expiresAt: session.expires_at };
 };

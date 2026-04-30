@@ -1,35 +1,26 @@
 import type { AuthSession } from "@/domains/session/core/domain/session.types";
 
 /**
- * Gateway contract for session operations.
- * Responsible for managing session state and user identity within the app.
+ * Gateway contract for reading and clearing the current session.
+ *
+ * Session persistence (cookie write) is handled automatically by @supabase/ssr
+ * and does not belong here. This gateway is read-only from the app's perspective.
  */
 export type SessionGateway = {
   /**
-   * Get the current session snapshot.
+   * Return the current session snapshot, or null if not authenticated.
+   * On the server this calls getUser() (validated against Supabase Auth).
+   * On the client this reads from the in-memory Supabase client state.
    */
   getSession(): Promise<AuthSession | null>;
 
   /**
-   * Persist the current session snapshot.
-   * Passing null clears any existing session.
-   */
-  setSession(session: AuthSession | null): Promise<void>;
-
-  /**
-   * Clear the current session and user identity during sign-out or when the
-   * session becomes invalid.
+   * Sign out and clear the session cookie.
    */
   clearSession(): Promise<void>;
 
   /**
-   * Check if the user is authenticated according to the current session state.
+   * Quick authenticated check without loading the full session.
    */
   isAuthenticated(): Promise<boolean>;
-
-  /**
-   * Optionally subscribe to session changes.
-   * Returns an unsubscribe function when implemented.
-   */
-  onSessionChange?(listener: (session: AuthSession | null) => void): () => void;
 };
