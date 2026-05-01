@@ -30,6 +30,9 @@ export default function RootLayout({
     <html
       lang={defaultLocale}
       className={`${geistSans.variable} ${geistMono.variable}`}
+      // suppressHydrationWarning
+      data-theme="light"
+      style={{ colorScheme: "light" }}
     >
       <body>{children}</body>
     </html>

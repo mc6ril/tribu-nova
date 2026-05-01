@@ -1,17 +1,20 @@
-import { Link } from "@/shared/i18n/routing";
+import VerifyEmailPage from "@/domains/auth/presentation/pages/verify-email";
 
-export default async function VerifyEmailPage({
-  params,
+export default async function VerifyEmail({
+  searchParams,
 }: {
-  params: Promise<{ locale: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const { locale } = await params;
+  const resolved = await searchParams;
 
-  return (
-    <main style={{ padding: 24 }}>
-      <h1>Verify email ({locale})</h1>
-      <p>Public localized verify email page (placeholder).</p>
-      <Link href="/">Back home</Link>
-    </main>
+  // Flatten string[] → string (only string values passed to the client component)
+  const flatParams = Object.fromEntries(
+    Object.entries(resolved).flatMap(([key, value]) => {
+      if (typeof value === "string") return [[key, value]];
+      if (Array.isArray(value) && value[0]) return [[key, value[0]]];
+      return [];
+    })
   );
+
+  return <VerifyEmailPage searchParams={flatParams} />;
 }

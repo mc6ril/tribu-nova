@@ -24,13 +24,14 @@ export const SignUpSchema = z.object({
     .min(1, "Email is required")
     .email({ message: "Invalid email format" }),
   password: PasswordSchema,
+  confirmPassword: z.string().min(1, "Password confirmation is required"),
   displayName: z
     .string()
     .trim()
     .max(100, "Display name must be less than 100 characters")
     .optional(),
-  termsAcceptedAt: z.string().optional(),
   locale: z.enum(["fr", "en", "es"]),
+  acceptedTermsAt: z.string().optional(),
 });
 
 /**

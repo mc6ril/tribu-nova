@@ -27,7 +27,7 @@ export type { Locale };
 export const routing = defineRouting({
   locales: supportedLocales,
   defaultLocale,
-  localePrefix: "as-needed",
+  localePrefix: "always",
   localeCookie: {
     name: localeCookieName,
     sameSite: "lax",

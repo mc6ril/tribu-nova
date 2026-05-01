@@ -1,0 +1,23 @@
+"use client";
+
+import { useMutation } from "@tanstack/react-query";
+
+import { PAGE_ROUTES } from "@/shared/constants/routes";
+import { createSupabaseBrowserClient } from "@/shared/infrastructure/supabase/client-browser";
+import { useAppRouter } from "@/shared/navigation/useAppRouter";
+
+import type { SignInInput } from "@/domains/auth/core/domain/auth.types";
+import { signInUser } from "@/domains/auth/core/usecases/user/signInUser";
+import { createSupabaseAuthGateway } from "@/domains/auth/infrastructure/supabase/AuthGateway.supabase";
+
+export const useSignIn = (redirectPath: string = PAGE_ROUTES.WORKSPACE) => {
+  const router = useAppRouter();
+  const gateway = createSupabaseAuthGateway(createSupabaseBrowserClient());
+
+  return useMutation({
+    mutationFn: (input: SignInInput) => signInUser(gateway, input),
+    onSuccess: () => {
+      router.push(redirectPath);
+    },
+  });
+};

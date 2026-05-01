@@ -32,10 +32,7 @@ const isRedirectResponse = (response: NextResponse): boolean => {
   return response.headers.has("location");
 };
 
-const resolveMiddlewareLocale = (
-  request: NextRequest,
-  pathname: string
-): Locale => {
+const resolveProxyLocale = (request: NextRequest, pathname: string): Locale => {
   const pathLocale = getLocaleFromPathname(pathname);
   if (pathLocale) {
     return pathLocale;
@@ -72,11 +69,11 @@ const createRedirectResponse = (
 };
 
 /**
- * Create Supabase client for Edge Runtime (middleware).
+ * Create Supabase client for the Next.js Proxy runtime.
  * Uses @supabase/ssr to handle sessions via cookies while preserving the
  * `next-intl` response (rewrite headers and locale cookie).
  */
-const createSupabaseClientForMiddleware = (
+const createSupabaseClientForProxy = (
   request: NextRequest,
   response: NextResponse
 ) => {
@@ -117,13 +114,13 @@ const createSupabaseClientForMiddleware = (
 };
 
 /**
- * Next.js middleware for route optimization (UX redirects).
+ * Next.js Proxy for route optimization (UX redirects).
  *
  * Security model:
- * - Authentication gating is enforced here (Edge) for protected routes.
+ * - Authentication gating is enforced here for protected routes.
  * - Authorization is enforced by database RLS (ultimate source of truth) and route-level loaders.
  *
- * This middleware provides:
+ * This proxy provides:
  * - Locale routing, rewrites, detection, and cookie sync through `next-intl`
  * - UX optimization: early redirects for better user experience
  * - Route filtering: prevents loading unnecessary pages
@@ -131,9 +128,7 @@ const createSupabaseClientForMiddleware = (
  *
  * On error, fails open (allows access) - RLS will still protect data access.
  */
-export const middleware = async (
-  request: NextRequest
-): Promise<NextResponse> => {
+export const proxy = async (request: NextRequest): Promise<NextResponse> => {
   const { pathname } = request.nextUrl;
   const i18nResponse = handleI18nRouting(request);
 
@@ -141,7 +136,7 @@ export const middleware = async (
     return i18nResponse;
   }
 
-  const locale = resolveMiddlewareLocale(request, pathname);
+  const locale = resolveProxyLocale(request, pathname);
   const normalizedPathname = stripLocalePrefix(pathname);
   const isPublicHome = normalizedPathname === PAGE_ROUTES.HOME;
 
@@ -173,9 +168,10 @@ export const middleware = async (
   const isAuthPage =
     normalizedPathname === AUTH_PAGE_ROUTES.SIGNIN ||
     normalizedPathname === AUTH_PAGE_ROUTES.SIGNUP;
+  const isJoinPage = normalizedPathname.startsWith(`${AUTH_PAGE_ROUTES.JOIN}/`);
   const isProtected = isProtectedRoute(pathname);
 
-  if (!isAuthPage && !isProtected) {
+  if (!isAuthPage && !isJoinPage && !isProtected) {
     return i18nResponse;
   }
 
@@ -184,7 +180,7 @@ export const middleware = async (
   );
 
   if (!hasAuthCookie) {
-    if (isProtected) {
+    if (isProtected || isJoinPage) {
       const signInUrl = new URL(
         buildPathForLocale(AUTH_PAGE_ROUTES.SIGNIN, locale),
         request.url
@@ -197,7 +193,7 @@ export const middleware = async (
   }
 
   try {
-    const { supabase, response } = createSupabaseClientForMiddleware(
+    const { supabase, response } = createSupabaseClientForProxy(
       request,
       i18nResponse
     );
@@ -240,13 +236,13 @@ export const middleware = async (
 
     return response;
   } catch (error) {
-    console.error("[Middleware] Authentication error:", error);
+    console.error("[Proxy] Authentication error:", error);
     return i18nResponse;
   }
 };
 
 /**
- * Middleware configuration.
+ * Proxy configuration for app routes.
  * Matches request paths except static assets and API (see matcher).
  */
 export const config = {
