@@ -24,14 +24,13 @@ export const SignUpSchema = z.object({
     .min(1, "Email is required")
     .email({ message: "Invalid email format" }),
   password: PasswordSchema,
-  confirmPassword: z.string().min(1, "Password confirmation is required"),
   displayName: z
     .string()
     .trim()
     .max(100, "Display name must be less than 100 characters")
     .optional(),
   locale: z.enum(["fr", "en", "es"]),
-  acceptedTermsAt: z.string().optional(),
+  termsAcceptedAt: z.string().datetime(),
 });
 
 /**
@@ -39,7 +38,7 @@ export const SignUpSchema = z.object({
  * Validates input and creates a new user account.
  *
  * @param repository - Auth repository
- * @param input - Signup credentials (email, password)
+ * @param input - Signup credentials and user metadata
  * @returns Authentication result with session (or null session with requiresEmailVerification flag if email verification is required)
  * @throws AuthenticationFailure if signup fails (email already exists, weak password, etc.)
  */

@@ -1,0 +1,179 @@
+@use "@/styles/variables/gradients" as *;
+@use "@/styles/variables/spacing" as *;
+
+.workspace-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 0;
+  background: $color-workspace-page-gradient;
+  display: flex;
+  flex-direction: column;
+}
+
+.workspace-container {
+  max-width: $spacing-container-max-width-wide;
+  margin: 0 auto;
+  padding: $spacing-3xl $spacing-2xl;
+  width: 100%;
+}
+
+.workspace-loader {
+  width: 100%;
+}
+
+// ── Diagnostics page ──────────────────────────────────────────────────────────
+
+.diagnostics-header {
+  margin-bottom: $spacing-4xl;
+
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0 0 $spacing-sm;
+  }
+
+  p {
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+    margin: 0;
+  }
+}
+
+.diagnostics {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-3xl;
+}
+
+.diagnostics-loading {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  padding: $spacing-3xl 0;
+}
+
+.diagnostics-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: $spacing-3xl;
+}
+
+.diagnostics-card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0 0 $spacing-sm;
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.diagnostics-card-note {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  margin: 0 0 $spacing-3xl;
+
+  code {
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+    background: var(--color-surface-subtle);
+    padding: 1px 4px;
+    border-radius: 3px;
+  }
+}
+
+.diagnostics-warning {
+  font-size: 0.875rem;
+  color: var(--color-error, #c0392b);
+}
+
+.diagnostics-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  padding: 0 $spacing-xs;
+  background: var(--color-accent-bg-soft);
+  color: var(--color-accent);
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.diagnostics-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+
+  th {
+    text-align: left;
+    color: var(--color-text-muted);
+    font-weight: 500;
+    padding: 0 $spacing-lg $spacing-sm;
+    border-bottom: 1px solid var(--color-border-subtle);
+
+    &:first-child {
+      padding-left: 0;
+    }
+  }
+
+  td {
+    padding: $spacing-sm $spacing-lg;
+    border-bottom: 1px solid var(--color-border-subtle);
+    color: var(--color-text);
+    vertical-align: top;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    code {
+      font-size: 0.8125rem;
+      background: var(--color-surface-subtle);
+      padding: 1px 5px;
+      border-radius: 3px;
+      word-break: break-all;
+    }
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+}
+
+.diagnostics-cell-key {
+  color: var(--color-text-secondary);
+  width: 160px;
+  white-space: nowrap;
+}
+
+.diagnostics-cell-muted {
+  color: var(--color-text-muted);
+  font-size: 0.8125rem;
+}
+
+.diagnostics-value-present {
+  color: var(--color-sage-text) !important;
+  background: var(--color-sage-bg-soft) !important;
+}
+
+.diagnostics-value-missing {
+  color: var(--color-text-muted) !important;
+  font-style: italic;
+}
+
+.diagnostics-value-token {
+  color: var(--color-accent-tan) !important;
+  background: var(--color-accent-peach-bg-soft) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .workspace-page,
+  .workspace-page * {
+    animation-duration: 0ms !important;
+    animation: none !important;
+    transition-duration: 0ms !important;
+  }
+}

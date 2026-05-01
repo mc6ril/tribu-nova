@@ -203,10 +203,10 @@ export const proxy = async (request: NextRequest): Promise<NextResponse> => {
     // token is expired — zero network calls on the happy path.
     // Security: this gate is UX-only; RLS is the actual security boundary.
     const {
-      data: { session },
-    } = await supabase.auth.getSession();
+      data: { user },
+    } = await supabase.auth.getUser();
 
-    if (session && isAuthPage) {
+    if (user && isAuthPage) {
       return createRedirectResponse(
         request,
         buildPathForLocale(PAGE_ROUTES.WORKSPACE, locale),
@@ -215,7 +215,7 @@ export const proxy = async (request: NextRequest): Promise<NextResponse> => {
     }
 
     if (isProtected) {
-      if (!session) {
+      if (!user) {
         const signInUrl = new URL(
           buildPathForLocale(AUTH_PAGE_ROUTES.SIGNIN, locale),
           request.url
@@ -224,7 +224,7 @@ export const proxy = async (request: NextRequest): Promise<NextResponse> => {
         return setLocaleCookie(NextResponse.redirect(signInUrl), locale);
       }
 
-      if (!session.user.email_confirmed_at) {
+      if (!user?.email_confirmed_at) {
         const signInUrl = new URL(
           buildPathForLocale(AUTH_PAGE_ROUTES.SIGNIN, locale),
           request.url

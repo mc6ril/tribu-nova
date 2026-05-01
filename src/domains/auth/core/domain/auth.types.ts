@@ -6,7 +6,7 @@ export type SignUpInput = {
   email: string;
   password: string;
   displayName?: string;
-  termsAcceptedAt?: string;
+  termsAcceptedAt: string;
   /** Used in Supabase email templates (`user_metadata.locale`). */
   locale: Locale;
 };

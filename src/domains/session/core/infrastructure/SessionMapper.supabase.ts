@@ -1,4 +1,4 @@
-import type { Session } from "@supabase/supabase-js";
+import type { Session, User } from "@supabase/supabase-js";
 
 import type { Theme } from "@/shared/constants/theme";
 import type { Locale } from "@/shared/core/i18n";
@@ -19,6 +19,45 @@ const resolveLocale = (raw: unknown): Locale => {
   return "en";
 };
 
+const buildProfileFromMeta = (
+  id: string,
+  email: string,
+  meta: Record<string, unknown> | undefined
+): Profile => {
+  const preferences: ProfilePreferences = {
+    theme: resolveTheme(
+      (meta?.preferences as Record<string, unknown>)?.theme ?? meta?.theme
+    ),
+    emailNotifications: Boolean(
+      (meta?.preferences as Record<string, unknown>)?.emailNotifications ?? false
+    ),
+    language: resolveLocale(
+      (meta?.preferences as Record<string, unknown>)?.language ?? meta?.locale
+    ),
+    gettingStartedStatus: "pending",
+  };
+
+  return {
+    id,
+    email,
+    displayName: meta?.display_name as string | undefined,
+    avatarUrl: meta?.avatar_url as string | undefined,
+    preferences,
+    termsAcceptedAt: String(meta?.terms_accepted_at ?? ""),
+  };
+};
+
+/**
+ * Maps a server-validated Supabase User to the stable AuthSession shape.
+ * Use this with getUser() — no getSession() call needed, no security warning.
+ */
+export const mapSupabaseUserToAuthSession = (user: User): AuthSession => {
+  const meta = user.user_metadata as Record<string, unknown> | undefined;
+  return {
+    user: buildProfileFromMeta(user.id, user.email ?? "", meta),
+  };
+};
+
 /**
  * Maps a Supabase JWT session to the stable SessionUser shape.
  * Reads only from session.user (JWT claims + user_metadata) — zero DB calls.
@@ -27,32 +66,9 @@ export const mapSupabaseSessionToAuthSession = (
   session: Session,
   userEmail: string
 ): AuthSession => {
-  const meta = session.user.user_metadata as
-    | Record<string, unknown>
-    | undefined;
-
-  const preferences: ProfilePreferences = {
-    theme: resolveTheme(
-      (meta?.preferences as Record<string, unknown>)?.theme ?? meta?.theme
-    ),
-    emailNotifications: Boolean(
-      (meta?.preferences as Record<string, unknown>)?.emailNotifications ??
-      false
-    ),
-    language: resolveLocale(
-      (meta?.preferences as Record<string, unknown>)?.language ?? meta?.locale
-    ),
-    gettingStartedStatus: "pending",
+  const meta = session.user.user_metadata as Record<string, unknown> | undefined;
+  return {
+    user: buildProfileFromMeta(session.user.id, userEmail, meta),
+    expiresAt: session.expires_at,
   };
-
-  const user: Profile = {
-    id: session.user.id,
-    email: userEmail,
-    displayName: meta?.display_name as string | undefined,
-    avatarUrl: meta?.avatar_url as string | undefined,
-    preferences,
-    termsAcceptedAt: String(meta?.terms_accepted_at ?? ""),
-  };
-
-  return { user, expiresAt: session.expires_at };
 };
