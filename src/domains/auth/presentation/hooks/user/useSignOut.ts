@@ -13,7 +13,9 @@ export const useSignOut = () => {
   const gateway = createSupabaseAuthGateway(createSupabaseBrowserClient());
 
   return useMutation({
-    mutationFn: () => signOutUser(gateway),
+    mutationFn: async () => {
+      await signOutUser(gateway);
+    },
     onSuccess: () => {
       router.push("/");
     },
