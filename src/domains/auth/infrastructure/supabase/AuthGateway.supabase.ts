@@ -24,7 +24,10 @@ import type {
 } from "@/domains/auth/core/domain/auth.types";
 import type { AuthGateway } from "@/domains/auth/core/ports/auth.gateway";
 import { handleAuthError } from "@/domains/auth/infrastructure/errors/authErrorHandler";
-import { mapSupabaseSessionToAuthSession } from "@/domains/session/core/infrastructure/SessionMapper.supabase";
+import {
+  mapSupabaseSessionToAuthSession,
+  mapSupabaseUserToAuthSession,
+} from "@/domains/session/core/infrastructure/SessionMapper.supabase";
 
 const resolveBrowserLocaleSegment = (): Locale | null => {
   if (typeof window === "undefined") return null;
@@ -240,10 +243,12 @@ export const createSupabaseAuthGateway = (
       }
 
       // PKCE flow: session already exists from auth callback exchange.
-      const { data: sessionData, error: sessionError } =
-        await supabase.auth.getSession();
-      if (sessionError) return handleAuthError(sessionError);
-      if (!sessionData.session) {
+      const {
+        data: { user },
+        error: userError,
+      } = await supabase.auth.getUser();
+      if (userError) return handleAuthError(userError);
+      if (!user) {
         return handleAuthError(
           createAppError(AUTH_ERROR_CODES.INVALID_TOKEN, {
             debugMessage:
@@ -252,16 +257,14 @@ export const createSupabaseAuthGateway = (
         );
       }
 
-      const { error: updateError } = await supabase.auth.updateUser({
-        password: input.password,
-      });
+      const { data: updateData, error: updateError } =
+        await supabase.auth.updateUser({
+          password: input.password,
+        });
       if (updateError) return handleAuthError(updateError);
 
       return {
-        session: mapSupabaseSessionToAuthSession(
-          sessionData.session,
-          sessionData.session.user.email ?? input.email ?? ""
-        ),
+        session: mapSupabaseUserToAuthSession(updateData.user ?? user),
       };
     } catch (error) {
       return handleAuthError(error);
@@ -271,13 +274,10 @@ export const createSupabaseAuthGateway = (
   async verifyEmail(input: VerifyEmailInput): Promise<AuthResult> {
     try {
       if (input.code?.trim()) {
-        const { error } = await supabase.auth.exchangeCodeForSession(
+        const { data, error } = await supabase.auth.exchangeCodeForSession(
           input.code
         );
         if (error) return handleAuthError(error);
-
-        const { data, error: sessionError } = await supabase.auth.getSession();
-        if (sessionError) return handleAuthError(sessionError);
 
         const session = data.session;
         return {

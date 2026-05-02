@@ -3,13 +3,13 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Database } from "@/shared/infrastructure/supabase/database.types";
 
 import type { AuthSession } from "@/domains/session/core/domain/session.types";
-import { mapSupabaseSessionToAuthSession } from "@/domains/session/core/infrastructure/SessionMapper.supabase";
+import { mapSupabaseUserToAuthSession } from "@/domains/session/core/infrastructure/SessionMapper.supabase";
 import type { SessionGateway } from "@/domains/session/core/ports/session.gateway";
 
 /**
- * Server-side SessionGateway backed by Supabase.
- * Uses getUser() to validate the JWT against Supabase Auth on every call —
- * wrap with React.cache() at the call site to deduplicate within a request.
+ * Client-side SessionGateway backed by Supabase.
+ * Use from client components and server actions only.
+ * In Server Components use getServerSession() which reads the signed cookie.
  */
 export const createSupabaseSessionGateway = (
   supabase: SupabaseClient<Database>
@@ -22,13 +22,7 @@ export const createSupabaseSessionGateway = (
 
     if (error || !user) return null;
 
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
-
-    if (!session) return null;
-
-    return mapSupabaseSessionToAuthSession(session, user.email ?? "");
+    return mapSupabaseUserToAuthSession(user);
   },
 
   async clearSession(): Promise<void> {
@@ -38,7 +32,8 @@ export const createSupabaseSessionGateway = (
   async isAuthenticated(): Promise<boolean> {
     const {
       data: { user },
+      error,
     } = await supabase.auth.getUser();
-    return user !== null;
+    return !error && user !== null;
   },
 });

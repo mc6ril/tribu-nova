@@ -10,9 +10,10 @@ import { getServerSession } from "@/domains/session/infrastructure/supabase/getS
 const APP_COOKIE_PURPOSES: Record<string, string> = {
   [APP_COOKIE_KEYS.LOCALE]: "Language preference — written client-side",
   [APP_COOKIE_KEYS.THEME]: "UI theme — written client-side",
-  [APP_COOKIE_KEYS.RUNTIME_CONFIG_OVERRIDES]: "Dev feature flag overrides — written client-side",
+  [APP_COOKIE_KEYS.RUNTIME_CONFIG_OVERRIDES]:
+    "Dev feature flag overrides — written client-side",
   [APP_COOKIE_KEYS.USER]:
-    "Auth gate — set server-side, checked by (app) layout on every navigation",
+    "Auth gate — signed server-side cookie, read by proxy and server layout to skip Supabase Auth on happy path",
 };
 
 const RELEVANT_HEADERS = [
@@ -44,7 +45,10 @@ async function DiagnosticsContent() {
       <section className={styles["diagnostics-card"]}>
         <h2 className={styles["diagnostics-card-title"]}>Session</h2>
         <p className={styles["diagnostics-card-note"]}>
-          Resolved from Supabase JWT — zero DB calls. Memoised once per request via{" "}
+          Resolved from the signed <code>workbench-user</code> cookie on the
+          happy path — zero Supabase Auth calls. Falls back to{" "}
+          <code>getSession()</code> (JWT local + refresh token) when the cookie
+          is absent or expired. Memoised once per request via{" "}
           <code>React.cache()</code>.
         </p>
         {session ? (
@@ -62,6 +66,12 @@ async function DiagnosticsContent() {
                     String(session.user.preferences.emailNotifications),
                   ],
                   ["Terms accepted at", session.user.termsAcceptedAt || "—"],
+                  [
+                    "Expires at",
+                    session.expiresAt
+                      ? new Date(session.expiresAt * 1000).toISOString()
+                      : "—",
+                  ],
                 ] as [string, string][]
               ).map(([key, value]) => (
                 <tr key={key}>
@@ -83,8 +93,9 @@ async function DiagnosticsContent() {
       <section className={styles["diagnostics-card"]}>
         <h2 className={styles["diagnostics-card-title"]}>App Cookies</h2>
         <p className={styles["diagnostics-card-note"]}>
-          Cookies the app manages explicitly. Preference cookies are written by the browser.
-          The auth gate cookie is set server-side by Supabase SSR.
+          Cookies the app manages explicitly. Preference cookies are written by
+          the browser. The auth gate cookie is written server-side (HMAC-signed,
+          HttpOnly) by the callback route and auth server actions.
         </p>
         <table className={styles["diagnostics-table"]}>
           <thead>
@@ -129,11 +140,12 @@ async function DiagnosticsContent() {
       <section className={styles["diagnostics-card"]}>
         <h2 className={styles["diagnostics-card-title"]}>
           All Cookies{" "}
-          <span className={styles["diagnostics-count"]}>{allCookies.length}</span>
+          <span className={styles["diagnostics-count"]}>
+            {allCookies.length}
+          </span>
         </h2>
         <p className={styles["diagnostics-card-note"]}>
-          Complete cookie jar. Supabase auth tokens (<code>sb-*</code>) and the app JWT are
-          hidden.
+          Complete cookie jar — all values shown.
         </p>
         <table className={styles["diagnostics-table"]}>
           <thead>
@@ -158,7 +170,7 @@ async function DiagnosticsContent() {
                   >
                     {sensitiveNames.has(name)
                       ? "[token — not shown]"
-                      : (value || "(empty)")}
+                      : value || "(empty)"}
                   </code>
                 </td>
               </tr>
@@ -177,16 +189,18 @@ async function DiagnosticsContent() {
             </tr>
           </thead>
           <tbody>
-            {RELEVANT_HEADERS.filter((name) => headerStore.has(name)).map((name) => (
-              <tr key={name}>
-                <td>
-                  <code>{name}</code>
-                </td>
-                <td>
-                  <code>{headerStore.get(name)}</code>
-                </td>
-              </tr>
-            ))}
+            {RELEVANT_HEADERS.filter((name) => headerStore.has(name)).map(
+              (name) => (
+                <tr key={name}>
+                  <td>
+                    <code>{name}</code>
+                  </td>
+                  <td>
+                    <code>{headerStore.get(name)}</code>
+                  </td>
+                </tr>
+              )
+            )}
           </tbody>
         </table>
       </section>
@@ -201,11 +215,14 @@ export default function WorkspaceTemporaryPage() {
         <header className={styles["diagnostics-header"]}>
           <h1>Auth Diagnostics</h1>
           <p>
-            Temporary page — verifies session, cookies, and headers after authentication.
+            Temporary page — verifies session, cookies, and headers after
+            authentication.
           </p>
         </header>
         <Suspense
-          fallback={<div className={styles["diagnostics-loading"]}>Loading…</div>}
+          fallback={
+            <div className={styles["diagnostics-loading"]}>Loading…</div>
+          }
         >
           <DiagnosticsContent />
         </Suspense>

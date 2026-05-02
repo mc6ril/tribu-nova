@@ -9,10 +9,12 @@ import {
 import { buildPathForLocale } from "@/shared/i18n/routing";
 import { createSupabaseServerClient } from "@/shared/infrastructure/supabase/client-server";
 
+import { writeAppSessionCookie } from "@/domains/session/infrastructure/supabase/writeAppSessionCookie";
+
 /**
  * Auth callback route handler for Supabase PKCE flow.
- * Exchanges the authorization code for a session, then redirects
- * to the target page (e.g., /auth/update-password after password reset).
+ * Exchanges the authorization code for a session, then writes the signed
+ * `workbench-user` cookie and redirects to the target page.
  */
 
 const resolveLocale = (value: string): Locale =>
@@ -62,13 +64,15 @@ export const GET = async (
   }
 
   const supabase = await createSupabaseServerClient();
-  const { error } = await supabase.auth.exchangeCodeForSession(code);
+  const { data, error } = await supabase.auth.exchangeCodeForSession(code);
 
-  if (error) {
+  if (error || !data.user) {
     return NextResponse.redirect(
       new URL(buildPathForLocale(AUTH_PAGE_ROUTES.SIGNIN, locale), url)
     );
   }
+
+  await writeAppSessionCookie(data.user);
 
   return NextResponse.redirect(new URL(redirectTo, url));
 };

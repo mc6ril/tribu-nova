@@ -3,14 +3,15 @@ import type { AuthSession } from "@/domains/session/core/domain/session.types";
 /**
  * Gateway contract for reading and clearing the current session.
  *
- * Session persistence (cookie write) is handled automatically by @supabase/ssr
- * and does not belong here. This gateway is read-only from the app's perspective.
+ * For server rendering, prefer `getServerSession()` which reads the signed
+ * `workbench-user` cookie (zero network calls on the happy path).
+ * This gateway is used by client-side code and server actions.
  */
 export type SessionGateway = {
   /**
    * Return the current session snapshot, or null if not authenticated.
-   * On the server this calls getUser() (validated against Supabase Auth).
-   * On the client this reads from the in-memory Supabase client state.
+   * Implementations must authenticate cookie/storage-backed data before mapping
+   * it into the domain session shape.
    */
   getSession(): Promise<AuthSession | null>;
 

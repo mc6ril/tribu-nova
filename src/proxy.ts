@@ -18,6 +18,7 @@ import {
   routing,
   stripLocalePrefix,
 } from "@/shared/i18n/routing";
+import { getAppSessionInfoFromRawCookies } from "@/shared/infrastructure/auth/appSessionCookie.server";
 import {
   buildAuthCallbackPath,
   getAuthCodeRedirectTarget,
@@ -25,6 +26,8 @@ import {
 } from "@/shared/utils/authRedirect";
 import { isProtectedRoute } from "@/shared/utils/routes";
 import { hasSupabaseAuthCookie } from "@/shared/utils/supabaseAuthCookies";
+
+import { buildAppSessionCookieEntry } from "@/domains/session/infrastructure/supabase/writeAppSessionCookie";
 
 const handleI18nRouting = createIntlMiddleware(routing);
 
@@ -175,6 +178,35 @@ export const proxy = async (request: NextRequest): Promise<NextResponse> => {
     return i18nResponse;
   }
 
+  // workbench-user is the primary source of truth — check it first so that auth-page
+  // redirects and email-verification gates work even when Supabase cookies are absent.
+  const cookieInfo = getAppSessionInfoFromRawCookies(request.cookies.getAll());
+
+  if (cookieInfo) {
+    const { emailConfirmedAt } = cookieInfo;
+
+    if (isAuthPage) {
+      return createRedirectResponse(
+        request,
+        buildPathForLocale(PAGE_ROUTES.WORKSPACE, locale),
+        locale
+      );
+    }
+
+    if (isProtected && !emailConfirmedAt) {
+      const signInUrl = new URL(
+        buildPathForLocale(AUTH_PAGE_ROUTES.SIGNIN, locale),
+        request.url
+      );
+      signInUrl.searchParams.set("unverified", "true");
+      return setLocaleCookie(NextResponse.redirect(signInUrl), locale);
+    }
+
+    return i18nResponse;
+  }
+
+  // workbench-user absent or expired — check for Supabase auth cookie before
+  // opening the Supabase client. Without any token, the user is definitely unauthenticated.
   const hasAuthCookie = hasSupabaseAuthCookie(
     request.cookies.getAll().map((cookie) => cookie.name)
   );
@@ -192,25 +224,50 @@ export const proxy = async (request: NextRequest): Promise<NextResponse> => {
     return i18nResponse;
   }
 
+  // Fallback: workbench-user absent/expired but Supabase token present.
+  // Authenticate with Supabase before deriving the signed app cookie.
+  // Security: this gate is UX-only; RLS is the actual security boundary.
   try {
     const { supabase, response } = createSupabaseClientForProxy(
       request,
       i18nResponse
     );
 
-    // Claims-first: read the JWT from the cookie without a network call.
-    // getSession() auto-refreshes via the refresh token only when the access
-    // token is expired — zero network calls on the happy path.
-    // Security: this gate is UX-only; RLS is the actual security boundary.
     const {
       data: { user },
+      error,
     } = await supabase.auth.getUser();
 
+    if (error && isProtected) {
+      const signInUrl = new URL(
+        buildPathForLocale(AUTH_PAGE_ROUTES.SIGNIN, locale),
+        request.url
+      );
+      signInUrl.searchParams.set("redirect", normalizedPathname);
+      return setLocaleCookie(NextResponse.redirect(signInUrl), locale);
+    }
+
+    const appSessionCookieEntry = user
+      ? buildAppSessionCookieEntry(user)
+      : null;
+    const setAppSessionCookie = (target: NextResponse): NextResponse => {
+      if (appSessionCookieEntry) {
+        target.cookies.set(
+          appSessionCookieEntry.name,
+          appSessionCookieEntry.value,
+          appSessionCookieEntry.options
+        );
+      }
+      return target;
+    };
+
     if (user && isAuthPage) {
-      return createRedirectResponse(
-        request,
-        buildPathForLocale(PAGE_ROUTES.WORKSPACE, locale),
-        locale
+      return setAppSessionCookie(
+        createRedirectResponse(
+          request,
+          buildPathForLocale(PAGE_ROUTES.WORKSPACE, locale),
+          locale
+        )
       );
     }
 
@@ -224,17 +281,19 @@ export const proxy = async (request: NextRequest): Promise<NextResponse> => {
         return setLocaleCookie(NextResponse.redirect(signInUrl), locale);
       }
 
-      if (!user?.email_confirmed_at) {
+      if (!user.email_confirmed_at) {
         const signInUrl = new URL(
           buildPathForLocale(AUTH_PAGE_ROUTES.SIGNIN, locale),
           request.url
         );
         signInUrl.searchParams.set("unverified", "true");
-        return setLocaleCookie(NextResponse.redirect(signInUrl), locale);
+        return setAppSessionCookie(
+          setLocaleCookie(NextResponse.redirect(signInUrl), locale)
+        );
       }
     }
 
-    return response;
+    return setAppSessionCookie(response);
   } catch (error) {
     console.error("[Proxy] Authentication error:", error);
     return i18nResponse;

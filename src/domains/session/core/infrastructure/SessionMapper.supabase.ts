@@ -29,7 +29,8 @@ const buildProfileFromMeta = (
       (meta?.preferences as Record<string, unknown>)?.theme ?? meta?.theme
     ),
     emailNotifications: Boolean(
-      (meta?.preferences as Record<string, unknown>)?.emailNotifications ?? false
+      (meta?.preferences as Record<string, unknown>)?.emailNotifications ??
+      false
     ),
     language: resolveLocale(
       (meta?.preferences as Record<string, unknown>)?.language ?? meta?.locale
@@ -66,7 +67,9 @@ export const mapSupabaseSessionToAuthSession = (
   session: Session,
   userEmail: string
 ): AuthSession => {
-  const meta = session.user.user_metadata as Record<string, unknown> | undefined;
+  const meta = session.user.user_metadata as
+    | Record<string, unknown>
+    | undefined;
   return {
     user: buildProfileFromMeta(session.user.id, userEmail, meta),
     expiresAt: session.expires_at,
