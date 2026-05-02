@@ -9,7 +9,7 @@ import {
 } from "@/shared/infrastructure/auth/appSessionCookie.server";
 
 import "server-only";
-import { mapSupabaseUserToAuthSession } from "@/domains/session/core/infrastructure/SessionMapper.supabase";
+import { mapSupabaseUserToAuthSession } from "@/domains/session/infrastructure/supabase/SessionMapper.supabase";
 
 export type AppSessionCookieEntry = {
   name: string;

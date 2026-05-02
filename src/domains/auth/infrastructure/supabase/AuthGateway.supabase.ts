@@ -27,8 +27,7 @@ import { handleAuthError } from "@/domains/auth/infrastructure/errors/authErrorH
 import {
   mapSupabaseSessionToAuthSession,
   mapSupabaseUserToAuthSession,
-} from "@/domains/session/core/infrastructure/SessionMapper.supabase";
-import { clearAppSessionCookie } from "@/domains/session/infrastructure/supabase/writeAppSessionCookie";
+} from "@/domains/session/infrastructure/supabase/SessionMapper.supabase";
 
 const resolveBrowserLocaleSegment = (): Locale | null => {
   if (typeof window === "undefined") return null;
@@ -171,20 +170,6 @@ export const createSupabaseAuthGateway = (
         );
 
       redirectToOAuthUrl(oauthUrl);
-    } catch (error) {
-      return handleAuthError(error);
-    }
-  },
-
-  async signOut(): Promise<void> {
-    try {
-      const { error } = await supabase.auth.signOut();
-      if (error) {
-        return handleAuthError(error);
-      }
-
-      // Clear the app session cookie once the user is signed out from the database.
-      await clearAppSessionCookie();
     } catch (error) {
       return handleAuthError(error);
     }

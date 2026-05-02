@@ -5,7 +5,7 @@ import { getServerClient } from "@/shared/infrastructure/supabase/client-server"
 
 import "server-only";
 import type { AuthSession } from "@/domains/session/core/domain/session.types";
-import { mapSupabaseUserToAuthSession } from "@/domains/session/core/infrastructure/SessionMapper.supabase";
+import { mapSupabaseUserToAuthSession } from "@/domains/session/infrastructure/supabase/SessionMapper.supabase";
 
 /**
  * Returns the current authenticated session for Server Components.

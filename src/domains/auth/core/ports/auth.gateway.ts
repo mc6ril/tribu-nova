@@ -39,13 +39,6 @@ export type AuthGateway = {
   signInWithGoogle?(redirectPath?: string): Promise<void>;
 
   /**
-   * Sign out the current user.
-   * Clears the current session.
-   * @throws AuthenticationFailure if signout fails
-   */
-  signOut(): Promise<void>;
-
-  /**
    * Request a password reset email.
    * @param input - Password reset request (email)
    * @throws PasswordResetError if email not found or reset fails
