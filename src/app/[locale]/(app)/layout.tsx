@@ -2,7 +2,7 @@ import { AUTH_PAGE_ROUTES } from "@/shared/constants/routes";
 import { defaultLocale, matchSupportedLocale } from "@/shared/core/i18n";
 import { redirect } from "@/shared/i18n/routing";
 
-import { getServerSession } from "@/domains/session/infrastructure/supabase/getServerSession";
+import { getServerSession } from "@/domains/auth/infrastructure/supabase/getServerSession";
 
 export default async function AppLayout({
   children,

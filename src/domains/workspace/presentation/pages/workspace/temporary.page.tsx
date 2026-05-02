@@ -5,7 +5,7 @@ import { APP_COOKIE_KEYS } from "@/shared/infrastructure/storage/cookies";
 
 import styles from "./styles.module.scss";
 
-import { getServerSession } from "@/domains/session/infrastructure/supabase/getServerSession";
+import { getServerSession } from "@/domains/auth/infrastructure/supabase/getServerSession";
 
 const APP_COOKIE_PURPOSES: Record<string, string> = {
   [APP_COOKIE_KEYS.LOCALE]: "Language preference — written client-side",

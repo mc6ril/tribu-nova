@@ -8,6 +8,7 @@ import { useAppRouter } from "@/shared/navigation/useAppRouter";
 
 import type { SignInInput } from "@/domains/auth/core/domain/auth.types";
 import { signInUser } from "@/domains/auth/core/usecases/user/signInUser";
+import { writeSessionCookieAction } from "@/domains/auth/infrastructure/actions/writeSessionCookieAction";
 import { createSupabaseAuthGateway } from "@/domains/auth/infrastructure/supabase/AuthGateway.supabase";
 
 export const useSignIn = (redirectPath: string = PAGE_ROUTES.WORKSPACE) => {
@@ -16,7 +17,8 @@ export const useSignIn = (redirectPath: string = PAGE_ROUTES.WORKSPACE) => {
 
   return useMutation({
     mutationFn: (input: SignInInput) => signInUser(gateway, input),
-    onSuccess: () => {
+    onSuccess: async () => {
+      await writeSessionCookieAction();
       router.push(redirectPath);
     },
   });

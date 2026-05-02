@@ -1,6 +1,6 @@
 import type { Locale } from "@/shared/core/i18n";
 
-import type { AuthSession } from "@/domains/session/core/domain/session.types";
+import type { AuthSession } from "@/domains/auth/core/domain/session.types";
 
 export type SignUpInput = {
   email: string;

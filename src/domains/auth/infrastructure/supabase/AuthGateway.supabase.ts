@@ -27,7 +27,7 @@ import { handleAuthError } from "@/domains/auth/infrastructure/errors/authErrorH
 import {
   mapSupabaseSessionToAuthSession,
   mapSupabaseUserToAuthSession,
-} from "@/domains/session/infrastructure/supabase/SessionMapper.supabase";
+} from "@/domains/auth/infrastructure/supabase/SessionMapper.supabase";
 
 const resolveBrowserLocaleSegment = (): Locale | null => {
   if (typeof window === "undefined") return null;

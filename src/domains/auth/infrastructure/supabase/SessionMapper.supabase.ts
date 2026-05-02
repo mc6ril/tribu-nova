@@ -3,11 +3,11 @@ import type { Session, User } from "@supabase/supabase-js";
 import type { Theme } from "@/shared/constants/theme";
 import type { Locale } from "@/shared/core/i18n";
 
+import type { AuthSession } from "@/domains/auth/core/domain/session.types";
 import type {
   Profile,
   ProfilePreferences,
 } from "@/domains/profile/core/domain/profile.types";
-import type { AuthSession } from "@/domains/session/core/domain/session.types";
 
 const resolveTheme = (raw: unknown): Theme => {
   if (raw === "light" || raw === "dark" || raw === "system") return raw;
@@ -48,10 +48,6 @@ const buildProfileFromMeta = (
   };
 };
 
-/**
- * Maps a server-validated Supabase User to the stable AuthSession shape.
- * Use this with getUser() — no getSession() call needed, no security warning.
- */
 export const mapSupabaseUserToAuthSession = (user: User): AuthSession => {
   const meta = user.user_metadata as Record<string, unknown> | undefined;
   return {
@@ -59,10 +55,6 @@ export const mapSupabaseUserToAuthSession = (user: User): AuthSession => {
   };
 };
 
-/**
- * Maps a Supabase JWT session to the stable SessionUser shape.
- * Reads only from session.user (JWT claims + user_metadata) — zero DB calls.
- */
 export const mapSupabaseSessionToAuthSession = (
   session: Session,
   userEmail: string

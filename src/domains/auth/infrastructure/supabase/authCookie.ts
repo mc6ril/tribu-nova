@@ -9,7 +9,7 @@ import {
 } from "@/shared/infrastructure/auth/appSessionCookie.server";
 
 import "server-only";
-import { mapSupabaseUserToAuthSession } from "@/domains/session/infrastructure/supabase/SessionMapper.supabase";
+import { mapSupabaseUserToAuthSession } from "@/domains/auth/infrastructure/supabase/SessionMapper.supabase";
 
 export type AppSessionCookieEntry = {
   name: string;
@@ -49,15 +49,4 @@ export const writeAppSessionCookie = async (user: User): Promise<void> => {
   const entry = buildAppSessionCookieEntry(user);
   const cookieStore = await cookies();
   cookieStore.set(entry.name, entry.value, entry.options);
-};
-
-export const clearAppSessionCookie = async (): Promise<void> => {
-  const cookieStore = await cookies();
-  cookieStore.set(APP_SESSION_COOKIE_NAME, "", {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
-    path: "/",
-    maxAge: 0,
-  });
 };

@@ -8,6 +8,7 @@ import { useAppRouter } from "@/shared/navigation/useAppRouter";
 
 import type { VerifyEmailInput } from "@/domains/auth/core/domain/auth.types";
 import { verifyEmail } from "@/domains/auth/core/usecases/verifyEmail";
+import { writeSessionCookieAction } from "@/domains/auth/infrastructure/actions/writeSessionCookieAction";
 import { createSupabaseAuthGateway } from "@/domains/auth/infrastructure/supabase/AuthGateway.supabase";
 
 export const useVerifyEmail = () => {
@@ -16,8 +17,9 @@ export const useVerifyEmail = () => {
 
   return useMutation({
     mutationFn: (input: VerifyEmailInput) => verifyEmail(gateway, input),
-    onSuccess: (result) => {
+    onSuccess: async (result) => {
       if (result.session) {
+        await writeSessionCookieAction();
         router.replace(PAGE_ROUTES.WORKSPACE);
       }
     },

@@ -8,6 +8,7 @@ import { useAppRouter } from "@/shared/navigation/useAppRouter";
 
 import type { UpdatePasswordInput } from "@/domains/auth/core/domain/auth.types";
 import { updatePassword } from "@/domains/auth/core/usecases/password/updatePassword";
+import { writeSessionCookieAction } from "@/domains/auth/infrastructure/actions/writeSessionCookieAction";
 import { createSupabaseAuthGateway } from "@/domains/auth/infrastructure/supabase/AuthGateway.supabase";
 
 export const useUpdatePassword = () => {
@@ -16,7 +17,8 @@ export const useUpdatePassword = () => {
 
   return useMutation({
     mutationFn: (input: UpdatePasswordInput) => updatePassword(gateway, input),
-    onSuccess: () => {
+    onSuccess: async () => {
+      await writeSessionCookieAction();
       router.push(PAGE_ROUTES.WORKSPACE);
     },
   });

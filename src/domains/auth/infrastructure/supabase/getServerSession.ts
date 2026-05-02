@@ -4,19 +4,9 @@ import { getAppSessionFromCookie } from "@/shared/infrastructure/auth/appSession
 import { getServerClient } from "@/shared/infrastructure/supabase/client-server";
 
 import "server-only";
-import type { AuthSession } from "@/domains/session/core/domain/session.types";
-import { mapSupabaseUserToAuthSession } from "@/domains/session/infrastructure/supabase/SessionMapper.supabase";
+import type { AuthSession } from "@/domains/auth/core/domain/session.types";
+import { mapSupabaseUserToAuthSession } from "@/domains/auth/infrastructure/supabase/SessionMapper.supabase";
 
-/**
- * Returns the current authenticated session for Server Components.
- *
- * Happy path: reads the signed `workbench-user` cookie — zero network calls.
- *
- * Fallback (cookie absent or expired): authenticates the Supabase cookie with
- * the Auth server, then maps the validated user.
- *
- * Wrapped with React.cache() so it fires at most once per server request.
- */
 export const getServerSession = cache(async (): Promise<AuthSession | null> => {
   const cookieSession = await getAppSessionFromCookie();
   if (cookieSession) {

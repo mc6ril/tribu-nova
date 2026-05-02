@@ -6,11 +6,11 @@ import type { Locale } from "@/shared/core/i18n";
 import { APP_COOKIE_KEYS } from "@/shared/infrastructure/storage/cookies";
 
 import "server-only";
+import type { AuthSession } from "@/domains/auth/core/domain/session.types";
 import type {
   GettingStartedStatus,
   ProfilePreferences,
 } from "@/domains/profile/core/domain/profile.types";
-import type { AuthSession } from "@/domains/session/core/domain/session.types";
 
 export const APP_SESSION_COOKIE_NAME = APP_COOKIE_KEYS.USER;
 export const APP_SESSION_COOKIE_MAX_AGE = 30 * 24 * 60 * 60; // 30 days
@@ -25,11 +25,6 @@ type AppSessionPayload = {
   termsAcceptedAt: string;
   expiresAt: number;
   iat: number;
-};
-
-export type AppSessionInfo = {
-  session: AuthSession;
-  emailConfirmedAt: string | null;
 };
 
 const getSecret = (): string => {
@@ -159,17 +154,13 @@ export const getAppSessionFromCookie =
     return mapToAuthSession(payload);
   };
 
-export const getAppSessionInfoFromRawCookies = (
-  requestCookies: Array<{ name: string; value: string }>
-): AppSessionInfo | null => {
-  const raw = requestCookies.find(
-    (c) => c.name === APP_SESSION_COOKIE_NAME
-  )?.value;
-  if (!raw) return null;
-  const payload = decodeAppSessionCookie(raw);
-  if (!payload) return null;
-  return {
-    session: mapToAuthSession(payload),
-    emailConfirmedAt: payload.emailConfirmedAt,
-  };
+export const clearAppSessionCookie = async (): Promise<void> => {
+  const cookieStore = await cookies();
+  cookieStore.set(APP_SESSION_COOKIE_NAME, "", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    path: "/",
+    maxAge: 0,
+  });
 };

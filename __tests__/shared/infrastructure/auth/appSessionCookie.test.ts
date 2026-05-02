@@ -7,10 +7,9 @@ import {
   decodeAppSessionCookie,
   encodeAppSessionCookieValue,
   getAppSessionFromCookie,
-  getAppSessionInfoFromRawCookies,
 } from "@/shared/infrastructure/auth/appSessionCookie.server";
 
-import type { AuthSession } from "@/domains/session/core/domain/session.types";
+import type { AuthSession } from "@/domains/auth/core/domain/session.types";
 
 const TEST_SECRET = "test-secret-at-least-32-chars-long-ok";
 
@@ -112,55 +111,6 @@ describe("decodeAppSessionCookie", () => {
       .update(encoded)
       .digest("base64url");
     expect(decodeAppSessionCookie(`${encoded}.${sig}`)).toBeNull();
-  });
-});
-
-// ─── getAppSessionInfoFromRawCookies ───────────────────────────────────────
-
-describe("getAppSessionInfoFromRawCookies", () => {
-  it("returns null when workbench-user cookie is absent", () => {
-    const result = getAppSessionInfoFromRawCookies([
-      { name: "some-other-cookie", value: "val" },
-    ]);
-    expect(result).toBeNull();
-  });
-
-  it("returns null when workbench-user has an invalid signature", () => {
-    const result = getAppSessionInfoFromRawCookies([
-      { name: APP_SESSION_COOKIE_NAME, value: "badpayload.badsig" },
-    ]);
-    expect(result).toBeNull();
-  });
-
-  it("returns null when workbench-user is expired", () => {
-    const raw = buildValidCookieValue({
-      expiresAt: Math.floor(Date.now() / 1000) - 10,
-    });
-    const result = getAppSessionInfoFromRawCookies([
-      { name: APP_SESSION_COOKIE_NAME, value: raw },
-    ]);
-    expect(result).toBeNull();
-  });
-
-  it("returns session and emailConfirmedAt for a valid cookie", () => {
-    const raw = buildValidCookieValue({
-      emailConfirmedAt: "2026-03-01T12:00:00Z",
-    });
-    const result = getAppSessionInfoFromRawCookies([
-      { name: APP_SESSION_COOKIE_NAME, value: raw },
-    ]);
-    expect(result).not.toBeNull();
-    expect(result?.session.user.id).toBe("user-123");
-    expect(result?.session.user.email).toBe("user@example.com");
-    expect(result?.emailConfirmedAt).toBe("2026-03-01T12:00:00Z");
-  });
-
-  it("exposes null emailConfirmedAt when the user email is unverified", () => {
-    const raw = buildValidCookieValue({ emailConfirmedAt: null });
-    const result = getAppSessionInfoFromRawCookies([
-      { name: APP_SESSION_COOKIE_NAME, value: raw },
-    ]);
-    expect(result?.emailConfirmedAt).toBeNull();
   });
 });
 

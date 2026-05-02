@@ -9,7 +9,7 @@ import {
 import { buildPathForLocale } from "@/shared/i18n/routing";
 import { createSupabaseServerClient } from "@/shared/infrastructure/supabase/client-server";
 
-import { writeAppSessionCookie } from "@/domains/session/infrastructure/supabase/writeAppSessionCookie";
+import { writeAppSessionCookie } from "@/domains/auth/infrastructure/supabase/authCookie";
 
 /**
  * Auth callback route handler for Supabase PKCE flow.
@@ -28,12 +28,12 @@ const resolveNextPath = ({
   nextPath: string | null;
 }): string => {
   if (!nextPath) {
-    return buildPathForLocale(PAGE_ROUTES.ACCOUNT, locale);
+    return buildPathForLocale(PAGE_ROUTES.WORKSPACE, locale);
   }
 
   // Only allow relative redirects.
   if (!nextPath.startsWith("/")) {
-    return buildPathForLocale(PAGE_ROUTES.ACCOUNT, locale);
+    return buildPathForLocale(PAGE_ROUTES.WORKSPACE, locale);
   }
 
   // If the caller already provided a locale segment, keep it.
