@@ -31,9 +31,8 @@ const supabaseRemotePattern = (() => {
 
 const nextConfig: NextConfig = {
   /**
-   * Locale routing is handled by `next-intl` middleware with `as-needed`
-   * prefixes: default-locale URLs stay unprefixed, secondary locales are
-   * prefixed.
+   * Locale routing is handled by `next-intl` route helpers and the `[locale]`
+   * segment.
    */
   sassOptions: {
     includePaths: [path.join(__dirname, "./src/styles")],

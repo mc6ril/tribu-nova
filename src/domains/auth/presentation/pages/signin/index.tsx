@@ -14,6 +14,7 @@ import Text from "@/shared/design-system/text";
 import Title from "@/shared/design-system/title";
 import { isAppError } from "@/shared/errors/appError";
 import { AUTH_ERROR_CODES } from "@/shared/errors/appErrorCodes";
+import { createLoggerFactory } from "@/shared/observability";
 
 import styles from "./styles.module.scss";
 
@@ -31,7 +32,14 @@ type Props = {
   isUnverifiedRedirect: boolean;
 };
 
+const logger = createLoggerFactory().forScope("auth.signin.page");
+
 const resolveSignInError = (error: unknown): string | undefined => {
+  logger.info("resolveSignInError entry", {
+    function: "resolveSignInError",
+    isAppError: isAppError(error),
+  });
+
   if (!isAppError(error)) return undefined;
   switch (error.code) {
     case AUTH_ERROR_CODES.INVALID_CREDENTIALS:
@@ -46,6 +54,12 @@ const resolveSignInError = (error: unknown): string | undefined => {
 };
 
 const SignInPage = ({ redirectPath, isUnverifiedRedirect }: Props) => {
+  logger.info("SignInPage render entry", {
+    function: "SignInPage",
+    redirectPath,
+    isUnverifiedRedirect,
+  });
+
   const t = useTranslations("pages.signin");
   const tFields = useTranslations("pages.signin.fields");
 
@@ -65,19 +79,33 @@ const SignInPage = ({ redirectPath, isUnverifiedRedirect }: Props) => {
 
   const onSubmit = useCallback(
     (data: SignInFormInput) => {
+      logger.info("onSubmit entry", {
+        function: "onSubmit",
+        email: data.email,
+        redirectPath,
+      });
       signIn.mutate(data);
     },
-    [signIn]
+    [redirectPath, signIn]
   );
 
   const handleResendVerification = useCallback(() => {
     const email = getValues("email");
+    logger.info("handleResendVerification entry", {
+      function: "handleResendVerification",
+      hasEmail: Boolean(email),
+      email: email || undefined,
+    });
     if (email) resendVerification.mutate(email);
   }, [getValues, resendVerification]);
 
   const handleGoogleSignIn = useCallback(() => {
+    logger.info("handleGoogleSignIn entry", {
+      function: "handleGoogleSignIn",
+      redirectPath,
+    });
     signInWithGoogle.mutate();
-  }, [signInWithGoogle]);
+  }, [redirectPath, signInWithGoogle]);
 
   const formErrorKey = signIn.error
     ? resolveSignInError(signIn.error)
@@ -102,6 +130,7 @@ const SignInPage = ({ redirectPath, isUnverifiedRedirect }: Props) => {
 
         <Form
           onSubmit={handleSubmit(onSubmit)}
+          method="post"
           error={formError}
           className={styles["signin-form"]}
           aria-label={t("buttonAriaLabel")}

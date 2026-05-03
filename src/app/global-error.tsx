@@ -20,10 +20,8 @@ const GlobalErrorContent = ({ error, reset }: Props) => {
 
   useEffect(() => {
     console.error(error);
-    if (error.digest) {
-      Sentry.captureException(error, {
-        tags: { nextDigest: error.digest },
-      });
+    if (process.env.NODE_ENV === "production") {
+      return;
     } else {
       Sentry.captureException(error);
     }

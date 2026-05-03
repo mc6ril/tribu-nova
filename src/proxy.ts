@@ -1,7 +1,17 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 
-export async function middleware(request: NextRequest) {
+import { createLoggerFactory } from "@/shared/observability";
+
+const logger = createLoggerFactory().forScope("proxy");
+
+export async function proxy(request: NextRequest) {
+  logger.info("proxy entry", {
+    function: "proxy",
+    pathname: request.nextUrl.pathname,
+    method: request.method,
+  });
+
   let supabaseResponse = NextResponse.next({ request });
 
   const supabase = createServerClient(
@@ -32,6 +42,15 @@ export async function middleware(request: NextRequest) {
   // IMPORTANT: Do not run code between createServerClient and getClaims().
   // getClaims() triggers token refresh. Removing it may cause random logouts.
   await supabase.auth.getClaims();
+  logger.info("proxy Supabase claims checked", {
+    function: "proxy",
+    pathname: request.nextUrl.pathname,
+  });
+
+  logger.info("proxy complete", {
+    function: "proxy",
+    pathname: request.nextUrl.pathname,
+  });
 
   return supabaseResponse;
 }

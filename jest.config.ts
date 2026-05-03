@@ -6,6 +6,7 @@ const config: Config = {
   roots: ["<rootDir>/__tests__"],
   testMatch: ["**/*.test.ts", "**/*.test.tsx"],
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
+  watchman: false,
   moduleNameMapper: {
     // Map SCSS/CSS files first (before path aliases)
     "^.+\\.(css|scss|sass)$": "<rootDir>/__mocks__/styleMock.ts",

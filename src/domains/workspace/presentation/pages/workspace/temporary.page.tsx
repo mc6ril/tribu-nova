@@ -2,10 +2,13 @@ import { Suspense } from "react";
 import { cookies, headers } from "next/headers";
 
 import { APP_COOKIE_KEYS } from "@/shared/infrastructure/storage/cookies";
+import { createLoggerFactory } from "@/shared/observability";
 
 import styles from "./styles.module.scss";
 
 import { getServerSession } from "@/domains/auth/infrastructure/supabase/getServerSession";
+
+const logger = createLoggerFactory().forScope("workspace.temporary-page");
 
 const APP_COOKIE_PURPOSES: Record<string, string> = {
   [APP_COOKIE_KEYS.LOCALE]: "Language preference — written client-side",
@@ -27,6 +30,10 @@ const RELEVANT_HEADERS = [
 ];
 
 async function DiagnosticsContent() {
+  logger.info("DiagnosticsContent entry", {
+    function: "DiagnosticsContent",
+  });
+
   const [cookieStore, headerStore, session] = await Promise.all([
     cookies(),
     headers(),
@@ -34,6 +41,13 @@ async function DiagnosticsContent() {
   ]);
 
   const allCookies = cookieStore.getAll();
+  logger.info("DiagnosticsContent request data resolved", {
+    function: "DiagnosticsContent",
+    cookieCount: allCookies.length,
+    hasSession: Boolean(session),
+    userId: session?.user.id,
+    email: session?.user.email,
+  });
 
   const sensitiveNames = new Set([
     APP_COOKIE_KEYS.USER,
@@ -209,6 +223,10 @@ async function DiagnosticsContent() {
 }
 
 export default function WorkspaceTemporaryPage() {
+  logger.info("WorkspaceTemporaryPage entry", {
+    function: "WorkspaceTemporaryPage",
+  });
+
   return (
     <main className={styles["workspace-page"]}>
       <div className={styles["workspace-container"]}>

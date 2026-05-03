@@ -9,7 +9,7 @@ import type {
   LogLevel,
   LogMeta,
 } from "@/shared/observability/logger.port";
-import { isArray, isPlainObject } from "@/shared/utils";
+import { isArray, isPlainObject } from "@/shared/utils/guards";
 
 import { shouldLog } from "./config";
 import type { LogConfig, StructuredLog } from "./types";

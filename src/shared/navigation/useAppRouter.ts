@@ -3,6 +3,10 @@
 import { useCallback, useMemo } from "react";
 
 import { useRouter } from "@/shared/i18n/routing";
+import { createLoggerFactory } from "@/shared/observability";
+
+const logger = createLoggerFactory().forScope("navigation.app-router");
+
 export type AppRouterNavigationOptions = {
   feedback?: "auto" | "none";
 };
@@ -18,6 +22,12 @@ const omitFeedback = <
 >(
   options: T | undefined
 ): Omit<T, "feedback"> | undefined => {
+  logger.info("omitFeedback entry", {
+    function: "omitFeedback",
+    hasOptions: Boolean(options),
+    feedback: options?.feedback,
+  });
+
   if (!options) {
     return undefined;
   }
@@ -32,6 +42,10 @@ const omitFeedback = <
  * a separate client-side loading overlay; route `loading.tsx` fallbacks own the UX.
  */
 export const useAppRouter = () => {
+  logger.info("useAppRouter entry", {
+    function: "useAppRouter",
+  });
+
   const router = useRouter();
 
   const push = useCallback(
@@ -39,6 +53,12 @@ export const useAppRouter = () => {
       href: string,
       options?: NextNavigateOptions & AppRouterNavigationOptions
     ) => {
+      logger.info("push entry", {
+        function: "push",
+        href,
+        options,
+      });
+
       const nextOpts = omitFeedback(options);
       if (nextOpts === undefined) {
         return router.push(href);
@@ -53,6 +73,12 @@ export const useAppRouter = () => {
       href: string,
       options?: NextNavigateOptions & AppRouterNavigationOptions
     ) => {
+      logger.info("replace entry", {
+        function: "replace",
+        href,
+        options,
+      });
+
       const nextOpts = omitFeedback(options);
       if (nextOpts === undefined) {
         return router.replace(href);
@@ -64,6 +90,10 @@ export const useAppRouter = () => {
 
   const back = useCallback(
     (_options?: AppRouterFeedbackOnlyOptions) => {
+      logger.info("back entry", {
+        function: "back",
+      });
+
       return router.back();
     },
     [router]
@@ -71,6 +101,10 @@ export const useAppRouter = () => {
 
   const forward = useCallback(
     (_options?: AppRouterFeedbackOnlyOptions) => {
+      logger.info("forward entry", {
+        function: "forward",
+      });
+
       return router.forward();
     },
     [router]
@@ -78,6 +112,10 @@ export const useAppRouter = () => {
 
   const refresh = useCallback(
     (_options?: AppRouterFeedbackOnlyOptions) => {
+      logger.info("refresh entry", {
+        function: "refresh",
+      });
+
       return router.refresh();
     },
     [router]
