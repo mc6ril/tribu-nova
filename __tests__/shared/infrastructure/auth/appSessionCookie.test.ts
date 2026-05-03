@@ -4,10 +4,12 @@ import {
   APP_SESSION_COOKIE_MAX_AGE,
   APP_SESSION_COOKIE_NAME,
   buildAppSessionPayload,
+  clearAppSessionCookie,
   decodeAppSessionCookie,
   encodeAppSessionCookieValue,
   getAppSessionFromCookie,
 } from "@/shared/infrastructure/auth/appSessionCookie.server";
+import { buildDefaultAppSessionPreferences } from "@/shared/infrastructure/auth/appSessionCookieValue";
 
 import type { AuthSession } from "@/domains/auth/core/domain/session.types";
 
@@ -112,6 +114,15 @@ describe("decodeAppSessionCookie", () => {
       .digest("base64url");
     expect(decodeAppSessionCookie(`${encoded}.${sig}`)).toBeNull();
   });
+
+  it("returns null when the payload is not an object", () => {
+    const encoded = Buffer.from(JSON.stringify(null)).toString("base64url");
+    const sig = createHmac("sha256", TEST_SECRET)
+      .update(encoded)
+      .digest("base64url");
+
+    expect(decodeAppSessionCookie(`${encoded}.${sig}`)).toBeNull();
+  });
 });
 
 // ─── getAppSessionFromCookie (server helper via mocked next/headers) ───────
@@ -153,6 +164,38 @@ describe("getAppSessionFromCookie", () => {
     expect(result?.user.id).toBe("user-123");
     expect(result?.user.email).toBe("user@example.com");
   });
+
+  it("returns AuthSession with defaults for a legacy cookie payload", async () => {
+    const legacyPayload = {
+      id: "legacy-user",
+      email: "legacy@example.com",
+      expiresAt: Math.floor(Date.now() / 1000) + 60,
+      iat: Math.floor(Date.now() / 1000),
+    };
+    const encoded = Buffer.from(JSON.stringify(legacyPayload)).toString(
+      "base64url"
+    );
+    const sig = createHmac("sha256", TEST_SECRET)
+      .update(encoded)
+      .digest("base64url");
+    const { cookies } = await import("next/headers");
+    (cookies as jest.Mock).mockResolvedValue({
+      get: (name: string) =>
+        name === APP_SESSION_COOKIE_NAME
+          ? { value: `${encoded}.${sig}` }
+          : undefined,
+    });
+
+    const result = await getAppSessionFromCookie();
+
+    expect(result?.user.preferences).toEqual({
+      theme: "system",
+      emailNotifications: false,
+      language: "en",
+      gettingStartedStatus: "pending",
+    });
+    expect(result?.user.termsAcceptedAt).toBe("");
+  });
 });
 
 // ─── encode round-trip ─────────────────────────────────────────────────────
@@ -168,6 +211,51 @@ describe("encodeAppSessionCookieValue / decodeAppSessionCookie round-trip", () =
     expect(decoded?.id).toBe("user-123");
     expect(decoded?.email).toBe("user@example.com");
     expect(decoded?.emailConfirmedAt).toBe("2026-01-01T00:00:00Z");
+  });
+
+  it("throws when the app session cookie secret is missing while encoding", () => {
+    delete process.env.APP_SESSION_COOKIE_SECRET;
+    const payload = buildAppSessionPayload(
+      BASE_SESSION,
+      "2026-01-01T00:00:00Z"
+    );
+
+    expect(() => encodeAppSessionCookieValue(payload)).toThrow(
+      "Missing required environment variable APP_SESSION_COOKIE_SECRET"
+    );
+  });
+});
+
+// ─── clearAppSessionCookie ────────────────────────────────────────────────
+
+describe("clearAppSessionCookie", () => {
+  it("expires the app session cookie", async () => {
+    const { cookies } = await import("next/headers");
+    const set = jest.fn();
+    (cookies as jest.Mock).mockResolvedValue({ set });
+
+    await clearAppSessionCookie();
+
+    expect(set).toHaveBeenCalledWith(APP_SESSION_COOKIE_NAME, "", {
+      httpOnly: true,
+      secure: false,
+      sameSite: "lax",
+      path: "/",
+      maxAge: 0,
+    });
+  });
+});
+
+// ─── default preferences ─────────────────────────────────────────────────
+
+describe("buildDefaultAppSessionPreferences", () => {
+  it("uses safe defaults for legacy cookies without preferences", () => {
+    expect(buildDefaultAppSessionPreferences()).toEqual({
+      theme: "system",
+      emailNotifications: false,
+      language: "en",
+      gettingStartedStatus: "pending",
+    });
   });
 });
 

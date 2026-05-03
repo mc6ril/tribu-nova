@@ -14,7 +14,7 @@ import {
 
 const TEST_SECRET = "test-secret-at-least-32-chars-long-ok";
 
-const buildUser = (): User =>
+const buildUser = (overrides: Partial<User> = {}): User =>
   ({
     id: "user-123",
     email: "user@example.com",
@@ -27,6 +27,7 @@ const buildUser = (): User =>
     },
     aud: "authenticated",
     created_at: "2026-01-01T00:00:00.000Z",
+    ...overrides,
   }) as User;
 
 beforeEach(() => {
@@ -60,6 +61,29 @@ describe("authCookie", () => {
         termsAcceptedAt: "2026-01-01T00:00:00.000Z",
       })
     );
+  });
+
+  it("marks the user cookie secure in production", () => {
+    const mutableEnv = process.env as Record<string, string | undefined>;
+    const originalNodeEnv = mutableEnv.NODE_ENV;
+    mutableEnv.NODE_ENV = "production";
+
+    try {
+      const entry = buildAppSessionCookieEntry(buildUser());
+
+      expect(entry.options.secure).toBe(true);
+    } finally {
+      mutableEnv.NODE_ENV = originalNodeEnv;
+    }
+  });
+
+  it("keeps a null email confirmation date when Supabase has none", () => {
+    const entry = buildAppSessionCookieEntry(
+      buildUser({ email_confirmed_at: undefined })
+    );
+    const payload = decodeAppSessionCookie(entry.value);
+
+    expect(payload?.emailConfirmedAt).toBeNull();
   });
 
   it("writes the signed user cookie through Next cookies", async () => {
