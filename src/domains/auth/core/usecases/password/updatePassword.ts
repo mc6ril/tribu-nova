@@ -20,23 +20,13 @@ const PasswordSchema = z
 
 export const UpdatePasswordSchema = z.object({
   password: PasswordSchema,
-  token: z.string().min(1, "Token is required").optional(),
-  email: z
-    .union([
-      z.string().email({ message: "Invalid email format" }),
-      z.literal(""),
-    ])
-    .optional(),
 });
 
 /**
- * Update password after a password reset.
- * Supports two flows:
- * - PKCE flow: session already established by auth callback, only password needed.
- * - Legacy token flow: email + token provided for OTP verification.
+ * Update password after a password reset (PKCE flow — session established by auth callback).
  *
  * @param repository - Auth repository
- * @param input - Password update input (password required; token and email optional)
+ * @param input - Password update input
  * @returns Authentication result with session (user is auto-logged in after password update)
  * @throws InvalidTokenError if token/session is invalid or expired
  * @throws PasswordResetError for other password reset errors

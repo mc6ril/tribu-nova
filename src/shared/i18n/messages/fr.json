@@ -104,6 +104,38 @@
       "ariaLabel": "Pied de page de l'application"
     }
   },
+  "routeFallback": {
+    "notFound": {
+      "eyebrow": "Page introuvable",
+      "status": "404",
+      "title": "Cette page a pris la tangente",
+      "message": "Le lien est peut-être ancien, incomplet ou déjà obsolète. On peut repartir d'un endroit plus sûr.",
+      "primaryAction": "Revenir à l'accueil",
+      "primaryActionAriaLabel": "Revenir à la page d'accueil",
+      "secondaryAction": "Aller à l'espace de travail",
+      "secondaryActionAriaLabel": "Aller à l'espace de travail"
+    },
+    "error": {
+      "eyebrow": "Incident temporaire",
+      "status": "Erreur",
+      "title": "Quelque chose a dérapé",
+      "message": "L'écran n'a pas pu se charger correctement. Vous pouvez réessayer sans perdre votre session.",
+      "primaryAction": "Réessayer",
+      "primaryActionAriaLabel": "Réessayer de charger la page",
+      "secondaryAction": "Retour à l'accueil",
+      "secondaryActionAriaLabel": "Revenir à la page d'accueil"
+    },
+    "globalError": {
+      "eyebrow": "Incident global",
+      "status": "Erreur critique",
+      "title": "On a perdu le fil",
+      "message": "L'application n'a pas réussi à rétablir cet écran. Un nouveau chargement suffit souvent à repartir proprement.",
+      "primaryAction": "Relancer",
+      "primaryActionAriaLabel": "Relancer l'application",
+      "secondaryAction": "Retour à l'accueil",
+      "secondaryActionAriaLabel": "Revenir à la page d'accueil"
+    }
+  },
   "pages": {
     "signup": {
       "title": "Créer un compte",

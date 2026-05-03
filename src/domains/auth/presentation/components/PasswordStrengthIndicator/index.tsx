@@ -1,6 +1,5 @@
 import React, { useMemo } from "react";
-
-import { useTranslations } from "@/shared/i18n";
+import { useTranslations } from "next-intl";
 
 import styles from "./PasswordStrengthIndicator.module.scss";
 

@@ -1,238 +1,193 @@
-// import { useCallback, useEffect } from "react";
-// import { SubmitHandler, useForm } from "react-hook-form";
-// import { useTranslations } from "next-intl";
-// import { zodResolver } from "@hookform/resolvers/zod";
+"use client";
 
-// import { PAGE_ROUTES } from "@/shared/constants";
-// import { AUTH_PAGE_ROUTES } from "@/shared/constants/routes";
-// import Button from "@/shared/design-system/button";
-// import Form from "@/shared/design-system/form";
-// import Input from "@/shared/design-system/input";
-// import Link from "@/shared/design-system/link";
-// import Text from "@/shared/design-system/text";
-// import Title from "@/shared/design-system/title";
-// import { getAppErrorCode } from "@/shared/errors/appError";
-// import { AUTH_ERROR_CODES } from "@/shared/errors/appErrorCodes";
-// import { getErrorMessage } from "@/shared/i18n/errorMessages";
-// import { useAppRouter } from "@/shared/navigation/useAppRouter";
+import { useCallback } from "react";
+import { useForm } from "react-hook-form";
+import NextLink from "next/link";
+import { useTranslations } from "next-intl";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 
-// import styles from "./styles.module.scss";
+import Button from "@/shared/design-system/button";
+import Form from "@/shared/design-system/form";
+import Input from "@/shared/design-system/input";
+import Text from "@/shared/design-system/text";
+import Title from "@/shared/design-system/title";
+import { isAppError } from "@/shared/errors/appError";
+import { AUTH_ERROR_CODES } from "@/shared/errors/appErrorCodes";
 
-// import { SignInInput } from "@/domains/auth/core/domain/auth.types";
-// import { SignInSchema } from "@/domains/auth/core/usecases/user/signInUser";
-// import { translateAuthFieldError } from "@/domains/auth/presentation/forms/authFieldErrors";
+import styles from "./styles.module.scss";
 
-// type FormData = SignInInput;
+import { SignInSchema } from "@/domains/auth/core/usecases/user/signInUser";
+import { translateAuthFieldError } from "@/domains/auth/presentation/forms/authFieldErrors";
+import { useAuthRoutes } from "@/domains/auth/presentation/hooks/useAuthRoutes";
+import { useSignIn } from "@/domains/auth/presentation/hooks/user/useSignIn";
+import { useSignInWithGoogle } from "@/domains/auth/presentation/hooks/user/useSignInWithGoogle";
+import { useResendVerificationEmail } from "@/domains/auth/presentation/hooks/verification/useResendVerificationEmail";
 
-// type SigninPageProps = {
-//   redirectPath: string;
-//   isUnverifiedRedirect: boolean;
-// };
+type SignInFormInput = z.infer<typeof SignInSchema>;
 
-// const SigninPage = ({
-//   redirectPath,
-//   isUnverifiedRedirect,
-// }: SigninPageProps) => {
-//   const router = useAppRouter();
-//   const t = useTranslations("auth.signin");
-//   const tCommon = useTranslations("common");
-//   const tErrors = useTranslations("errors");
-//   const tFields = useTranslations("pages.signin.fields");
+type Props = {
+  redirectPath: string;
+  isUnverifiedRedirect: boolean;
+};
 
-//   const signupHref =
-//     redirectPath === PAGE_ROUTES.WORKSPACE
-//       ? AUTH_PAGE_ROUTES.SIGNUP
-//       : `${AUTH_PAGE_ROUTES.SIGNUP}?redirect=${encodeURIComponent(redirectPath)}`;
+const resolveSignInError = (error: unknown): string | undefined => {
+  if (!isAppError(error)) return undefined;
+  switch (error.code) {
+    case AUTH_ERROR_CODES.INVALID_CREDENTIALS:
+      return "invalidCredentials";
+    case AUTH_ERROR_CODES.EMAIL_VERIFICATION_ERROR:
+      return "emailNotVerified";
+    case AUTH_ERROR_CODES.INVALID_EMAIL:
+      return "invalidEmail";
+    default:
+      return "generic";
+  }
+};
 
-//   const {
-//     register,
-//     handleSubmit,
-//     formState: { errors },
-//     setError,
-//     clearErrors,
-//     getValues,
-//   } = useForm<FormData>({
-//     resolver: zodResolver(SignInSchema),
-//     mode: "onBlur",
-//   });
+const SignInPage = ({ redirectPath, isUnverifiedRedirect }: Props) => {
+  const t = useTranslations("pages.signin");
+  const tFields = useTranslations("pages.signin.fields");
 
-//   useEffect(() => {
-//     if (isUnverifiedRedirect) {
-//       setError("root", {
-//         type: "server",
-//         message: tErrors("auth.EMAIL_VERIFICATION_ERROR"),
-//       });
-//     }
-//   }, [isUnverifiedRedirect, setError, tErrors]);
+  const {
+    error: signInError,
+    isPending: isSignInPending,
+    mutate: submitSignIn,
+  } = useSignIn(redirectPath);
+  const { isPending: isGoogleSignInPending, mutate: submitGoogleSignIn } =
+    useSignInWithGoogle(redirectPath);
+  const {
+    isPending: isResendVerificationPending,
+    isSuccess: didResendVerificationSucceed,
+    mutate: resendVerificationEmail,
+  } = useResendVerificationEmail();
+  const authRoutes = useAuthRoutes();
 
-//   useEffect(() => {
-//     if (signInMutation.error) {
-//       const code = getAppErrorCode(signInMutation.error);
-//       const errorMessage = getErrorMessage(signInMutation.error, tErrors);
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    formState: { errors },
+  } = useForm<SignInFormInput>({
+    resolver: zodResolver(SignInSchema),
+  });
 
-//       if (code === AUTH_ERROR_CODES.EMAIL_VERIFICATION_ERROR) {
-//         setError("root", {
-//           type: "server",
-//           message: errorMessage,
-//         });
-//       } else if (code === AUTH_ERROR_CODES.INVALID_CREDENTIALS) {
-//         setError("root", {
-//           type: "server",
-//           message: errorMessage,
-//         });
-//       } else if (code === AUTH_ERROR_CODES.INVALID_EMAIL) {
-//         setError("email", {
-//           type: "server",
-//           message: errorMessage,
-//         });
-//       } else {
-//         setError("root", {
-//           type: "server",
-//           message: errorMessage,
-//         });
-//       }
-//     }
-//   }, [signInMutation.error, setError, tErrors]);
+  const onSubmit = useCallback(
+    (data: SignInFormInput) => {
+      submitSignIn(data);
+    },
+    [submitSignIn]
+  );
 
-//   useEffect(() => {
-//     if (resendVerificationMutation.isSuccess) {
-//       setError("root", {
-//         type: "server",
-//         message: t("resendVerification.success"),
-//       });
-//     }
-//   }, [resendVerificationMutation.isSuccess, setError, t]);
+  const handleResendVerification = useCallback(() => {
+    const email = getValues("email");
+    if (email) resendVerificationEmail(email);
+  }, [getValues, resendVerificationEmail]);
 
-//   useEffect(() => {
-//     if (signInWithGoogleMutation.error) {
-//       setError("root", {
-//         type: "server",
-//         message: getErrorMessage(signInWithGoogleMutation.error, tErrors),
-//       });
-//     }
-//   }, [signInWithGoogleMutation.error, setError, tErrors]);
+  const handleGoogleSignIn = useCallback(() => {
+    submitGoogleSignIn();
+  }, [submitGoogleSignIn]);
 
-//   useEffect(() => {
-//     if (signInMutation.isSuccess && signInMutation.data) {
-//       router.push(redirectPath);
-//     }
-//   }, [redirectPath, signInMutation.isSuccess, signInMutation.data, router]);
+  const formErrorKey = signInError
+    ? resolveSignInError(signInError)
+    : undefined;
+  const formError = formErrorKey ? t(`errors.${formErrorKey}`) : undefined;
 
-//   const onSubmit: SubmitHandler<FormData> = useCallback(
-//     (data) => {
-//       signInMutation.mutate(data);
-//     },
-//     [signInMutation]
-//   );
+  const showUnverifiedBanner =
+    isUnverifiedRedirect ||
+    (signInError &&
+      isAppError(signInError) &&
+      signInError.code === AUTH_ERROR_CODES.EMAIL_VERIFICATION_ERROR);
 
-//   const handleResendVerification = useCallback(() => {
-//     const email = getValues("email");
-//     if (email) {
-//       resendVerificationMutation.mutate(email);
-//     }
-//   }, [getValues, resendVerificationMutation]);
+  return (
+    <div className={styles["signin-page"]}>
+      <div className={styles["signin-container"]}>
+        <Title variant="h1" className={styles["signin-title"]}>
+          {t("title")}
+        </Title>
+        <Text variant="body" className={styles["signin-subtitle"]}>
+          {t("subtitle")}
+        </Text>
 
-//   const handleGoogleSignIn = useCallback(() => {
-//     clearErrors("root");
+        <Form
+          onSubmit={handleSubmit(onSubmit)}
+          method="post"
+          error={formError}
+          className={styles["signin-form"]}
+          aria-label={t("buttonAriaLabel")}
+        >
+          <Input
+            {...register("email")}
+            type="email"
+            label="Email"
+            placeholder="email@exemple.com"
+            error={translateAuthFieldError(errors.email, (k) => tFields(k))}
+            autoComplete="email"
+            required
+          />
 
-//     signInWithGoogleMutation.mutate(redirectPath);
-//   }, [clearErrors, redirectPath, signInWithGoogleMutation]);
+          <Input
+            {...register("password")}
+            type="password"
+            label="Mot de passe"
+            error={translateAuthFieldError(errors.password, (k) => tFields(k))}
+            autoComplete="current-password"
+            required
+          />
 
-//   const isEmailVerificationError =
-//     isUnverifiedRedirect ||
-//     getAppErrorCode(signInMutation.error) ===
-//       AUTH_ERROR_CODES.EMAIL_VERIFICATION_ERROR;
+          <div className={styles["signin-forgot-password"]}>
+            <NextLink href={authRoutes.resetPassword}>
+              {t("forgotPassword")}
+            </NextLink>
+          </div>
 
-//   return (
-//     <div className={styles["signin-page"]}>
-//       <div className={styles["signin-container"]}>
-//         <Title variant="h1" className={styles["signin-title"]}>
-//           {t("title")}
-//         </Title>
-//         <Text variant="body" className={styles["signin-subtitle"]}>
-//           {t("subtitle")}
-//         </Text>
+          <Button
+            label={t("button")}
+            type="submit"
+            fullWidth
+            disabled={isSignInPending}
+            aria-label={t("buttonAriaLabel")}
+          />
+        </Form>
 
-//         <Form
-//           onSubmit={handleSubmit(onSubmit)}
-//           className={styles["signin-form"]}
-//           error={errors.root?.message}
-//           noValidate
-//         >
-//           {isEmailVerificationError && errors.root && (
-//             <div className={styles["signin-resend-verification"]}>
-//               <Button
-//                 label={
-//                   resendVerificationMutation.isPending
-//                     ? tCommon("loading")
-//                     : t("resendVerification.button")
-//                 }
-//                 onClick={handleResendVerification}
-//                 disabled={resendVerificationMutation.isPending}
-//                 variant="secondary"
-//                 type="button"
-//                 aria-label={t("resendVerification.buttonAriaLabel")}
-//               />
-//             </div>
-//           )}
+        {showUnverifiedBanner && (
+          <div className={styles["signin-resend-verification"]}>
+            {didResendVerificationSucceed ? (
+              <Text variant="small">{t("resendVerification.success")}</Text>
+            ) : (
+              <Button
+                label={t("resendVerification.button")}
+                variant="ghost"
+                onClick={handleResendVerification}
+                disabled={isResendVerificationPending}
+                aria-label={t("resendVerification.buttonAriaLabel")}
+              />
+            )}
+          </div>
+        )}
 
-//           <Input
-//             label={tCommon("email")}
-//             type="email"
-//             autoComplete="email"
-//             required
-//             error={translateAuthFieldError(errors.email, tFields)}
-//             {...register("email")}
-//           />
+        <div className={styles["signin-divider"]}>
+          <span>{t("oauth.divider")}</span>
+        </div>
 
-//           <Input
-//             label={tCommon("password")}
-//             type="password"
-//             autoComplete="current-password"
-//             required
-//             error={translateAuthFieldError(errors.password, tFields)}
-//             {...register("password")}
-//           />
+        <Button
+          label={t("oauth.googleButton")}
+          variant="secondary"
+          onClick={handleGoogleSignIn}
+          fullWidth
+          disabled={isGoogleSignInPending}
+          aria-label={t("oauth.googleButtonAriaLabel")}
+        />
 
-//           <div className={styles["signin-forgot-password"]}>
-//             <Link
-//               href={AUTH_PAGE_ROUTES.RESET_PASSWORD}
-//               className={styles["signin-link"]}
-//             >
-//               {t("forgotPassword")}
-//             </Link>
-//           </div>
+        <Text variant="body" className={styles["signin-footer"]}>
+          {t("footer")}{" "}
+          <NextLink href={authRoutes.signup} className={styles["signin-link"]}>
+            {t("footerLink")}
+          </NextLink>
+        </Text>
+      </div>
+    </div>
+  );
+};
 
-//           <Button
-//             label={t("button")}
-//             type="submit"
-//             fullWidth
-//             disabled={signInMutation.isPending}
-//             aria-label={t("buttonAriaLabel")}
-//           />
-//         </Form>
-
-//         <div className={styles["signin-divider"]}>
-//           <span>{t("oauth.divider")}</span>
-//         </div>
-//         <Button
-//           label={t("oauth.googleButton")}
-//           variant="secondary"
-//           fullWidth
-//           onClick={handleGoogleSignIn}
-//           disabled={signInWithGoogleMutation.isPending}
-//           aria-label={t("oauth.googleButtonAriaLabel")}
-//         />
-
-//         <Text variant="small" className={styles["signin-footer"]}>
-//           {t("footer")}{" "}
-//           <Link href={signupHref} className={styles["signin-link"]}>
-//             {t("footerLink")}
-//           </Link>
-//         </Text>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default SigninPage;
+export default SignInPage;

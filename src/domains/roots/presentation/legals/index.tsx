@@ -1,11 +1,11 @@
+import { getTranslations } from "next-intl/server";
+
 import { getAccessibilityId } from "@/shared/a11y/constants";
 import { GDPR_RIGHTS_KEYS, LEGAL_SECTIONS } from "@/shared/constants";
-import { PAGE_ROUTES } from "@/shared/constants/routes";
+import type { Locale } from "@/shared/core/i18n";
 import BackButton from "@/shared/design-system/back_button";
 import Text from "@/shared/design-system/text";
 import Title from "@/shared/design-system/title";
-import type { Locale } from "@/shared/i18n/config";
-import { getStaticTranslator } from "@/shared/i18n/staticTranslator";
 
 import styles from "./styles.module.scss";
 
@@ -17,7 +17,7 @@ const createNamespaceTranslationGetter = async (
   locale: Locale,
   namespace: string
 ) => {
-  const t = getStaticTranslator(locale, namespace);
+  const t = await getTranslations({ locale, namespace });
   return (key: string): string => t(key);
 };
 
@@ -31,7 +31,7 @@ const LegalPage = async ({ locale }: LegalPageProps) => {
           <BackButton
             label={t("header.label")}
             ariaLabel={t("header.label")}
-            fallbackHref={`/${locale}${PAGE_ROUTES.HOME}`}
+            fallbackHref="/"
           />
           <div className={styles["legal-welcome"]}>
             <Title variant="h1" className={styles["legal-welcome__title"]}>

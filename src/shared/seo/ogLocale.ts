@@ -1,4 +1,4 @@
-import type { Locale } from "@/shared/i18n/config";
+import type { Locale } from "@/shared/core/i18n";
 
 const OG_LOCALE_BY_APP_LOCALE: Record<Locale, string> = {
   fr: "fr_FR",

@@ -1,12 +1,12 @@
-import type { Locale } from "@/shared/i18n/config";
+import type { Locale } from "@/shared/core/i18n";
 
-import type { AuthSession } from "@/domains/session/core/domain/session.types";
+import type { AuthSession } from "@/domains/auth/core/domain/session.types";
 
 export type SignUpInput = {
   email: string;
   password: string;
   displayName?: string;
-  termsAcceptedAt?: string;
+  termsAcceptedAt: string;
   /** Used in Supabase email templates (`user_metadata.locale`). */
   locale: Locale;
 };
@@ -22,8 +22,6 @@ export type ResetPasswordInput = {
 
 export type UpdatePasswordInput = {
   password: string;
-  token?: string;
-  email?: string;
 };
 
 export type VerifyEmailLinkType = "email" | "signup";

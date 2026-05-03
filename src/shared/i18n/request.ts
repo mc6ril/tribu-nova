@@ -1,32 +1,25 @@
-import { cookies, headers } from "next/headers";
+import { headers } from "next/headers";
 import { getRequestConfig } from "next-intl/server";
 
-import {
-  localeCookieName,
-  matchSupportedLocale,
-  resolveLocale,
-} from "./config";
-import { loadMessages } from "./loadMessages";
+import { defaultLocale, matchSupportedLocale } from "@/shared/core/i18n";
+import { loadMessages } from "@/shared/i18n/loadMessages";
+import { NEXT_INTL_LOCALE_HEADER } from "@/shared/i18n/nextIntlHeader";
 
-export default getRequestConfig(async ({ requestLocale }) => {
-  const requestedLocale = await requestLocale;
-  const explicitLocale = matchSupportedLocale(requestedLocale);
-
-  if (explicitLocale) {
-    return {
-      locale: explicitLocale,
-      messages: await loadMessages(explicitLocale),
-    };
+export default getRequestConfig(async ({ locale, requestLocale }) => {
+  let headerLocale = null;
+  try {
+    headerLocale = matchSupportedLocale(
+      (await headers()).get(NEXT_INTL_LOCALE_HEADER)
+    );
+  } catch {
+    /* static / edge cases without request headers */
   }
 
-  const [cookieStore, headerStore] = await Promise.all([cookies(), headers()]);
-  const locale = resolveLocale({
-    cookieLocale: cookieStore.get(localeCookieName)?.value,
-    acceptLanguage: headerStore.get("accept-language"),
-  });
+  const segmentLocale = matchSupportedLocale(locale ?? (await requestLocale));
+  const resolvedLocale = headerLocale ?? segmentLocale ?? defaultLocale;
 
   return {
-    locale,
-    messages: await loadMessages(locale),
+    locale: resolvedLocale,
+    messages: await loadMessages(resolvedLocale),
   };
 });

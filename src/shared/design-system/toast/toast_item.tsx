@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useCallback, useEffect, useRef } from "react";
+import { useTranslations } from "next-intl";
 
 import { getAccessibilityId } from "@/shared/a11y";
-import { useTranslations } from "@/shared/i18n";
 
 import styles from "./toast.module.scss";
 

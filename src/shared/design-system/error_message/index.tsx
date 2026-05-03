@@ -1,11 +1,11 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "next-intl";
 
 import { getAccessibilityId } from "@/shared/a11y/constants";
 import { ErrorIcon } from "@/shared/design-system/icons";
 import Title from "@/shared/design-system/title";
-import { useTranslations } from "@/shared/i18n";
 
 import styles from "./error_message.module.scss";
 

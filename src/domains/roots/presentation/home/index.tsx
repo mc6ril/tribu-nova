@@ -1,3 +1,5 @@
+import { getTranslations } from "next-intl/server";
+
 import { getAccessibilityId } from "@/shared/a11y/constants";
 import { PRODUCT_BRAND_NAME } from "@/shared/constants/brand";
 import {
@@ -8,11 +10,10 @@ import {
   VALUE_KEYS,
 } from "@/shared/constants/landing";
 import { AUTH_PAGE_ROUTES, PAGE_ROUTES } from "@/shared/constants/routes";
+import type { Locale } from "@/shared/core/i18n";
 import Link from "@/shared/design-system/link";
 import Text from "@/shared/design-system/text";
 import Title from "@/shared/design-system/title";
-import type { Locale } from "@/shared/i18n/config";
-import { getStaticTranslator } from "@/shared/i18n/staticTranslator";
 import { buildFeaturePreviewContent } from "@/shared/utils/landingUtils";
 
 import styles from "./home.module.scss";
@@ -25,7 +26,7 @@ const createNamespaceTranslationGetter = async (
   locale: Locale,
   namespace: string
 ) => {
-  const t = getStaticTranslator(locale, namespace);
+  const t = await getTranslations({ locale, namespace });
   return (key: string): string => t(key);
 };
 
@@ -54,8 +55,7 @@ const Home = async ({ locale }: HomeProps) => {
     createNamespaceTranslationGetter(locale, "pages.landing.footer"),
   ]);
 
-  const homePrefix = `/${locale}`;
-  const legal = `${homePrefix}${PAGE_ROUTES.LEGAL}`;
+  const legal = PAGE_ROUTES.LEGAL;
   const featurePreview = buildFeaturePreviewContent("board", tExamples);
   const previewAnchor = `#${getAccessibilityId("landing-example-preview")}`;
   const primaryCtaClassName = getCtaClassName(
@@ -116,14 +116,14 @@ const Home = async ({ locale }: HomeProps) => {
           </ul>
           <div className={styles["landing-hero__actions"]}>
             <Link
-              href={`${homePrefix}${AUTH_PAGE_ROUTES.SIGNUP}`}
+              href={AUTH_PAGE_ROUTES.SIGNUP}
               className={primaryCtaClassName}
               aria-label={tHero("ctaSignUp")}
             >
               {tHero("ctaSignUp")}
             </Link>
             <Link
-              href={`${homePrefix}${AUTH_PAGE_ROUTES.SIGNIN}`}
+              href={AUTH_PAGE_ROUTES.SIGNIN}
               className={ghostCtaClassName}
               aria-label={tHero("ctaSignIn")}
             >
@@ -330,7 +330,7 @@ const Home = async ({ locale }: HomeProps) => {
             {tCta("title")}
           </Title>
           <Link
-            href={`${homePrefix}${AUTH_PAGE_ROUTES.SIGNUP}`}
+            href={AUTH_PAGE_ROUTES.SIGNUP}
             className={getCtaClassName(
               primaryCtaClassName,
               styles["cta-section__button"]

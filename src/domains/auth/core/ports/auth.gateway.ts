@@ -39,13 +39,6 @@ export type AuthGateway = {
   signInWithGoogle?(redirectPath?: string): Promise<void>;
 
   /**
-   * Sign out the current user.
-   * Clears the current session.
-   * @throws AuthenticationFailure if signout fails
-   */
-  signOut(): Promise<void>;
-
-  /**
    * Request a password reset email.
    * @param input - Password reset request (email)
    * @throws PasswordResetError if email not found or reset fails
@@ -54,9 +47,8 @@ export type AuthGateway = {
   resetPasswordForEmail(input: ResetPasswordInput): Promise<void>;
 
   /**
-   * Update password after a password reset.
-   * Supports PKCE flow (session-based, no token needed) and legacy token flow.
-   * @param input - Password update input (password required; token and email optional)
+   * Update password after a password reset (PKCE flow — session established by auth callback).
+   * @param input - Password update input
    * @returns Authentication result with session (user is auto-logged in after password update)
    * @throws InvalidTokenError if token/session is invalid or expired
    * @throws PasswordResetError for other password reset errors

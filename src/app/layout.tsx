@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
-import { defaultLocale } from "@/shared/i18n/config";
+import { defaultLocale } from "@/shared/core/i18n";
 
 import "./globals.css";
 import "@/styles/global.scss";
@@ -30,6 +30,7 @@ export default function RootLayout({
     <html
       lang={defaultLocale}
       className={`${geistSans.variable} ${geistMono.variable}`}
+      suppressHydrationWarning
     >
       <body>{children}</body>
     </html>

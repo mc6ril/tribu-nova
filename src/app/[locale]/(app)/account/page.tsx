@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/shared/i18n/routing";
 
 export default async function AccountPage({
   params,
@@ -11,7 +11,7 @@ export default async function AccountPage({
     <main style={{ padding: 24 }}>
       <h1>Account ({locale})</h1>
       <p>Protected localized account page (placeholder).</p>
-      <Link href={`/${locale}`}>Back home</Link>
+      <Link href="/">Back home</Link>
     </main>
   );
 }

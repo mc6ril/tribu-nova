@@ -5,7 +5,7 @@ import {
   defaultLocale,
   isSupportedLocale,
   type Locale,
-} from "@/shared/i18n/config";
+} from "@/shared/core/i18n";
 import { buildManifest } from "@/shared/seo/buildManifest";
 
 type Params = {

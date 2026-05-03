@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import { PRODUCT_BRAND_NAME } from "@/shared/constants/brand";
-import type { Locale } from "@/shared/i18n/config";
+import type { Locale } from "@/shared/core/i18n";
 import { getLanguageAlternates } from "@/shared/seo/languageAlternates";
 import {
   getAlternateOpenGraphLocales,

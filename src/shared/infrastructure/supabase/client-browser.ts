@@ -2,11 +2,12 @@ import { createBrowserClient } from "@supabase/ssr";
 import type { SupabaseClient } from "@supabase/supabase-js";
 
 import { throwProgrammingError } from "@/shared/errors/programmingError";
+import type { Database } from "@/shared/infrastructure/supabase/database.types";
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SUPABASE_PUBLISHABLE_KEY =
   process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY;
-let browserClientSingleton: SupabaseClient | null = null;
+let browserClientSingleton: SupabaseClient<Database> | null = null;
 
 /** Validate required env vars; throw with helpful message on missing. */
 const validateEnvironmentVariables = (): void => {
@@ -46,7 +47,7 @@ export const createSupabaseBrowserClient = () => {
   }
 
   validateEnvironmentVariables();
-  browserClientSingleton = createBrowserClient(
+  browserClientSingleton = createBrowserClient<Database>(
     SUPABASE_URL!,
     SUPABASE_PUBLISHABLE_KEY!
   );

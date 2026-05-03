@@ -31,10 +31,8 @@ const supabaseRemotePattern = (() => {
 
 const nextConfig: NextConfig = {
   /**
-   * Public pages are served directly from:
-   * - `/` (default locale)
-   * - `/{locale}` (secondary locales)
-   * - `/{locale}/legal`
+   * Locale routing is handled by `next-intl` route helpers and the `[locale]`
+   * segment.
    */
   sassOptions: {
     includePaths: [path.join(__dirname, "./src/styles")],

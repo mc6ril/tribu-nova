@@ -1,9 +1,9 @@
 import type { InputHTMLAttributes } from "react";
 import React, { forwardRef, useCallback, useState } from "react";
+import { useTranslations } from "next-intl";
 
 import { getAccessibilityId } from "@/shared/a11y/constants";
 import { EyeIcon, EyeOffIcon } from "@/shared/design-system/icons";
-import { useTranslations } from "@/shared/i18n";
 
 import styles from "./input.module.scss";
 

@@ -2,9 +2,9 @@
 
 import React, { useCallback, useRef, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
+import { useTranslations } from "next-intl";
 
 import { getAccessibilityId } from "@/shared/a11y/constants";
-import { useTranslations } from "@/shared/i18n";
 
 import ModalDialog from "./components/modal_dialog";
 import styles from "./modal.module.scss";

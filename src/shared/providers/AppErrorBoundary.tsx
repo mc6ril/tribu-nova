@@ -3,11 +3,10 @@
 import type { ErrorInfo, ReactNode } from "react";
 import { Component } from "react";
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 
+import { PAGE_ROUTES } from "@/shared/constants/routes";
 import RouteFallbackPage from "@/shared/design-system/route_fallback_page";
-import { getFallbackMessages } from "@/shared/i18n/fallbackMessages";
-import { buildHomePath } from "@/shared/i18n/publicPaths";
-import { useRuntimeLocaleSnapshot } from "@/shared/i18n/useRuntimeLocaleSnapshot";
 
 type AppErrorBoundaryProps = {
   children: ReactNode;
@@ -64,10 +63,8 @@ class InternalAppErrorBoundary extends Component<BoundaryProps, BoundaryState> {
 }
 
 const AppErrorBoundary = ({ children }: AppErrorBoundaryProps) => {
-  const locale = useRuntimeLocaleSnapshot();
+  const t = useTranslations("routeFallback.error");
   const pathname = usePathname() ?? "";
-  const copy = getFallbackMessages(locale).error;
-  const homePath = buildHomePath(locale);
 
   return (
     <InternalAppErrorBoundary
@@ -75,25 +72,25 @@ const AppErrorBoundary = ({ children }: AppErrorBoundaryProps) => {
       fallback={({ error, reset }) => (
         <RouteFallbackPage
           tone="error"
-          eyebrow={copy.eyebrow}
-          statusLabel={copy.status}
+          eyebrow={t("eyebrow")}
+          statusLabel={t("status")}
           statusValue="500"
-          title={copy.title}
-          message={copy.message}
+          title={t("title")}
+          message={t("message")}
           detail={
             process.env.NODE_ENV === "development" ? error.message : undefined
           }
           actions={[
             {
-              label: copy.primaryAction,
-              ariaLabel: copy.primaryActionAriaLabel,
+              label: t("primaryAction"),
+              ariaLabel: t("primaryActionAriaLabel"),
               onClick: reset,
               variant: "primary",
             },
             {
-              label: copy.secondaryAction,
-              ariaLabel: copy.secondaryActionAriaLabel,
-              href: homePath,
+              label: t("secondaryAction"),
+              ariaLabel: t("secondaryActionAriaLabel"),
+              href: PAGE_ROUTES.HOME,
               variant: "secondary",
             },
           ]}

@@ -1,27 +1,21 @@
-import Link from "next/link";
+import { PAGE_ROUTES } from "@/shared/constants/routes";
+import { isArray } from "@/shared/utils";
+import { sanitizeInternalRedirectPath } from "@/shared/utils/authRedirect";
 
-export default async function SignupPage({
-  params,
+import SignUpPage from "@/domains/auth/presentation/pages/signup";
+
+export default async function Signup({
+  searchParams,
 }: {
-  params: Promise<{ locale: string }>;
+  searchParams: Promise<{ redirect?: string | string[] }>;
 }) {
-  const { locale } = await params;
+  const resolved = await searchParams;
 
-  return (
-    <main style={{ padding: 24 }}>
-      <h1>Signup ({locale})</h1>
-      <p>Public localized signup page (placeholder).</p>
-      <ul style={{ marginTop: 16, display: "grid", gap: 8 }}>
-        <li>
-          <Link href={`/${locale}/auth/verify-email`}>Verify email</Link>
-        </li>
-        <li>
-          <Link href={`/${locale}/auth/reset-password`}>Reset password</Link>
-        </li>
-      </ul>
-      <div style={{ marginTop: 16 }}>
-        <Link href={`/${locale}`}>Back home</Link>
-      </div>
-    </main>
+  const redirect = resolved.redirect;
+  const redirectPath = sanitizeInternalRedirectPath(
+    isArray(redirect) ? redirect[0] : (redirect ?? null),
+    PAGE_ROUTES.WORKSPACE
   );
+
+  return <SignUpPage redirectPath={redirectPath} />;
 }

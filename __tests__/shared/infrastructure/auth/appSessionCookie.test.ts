@@ -1,0 +1,272 @@
+import { createHmac } from "node:crypto";
+
+import {
+  APP_SESSION_COOKIE_MAX_AGE,
+  APP_SESSION_COOKIE_NAME,
+  buildAppSessionPayload,
+  clearAppSessionCookie,
+  decodeAppSessionCookie,
+  encodeAppSessionCookieValue,
+  getAppSessionFromCookie,
+} from "@/shared/infrastructure/auth/appSessionCookie.server";
+import { buildDefaultAppSessionPreferences } from "@/shared/infrastructure/auth/appSessionCookieValue";
+
+import type { AuthSession } from "@/domains/auth/core/domain/session.types";
+
+const TEST_SECRET = "test-secret-at-least-32-chars-long-ok";
+
+const BASE_SESSION: AuthSession = {
+  user: {
+    id: "user-123",
+    email: "user@example.com",
+    displayName: "Test User",
+    avatarUrl: undefined,
+    preferences: {
+      theme: "system",
+      emailNotifications: false,
+      language: "en",
+      gettingStartedStatus: "pending",
+    },
+    termsAcceptedAt: "2026-01-01T00:00:00Z",
+  },
+};
+
+function buildValidCookieValue(
+  overrides: {
+    expiresAt?: number;
+    secret?: string;
+    emailConfirmedAt?: string | null;
+  } = {}
+): string {
+  const secret = overrides.secret ?? TEST_SECRET;
+  const session = { ...BASE_SESSION };
+  const payload = buildAppSessionPayload(
+    session,
+    overrides.emailConfirmedAt !== undefined
+      ? overrides.emailConfirmedAt
+      : "2026-01-01T00:00:00Z"
+  );
+  if (overrides.expiresAt !== undefined) {
+    payload.expiresAt = overrides.expiresAt;
+  }
+  const encoded = Buffer.from(JSON.stringify(payload)).toString("base64url");
+  const sig = createHmac("sha256", secret).update(encoded).digest("base64url");
+  return `${encoded}.${sig}`;
+}
+
+beforeEach(() => {
+  process.env.APP_SESSION_COOKIE_SECRET = TEST_SECRET;
+});
+
+afterEach(() => {
+  delete process.env.APP_SESSION_COOKIE_SECRET;
+});
+
+// ─── decodeAppSessionCookie ────────────────────────────────────────────────
+
+describe("decodeAppSessionCookie", () => {
+  it("returns null when secret is not configured", () => {
+    delete process.env.APP_SESSION_COOKIE_SECRET;
+    const raw = buildValidCookieValue({ secret: TEST_SECRET });
+    expect(decodeAppSessionCookie(raw)).toBeNull();
+  });
+
+  it("returns null when the cookie has no dot separator", () => {
+    expect(decodeAppSessionCookie("nodothere")).toBeNull();
+  });
+
+  it("returns null when the signature is invalid", () => {
+    const raw = buildValidCookieValue();
+    const tampered = raw.slice(0, -4) + "xxxx";
+    expect(decodeAppSessionCookie(tampered)).toBeNull();
+  });
+
+  it("returns null when the payload is base64url but not valid JSON", () => {
+    const badEncoded = Buffer.from("not-json-{{{").toString("base64url");
+    const sig = createHmac("sha256", TEST_SECRET)
+      .update(badEncoded)
+      .digest("base64url");
+    expect(decodeAppSessionCookie(`${badEncoded}.${sig}`)).toBeNull();
+  });
+
+  it("returns null when the cookie is expired", () => {
+    const pastTimestamp = Math.floor(Date.now() / 1000) - 1;
+    const raw = buildValidCookieValue({ expiresAt: pastTimestamp });
+    expect(decodeAppSessionCookie(raw)).toBeNull();
+  });
+
+  it("returns the payload for a valid, non-expired cookie", () => {
+    const raw = buildValidCookieValue();
+    const payload = decodeAppSessionCookie(raw);
+    expect(payload).not.toBeNull();
+    expect(payload?.id).toBe("user-123");
+    expect(payload?.email).toBe("user@example.com");
+    expect(payload?.expiresAt).toBeGreaterThan(Math.floor(Date.now() / 1000));
+  });
+
+  it("returns null when the payload is missing required fields", () => {
+    const incomplete = { email: "user@example.com" }; // missing id, expiresAt, iat
+    const encoded = Buffer.from(JSON.stringify(incomplete)).toString(
+      "base64url"
+    );
+    const sig = createHmac("sha256", TEST_SECRET)
+      .update(encoded)
+      .digest("base64url");
+    expect(decodeAppSessionCookie(`${encoded}.${sig}`)).toBeNull();
+  });
+
+  it("returns null when the payload is not an object", () => {
+    const encoded = Buffer.from(JSON.stringify(null)).toString("base64url");
+    const sig = createHmac("sha256", TEST_SECRET)
+      .update(encoded)
+      .digest("base64url");
+
+    expect(decodeAppSessionCookie(`${encoded}.${sig}`)).toBeNull();
+  });
+});
+
+// ─── getAppSessionFromCookie (server helper via mocked next/headers) ───────
+
+describe("getAppSessionFromCookie", () => {
+  it("returns null when the cookie is absent", async () => {
+    const { cookies } = await import("next/headers");
+    (cookies as jest.Mock).mockResolvedValue({
+      get: () => undefined,
+    });
+    const result = await getAppSessionFromCookie();
+    expect(result).toBeNull();
+  });
+
+  it("returns null when the cookie has an invalid signature", async () => {
+    const warnSpy = jest
+      .spyOn(console, "warn")
+      .mockImplementation(() => undefined);
+    const { cookies } = await import("next/headers");
+    (cookies as jest.Mock).mockResolvedValue({
+      get: () => ({ value: "bad.data" }),
+    });
+    const result = await getAppSessionFromCookie();
+    expect(result).toBeNull();
+    expect(warnSpy).toHaveBeenCalledWith(
+      expect.stringContaining("Invalid app session cookie ignored")
+    );
+    warnSpy.mockRestore();
+  });
+
+  it("returns AuthSession for a valid cookie", async () => {
+    const raw = buildValidCookieValue();
+    const { cookies } = await import("next/headers");
+    (cookies as jest.Mock).mockResolvedValue({
+      get: (name: string) =>
+        name === APP_SESSION_COOKIE_NAME ? { value: raw } : undefined,
+    });
+    const result = await getAppSessionFromCookie();
+    expect(result?.user.id).toBe("user-123");
+    expect(result?.user.email).toBe("user@example.com");
+  });
+
+  it("returns AuthSession with defaults for a legacy cookie payload", async () => {
+    const legacyPayload = {
+      id: "legacy-user",
+      email: "legacy@example.com",
+      expiresAt: Math.floor(Date.now() / 1000) + 60,
+      iat: Math.floor(Date.now() / 1000),
+    };
+    const encoded = Buffer.from(JSON.stringify(legacyPayload)).toString(
+      "base64url"
+    );
+    const sig = createHmac("sha256", TEST_SECRET)
+      .update(encoded)
+      .digest("base64url");
+    const { cookies } = await import("next/headers");
+    (cookies as jest.Mock).mockResolvedValue({
+      get: (name: string) =>
+        name === APP_SESSION_COOKIE_NAME
+          ? { value: `${encoded}.${sig}` }
+          : undefined,
+    });
+
+    const result = await getAppSessionFromCookie();
+
+    expect(result?.user.preferences).toEqual({
+      theme: "system",
+      emailNotifications: false,
+      language: "en",
+      gettingStartedStatus: "pending",
+    });
+    expect(result?.user.termsAcceptedAt).toBe("");
+  });
+});
+
+// ─── encode round-trip ─────────────────────────────────────────────────────
+
+describe("encodeAppSessionCookieValue / decodeAppSessionCookie round-trip", () => {
+  it("encodes and decodes symmetrically", () => {
+    const payload = buildAppSessionPayload(
+      BASE_SESSION,
+      "2026-01-01T00:00:00Z"
+    );
+    const raw = encodeAppSessionCookieValue(payload);
+    const decoded = decodeAppSessionCookie(raw);
+    expect(decoded?.id).toBe("user-123");
+    expect(decoded?.email).toBe("user@example.com");
+    expect(decoded?.emailConfirmedAt).toBe("2026-01-01T00:00:00Z");
+  });
+
+  it("throws when the app session cookie secret is missing while encoding", () => {
+    delete process.env.APP_SESSION_COOKIE_SECRET;
+    const payload = buildAppSessionPayload(
+      BASE_SESSION,
+      "2026-01-01T00:00:00Z"
+    );
+
+    expect(() => encodeAppSessionCookieValue(payload)).toThrow(
+      "Missing required environment variable APP_SESSION_COOKIE_SECRET"
+    );
+  });
+});
+
+// ─── clearAppSessionCookie ────────────────────────────────────────────────
+
+describe("clearAppSessionCookie", () => {
+  it("expires the app session cookie", async () => {
+    const { cookies } = await import("next/headers");
+    const set = jest.fn();
+    (cookies as jest.Mock).mockResolvedValue({ set });
+
+    await clearAppSessionCookie();
+
+    expect(set).toHaveBeenCalledWith(APP_SESSION_COOKIE_NAME, "", {
+      httpOnly: true,
+      secure: false,
+      sameSite: "lax",
+      path: "/",
+      maxAge: 0,
+    });
+  });
+});
+
+// ─── default preferences ─────────────────────────────────────────────────
+
+describe("buildDefaultAppSessionPreferences", () => {
+  it("uses safe defaults for legacy cookies without preferences", () => {
+    expect(buildDefaultAppSessionPreferences()).toEqual({
+      theme: "system",
+      emailNotifications: false,
+      language: "en",
+      gettingStartedStatus: "pending",
+    });
+  });
+});
+
+// ─── constants ────────────────────────────────────────────────────────────
+
+describe("constants", () => {
+  it("APP_SESSION_COOKIE_NAME is workbench-user", () => {
+    expect(APP_SESSION_COOKIE_NAME).toBe("workbench-user");
+  });
+
+  it("APP_SESSION_COOKIE_MAX_AGE is 30 days in seconds", () => {
+    expect(APP_SESSION_COOKIE_MAX_AGE).toBe(30 * 24 * 60 * 60);
+  });
+});

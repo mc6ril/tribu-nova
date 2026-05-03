@@ -12,7 +12,7 @@ export const ProfileAvatarUrlSchema = z
  */
 export const updateProfileAvatar = async (
   gateway: ProfileGateway,
-  avatarUrl: string,
+  avatarUrl: string
 ): Promise<Profile | null> => {
   const validated = ProfileAvatarUrlSchema.parse(avatarUrl);
 
@@ -20,4 +20,3 @@ export const updateProfileAvatar = async (
 
   return gateway.getProfile();
 };
-

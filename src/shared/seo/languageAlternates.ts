@@ -2,14 +2,14 @@ import {
   defaultLocale,
   type Locale,
   supportedLocales,
-} from "@/shared/i18n/config";
+} from "@/shared/core/i18n";
 import { getSiteUrl } from "@/shared/seo/siteUrl";
 
 type Hreflang = Locale | "x-default";
 
 /**
  * hreflang map for a public route.
- * The default locale is unprefixed; secondary locales keep their prefix.
+ * All supported locales keep their URL prefix.
  */
 export const getLanguageAlternates = (
   buildPathForLocale: (locale: Locale) => string

@@ -45,6 +45,10 @@ handle_command_error() {
             echo "  - Check that .next/ directory exists" >&2
             echo "  - Verify production build completed successfully" >&2
             ;;
+        test:e2e|test:e2e:ui|test:e2e:headed)
+            echo "  - Install browsers: yarn playwright install chromium" >&2
+            echo "  - Ensure port 3000 is free or set PLAYWRIGHT_BASE_URL" >&2
+            ;;
     esac
     exit "$exit_code"
 }
@@ -63,6 +67,9 @@ show_usage() {
     echo "  start            Start production server"
     echo "  clean            Remove build artifacts (.next/ directory)"
     echo "  clean --all      Remove build artifacts and node_modules/ (with confirmation)"
+    echo "  test:e2e         Run Playwright E2E tests (see playwright.config.ts)"
+    echo "  test:e2e:ui      Run Playwright E2E in UI mode"
+    echo "  test:e2e:headed  Run Playwright E2E with a visible browser"
     echo "  help, --help, -h Show this help message"
     echo ""
     echo "Examples:"
@@ -72,6 +79,8 @@ show_usage() {
     echo "  sh run start"
     echo "  sh run clean"
     echo "  sh run clean --all"
+    echo "  sh run test:e2e"
+    echo "  sh run test:e2e:ui"
     echo "  sh run help"
     echo ""
     echo "For more information, see README.md"
@@ -285,6 +294,27 @@ main() {
         clean)
             # Clean command doesn't require yarn
             handle_clean "$@"
+            ;;
+        test:e2e|test:e2e:ui|test:e2e:headed)
+            check_yarn
+            local exit_code=0
+            case "$command" in
+                test:e2e)
+                    echo "Running Playwright E2E tests..."
+                    yarn playwright test || exit_code=$?
+                    ;;
+                test:e2e:ui)
+                    echo "Running Playwright E2E (UI mode)..."
+                    yarn playwright test --ui || exit_code=$?
+                    ;;
+                test:e2e:headed)
+                    echo "Running Playwright E2E (headed browser)..."
+                    yarn playwright test --headed || exit_code=$?
+                    ;;
+            esac
+            if [ $exit_code -ne 0 ]; then
+                handle_command_error "$command" "$exit_code"
+            fi
             ;;
         *)
             echo "Error: Unknown command '$command'" >&2

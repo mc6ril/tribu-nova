@@ -1,27 +1,33 @@
-import Link from "next/link";
+import { PAGE_ROUTES } from "@/shared/constants";
+import { isArray } from "@/shared/utils";
+import { sanitizeInternalRedirectPath } from "@/shared/utils/authRedirect";
 
-export default async function SigninPage({
-  params,
+import SignInPage from "@/domains/auth/presentation/pages/signin";
+
+export default async function Signin({
+  searchParams,
 }: {
-  params: Promise<{ locale: string }>;
+  searchParams: Promise<{
+    redirect?: string | string[];
+    unverified?: string | string[];
+  }>;
 }) {
-  const { locale } = await params;
+  const resolved = await searchParams;
+
+  const redirect = resolved.redirect;
+  const redirectPath = sanitizeInternalRedirectPath(
+    isArray(redirect) ? redirect[0] : (redirect ?? null),
+    PAGE_ROUTES.WORKSPACE
+  );
+
+  const unverified = resolved.unverified;
+  const isUnverifiedRedirect =
+    (isArray(unverified) ? unverified[0] : unverified) === "true";
 
   return (
-    <main style={{ padding: 24 }}>
-      <h1>Sign in ({locale})</h1>
-      <p>Public localized sign-in page (placeholder).</p>
-      <ul style={{ marginTop: 16, display: "grid", gap: 8 }}>
-        <li>
-          <Link href={`/${locale}/auth/signup`}>Create account</Link>
-        </li>
-        <li>
-          <Link href={`/${locale}/auth/reset-password`}>Reset password</Link>
-        </li>
-      </ul>
-      <div style={{ marginTop: 16 }}>
-        <Link href={`/${locale}`}>Back home</Link>
-      </div>
-    </main>
+    <SignInPage
+      redirectPath={redirectPath}
+      isUnverifiedRedirect={isUnverifiedRedirect}
+    />
   );
 }

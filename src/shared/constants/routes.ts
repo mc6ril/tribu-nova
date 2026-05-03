@@ -72,6 +72,27 @@ export const PUBLIC_ROUTES: readonly string[] = Object.freeze([
 ]);
 
 /**
+ * Public routes that should remain visible to authenticated users.
+ * `/legals` is accepted as a defensive alias for the legal page wording used in
+ * product discussions; the concrete route today is `/legal`.
+ */
+export const AUTHENTICATED_PUBLIC_REDIRECT_EXEMPT_ROUTES: readonly string[] =
+  Object.freeze([PAGE_ROUTES.HOME, PAGE_ROUTES.LEGAL, "/legals"]);
+
+/**
+ * Public page routes that are guest-only. Authenticated visitors are sent back
+ * to the workspace from Proxy before React starts rendering.
+ */
+export const AUTHENTICATED_PUBLIC_REDIRECT_ROUTES: readonly string[] =
+  Object.freeze(
+    PUBLIC_ROUTES.filter(
+      (route) =>
+        route !== AUTH_PAGE_ROUTES.CALLBACK &&
+        !AUTHENTICATED_PUBLIC_REDIRECT_EXEMPT_ROUTES.includes(route)
+    )
+  );
+
+/**
  * API route paths for server-side operations.
  * Used by client-side hooks to call API routes for admin-privileged operations.
  */

@@ -4,22 +4,29 @@ import {
   PROTECTED_ROUTES,
   PUBLIC_ROUTES,
 } from "@/shared/constants/routes";
-import { supportedLocales } from "@/shared/i18n/config";
+import { stripLocalePrefix } from "@/shared/i18n/routing";
 
-const PUBLIC_LOCALE_PREFIX = supportedLocales.join("|");
-const PUBLIC_LEAF_ROUTES = [PAGE_ROUTES.PRICING, PAGE_ROUTES.LEGAL]
-  .map((value) => value.replace(/^\//, ""))
-  .join("|");
-const PUBLIC_ENTRY_PATH = new RegExp(
-  `^(?:${PAGE_ROUTES.HOME}$|${PAGE_ROUTES.PRICING}/?$|${PAGE_ROUTES.LEGAL}(?:/.*)?$|/(${PUBLIC_LOCALE_PREFIX})(?:$|/(?:${PUBLIC_LEAF_ROUTES})/?$|/${PAGE_ROUTES.LEGAL.replace(/^\//, "")}(?:/.*)?$))`,
-  "i"
-);
+const PUBLIC_ENTRY_ROUTES = Object.freeze([
+  PAGE_ROUTES.HOME,
+  PAGE_ROUTES.PRICING,
+  PAGE_ROUTES.LEGAL,
+]);
 
 /**
  * Public entry URLs (default locale unprefixed, secondary locales prefixed).
  */
 export const isPublicEntryRoute = (pathname: string): boolean => {
-  return PUBLIC_ENTRY_PATH.test(normalizePath(pathname));
+  const normalizedPathname = stripLocalePrefix(normalizePath(pathname));
+
+  return PUBLIC_ENTRY_ROUTES.some((route) => {
+    if (route === PAGE_ROUTES.HOME) {
+      return normalizedPathname === route;
+    }
+
+    return (
+      normalizedPathname === route || normalizedPathname.startsWith(`${route}/`)
+    );
+  });
 };
 
 const UUID_PATH_SEGMENT =
@@ -36,11 +43,13 @@ const PROJECT_ROUTE_PATTERN = new RegExp(
  * @returns True if the pathname is a public route
  */
 export const isPublicRoute = (pathname: string): boolean => {
-  if (PUBLIC_ROUTES.includes(pathname)) {
+  const normalizedPathname = stripLocalePrefix(normalizePath(pathname));
+
+  if (PUBLIC_ROUTES.includes(normalizedPathname)) {
     return true;
   }
 
-  if (isPublicEntryRoute(pathname)) {
+  if (isPublicEntryRoute(normalizedPathname)) {
     return true;
   }
 
@@ -57,13 +66,19 @@ export const isPublicRoute = (pathname: string): boolean => {
  * @returns True if the pathname is a protected route
  */
 export const isProtectedRoute = (pathname: string): boolean => {
+  const normalizedPathname = stripLocalePrefix(normalizePath(pathname));
+
   // Check exact matches
-  if (PROTECTED_ROUTES.includes(pathname)) {
+  if (PROTECTED_ROUTES.includes(normalizedPathname)) {
+    return true;
+  }
+
+  if (normalizedPathname.startsWith(`${PAGE_ROUTES.WORKSPACE}/`)) {
     return true;
   }
 
   // Project root (/{projectId}) and nested views are protected.
-  return PROJECT_ROUTE_PATTERN.test(pathname);
+  return PROJECT_ROUTE_PATTERN.test(normalizedPathname);
 };
 
 /**
@@ -74,7 +89,7 @@ export const isProtectedRoute = (pathname: string): boolean => {
  * @returns True if the pathname is a project route
  */
 export const isProjectRoute = (pathname: string): boolean => {
-  return PROJECT_ROUTE_PATTERN.test(pathname);
+  return PROJECT_ROUTE_PATTERN.test(stripLocalePrefix(normalizePath(pathname)));
 };
 
 /**
@@ -84,7 +99,7 @@ export const isProjectRoute = (pathname: string): boolean => {
  * @returns The project ID if found, null otherwise
  */
 export const extractProjectId = (pathname: string): string | null => {
-  const match = pathname.match(
+  const match = stripLocalePrefix(normalizePath(pathname)).match(
     /^\/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/i
   );
   return match ? match[1] : null;
@@ -97,7 +112,7 @@ export const extractProjectId = (pathname: string): string | null => {
  * @returns The view name if found, null otherwise
  */
 export const extractProjectView = (pathname: string): string | null => {
-  const match = pathname.match(
+  const match = stripLocalePrefix(normalizePath(pathname)).match(
     /^\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\/([^/]+)/i
   );
   return match ? match[1] : null;

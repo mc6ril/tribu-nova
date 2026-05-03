@@ -1,10 +1,7 @@
-import { routing } from "../../i18n/routing";
+import { localeCookieName } from "@/shared/core/i18n";
 
 export const APP_COOKIE_KEYS = Object.freeze({
-  LOCALE:
-    routing.localeCookie && typeof routing.localeCookie === "object"
-      ? (routing.localeCookie.name ?? "workbench-locale")
-      : "workbench-locale",
+  LOCALE: localeCookieName,
   THEME: "workbench-theme",
   RUNTIME_CONFIG_OVERRIDES: "workbench-runtime-config-overrides",
   USER: "workbench-user",

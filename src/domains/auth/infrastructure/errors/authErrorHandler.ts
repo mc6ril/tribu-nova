@@ -2,7 +2,7 @@ import { AUTH_ERROR_CODES_ARRAY } from "@/shared/errors/appErrorCodes";
 import { createLoggerFactory } from "@/shared/observability";
 import { hasErrorCode } from "@/shared/utils/guards";
 
-import { mapSupabaseAuthError } from "@/domains/auth/infrastructure/supabase/AuthMapper.supabase";
+import { mapSupabaseAuthError } from "@/domains/auth/infrastructure/supabase/AuthErrorMapper.supabase";
 
 const loggerFactory = createLoggerFactory();
 const logger = loggerFactory.forScope("infrastructure.supabase-auth-errors");

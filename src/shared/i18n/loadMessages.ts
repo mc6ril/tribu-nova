@@ -1,10 +1,10 @@
-import type { IntlMessages } from "./messageCatalog";
-import type { Locale } from "./routing";
+import type { Locale } from "@/shared/core/i18n";
+import type { IntlMessages } from "@/shared/i18n/messageCatalog";
 
 const messageLoaders: Record<Locale, () => Promise<IntlMessages>> = {
-  fr: async () => (await import("./messages/fr.json")).default,
-  en: async () => (await import("./messages/en.json")).default,
-  es: async () => (await import("./messages/es.json")).default,
+  fr: async () => (await import("@/shared/i18n/messages/fr.json")).default,
+  en: async () => (await import("@/shared/i18n/messages/en.json")).default,
+  es: async () => (await import("@/shared/i18n/messages/es.json")).default,
 };
 
 export const loadMessages = async (locale: Locale): Promise<IntlMessages> => {

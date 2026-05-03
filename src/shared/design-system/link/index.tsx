@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
 
 import { getAccessibilityId } from "@/shared/a11y/constants";
+import { Link as IntlLink } from "@/shared/i18n/routing";
 
 import styles from "./link.module.scss";
 
@@ -24,7 +24,7 @@ type Props = {
   ariaLabel?: string;
   /** Additional CSS class name */
   className?: string;
-} & React.ComponentPropsWithoutRef<typeof Link>;
+} & React.ComponentPropsWithoutRef<typeof IntlLink>;
 
 /**
  * Reusable Link component that wraps Next.js Link for consistent navigation styling.
@@ -94,7 +94,7 @@ const LinkComponent = ({
   }
 
   return (
-    <Link
+    <IntlLink
       id={linkId}
       href={href}
       className={linkClasses}
@@ -104,7 +104,7 @@ const LinkComponent = ({
       {...linkProps}
     >
       {children}
-    </Link>
+    </IntlLink>
   );
 };
 

@@ -1,4 +1,4 @@
-import { Locale } from "@/shared/i18n";
+import type { Locale } from "@/shared/core/i18n";
 
 import LegalPage from "@/domains/roots/presentation/legals";
 

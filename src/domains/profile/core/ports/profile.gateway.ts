@@ -26,4 +26,3 @@ export type ProfileGateway = {
    */
   updateAvatar(avatarUrl: string): Promise<void>;
 };
-

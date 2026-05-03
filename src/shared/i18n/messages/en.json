@@ -104,6 +104,38 @@
       "ariaLabel": "Application footer"
     }
   },
+  "routeFallback": {
+    "notFound": {
+      "eyebrow": "Page not found",
+      "status": "404",
+      "title": "This page slipped away",
+      "message": "The link may be outdated, incomplete, or already obsolete. We can get you back somewhere safer.",
+      "primaryAction": "Back to home",
+      "primaryActionAriaLabel": "Return to the home page",
+      "secondaryAction": "Go to workspace",
+      "secondaryActionAriaLabel": "Go to the workspace"
+    },
+    "error": {
+      "eyebrow": "Temporary incident",
+      "status": "Error",
+      "title": "Something went off track",
+      "message": "This screen could not load properly. You can try again without losing your current session.",
+      "primaryAction": "Try again",
+      "primaryActionAriaLabel": "Try loading the page again",
+      "secondaryAction": "Back to home",
+      "secondaryActionAriaLabel": "Return to the home page"
+    },
+    "globalError": {
+      "eyebrow": "Global incident",
+      "status": "Critical error",
+      "title": "We lost the thread",
+      "message": "The app could not recover this screen. A fresh restart is often enough to get back on track.",
+      "primaryAction": "Restart",
+      "primaryActionAriaLabel": "Restart the application",
+      "secondaryAction": "Back to home",
+      "secondaryActionAriaLabel": "Return to the home page"
+    }
+  },
   "pages": {
     "signup": {
       "title": "Create an account",

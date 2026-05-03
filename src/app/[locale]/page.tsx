@@ -1,4 +1,4 @@
-import type { Locale } from "@/shared/i18n/config";
+import type { Locale } from "@/shared/core/i18n";
 
 import Home from "@/domains/roots/presentation/home";
 
