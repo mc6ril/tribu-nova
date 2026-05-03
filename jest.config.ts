@@ -5,6 +5,12 @@ const config: Config = {
   testEnvironment: "node",
   roots: ["<rootDir>/__tests__"],
   testMatch: ["**/*.test.ts", "**/*.test.tsx"],
+  testPathIgnorePatterns: [
+    "/node_modules/",
+    "<rootDir>/.next/",
+    "<rootDir>/src/.*/core/",
+    "<rootDir>/__tests__/.*/core/",
+  ],
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
   watchman: false,
   moduleNameMapper: {
@@ -24,12 +30,18 @@ const config: Config = {
   collectCoverage: true,
   collectCoverageFrom: [
     "src/shared/infrastructure/auth/**/*.{ts,tsx}",
+    "src/domains/auth/infrastructure/**/*.{ts,tsx}",
     "src/domains/session/**/*.{ts,tsx}",
+    "!src/**/core/**/*.{ts,tsx}",
     "!src/**/index.ts",
     "!src/**/*.d.ts",
   ],
   coverageDirectory: "coverage",
-  coveragePathIgnorePatterns: ["/node_modules/", "/__tests__/"],
+  coveragePathIgnorePatterns: [
+    "/node_modules/",
+    "/__tests__/",
+    "<rootDir>/src/.*/core/",
+  ],
   transform: {
     "^.+\\.tsx?$": [
       "ts-jest",
