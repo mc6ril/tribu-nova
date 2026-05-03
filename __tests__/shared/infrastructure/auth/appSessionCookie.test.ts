@@ -127,12 +127,19 @@ describe("getAppSessionFromCookie", () => {
   });
 
   it("returns null when the cookie has an invalid signature", async () => {
+    const warnSpy = jest
+      .spyOn(console, "warn")
+      .mockImplementation(() => undefined);
     const { cookies } = await import("next/headers");
     (cookies as jest.Mock).mockResolvedValue({
       get: () => ({ value: "bad.data" }),
     });
     const result = await getAppSessionFromCookie();
     expect(result).toBeNull();
+    expect(warnSpy).toHaveBeenCalledWith(
+      expect.stringContaining("Invalid app session cookie ignored")
+    );
+    warnSpy.mockRestore();
   });
 
   it("returns AuthSession for a valid cookie", async () => {

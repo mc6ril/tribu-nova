@@ -14,21 +14,12 @@ export default async function AppLayout({
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 }) {
-  logger.info("AppLayout entry", {
-    function: "AppLayout",
-  });
-
   const { locale: localeParam } = await params;
   const locale = matchSupportedLocale(localeParam) ?? defaultLocale;
-  logger.info("AppLayout locale resolved", {
-    function: "AppLayout",
-    localeParam,
-    locale,
-  });
 
   const session = await getServerSession();
   if (!session) {
-    logger.info("AppLayout missing session; redirecting to signin", {
+    logger.warn("Protected app route requested without a session", {
       function: "AppLayout",
       locale,
       redirectPath: AUTH_PAGE_ROUTES.SIGNIN,
@@ -41,12 +32,6 @@ export default async function AppLayout({
   if (!authenticatedSession) {
     throw new Error("AppLayout expected a session after redirect.");
   }
-
-  logger.info("AppLayout session resolved", {
-    function: "AppLayout",
-    userId: authenticatedSession.user.id,
-    email: authenticatedSession.user.email,
-  });
 
   return (
     <div style={{ display: "flex", minHeight: "100vh" }}>

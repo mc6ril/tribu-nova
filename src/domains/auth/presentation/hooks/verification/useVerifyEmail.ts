@@ -1,5 +1,6 @@
 "use client";
 
+import { useCallback, useMemo } from "react";
 import { useMutation } from "@tanstack/react-query";
 
 import { PAGE_ROUTES } from "@/shared/constants/routes";
@@ -13,15 +14,26 @@ import { createSupabaseAuthGateway } from "@/domains/auth/infrastructure/supabas
 
 export const useVerifyEmail = () => {
   const router = useAppRouter();
-  const gateway = createSupabaseAuthGateway(createSupabaseBrowserClient());
-
-  return useMutation({
-    mutationFn: (input: VerifyEmailInput) => verifyEmail(gateway, input),
-    onSuccess: async (result) => {
+  const gateway = useMemo(
+    () => createSupabaseAuthGateway(createSupabaseBrowserClient()),
+    []
+  );
+  const mutationFn = useCallback(
+    (input: VerifyEmailInput) => verifyEmail(gateway, input),
+    [gateway]
+  );
+  const onSuccess = useCallback(
+    async (result: Awaited<ReturnType<typeof verifyEmail>>) => {
       if (result.session) {
         await writeSessionCookieAction();
         router.replace(PAGE_ROUTES.WORKSPACE);
       }
     },
+    [router]
+  );
+
+  return useMutation({
+    mutationFn,
+    onSuccess,
   });
 };

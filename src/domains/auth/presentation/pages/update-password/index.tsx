@@ -27,7 +27,11 @@ const UpdatePasswordPage = () => {
   const t = useTranslations("pages.updatePassword");
   const tFields = useTranslations("pages.updatePassword.fields");
 
-  const updatePassword = useUpdatePassword();
+  const {
+    mutate: updatePassword,
+    isPending: isUpdatePasswordPending,
+    isSuccess: isUpdatePasswordSuccess,
+  } = useUpdatePassword();
   const authRoutes = useAuthRoutes();
 
   const {
@@ -43,12 +47,12 @@ const UpdatePasswordPage = () => {
 
   const onSubmit = useCallback(
     (data: UpdatePasswordFormInput) => {
-      updatePassword.mutate({ password: data.password });
+      updatePassword({ password: data.password });
     },
     [updatePassword]
   );
 
-  if (updatePassword.isSuccess) {
+  if (isUpdatePasswordSuccess) {
     return (
       <div className={styles["update-password-page"]}>
         <div className={styles["update-password-container"]}>
@@ -108,7 +112,7 @@ const UpdatePasswordPage = () => {
             label={t("button")}
             type="submit"
             fullWidth
-            disabled={updatePassword.isPending}
+            disabled={isUpdatePasswordPending}
             aria-label={t("buttonAriaLabel")}
           />
         </Form>

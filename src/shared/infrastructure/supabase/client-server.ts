@@ -4,21 +4,8 @@ import { createServerClient } from "@supabase/ssr";
 
 import { requireNonEmptyEnv } from "@/shared/errors/programmingError";
 import type { Database } from "@/shared/infrastructure/supabase/database.types";
-import { createLoggerFactory } from "@/shared/observability";
-
-const logger = createLoggerFactory().forScope(
-  "infrastructure.supabase-server-client"
-);
 
 export const createSupabaseServerClient = async () => {
-  logger.info("createSupabaseServerClient entry", {
-    function: "createSupabaseServerClient",
-    hasSupabaseUrl: Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL),
-    hasSupabasePublishableKey: Boolean(
-      process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY
-    ),
-  });
-
   const cookieStore = await cookies();
 
   return createServerClient<Database>(

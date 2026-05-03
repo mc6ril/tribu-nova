@@ -14,7 +14,6 @@ import Text from "@/shared/design-system/text";
 import Title from "@/shared/design-system/title";
 import { isAppError } from "@/shared/errors/appError";
 import { AUTH_ERROR_CODES } from "@/shared/errors/appErrorCodes";
-import { createLoggerFactory } from "@/shared/observability";
 
 import styles from "./styles.module.scss";
 
@@ -32,14 +31,7 @@ type Props = {
   isUnverifiedRedirect: boolean;
 };
 
-const logger = createLoggerFactory().forScope("auth.signin.page");
-
 const resolveSignInError = (error: unknown): string | undefined => {
-  logger.info("resolveSignInError entry", {
-    function: "resolveSignInError",
-    isAppError: isAppError(error),
-  });
-
   if (!isAppError(error)) return undefined;
   switch (error.code) {
     case AUTH_ERROR_CODES.INVALID_CREDENTIALS:
@@ -54,18 +46,21 @@ const resolveSignInError = (error: unknown): string | undefined => {
 };
 
 const SignInPage = ({ redirectPath, isUnverifiedRedirect }: Props) => {
-  logger.info("SignInPage render entry", {
-    function: "SignInPage",
-    redirectPath,
-    isUnverifiedRedirect,
-  });
-
   const t = useTranslations("pages.signin");
   const tFields = useTranslations("pages.signin.fields");
 
-  const signIn = useSignIn(redirectPath);
-  const signInWithGoogle = useSignInWithGoogle(redirectPath);
-  const resendVerification = useResendVerificationEmail();
+  const {
+    error: signInError,
+    isPending: isSignInPending,
+    mutate: submitSignIn,
+  } = useSignIn(redirectPath);
+  const { isPending: isGoogleSignInPending, mutate: submitGoogleSignIn } =
+    useSignInWithGoogle(redirectPath);
+  const {
+    isPending: isResendVerificationPending,
+    isSuccess: didResendVerificationSucceed,
+    mutate: resendVerificationEmail,
+  } = useResendVerificationEmail();
   const authRoutes = useAuthRoutes();
 
   const {
@@ -79,44 +74,30 @@ const SignInPage = ({ redirectPath, isUnverifiedRedirect }: Props) => {
 
   const onSubmit = useCallback(
     (data: SignInFormInput) => {
-      logger.info("onSubmit entry", {
-        function: "onSubmit",
-        email: data.email,
-        redirectPath,
-      });
-      signIn.mutate(data);
+      submitSignIn(data);
     },
-    [redirectPath, signIn]
+    [submitSignIn]
   );
 
   const handleResendVerification = useCallback(() => {
     const email = getValues("email");
-    logger.info("handleResendVerification entry", {
-      function: "handleResendVerification",
-      hasEmail: Boolean(email),
-      email: email || undefined,
-    });
-    if (email) resendVerification.mutate(email);
-  }, [getValues, resendVerification]);
+    if (email) resendVerificationEmail(email);
+  }, [getValues, resendVerificationEmail]);
 
   const handleGoogleSignIn = useCallback(() => {
-    logger.info("handleGoogleSignIn entry", {
-      function: "handleGoogleSignIn",
-      redirectPath,
-    });
-    signInWithGoogle.mutate();
-  }, [redirectPath, signInWithGoogle]);
+    submitGoogleSignIn();
+  }, [submitGoogleSignIn]);
 
-  const formErrorKey = signIn.error
-    ? resolveSignInError(signIn.error)
+  const formErrorKey = signInError
+    ? resolveSignInError(signInError)
     : undefined;
   const formError = formErrorKey ? t(`errors.${formErrorKey}`) : undefined;
 
   const showUnverifiedBanner =
     isUnverifiedRedirect ||
-    (signIn.error &&
-      isAppError(signIn.error) &&
-      signIn.error.code === AUTH_ERROR_CODES.EMAIL_VERIFICATION_ERROR);
+    (signInError &&
+      isAppError(signInError) &&
+      signInError.code === AUTH_ERROR_CODES.EMAIL_VERIFICATION_ERROR);
 
   return (
     <div className={styles["signin-page"]}>
@@ -164,21 +145,21 @@ const SignInPage = ({ redirectPath, isUnverifiedRedirect }: Props) => {
             label={t("button")}
             type="submit"
             fullWidth
-            disabled={signIn.isPending}
+            disabled={isSignInPending}
             aria-label={t("buttonAriaLabel")}
           />
         </Form>
 
         {showUnverifiedBanner && (
           <div className={styles["signin-resend-verification"]}>
-            {resendVerification.isSuccess ? (
+            {didResendVerificationSucceed ? (
               <Text variant="small">{t("resendVerification.success")}</Text>
             ) : (
               <Button
                 label={t("resendVerification.button")}
                 variant="ghost"
                 onClick={handleResendVerification}
-                disabled={resendVerification.isPending}
+                disabled={isResendVerificationPending}
                 aria-label={t("resendVerification.buttonAriaLabel")}
               />
             )}
@@ -194,7 +175,7 @@ const SignInPage = ({ redirectPath, isUnverifiedRedirect }: Props) => {
           variant="secondary"
           onClick={handleGoogleSignIn}
           fullWidth
-          disabled={signInWithGoogle.isPending}
+          disabled={isGoogleSignInPending}
           aria-label={t("oauth.googleButtonAriaLabel")}
         />
 

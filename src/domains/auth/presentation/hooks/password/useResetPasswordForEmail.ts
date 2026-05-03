@@ -1,5 +1,6 @@
 "use client";
 
+import { useCallback, useMemo } from "react";
 import { useMutation } from "@tanstack/react-query";
 
 import { createSupabaseBrowserClient } from "@/shared/infrastructure/supabase/client-browser";
@@ -9,10 +10,16 @@ import { resetPasswordForEmail } from "@/domains/auth/core/usecases/password/res
 import { createSupabaseAuthGateway } from "@/domains/auth/infrastructure/supabase/AuthGateway.supabase";
 
 export const useResetPasswordForEmail = () => {
-  const gateway = createSupabaseAuthGateway(createSupabaseBrowserClient());
+  const gateway = useMemo(
+    () => createSupabaseAuthGateway(createSupabaseBrowserClient()),
+    []
+  );
+  const mutationFn = useCallback(
+    (input: ResetPasswordInput) => resetPasswordForEmail(gateway, input),
+    [gateway]
+  );
 
   return useMutation({
-    mutationFn: (input: ResetPasswordInput) =>
-      resetPasswordForEmail(gateway, input),
+    mutationFn,
   });
 };

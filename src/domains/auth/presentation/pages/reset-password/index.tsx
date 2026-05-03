@@ -26,7 +26,11 @@ const ResetPasswordPage = () => {
   const t = useTranslations("pages.resetPassword");
   const tFields = useTranslations("pages.resetPassword.fields");
 
-  const resetPassword = useResetPasswordForEmail();
+  const {
+    mutate: resetPassword,
+    isPending: isResetPasswordPending,
+    isSuccess: isResetPasswordSuccess,
+  } = useResetPasswordForEmail();
   const authRoutes = useAuthRoutes();
 
   const {
@@ -39,12 +43,12 @@ const ResetPasswordPage = () => {
 
   const onSubmit = useCallback(
     (data: ResetPasswordFormInput) => {
-      resetPassword.mutate(data);
+      resetPassword(data);
     },
     [resetPassword]
   );
 
-  if (resetPassword.isSuccess) {
+  if (isResetPasswordSuccess) {
     return (
       <div className={styles["reset-password-page"]}>
         <div className={styles["reset-password-container"]}>
@@ -92,7 +96,7 @@ const ResetPasswordPage = () => {
             label={t("button")}
             type="submit"
             fullWidth
-            disabled={resetPassword.isPending}
+            disabled={isResetPasswordPending}
             aria-label={t("buttonAriaLabel")}
           />
         </Form>

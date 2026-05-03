@@ -52,9 +52,20 @@ const SignUpPage = ({ redirectPath }: Props) => {
   const rawLocale = useLocale();
   const locale = isSupportedLocale(rawLocale) ? rawLocale : "fr";
 
-  const signUp = useSignUp(redirectPath);
-  const signInWithGoogle = useSignInWithGoogle(redirectPath);
-  const resendVerification = useResendVerificationEmail();
+  const {
+    error: signUpError,
+    isPending: isSignUpPending,
+    mutate: signUp,
+    isSuccess: isSignUpSuccess,
+    data: signUpData,
+  } = useSignUp(redirectPath);
+  const { mutate: submitGoogleSignIn, isPending: isGoogleSignInPending } =
+    useSignInWithGoogle(redirectPath);
+  const {
+    mutate: resendVerificationEmail,
+    isPending: isResendVerificationPending,
+    isSuccess: isResendVerificationSuccess,
+  } = useResendVerificationEmail();
   const authRoutes = useAuthRoutes();
 
   const [verificationEmail, setVerificationEmail] = useState<string | null>(
@@ -75,7 +86,7 @@ const SignUpPage = ({ redirectPath }: Props) => {
   const onSubmit = useCallback(
     (data: SignUpFormInput) => {
       setVerificationEmail(data.email);
-      signUp.mutate({
+      signUp({
         email: data.email,
         password: data.password,
         displayName: data.displayName,
@@ -87,15 +98,15 @@ const SignUpPage = ({ redirectPath }: Props) => {
   );
 
   const handleGoogleSignIn = useCallback(() => {
-    signInWithGoogle.mutate();
-  }, [signInWithGoogle]);
+    submitGoogleSignIn();
+  }, [submitGoogleSignIn]);
 
   const handleResendVerification = useCallback(() => {
-    if (verificationEmail) resendVerification.mutate(verificationEmail);
-  }, [resendVerification, verificationEmail]);
+    if (verificationEmail) resendVerificationEmail(verificationEmail);
+  }, [resendVerificationEmail, verificationEmail]);
 
   const isVerificationRequired =
-    signUp.isSuccess && signUp.data.requiresEmailVerification === true;
+    isSignUpSuccess && signUpData.requiresEmailVerification === true;
 
   if (isVerificationRequired) {
     return (
@@ -115,7 +126,7 @@ const SignUpPage = ({ redirectPath }: Props) => {
           </Text>
 
           <div className={styles["signup-verification-actions"]}>
-            {resendVerification.isSuccess ? (
+            {isResendVerificationSuccess ? (
               <Text
                 variant="small"
                 className={styles["signup-verification-feedback--success"]}
@@ -127,7 +138,7 @@ const SignUpPage = ({ redirectPath }: Props) => {
                 label={t("verification.resendButton")}
                 variant="secondary"
                 onClick={handleResendVerification}
-                disabled={resendVerification.isPending}
+                disabled={isResendVerificationPending}
                 aria-label={t("verification.resendButtonAriaLabel")}
               />
             )}
@@ -143,8 +154,8 @@ const SignUpPage = ({ redirectPath }: Props) => {
     );
   }
 
-  const formErrorKey = signUp.error
-    ? resolveSignUpError(signUp.error)
+  const formErrorKey = signUpError
+    ? resolveSignUpError(signUpError)
     : undefined;
   const formError = formErrorKey ? t(`errors.${formErrorKey}`) : undefined;
 
@@ -239,10 +250,10 @@ const SignUpPage = ({ redirectPath }: Props) => {
           </div>
 
           <Button
-            label={signUp.isPending ? t("buttonLoading") : t("button")}
+            label={isSignUpPending ? t("buttonLoading") : t("button")}
             type="submit"
             fullWidth
-            disabled={signUp.isPending}
+            disabled={isSignUpPending}
             aria-label={t("buttonAriaLabel")}
           />
         </Form>
@@ -256,7 +267,7 @@ const SignUpPage = ({ redirectPath }: Props) => {
           variant="secondary"
           onClick={handleGoogleSignIn}
           fullWidth
-          disabled={signInWithGoogle.isPending}
+          disabled={isGoogleSignInPending}
           aria-label={t("oauth.googleButtonAriaLabel")}
         />
 

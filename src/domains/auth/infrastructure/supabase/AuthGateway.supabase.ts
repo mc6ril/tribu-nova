@@ -6,7 +6,6 @@ import { createAppError } from "@/shared/errors/appError";
 import { AUTH_ERROR_CODES } from "@/shared/errors/appErrorCodes";
 import { buildPathForLocale } from "@/shared/i18n/routing";
 import type { Database } from "@/shared/infrastructure/supabase/database.types";
-import { createLoggerFactory } from "@/shared/observability";
 import { getSiteUrl } from "@/shared/seo/siteUrl";
 import {
   buildAuthCallbackPath,
@@ -30,26 +29,13 @@ import {
   mapSupabaseUserToAuthSession,
 } from "@/domains/auth/infrastructure/supabase/SessionMapper.supabase";
 
-const logger = createLoggerFactory().forScope("auth.supabase-gateway");
-
 const resolveBrowserLocaleSegment = (): Locale | null => {
-  logger.info("resolveBrowserLocaleSegment entry", {
-    function: "resolveBrowserLocaleSegment",
-    hasWindow: typeof window !== "undefined",
-  });
-
   if (typeof window === "undefined") return null;
   const firstSegment = window.location.pathname.split("/")[1] ?? "";
   return isSupportedLocale(firstSegment) ? firstSegment : null;
 };
 
 const redirectToOAuthUrl = (url: string): void => {
-  logger.info("redirectToOAuthUrl entry", {
-    function: "redirectToOAuthUrl",
-    hasWindow: typeof window !== "undefined",
-    hasUrl: Boolean(url),
-  });
-
   if (typeof window === "undefined") return;
   try {
     if (window.top && window.top !== window.self) {
@@ -69,12 +55,6 @@ const buildAbsoluteRedirectUrl = ({
   path: string;
   query?: Record<string, string | undefined>;
 }): string => {
-  logger.info("buildAbsoluteRedirectUrl entry", {
-    function: "buildAbsoluteRedirectUrl",
-    path,
-    queryKeys: query ? Object.keys(query) : [],
-  });
-
   const origin = getSiteUrl().origin;
   const locale = resolveBrowserLocaleSegment();
   const url = new URL(locale ? buildPathForLocale(path, locale) : path, origin);
@@ -93,13 +73,6 @@ const buildBrowserAuthCallbackUrl = ({
   nextPath?: string | null;
   fallbackPath?: string;
 }): string | undefined => {
-  logger.info("buildBrowserAuthCallbackUrl entry", {
-    function: "buildBrowserAuthCallbackUrl",
-    nextPath,
-    fallbackPath,
-    hasWindow: typeof window !== "undefined",
-  });
-
   if (typeof window === "undefined" || !window.location.origin)
     return undefined;
   const relativePath = buildAuthCallbackPath({ nextPath, fallbackPath });
@@ -113,10 +86,6 @@ const buildBrowserAuthCallbackUrl = ({
 export const createSupabaseAuthGateway = (
   supabase: SupabaseClient<Database>
 ): AuthGateway => {
-  logger.info("createSupabaseAuthGateway entry", {
-    function: "createSupabaseAuthGateway",
-  });
-
   return {
     async signUp(input: SignUpInput): Promise<AuthResult> {
       try {
@@ -152,11 +121,6 @@ export const createSupabaseAuthGateway = (
     },
 
     async signIn(input: SignInInput): Promise<AuthResult> {
-      logger.info("signIn entry", {
-        function: "signIn",
-        email: input.email,
-      });
-
       try {
         const { data, error } = await supabase.auth.signInWithPassword({
           email: input.email,
@@ -167,12 +131,6 @@ export const createSupabaseAuthGateway = (
 
         const session = data.session;
         const email = data.user?.email ?? input.email;
-        logger.info("signIn Supabase password resolved", {
-          function: "signIn",
-          email,
-          hasSession: Boolean(session),
-          userId: data.user?.id,
-        });
 
         return {
           session: session
@@ -245,42 +203,6 @@ export const createSupabaseAuthGateway = (
 
     async updatePassword(input: UpdatePasswordInput): Promise<AuthResult> {
       try {
-        const hasToken = !!input.token?.trim();
-        const hasEmail = !!input.email?.trim();
-
-        // Legacy flow: verify recovery OTP then update.
-        if (hasToken && hasEmail) {
-          const { data: verifyData, error: verifyError } =
-            await supabase.auth.verifyOtp({
-              email: input.email!,
-              token: input.token!,
-              type: "recovery",
-            });
-
-          if (verifyError) return handleAuthError(verifyError);
-          if (!verifyData.session) {
-            return handleAuthError(
-              createAppError(AUTH_ERROR_CODES.INVALID_TOKEN, {
-                debugMessage:
-                  "No session returned from password recovery token verification.",
-              })
-            );
-          }
-
-          const { error: updateError } = await supabase.auth.updateUser({
-            password: input.password,
-          });
-          if (updateError) return handleAuthError(updateError);
-
-          return {
-            session: mapSupabaseSessionToAuthSession(
-              verifyData.session,
-              verifyData.user?.email ?? input.email!
-            ),
-          };
-        }
-
-        // PKCE flow: session already exists from auth callback exchange.
         const {
           data: { user },
           error: userError,

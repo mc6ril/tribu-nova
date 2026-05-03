@@ -1,5 +1,5 @@
 import { loadEnvConfig } from "@next/env";
-import { expect, type Page, test } from "@playwright/test";
+import { type BrowserContext, expect, test } from "@playwright/test";
 import { createHmac } from "node:crypto";
 
 const defaultLocalePrefix = "/fr";
@@ -103,64 +103,66 @@ const buildSupabasePasswordSession = () => {
   };
 };
 
-const preventSupabaseCookiePersistence = async (page: Page) => {
-  await page.addInitScript(() => {
-    const descriptor = Object.getOwnPropertyDescriptor(
-      Document.prototype,
-      "cookie"
+const getRequiredAppSessionSecret = (): string => {
+  const appSessionSecret = process.env.APP_SESSION_COOKIE_SECRET;
+  if (!appSessionSecret) {
+    test.skip(
+      true,
+      "APP_SESSION_COOKIE_SECRET is required to sign the app session cookie."
     );
+    return "";
+  }
 
-    if (!descriptor?.get || !descriptor.set) {
-      return;
-    }
+  return appSessionSecret;
+};
 
-    Object.defineProperty(document, "cookie", {
-      configurable: true,
-      get() {
-        return descriptor.get?.call(document);
-      },
-      set(value: string) {
-        if (value.startsWith("sb-")) {
-          return;
-        }
+const addAuthenticatedAppSessionCookie = async (
+  context: BrowserContext,
+  baseURL: string | undefined
+) => {
+  const appBaseURL = baseURL ?? "http://localhost:3000";
 
-        descriptor.set?.call(document, value);
-      },
-    });
-  });
+  await context.addCookies([
+    {
+      name: appSessionCookieName,
+      value: buildAppSessionCookieValue(getRequiredAppSessionSecret()),
+      url: appBaseURL,
+      httpOnly: true,
+      sameSite: "Lax",
+    },
+  ]);
 };
 
 loadLocalEnv();
 
 test.describe("signin", () => {
-  test("authenticates with email and redirects to the workspace", async ({
+  test("renders the signin form for guests", async ({ page }) => {
+    await page.goto(`${defaultLocalePrefix}/auth/signin`);
+
+    await expect(
+      page.getByRole("heading", { level: 1, name: "Se connecter" })
+    ).toBeVisible();
+
+    const passwordInput = page.getByRole("textbox", {
+      name: /^Mot de passe$/,
+    });
+
+    await page
+      .getByRole("button", { name: "Afficher le mot de passe" })
+      .click();
+    await expect(passwordInput).toHaveAttribute("type", "text");
+    await page.getByRole("button", { name: "Masquer le mot de passe" }).click();
+    await expect(passwordInput).toHaveAttribute("type", "password");
+  });
+
+  test("redirects authenticated visitors from signin to the workspace", async ({
     page,
     context,
     baseURL,
   }) => {
-    const appSessionSecret = process.env.APP_SESSION_COOKIE_SECRET;
-    if (!appSessionSecret) {
-      test.skip(
-        true,
-        "APP_SESSION_COOKIE_SECRET is required to sign the app session cookie."
-      );
-      return;
-    }
-
-    const appBaseURL = baseURL ?? "http://localhost:3000";
     let passwordSignInRequests = 0;
 
-    await context.addCookies([
-      {
-        name: appSessionCookieName,
-        value: buildAppSessionCookieValue(appSessionSecret),
-        url: appBaseURL,
-        httpOnly: true,
-        sameSite: "Lax",
-      },
-    ]);
-
-    await preventSupabaseCookiePersistence(page);
+    await addAuthenticatedAppSessionCookie(context, baseURL);
 
     await test.step("mock Supabase password authentication", async () => {
       await page.route(
@@ -191,34 +193,6 @@ test.describe("signin", () => {
 
     await test.step("open the signin page", async () => {
       await page.goto(`${defaultLocalePrefix}/auth/signin`);
-
-      await expect(
-        page.getByRole("heading", { level: 1, name: "Se connecter" })
-      ).toBeVisible();
-      await page.waitForLoadState("networkidle");
-    });
-
-    await test.step("verify the hydrated password visibility control", async () => {
-      const passwordInput = page.getByRole("textbox", {
-        name: /^Mot de passe$/,
-      });
-
-      await page
-        .getByRole("button", { name: "Afficher le mot de passe" })
-        .click();
-      await expect(passwordInput).toHaveAttribute("type", "text");
-      await page
-        .getByRole("button", { name: "Masquer le mot de passe" })
-        .click();
-      await expect(passwordInput).toHaveAttribute("type", "password");
-    });
-
-    await test.step("submit credentials", async () => {
-      await page.getByLabel("Email").fill(testUser.email);
-      await page
-        .getByRole("textbox", { name: /^Mot de passe$/ })
-        .fill(testUser.password);
-      await page.getByRole("button", { name: /^Se connecter$/ }).click();
     });
 
     await test.step("reach the authenticated workspace", async () => {
@@ -229,8 +203,39 @@ test.describe("signin", () => {
       await expect(page.getByText(testUser.email)).toBeVisible();
     });
 
-    await test.step("assert a single password authentication request", async () => {
-      expect(passwordSignInRequests).toBe(1);
+    await test.step("assert no password authentication request was needed", async () => {
+      expect(passwordSignInRequests).toBe(0);
     });
+  });
+
+  test("redirects authenticated visitors from guest-only public pages", async ({
+    page,
+    context,
+    baseURL,
+  }) => {
+    await addAuthenticatedAppSessionCookie(context, baseURL);
+
+    await page.goto(`${defaultLocalePrefix}/pricing`);
+
+    await expect(page).toHaveURL(/\/fr\/workspace\/?$/);
+    await expect(
+      page.getByRole("heading", { level: 1, name: "Auth Diagnostics" })
+    ).toBeVisible();
+  });
+
+  test("keeps authenticated visitors on public exceptions", async ({
+    page,
+    context,
+    baseURL,
+  }) => {
+    await addAuthenticatedAppSessionCookie(context, baseURL);
+
+    await page.goto(defaultLocalePrefix);
+    await expect(page).toHaveURL(/\/fr\/?$/);
+    await expect(page.getByRole("main")).toBeVisible();
+
+    await page.goto(`${defaultLocalePrefix}/legal`);
+    await expect(page).toHaveURL(/\/fr\/legal\/?$/);
+    await expect(page.getByRole("main")).toBeVisible();
   });
 });

@@ -1,7 +1,5 @@
 import { z } from "zod";
 
-import type { LoggerFactory } from "@/shared/observability";
-
 import type {
   AuthResult,
   SignInInput,
@@ -28,28 +26,8 @@ export const SignInSchema = z.object({
  */
 export const signInUser = async (
   gateway: AuthGateway,
-  input: SignInInput,
-  loggerFactory?: LoggerFactory
+  input: SignInInput
 ): Promise<AuthResult> => {
-  const logger = loggerFactory?.forScope("auth.signin.usecase");
-  logger?.info("signInUser entry", {
-    function: "signInUser",
-    email: input.email,
-  });
-
   const validatedInput = SignInSchema.parse(input);
-  logger?.info("signInUser validated input", {
-    function: "signInUser",
-    email: validatedInput.email,
-  });
-
-  const result = await gateway.signIn(validatedInput);
-  logger?.info("signInUser gateway resolved", {
-    function: "signInUser",
-    email: validatedInput.email,
-    hasSession: Boolean(result.session),
-    sessionEmail: result.session?.user.email,
-  });
-
-  return result;
+  return gateway.signIn(validatedInput);
 };

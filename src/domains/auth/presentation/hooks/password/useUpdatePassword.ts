@@ -1,5 +1,6 @@
 "use client";
 
+import { useCallback, useMemo } from "react";
 import { useMutation } from "@tanstack/react-query";
 
 import { PAGE_ROUTES } from "@/shared/constants/routes";
@@ -13,13 +14,21 @@ import { createSupabaseAuthGateway } from "@/domains/auth/infrastructure/supabas
 
 export const useUpdatePassword = () => {
   const router = useAppRouter();
-  const gateway = createSupabaseAuthGateway(createSupabaseBrowserClient());
+  const gateway = useMemo(
+    () => createSupabaseAuthGateway(createSupabaseBrowserClient()),
+    []
+  );
+  const mutationFn = useCallback(
+    (input: UpdatePasswordInput) => updatePassword(gateway, input),
+    [gateway]
+  );
+  const onSuccess = useCallback(async () => {
+    await writeSessionCookieAction();
+    router.push(PAGE_ROUTES.WORKSPACE);
+  }, [router]);
 
   return useMutation({
-    mutationFn: (input: UpdatePasswordInput) => updatePassword(gateway, input),
-    onSuccess: async () => {
-      await writeSessionCookieAction();
-      router.push(PAGE_ROUTES.WORKSPACE);
-    },
+    mutationFn,
+    onSuccess,
   });
 };

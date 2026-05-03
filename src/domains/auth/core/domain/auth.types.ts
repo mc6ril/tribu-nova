@@ -22,8 +22,6 @@ export type ResetPasswordInput = {
 
 export type UpdatePasswordInput = {
   password: string;
-  token?: string;
-  email?: string;
 };
 
 export type VerifyEmailLinkType = "email" | "signup";

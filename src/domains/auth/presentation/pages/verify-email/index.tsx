@@ -23,7 +23,12 @@ type Props = {
 
 const VerifyEmailPage = ({ searchParams }: Props) => {
   const t = useTranslations("pages.verifyEmail");
-  const verifyEmail = useVerifyEmail();
+  const {
+    mutate: verifyEmail,
+    isPending: isVerifyEmailPending,
+    isSuccess: isVerifyEmailSuccess,
+    isError: isVerifyEmailError,
+  } = useVerifyEmail();
   const authRoutes = useAuthRoutes();
   const hasTriggered = useRef(false);
 
@@ -42,23 +47,23 @@ const VerifyEmailPage = ({ searchParams }: Props) => {
     const parsedWithHash = parseVerifyEmailParams(params, hash);
     if (!parsedWithHash.input) return;
     hasTriggered.current = true;
-    verifyEmail.mutate(parsedWithHash.input);
+    verifyEmail(parsedWithHash.input);
   }, [params, verifyEmail]);
 
   const isLoading =
-    verifyEmail.isPending ||
+    isVerifyEmailPending ||
     (!parsed.redirectError &&
       !parsed.isMissingToken &&
       !parsed.shouldRecoverSession &&
-      !verifyEmail.isError &&
-      !verifyEmail.isSuccess);
+      !isVerifyEmailError &&
+      !isVerifyEmailSuccess);
 
   const redirectErrorCode = getVerifyEmailRedirectErrorCode(
     parsed.redirectError
   );
 
   const renderContent = () => {
-    if (parsed.shouldRecoverSession || verifyEmail.isSuccess) {
+    if (parsed.shouldRecoverSession || isVerifyEmailSuccess) {
       return (
         <>
           <div className={styles["verify-email-success"]}>
@@ -77,7 +82,7 @@ const VerifyEmailPage = ({ searchParams }: Props) => {
       );
     }
 
-    if (parsed.redirectError || verifyEmail.isError) {
+    if (parsed.redirectError || isVerifyEmailError) {
       const errorKey =
         redirectErrorCode === "INVALID_TOKEN"
           ? "invalidToken"
